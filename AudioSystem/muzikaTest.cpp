@@ -1,6 +1,9 @@
 #include "muzikaTest.h"
 
+// Globalni mutex printMutex koristi se za sinhronizaciju ispisa na konzoli
+// kako bi se sprijeèilo meðusobno preplitanje poruka kada se koristi više niti.
 std::mutex printMutex;
+
 
 // Konstruktor klase AudioPlayer
 AudioPlayer::AudioPlayer()
@@ -37,7 +40,7 @@ void AudioPlayer::Pokreni() {
 void AudioPlayer::setNiz()
 {
     niz[0] = "capcarap";
-    niz[1] = "hitler";
+    niz[1] = "patrola";
     niz[2] = "dale";
     niz[3] = "do_gole_koze";
     niz[4] = "nepopravljivo";
