@@ -2,6 +2,20 @@
 
 std::mutex printMutex;
 
+// Konstruktor klase AudioPlayer
+AudioPlayer::AudioPlayer()
+{
+    // Postavljanje inicijalnih vrijednosti èlanova klase
+    this->soundFilePath = "capcarap";
+    this->trenutniIndeksPjesme = 0;
+    this->seconds = 0;
+    this->isPlaying = false;
+    this->listaDisplayed = false;
+    this->isPlaybackComplete = false;
+    this->trajanjePjesme = 200;
+}
+
+// Glavna metoda za upravljanje audio playerom
 void AudioPlayer::Pokreni() {
     int izbor;
     do {
@@ -16,9 +30,10 @@ void AudioPlayer::Pokreni() {
         }
         Izbornik(izbor);
 
-    } while (izbor != 6);
+    } while (izbor != 7);
 }
 
+// Inicijalizacija niza pjesama
 void AudioPlayer::setNiz()
 {
     niz[0] = "capcarap";
@@ -31,6 +46,7 @@ void AudioPlayer::setNiz()
     niz[7] = "whiskey";
 }
 
+// Ispis liste pjesama
 void AudioPlayer::Lista(std::string niz[]) {
     for (int i = 0; i < 10; i++) {
         std::cout << std::setw(2) << i + 1 << ". ";
@@ -38,6 +54,7 @@ void AudioPlayer::Lista(std::string niz[]) {
     }
 }
 
+// Ispis glavnog izbornika
 void AudioPlayer::Menu() {
     system("cls");
     std::cout << '\n';
@@ -48,7 +65,8 @@ void AudioPlayer::Menu() {
     std::cout << "       3. Pojacaj" << std::endl;
     std::cout << "       4. Smanji" << std::endl;
     std::cout << "       5. Lista" << std::endl;
-    std::cout << "       6. Exit" << std::endl;
+    std::cout << "       6. Preskoci trenutnu pjesmu" << std::endl;
+    std::cout << "       7. Exit" << std::endl;
     std::cout << '\n';
     std::cout << '\n';
     if (listaDisplayed) {
@@ -60,7 +78,7 @@ void AudioPlayer::Menu() {
     listaDisplayed = false;
 }
 
-
+// Metoda za izbor opcije iz glavnog izbornika
 void AudioPlayer::Izbornik(int izbor) {
     switch (izbor) {
     case 1:
@@ -79,12 +97,16 @@ void AudioPlayer::Izbornik(int izbor) {
         listaDisplayed = true;
         break;
     case 6:
+        isPlaybackComplete = true;
+        break;
+    case 7:
         break;
     default:
         std::cout << "Greska!" << std::endl;
     }
 }
 
+// Metoda za unos imena pjesme
 void AudioPlayer::unesiIme() {
     std::string fileName;
     std::cout << "Unesi ime: ";
@@ -102,42 +124,73 @@ void AudioPlayer::unesiIme() {
     }
 }
 
+// Metoda za reprodukciju/pauziranje pjesme
 void AudioPlayer::pustiPauza() {
     if (this->isPlaying) {
+        // Zaustavljanje reprodukcije
         PlaySound(NULL, 0, 0);
         this->isPlaying = false;
-        this->isPlaybackComplete = true;
+        this->seconds = 0;
+        //->isPlaybackComplete = true;
     }
     else {
+        // Pokretanje reprodukcije
         std::wstring wSoundFilePath(soundFilePath.begin(), soundFilePath.end());
         PlaySoundW(wSoundFilePath.c_str(), NULL, SND_ASYNC | SND_FILENAME | SND_NOSTOP | SND_NODEFAULT);
+        this->trajanjePjesme = 200;
         this->isPlaying = true;
         this->isPlaybackComplete = false;
 
+        // Pokretanje thread-a za praæenje vremena reprodukcije
         std::thread(&AudioPlayer::Vrijeme, this).detach();
     }
 }
 
+// Metoda koja prati trajanje reprodukcije
 void AudioPlayer::Vrijeme() {
-    int seconds = 0;
-
-    while (isPlaying) {
+    while (this->isPlaying) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
 
-        seconds++;
+        this->seconds++;
 
         {
             std::lock_guard<std::mutex> lockGuard(printMutex);
-            std::cout << "\rTrenutna pjesma na radiju: " << soundFilePath
-                << " ( " << seconds / 60 << ":" << seconds % 60 << " )" << std::flush;
+            // Ispis trenutne pozicije pjesme
+            std::cout << "\rTrenutna pjesma na radiju: " << soundFilePath << std::flush
+                << " ( " << this->seconds / 60 << ":" << this->seconds % 60 << " )" << std::flush;
+
+            std::cout << " >> ";
         }
 
-        if (!isPlaying) {
+        // Provjera završetka reprodukcije
+        if (this->seconds >= this->trajanjePjesme) {
+            this->isPlaybackComplete = true;
+        }
+
+        // Pokretanje nove pjesme nakon završetka trenutne
+        if (this->isPlaybackComplete) {
+            novaPjesma();
             break;
         }
     }
 }
 
+// Metoda za prelazak na sljedeæu pjesmu
+void AudioPlayer::novaPjesma() {
+    this->trenutniIndeksPjesme++;
+    if (this->trenutniIndeksPjesme < 10) {
+        this->soundFilePath = this->niz[this->trenutniIndeksPjesme];
+        std::wstring wSoundFilePath(this->niz[this->trenutniIndeksPjesme].begin(), this->niz[this->trenutniIndeksPjesme].end());
+        PlaySound(NULL, 0, 0);
+        PlaySoundW(wSoundFilePath.c_str(), NULL, SND_ASYNC | SND_FILENAME | SND_NOSTOP | SND_NODEFAULT);
+        this->isPlaying = true;
+        this->isPlaybackComplete = false;
+        this->seconds = 0;
+        std::thread(&AudioPlayer::Vrijeme, this).detach();
+    }
+}
+
+// Metoda za pojaèavanje zvuka
 void AudioPlayer::Pojacaj() {
     DWORD currentVolume = getSystemVolume();
 
@@ -157,6 +210,7 @@ void AudioPlayer::Pojacaj() {
     setSystemVolume(newVolume);
 }
 
+// Metoda za smanjenje zvuka
 void AudioPlayer::Smanji() {
     DWORD currentVolume = getSystemVolume();
 
@@ -176,13 +230,20 @@ void AudioPlayer::Smanji() {
     setSystemVolume(newVolume);
 }
 
-
+// Metoda za dobijanje trenutnog sistema zvuka
 int AudioPlayer::getSystemVolume() {
     DWORD volume;
     waveOutGetVolume(0, &volume);
     return volume;
 }
 
+// Metoda za postavljanje sistema zvuka na novu vrijednost
 void AudioPlayer::setSystemVolume(DWORD volume) {
     waveOutSetVolume(0, volume);
+}
+
+// Destruktor klase AudioPlayer
+AudioPlayer::~AudioPlayer()
+{
+    return;
 }
