@@ -11,11 +11,18 @@ class AudioPlayer {
 private:
     std::string niz[10];
     std::string soundFilePath;
-    bool isPlaying = false;
-    bool listaDisplayed = false;  
-    bool isPlaybackComplete = false;
+    bool isPlaying;
+    bool listaDisplayed;  
+    bool isPlaybackComplete;
+    int trenutniIndeksPjesme;
+    int seconds;
+    int trajanjePjesme;
 
 public:
+
+    AudioPlayer();
+
+    ~AudioPlayer();
 
     void setNiz();
 
@@ -41,4 +48,5 @@ public:
 
     void setSystemVolume(DWORD volume);
 
+    void novaPjesma();
 };
