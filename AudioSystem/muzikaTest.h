@@ -4,15 +4,19 @@
 #include <mmsystem.h>
 #include <string>
 #include <iomanip>
+#include <thread>
+#include <chrono>
 
 class AudioPlayer {
 private:
     std::string niz[10];
     std::string soundFilePath;
     bool isPlaying = false;
-    bool listaDisplayed = false;
+    bool listaDisplayed = false;  
+    bool isPlaybackComplete = false;
 
 public:
+
     void setNiz();
 
     void Pokreni();
@@ -31,9 +35,9 @@ public:
 
     void Smanji();
 
+    void Vrijeme();
 
     int getSystemVolume();
-
 
     void setSystemVolume(DWORD volume);
 
