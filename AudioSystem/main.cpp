@@ -3,7 +3,10 @@
 
 int main()
 {
-    AplikacijaGUI AudioSystemGUI;
+    sf::Font arial;
+    arial.loadFromFile("Arial.ttf");
+
+    AplikacijaGUI AudioSystemGUI(arial);
 
     while (AudioSystemGUI.getWindowIsOpen()) //petlja u kojoj se odvijaju akcije aplikacije dok je prozor otvoren
     {

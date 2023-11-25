@@ -1,5 +1,5 @@
 #include "AplikacijaGUI.h"
-
+#include <iostream>
 //----------------------private----------------------------------//
 
 void AplikacijaGUI::InicijalizacijaVarijabli()
@@ -9,6 +9,8 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 
 	this->videoMode.height = 720; //visina prozora koja se smijesta unutar this->videoMode
 	this->videoMode.width = 1280; //sirina prozora koja se smijesta unutar this->videoMode
+
+	
 }
 
 void AplikacijaGUI::InicijalizacijaProzora()
@@ -29,12 +31,16 @@ void AplikacijaGUI::InicijalizacijaElemenata()
 	this->rect.setSize(sf::Vector2f(100.f, 100.f));
 	this->rect.setFillColor(sf::Color::Cyan);
 
+	this->textbox1.SetTextBox(35, sf::Color::White, true);
+	this->textbox1.SetFont(this->font);
+	this->textbox1.SetPosition(sf::Vector2f(200, 200));
 }
 
 //------------------end of private-------------------------------//
 
-AplikacijaGUI::AplikacijaGUI() //konstruktor poziva privatne metode koje inicijaliziraju varijable i prozor
+AplikacijaGUI::AplikacijaGUI(sf::Font& font) //konstruktor poziva privatne metode koje inicijaliziraju varijable i prozor
 {
+	this->font = font;
 	this->InicijalizacijaVarijabli();
 	this->InicijalizacijaProzora();
 	this->InicijalizacijaElemenata();
@@ -59,6 +65,7 @@ void AplikacijaGUI::UpdatePozicijaMisa()
 
 void AplikacijaGUI::UpdatePollEvents() //ova metoda osvjezava eventove, npr. interakcija sa prozorom od strane korisinka
 {
+
 	while (this->window->pollEvent(this->event))//dok cita eventove smijesta vrijednost i vrstu unutar varijable event
 	{
 		switch (this->event.type)//provjerava koja je vrsta eventa
@@ -66,9 +73,12 @@ void AplikacijaGUI::UpdatePollEvents() //ova metoda osvjezava eventove, npr. int
 		case sf::Event::Closed://ako korisnik pritisne close button aplikacije
 			this->window->close();//onda se prozor zatvori
 			break;
+		case sf::Event::TextEntered:
+			this->textbox1.OtipkanoNa(this->event);//kada je tekst otkucan poziva metodu objekta za ovaj textbox
+			break;
 		case sf::Event::KeyPressed:
-			if (this->event.key.code == sf::Keyboard::Escape)//ako korisnik pritisne ESC opet se zatvori prozor aplikacije
-				this->window->close();
+			if (this->event.key.code == sf::Keyboard::Enter)
+				std::cout << this->textbox1.GetText() << std::endl;
 			break;
 		default:
 			break;
@@ -94,7 +104,7 @@ void AplikacijaGUI::RenderGUI() //renderuje objekte, elemente aplikacije
 
 	//--------ovdje krece pozivanje metoda koje iscrtavaju elemente----------
 
-	this->RenderRect();
+	this->textbox1.DrawTo(*this->window);
 
 	//--------ovdje zavrsava pozivanje metoda koje iscrtavaju elemente-------
 
