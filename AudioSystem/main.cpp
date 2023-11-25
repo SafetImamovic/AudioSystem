@@ -1,27 +1,22 @@
-#include <SFML/Graphics.hpp>
+#include "AplikacijaGUI.h"
 #include "muzikaTest.h"
+
 int main()
 {
-    AudioPlayer player;
-    player.Pokreni();
-    /*
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    AplikacijaGUI AudioSystemGUI;
 
-    while (window.isOpen())
+    while (AudioSystemGUI.getWindowIsOpen()) //petlja u kojoj se odvijaju akcije aplikacije dok je prozor otvoren
     {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+        //update
+        AudioSystemGUI.UpdateGUI();
 
-        window.clear();
-        window.draw(shape);
-        window.display();
+        //render
+        AudioSystemGUI.RenderGUI();
     }
-    */
+
+
+    //AudioPlayer player;
+    //player.Pokreni();
+    
     return 0;
 }
