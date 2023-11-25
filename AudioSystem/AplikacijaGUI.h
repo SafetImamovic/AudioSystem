@@ -4,6 +4,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 
+#include "TextBox.h"
+
 /*
 	Klasa koja je odgovorna za GUI
 */
@@ -16,6 +18,8 @@ private:
     //cak i van prozora ako je tako definisano
 	sf::VideoMode videoMode; //zadaje rezoluciju prozoru
 	sf::Vector2i mousePozProzor; //cuva poziciju misa relativnu prozoru (koordinate)
+	sf::Font font;
+	TextBox textbox1;
 	//elementi aplikacije
 	//tok definiranja, logike i iscrtavanja elemenata na prozor je sljedeci:
 	//1. deklaracija elementa ovdje
@@ -35,7 +39,7 @@ private:
 	void InicijalizacijaElemenata();
 
 public:
-	AplikacijaGUI();
+	AplikacijaGUI(sf::Font& font);
 	~AplikacijaGUI();
 
 	void UpdateRect();
