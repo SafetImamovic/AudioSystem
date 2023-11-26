@@ -139,11 +139,13 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="muzikaTest.cpp" />
     <ClCompile Include="TextBox.cpp" />
+    <ClCompile Include="Tipka.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AplikacijaGUI.h" />
     <ClInclude Include="muzikaTest.h" />
     <ClInclude Include="TextBox.h" />
+    <ClInclude Include="Tipka.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

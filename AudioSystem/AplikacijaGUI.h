@@ -5,6 +5,7 @@
 #include <SFML/Window.hpp>
 
 #include "TextBox.h"
+#include "Tipka.h"
 
 /*
 	Klasa koja je odgovorna za GUI
@@ -20,6 +21,8 @@ private:
 	sf::Vector2i mousePozProzor; //cuva poziciju misa relativnu prozoru (koordinate)
 	sf::Font font;
 	TextBox textbox1;
+	Tipka tipka1;
+
 	//elementi aplikacije
 	//tok definiranja, logike i iscrtavanja elemenata na prozor je sljedeci:
 	//1. deklaracija elementa ovdje
@@ -54,4 +57,3 @@ public:
 
 	const bool getWindowIsOpen() const;
 };
-

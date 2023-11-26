@@ -1,5 +1,6 @@
 #include "TextBox.h"
 
+
 //----------------------Private metode---------------------------
 
 void TextBox::InputLogika(int karakterIstipkan)
@@ -61,6 +62,8 @@ void TextBox::SetFont(sf::Font& font)//posto sfml nema default fontova, moramo m
 void TextBox::SetPosition(sf::Vector2f pozicija)//postavlja poziciju, overrida zadnju
 {
 	this->textbox.setPosition(pozicija);
+
+	
 }
 
 void TextBox::SetLimit(bool ImaIliNema)//da li ima limit karakatera ili nema
@@ -71,7 +74,7 @@ void TextBox::SetLimit(bool ImaIliNema)//da li ima limit karakatera ili nema
 void TextBox::SetLimit(bool ImaIliNema, int Limit)//overloadana funkcija u kojoj se moze proslijediti limit
 {
 	this->imaLimit = ImaIliNema;
-	this->Limit = Limit;
+	this->Limit = Limit - 1;
 }
 
 void TextBox::SetOznacen(bool oznacen)//radi selektora _ potrebno je reci korisniku kada je selektirano polje za unos
@@ -90,6 +93,31 @@ void TextBox::SetOznacen(bool oznacen)//radi selektora _ potrebno je reci korisn
 	}
 }
 
+void TextBox::SetBackground(sf::Color boja, sf::Vector2f velicina)
+{
+	this->backgroundShape.setFillColor(boja);
+
+	
+
+	this->backgroundShape.setSize(velicina);
+}
+
+void TextBox::SetPozadinaPozicija(sf::Vector2f pozicija)
+{
+	this->backgroundShape.setPosition(pozicija);
+}
+
+void TextBox::SetSve(int velicinaTeksta, sf::Color bojaTeksta, sf::Color bojaPozadine, bool oznacen, sf::Font& font, sf::Vector2f pozicija, sf::Vector2f padding, sf::Vector2f velicinaPozadine)
+//funkcija koja postavlja skoro sve atribute textboxa
+{
+	this->SetTextBox(velicinaTeksta, bojaTeksta, oznacen);
+	this->SetFont(font);
+	this->SetPosition(pozicija);
+	this->SetBackground(bojaPozadine, velicinaPozadine);
+	this->SetPozadinaPozicija(pozicija - padding);
+}
+
+
 std::string TextBox::GetText()//vraca string koji je korisnik oktucao i submito
 {
 	return this->text.str();
@@ -98,6 +126,7 @@ std::string TextBox::GetText()//vraca string koji je korisnik oktucao i submito
 void TextBox::DrawTo(sf::RenderWindow& window)//ovoj metodi proslijedjujemo target tj prozor na kojem zelimo da se
 //izvrsi render textboxa
 {
+	window.draw(this->backgroundShape);
 	window.draw(this->textbox);
 }
 
