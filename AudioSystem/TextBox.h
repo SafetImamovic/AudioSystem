@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <sstream>
+#include <iostream>
 
 //definira ascii vrijednost specijalnih tipki
 #define DELETE_KEY 8
@@ -16,6 +17,7 @@ class TextBox
 {
 private:
 	sf::Text textbox;
+	sf::RectangleShape backgroundShape;
 	std::ostringstream text;
 	bool jeOznacen = false;
 	bool imaLimit = false;
@@ -34,6 +36,9 @@ public:
 	void SetLimit(bool ImaIliNema);
 	void SetLimit(bool ImaIliNema, int Limit);
 	void SetOznacen(bool oznacen);
+	void SetBackground(sf::Color boja, sf::Vector2f velicina);
+	void SetPozadinaPozicija(sf::Vector2f pozicija);
+	void SetSve(int velicinaTeksta, sf::Color bojaTeksta, sf::Color bojaPozadine, bool oznacen, sf::Font& font, sf::Vector2f pozicija, sf::Vector2f padding, sf::Vector2f velicinaPozadine);
 	std::string GetText();
 
 	void DrawTo(sf::RenderWindow& window);

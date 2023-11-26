@@ -31,9 +31,10 @@ void AplikacijaGUI::InicijalizacijaElemenata()
 	this->rect.setSize(sf::Vector2f(100.f, 100.f));
 	this->rect.setFillColor(sf::Color::Cyan);
 
-	this->textbox1.SetTextBox(35, sf::Color::White, true);
-	this->textbox1.SetFont(this->font);
-	this->textbox1.SetPosition(sf::Vector2f(200, 200));
+	this->textbox1.SetSve(20, sf::Color::White, sf::Color(30, 30, 30), true, this->font, sf::Vector2f(200, 50), sf::Vector2f(20, 15), sf::Vector2f(1000, 50));
+	this->tipka1.SetTipka("nice", { 200, 50 }, 20, sf::Color(255, 255, 255, 255), sf::Color(30, 30, 30));
+	this->tipka1.SetPozicija({ 200, 400 });
+	this->tipka1.SetFont(this->font);
 }
 
 //------------------end of private-------------------------------//
@@ -80,6 +81,16 @@ void AplikacijaGUI::UpdatePollEvents() //ova metoda osvjezava eventove, npr. int
 			if (this->event.key.code == sf::Keyboard::Enter)
 				std::cout << this->textbox1.GetText() << std::endl;
 			break;
+		case sf::Event::MouseMoved:
+			if (this->tipka1.Hover(*this->window))
+			{
+				this->tipka1.PromijeniBojuPozadine(sf::Color::White);
+			}
+			else
+			{
+				this->tipka1.PromijeniBojuPozadine(sf::Color(30, 30, 30));
+			}
+			break;
 		default:
 			break;
 		}
@@ -105,6 +116,7 @@ void AplikacijaGUI::RenderGUI() //renderuje objekte, elemente aplikacije
 	//--------ovdje krece pozivanje metoda koje iscrtavaju elemente----------
 
 	this->textbox1.DrawTo(*this->window);
+	this->tipka1.DrawTo(*this->window);
 
 	//--------ovdje zavrsava pozivanje metoda koje iscrtavaju elemente-------
 
