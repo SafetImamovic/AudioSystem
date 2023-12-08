@@ -1,5 +1,6 @@
 #pragma once
 #pragma comment(lib, "Strmiids.lib")
+#pragma comment(lib, "winmm.lib")
 #include <iostream>
 #include <Windows.h>
 #include <mmsystem.h>
@@ -15,6 +16,8 @@
 #include <vector>
 #include <set>
 #include <Shellapi.h>
+#include <fstream>
+#include <SFML/Audio.hpp>
 
 class AudioPlayer {
 private:
@@ -74,5 +77,11 @@ public:
     void StartPlaybackCallback(UINT uTimerID, UINT uMsg, DWORD_PTR dw1, DWORD_PTR dw2);
 
     void ScanFolderForMusicFiles(const std::wstring& folderPath, std::vector<std::wstring>& fileNames);
+
+    void PromijeniBrzinuReprodukcije(double faktor);
+
+    void Ubrzaj();
+
+    void Uspori();
 
 };
