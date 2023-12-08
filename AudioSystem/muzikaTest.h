@@ -14,6 +14,7 @@
 #include <filesystem>
 #include <vector>
 #include <set>
+#include <Shellapi.h>
 
 class AudioPlayer {
 private:
