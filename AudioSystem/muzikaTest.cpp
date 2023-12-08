@@ -24,8 +24,8 @@ AudioPlayer::AudioPlayer()
     waveFormat.wBitsPerSample = 16;
     waveFormat.nBlockAlign = (waveFormat.nChannels * waveFormat.wBitsPerSample) / 8;
     waveFormat.nAvgBytesPerSec = waveFormat.nSamplesPerSec * waveFormat.nBlockAlign;
-    waveFormat.cbSize = 0;
-    
+    waveFormat.cbSize = 0; 
+
 }
 
 // Glavna metoda za upravljanje audio playerom
@@ -43,7 +43,7 @@ void AudioPlayer::Pokreni() {
         }
         Izbornik(izbor);
 
-    } while (izbor != 9);
+    } while (izbor != 11);
 }
 
 // Inicijalizacija niza pjesama
@@ -63,6 +63,7 @@ void AudioPlayer::Lista() {
     // Ispisivanje svake pesme u tabeli
     for (size_t i = 0; i < songList.size(); i++) {
         std::wcout << std::left << std::setw(indexWidth) << i + 1 << std::setw(nameWidth) << ImeFajlaBezEkstenzije(this->songList[i]) << std::endl;
+        std::cout << "---------------------------------" << '\n';
     }
 
     std::cout << std::endl;
@@ -74,6 +75,7 @@ std::wstring AudioPlayer::ImeFajlaBezEkstenzije(const std::wstring& filePath) {
     return filePath.substr(0, lastDotPos);
 }
 
+// Funkcija za ispis svih pjesama iako nisu dostupne
 void AudioPlayer::sveLista() {
     for (const auto& song : songList) {
         std::wcout << song << std::endl;
@@ -87,15 +89,17 @@ void AudioPlayer::Menu() {
     std::cout << '\n';
     std::cout << "       ***** (Unesi '0' za refresh) *****        " << std::endl;
     std::cout << '\n';
-    std::cout << "       1. Unesi ime" << std::endl;
-    std::cout << "       2. Pusti/pauziraj" << std::endl;
-    std::cout << "       3. Pojacaj" << std::endl;
-    std::cout << "       4. Smanji" << std::endl;
-    std::cout << "       5. Lista" << std::endl;
-    std::cout << "       6. Preskoci trenutnu pjesmu" << std::endl;
-    std::cout << "       7. Premotaj unazad" << std::endl;
-    std::cout << "       8. Premotaj unaprijed" << std::endl;
-    std::cout << "       9. Exit" << std::endl;
+    std::cout << "       1.  Unesi ime" << std::endl;
+    std::cout << "       2.  Pusti/pauziraj" << std::endl;
+    std::cout << "       3.  Pojacaj" << std::endl;
+    std::cout << "       4.  Smanji" << std::endl;
+    std::cout << "       5.  Lista" << std::endl;
+    std::cout << "       6.  Preskoci trenutnu pjesmu" << std::endl;
+    std::cout << "       7.  Premotaj unazad" << std::endl;
+    std::cout << "       8.  Premotaj unaprijed" << std::endl;
+    std::cout << "       9.  Ubrzaj pjesmu" << std::endl;
+    std::cout << "       10. Uspori pjesmu" << std::endl;
+    std::cout << "       11. Exit" << std::endl;
     std::cout << '\n';
     std::cout << '\n';
     if (listaDisplayed) {
@@ -130,13 +134,26 @@ void AudioPlayer::Izbornik(int izbor) {
         break;
     case 7:
         std::cout << "Jos uvijek u testu!\n";
+        Sleep(1000);
         //premotajUnazad();
         break;
     case 8:
         std::cout << "Jos uvijek u testu!\n";
+        Sleep(1000);
         //premotajUnaprijed();
         break;
     case 9:
+        std::cout << "Jos uvijek u testu!\n";
+        Sleep(1000);
+        //Ubrzaj();
+        break;
+    case 10:
+        std::cout << "Jos uvijek u testu!\n";
+        Sleep(1000);
+        //Uspori();
+        break;
+    case 11:
+        std::cout << "Hvala na koristenju!\n";
         break;
     default:
         std::cout << "Greska!" << std::endl;
@@ -290,39 +307,22 @@ void AudioPlayer::setSystemVolume(DWORD volume) {
 
 //    Metoda za premotavanje unazad tokom reprodukcije.
 void AudioPlayer::premotajUnazad() {
-    if (this->isPlaying) {
-        PlaySound(NULL, 0, 0);
-        this->isPlaying = true;
-        this->isPlaybackComplete = false;
-
-        this->seconds = this->seconds - 10;
-        this->seconds = (this->seconds < 0) ? 0 : this->seconds;
-
-        timeSetEvent(1000, 0, &AudioPlayer::StartPlaybackCallbackStatic, reinterpret_cast<DWORD_PTR>(this), TIME_ONESHOT);
-
-    }
+    
 }
 
 //    Metoda za premotavanje unaprijed tokom reprodukcije.
 void AudioPlayer::premotajUnaprijed() {
-    if (this->isPlaying) {
-        PlaySound(NULL, 0, 0);
-        this->isPlaying = true;
-        this->isPlaybackComplete = false;
-
-        this->seconds = this->seconds + 10;
-        this->seconds = (this->seconds > this->trajanjePjesme) ? this->trajanjePjesme : this->seconds;
-
-        timeSetEvent(1000, 0, &AudioPlayer::StartPlaybackCallbackStatic, reinterpret_cast<DWORD_PTR>(this), TIME_ONESHOT);
-    }
+   
 }
 
 //Staticka metoda koja se poziva pri svakom "timer" dogaðaju tokom reprodukcije.
 void CALLBACK AudioPlayer::StartPlaybackCallbackStatic(UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1, DWORD_PTR dw2) {
-    AudioPlayer* audioPlayer = reinterpret_cast<AudioPlayer*>(dwUser);
-    if (audioPlayer != nullptr) {
-        audioPlayer->StartPlaybackCallback(uTimerID, uMsg, dw1, dw2);
-    }
+    
+}
+
+//Metoda koja se poziva pri svakom "timer" dogaðaju tokom reprodukcije
+void AudioPlayer::StartPlaybackCallback(UINT uTimerID, UINT uMsg, DWORD_PTR dw1, DWORD_PTR dw2) {
+    
 }
 
 // Metoda koja skenira odreðeni folder i popunjava set sa imenima muzièkih fajlova.
@@ -344,27 +344,21 @@ void AudioPlayer::ScanFolderForMusicFiles(const std::wstring& folderPath, std::v
     fileNames.assign(uniqueFileNames.begin(), uniqueFileNames.end());
 }
 
-//Metoda koja se poziva pri svakom "timer" dogaðaju tokom reprodukcije
-void AudioPlayer::StartPlaybackCallback(UINT uTimerID, UINT uMsg, DWORD_PTR dw1, DWORD_PTR dw2) {
-    if (this->isPlaying && !this->isPlaybackComplete) {
-        std::wstring wSoundFilePath(this->soundFilePath.begin(), this->soundFilePath.end());
-        PlaySoundW(wSoundFilePath.c_str(), NULL, SND_ASYNC | SND_FILENAME | SND_NOSTOP | SND_NODEFAULT);
+void AudioPlayer::PromijeniBrzinuReprodukcije(double faktor) {
+    
+}
 
-        timeSetEvent(1000, 0, &AudioPlayer::StartPlaybackCallbackStatic, reinterpret_cast<DWORD_PTR>(this), TIME_ONESHOT);
-    }
-    else {
-        std::wcout << L"\nKraj pjesme: " << this->soundFilePath << std::endl;
 
-        PlaySound(NULL, 0, 0);
-        this->isPlaying = false;
-        this->isPlaybackComplete = true;
+void AudioPlayer::Ubrzaj() {
+    PromijeniBrzinuReprodukcije(2.0); 
+}
 
-        novaPjesma();
-    }
+void AudioPlayer::Uspori() {
+    PromijeniBrzinuReprodukcije(0.8);
 }
 
 // Destruktor klase AudioPlayer
 AudioPlayer::~AudioPlayer()
 {
-    return;
+
 }
