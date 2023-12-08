@@ -10,7 +10,7 @@ WAVEFORMATEX waveformat;
 AudioPlayer::AudioPlayer()
 {
     // Postavljanje inicijalnih vrijednosti èlanova klase
-    this->soundFilePath = L"smack_that";
+    this->soundFilePath = L"Akon-SmackThat";
     this->trenutniIndeksPjesme = 0;
     this->seconds = 0;
     this->isPlaying = false;
@@ -54,10 +54,18 @@ void AudioPlayer::setNiz()
 
 // Ispis liste pjesama
 void AudioPlayer::Lista() {
+    const int indexWidth = 8;
+    const int nameWidth = 60;
+
+    // Ispisivanje zaglavlja tabele
+    std::wcout << std::left << std::setw(indexWidth) << L"Mjesto " << std::setw(nameWidth) << L" Pjesma" << std::endl;
+    std::wcout << '\n';
+    // Ispisivanje svake pesme u tabeli
     for (size_t i = 0; i < songList.size(); i++) {
-        std::wcout << std::setw(2) << i + 1 << ". " << std::setw(10) << ImeFajlaBezEkstenzije(this->songList[i]) << " ";
+        std::wcout << std::left << std::setw(indexWidth) << i + 1 << std::setw(nameWidth) << ImeFajlaBezEkstenzije(this->songList[i]) << std::endl;
     }
-    std::cout << std::endl << std::endl;
+
+    std::cout << std::endl;
 }
 
 // Funkcija koja vraæa ime fajla bez ekstenzije
