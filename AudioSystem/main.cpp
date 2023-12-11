@@ -1,5 +1,6 @@
-#include <SFML/Graphics.hpp>
+#include "AplikacijaGUI.h"
 #include "muzikaTest.h"
+
 int main()
 {
     AudioPlayer player;
@@ -8,10 +9,10 @@ int main()
     /*
     sf::Music music;
 
-    // Postavite putanju do zvuènog fajla
+    // Postavite putanju do zvuÃ¨nog fajla
     const std::string filePath = "Breskvica-Dogolekoze";
 
-    // Uèitajte zvuèni fajl
+    // UÃ¨itajte zvuÃ¨ni fajl
     if (!music.openFromFile(filePath)) {
         std::cerr << "Error opening sound file." << std::endl;
         return 1;
@@ -24,7 +25,7 @@ int main()
     // Reprodukcija zvuka
     music.play();
 
-    // Saèekajte dok se reprodukcija ne završi
+    // SaÃ¨ekajte dok se reprodukcija ne zavrÅ¡i
     while (music.getStatus() == sf::Music::Playing) {
         sf::sleep(sf::milliseconds(100));
     }
@@ -34,19 +35,19 @@ int main()
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
 
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
 
-        window.clear();
-        window.draw(shape);
-        window.display();
+    while (AudioSystemGUI.getWindowIsOpen()) //petlja u kojoj se odvijaju akcije aplikacije dok je prozor otvoren
+    {
+        //update
+        AudioSystemGUI.UpdateGUI();
+
+        //render
+        AudioSystemGUI.RenderGUI();
     }
-    */
+
+
+    //AudioPlayer player;
+    //player.Pokreni();
+    
     return 0;
 }
