@@ -6,6 +6,9 @@
 
 #include "TextBox.h"
 #include "Tipka.h"
+#include <string>
+#include <vector>
+#include <memory>
 
 /*
 	Klasa koja je odgovorna za GUI
@@ -20,8 +23,9 @@ private:
 	sf::VideoMode videoMode; //zadaje rezoluciju prozoru
 	sf::Vector2i mousePozProzor; //cuva poziciju misa relativnu prozoru (koordinate)
 	sf::Font font;
-	TextBox textbox1;
-	Tipka tipka1;
+	std::vector<TextBox> TextBoxovi; //vektor koji sadrzava sve textbox elemente
+	std::vector<Tipka> Tipke;		//tako vrijedi i za ovaj vektor samo za tipke
+	sf::Color PrimarnaBoja, SekundarnaBoja, AkcenatBoja;
 
 	//elementi aplikacije
 	//tok definiranja, logike i iscrtavanja elemenata na prozor je sljedeci:
@@ -40,6 +44,11 @@ private:
 	void InicijalizacijaVarijabli();
 	void InicijalizacijaProzora();
 	void InicijalizacijaElemenata();
+	void ProvjeriHoverZaSveElemente();
+	void ProvjeriClickZaSveElemente();
+	void RenderSveElemente();
+	void ResetPrimarneBoje();
+	void GetOdgovarajuciTextBoxText();
 
 public:
 	AplikacijaGUI(sf::Font& font);

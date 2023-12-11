@@ -39,6 +39,16 @@ void TextBox::IzbrisiZadnjiKarakter()
 
 //------------------end Private metode---------------------------
 
+TextBox::TextBox(const TextBox& original)
+{
+	this->textbox = original.textbox;
+	this->text << original.text.str();
+	this->jeOznacen = original.jeOznacen;
+	this->imaLimit = original.imaLimit;
+	this->Limit = original.Limit;
+	this->backgroundShape = original.backgroundShape;
+}
+
 void TextBox::SetTextBox(int velicina, sf::Color boja, bool oznacen)
 {
 	this->textbox.setCharacterSize(velicina);
@@ -91,6 +101,10 @@ void TextBox::SetOznacen(bool oznacen)//radi selektora _ potrebno je reci korisn
 		}
 		this->textbox.setString(noviT);
 	}
+	else
+	{
+		this->textbox.setString(this->text.str() + "_");
+	}
 }
 
 void TextBox::SetBackground(sf::Color boja, sf::Vector2f velicina)
@@ -115,6 +129,17 @@ void TextBox::SetSve(int velicinaTeksta, sf::Color bojaTeksta, sf::Color bojaPoz
 	this->SetPosition(pozicija);
 	this->SetBackground(bojaPozadine, velicinaPozadine);
 	this->SetPozadinaPozicija(pozicija - padding);
+}
+
+bool TextBox::JeOznacen()
+{
+	return this->jeOznacen;
+}
+
+void TextBox::Clear()
+{
+	this->text.str("");
+	this->textbox.setString("");
 }
 
 
