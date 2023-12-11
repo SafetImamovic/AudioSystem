@@ -3,8 +3,9 @@
 
 int main()
 {
-    AudioPlayer player;
-    player.Pokreni();
+    sf::Font arial;
+    arial.loadFromFile("Arial.ttf");
+    AplikacijaGUI GUI(arial);
     
     /*
     sf::Music music;
@@ -50,4 +51,5 @@ int main()
     //player.Pokreni();
     
     return 0;
+    */
 }
