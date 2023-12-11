@@ -111,6 +111,9 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)External\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+
+      
+
       <AdditionalDependencies>sfml-audio.lib;Strmiids.lib;Ole32.lib;Mmdevapi.lib;winmm.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -131,15 +134,24 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)External\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+
+
       <AdditionalDependencies>sfml-audio.lib;Strmiids.lib;Ole32.lib;Mmdevapi.lib;winmm.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AplikacijaGUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="muzikaTest.cpp" />
+    <ClCompile Include="TextBox.cpp" />
+    <ClCompile Include="Tipka.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AplikacijaGUI.h" />
     <ClInclude Include="muzikaTest.h" />
+    <ClInclude Include="TextBox.h" />
+    <ClInclude Include="Tipka.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
