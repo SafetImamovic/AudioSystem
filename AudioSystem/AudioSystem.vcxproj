@@ -111,7 +111,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)External\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>winmm.lib;sfml-system-s.lib;opengl32.lib;gdi32.lib;sfml-window-s.lib;sfml-graphics-s.lib;freetype.lib</AdditionalDependencies>
+      <AdditionalDependencies>sfml-window-d.lib;sfml-system-d.lib;opengl32.lib;winmm.lib;gdi32.lib;sfml-graphics-d.lib;freetype.lib;sfml-audio-d.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;sfml-network-d.lib;ws2_32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,11 +131,12 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)External\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>winmm.lib;sfml-graphics-s.lib;sfml-window-s.lib;sfml-system-s.lib;opengl32.lib;freetype.lib;gdi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>sfml-window-s.lib;sfml-system-s.lib;opengl32.lib;winmm.lib;gdi32.lib;sfml-graphics-s.lib;freetype.lib;sfml-audio-s.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;sfml-network-s.lib;ws2_32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AplikacijaGUI.cpp" />
+    <ClCompile Include="ElementarneKomponente.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="muzikaTest.cpp" />
     <ClCompile Include="TextBox.cpp" />
@@ -143,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AplikacijaGUI.h" />
+    <ClInclude Include="ElementarneKomponente.h" />
     <ClInclude Include="muzikaTest.h" />
     <ClInclude Include="TextBox.h" />
     <ClInclude Include="Tipka.h" />

@@ -4,7 +4,7 @@
 int main()
 {
     sf::Font arial;
-    arial.loadFromFile("Arial.ttf");
+    arial.loadFromFile("seguisym.ttf");
 
     AplikacijaGUI AudioSystemGUI(arial);
 
