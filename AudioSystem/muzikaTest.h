@@ -1,4 +1,6 @@
 #pragma once
+#pragma comment(lib, "Strmiids.lib")
+#pragma comment(lib, "winmm.lib")
 #include <iostream>
 #include <Windows.h>
 #include <mmsystem.h>
@@ -6,20 +8,32 @@
 #include <iomanip>
 #include <thread>
 #include <chrono>
+#include <algorithm>
+#include <dshow.h>
+#include <uuids.h>
+#include <atlbase.h>
+#include <filesystem>
+#include <vector>
+#include <set>
+#include <Shellapi.h>
+#include <fstream>
+#include <SFML/Audio.hpp>
 
 class AudioPlayer {
 private:
-    std::string niz[10];
-    std::string soundFilePath;
+    std::vector<std::wstring> songList;
+    std::wstring soundFilePath;
     bool isPlaying;
-    bool listaDisplayed;  
+    bool listaDisplayed;
     bool isPlaybackComplete;
     int trenutniIndeksPjesme;
     int seconds;
     int trajanjePjesme;
+    double currentTimeInSeconds;
+    WAVEFORMATEX waveFormat;
+    double currentSamplePosition;
 
 public:
-
     AudioPlayer();
 
     ~AudioPlayer();
@@ -28,7 +42,11 @@ public:
 
     void Pokreni();
 
-    void Lista(std::string niz[]);
+    void Lista();
+
+    std::wstring ImeFajlaBezEkstenzije(const std::wstring& filePath);
+
+    void sveLista();
 
     void Menu();
 
@@ -49,4 +67,21 @@ public:
     void setSystemVolume(DWORD volume);
 
     void novaPjesma();
+
+    void premotajUnazad();
+
+    void premotajUnaprijed();
+
+    static void CALLBACK StartPlaybackCallbackStatic(UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1, DWORD_PTR dw2);
+
+    void StartPlaybackCallback(UINT uTimerID, UINT uMsg, DWORD_PTR dw1, DWORD_PTR dw2);
+
+    void ScanFolderForMusicFiles(const std::wstring& folderPath, std::vector<std::wstring>& fileNames);
+
+    void PromijeniBrzinuReprodukcije(double faktor);
+
+    void Ubrzaj();
+
+    void Uspori();
+
 };
