@@ -21,9 +21,15 @@
     <ClCompile Include="muzikaTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="muzikaBeta.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="muzikaTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="muzikaBeta.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
