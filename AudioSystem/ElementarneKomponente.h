@@ -11,5 +11,6 @@ public:
 	bool Hover(sf::RenderWindow& window, sf::RectangleShape oblik);
 	void SetID(std::string ID);
 	std::string GetID();
+
 };
 

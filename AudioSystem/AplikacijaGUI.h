@@ -4,8 +4,10 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 
+
 #include "TextBox.h"
 #include "Tipka.h"
+#include "Kontrole.h"
 #include <string>
 #include <vector>
 #include <memory>
@@ -24,8 +26,10 @@ private:
 	sf::Vector2i mousePozProzor; //cuva poziciju misa relativnu prozoru (koordinate)
 	sf::Font font;
 	std::vector<TextBox> TextBoxovi; //vektor koji sadrzava sve textbox elemente
-	std::vector<Tipka> Tipke;		//tako vrijedi i za ovaj vektor samo za tipke
+
 	sf::Color PrimarnaBoja, SekundarnaBoja, AkcenatBoja;
+
+	Kontrole kontrole;
 
 	//elementi aplikacije
 	//tok definiranja, logike i iscrtavanja elemenata na prozor je sljedeci:
@@ -51,7 +55,7 @@ private:
 	void GetOdgovarajuciTextBoxText();
 
 public:
-	AplikacijaGUI(sf::Font& font);
+	AplikacijaGUI(sf::Font& font, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja);
 	~AplikacijaGUI();
 
 	void UpdateRect();

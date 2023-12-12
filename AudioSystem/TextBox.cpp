@@ -121,7 +121,7 @@ void TextBox::SetPozadinaPozicija(sf::Vector2f pozicija)
 	this->backgroundShape.setPosition(pozicija);
 }
 
-void TextBox::SetSve(int velicinaTeksta, sf::Color bojaTeksta, sf::Color bojaPozadine, bool oznacen, sf::Font& font, sf::Vector2f pozicija, sf::Vector2f padding, sf::Vector2f velicinaPozadine)
+void TextBox::SetSve(std::string ID, int velicinaTeksta, sf::Color bojaTeksta, sf::Color bojaPozadine, bool oznacen, sf::Font& font, sf::Vector2f pozicija, sf::Vector2f padding, sf::Vector2f velicinaPozadine)
 //funkcija koja postavlja skoro sve atribute textboxa
 {
 	this->SetTextBox(velicinaTeksta, bojaTeksta, oznacen);

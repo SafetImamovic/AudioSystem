@@ -137,6 +137,8 @@
   <ItemGroup>
     <ClCompile Include="AplikacijaGUI.cpp" />
     <ClCompile Include="ElementarneKomponente.cpp" />
+    <ClCompile Include="GlobalneFunkcije.cpp" />
+    <ClCompile Include="Kontrole.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="muzikaTest.cpp" />
     <ClCompile Include="TextBox.cpp" />
@@ -145,6 +147,8 @@
   <ItemGroup>
     <ClInclude Include="AplikacijaGUI.h" />
     <ClInclude Include="ElementarneKomponente.h" />
+    <ClInclude Include="GlobalneFunkcije.h" />
+    <ClInclude Include="Kontrole.h" />
     <ClInclude Include="muzikaTest.h" />
     <ClInclude Include="TextBox.h" />
     <ClInclude Include="Tipka.h" />
