@@ -36,6 +36,11 @@ private:
     size_t currentSamplePosition;
     std::mutex printMutex;
     sf::Music music;
+    sf::Time tempVrijeme;
+    double brzina;
+    sf::Time startTime;
+    sf::Time pauseTime;
+    std::thread timeTrackingThread;
 
 public:
 
