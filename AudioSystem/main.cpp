@@ -1,15 +1,16 @@
-#include <SFML/Graphics.hpp>
 #include "muzikaTest.h"
+#include "muzikaBeta.h"
+
 int main()
 {
-    AudioPlayer player;
-    player.Pokreni();
-    
+   AudioPlayer player;
+   player.Pokreni();
+   
     /*
     sf::Music music;
 
     // Postavite putanju do zvuènog fajla
-    const std::string filePath = "Breskvica-Dogolekoze";
+    const std::string filePath = "Breskvica-Dogolekoze.wav";
 
     // Uèitajte zvuèni fajl
     if (!music.openFromFile(filePath)) {

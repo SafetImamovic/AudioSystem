@@ -19,69 +19,69 @@
 #include <fstream>
 #include <SFML/Audio.hpp>
 
-class AudioPlayer {
+class AudioPlayer2 {
 private:
-    std::vector<std::wstring> songList;
-    std::wstring soundFilePath;
-    bool isPlaying;
-    bool listaDisplayed;
-    bool isPlaybackComplete;
-    int trenutniIndeksPjesme;
-    int seconds;
-    int trajanjePjesme;
-    double currentTimeInSeconds;
-    WAVEFORMATEX waveFormat;
-    double currentSamplePosition;
+    std::vector<std::wstring> songList2;
+    std::wstring soundFilePath2;
+    bool isPlaying2;
+    bool listaDisplayed2;
+    bool isPlaybackComplete2;
+    int trenutniIndeksPjesme2;
+    int seconds2;
+    int trajanjePjesme2;
+    double currentTimeInSeconds2;
+    WAVEFORMATEX waveFormat2;
+    double currentSamplePosition2;
 
 public:
-    AudioPlayer();
+    AudioPlayer2();
 
-    ~AudioPlayer();
+    ~AudioPlayer2();
 
-    void setNiz();
+    void setNiz2();
 
-    void Pokreni();
+    void Pokreni2();
 
-    void Lista();
+    void Lista2();
 
-    std::wstring ImeFajlaBezEkstenzije(const std::wstring& filePath);
+    std::wstring ImeFajlaBezEkstenzije2(const std::wstring& filePath);
 
-    void sveLista();
+    void sveLista2();
 
-    void Menu();
+    void Menu2();
 
-    void Izbornik(int izbor);
+    void Izbornik2(int izbor);
 
-    void unesiIme();
+    void unesiIme2();
 
-    void pustiPauza();
+    void pustiPauza2();
 
-    void Pojacaj();
+    void Pojacaj2();
 
-    void Smanji();
+    void Smanji2();
 
-    void Vrijeme();
+    void Vrijeme2();
 
-    int getSystemVolume();
+    int getSystemVolume2();
 
-    void setSystemVolume(DWORD volume);
+    void setSystemVolume2(DWORD volume);
 
-    void novaPjesma();
+    void novaPjesma2();
 
-    void premotajUnazad();
+    void premotajUnazad2();
 
-    void premotajUnaprijed();
+    void premotajUnaprijed2();
 
-    static void CALLBACK StartPlaybackCallbackStatic(UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1, DWORD_PTR dw2);
+    static void CALLBACK StartPlaybackCallbackStatic2(UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1, DWORD_PTR dw2);
 
-    void StartPlaybackCallback(UINT uTimerID, UINT uMsg, DWORD_PTR dw1, DWORD_PTR dw2);
+    void StartPlaybackCallback2(UINT uTimerID, UINT uMsg, DWORD_PTR dw1, DWORD_PTR dw2);
 
-    void ScanFolderForMusicFiles(const std::wstring& folderPath, std::vector<std::wstring>& fileNames);
+    void ScanFolderForMusicFiles2(const std::wstring& folderPath, std::vector<std::wstring>& fileNames);
 
-    void PromijeniBrzinuReprodukcije(double faktor);
+    void PromijeniBrzinuReprodukcije2(double faktor);
 
-    void Ubrzaj();
+    void Ubrzaj2();
 
-    void Uspori();
+    void Uspori2();
 
 };
