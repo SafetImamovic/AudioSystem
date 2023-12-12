@@ -17,73 +17,71 @@
 #include <set>
 #include <Shellapi.h>
 #include <fstream>
-#include <SFML/Audio/Music.hpp>
-#include <cstring>
+#include <SFML/Audio.hpp>
 
-class AudioPlayer
-{
+class AudioPlayer2 {
 private:
-    std::vector<std::string> songList;
-    std::string soundFilePath;
-    bool isPlaying;
-    bool listaDisplayed;
-    bool isPlaybackComplete;
-    size_t trenutniIndeksPjesme;
-    size_t seconds;
-    size_t trajanjePjesme;
-    double currentTimeInSeconds;
-    WAVEFORMATEX waveFormat;
-    size_t currentSamplePosition;
-    std::mutex printMutex;
-    sf::Music music;
+    std::vector<std::wstring> songList2;
+    std::wstring soundFilePath2;
+    bool isPlaying2;
+    bool listaDisplayed2;
+    bool isPlaybackComplete2;
+    int trenutniIndeksPjesme2;
+    int seconds2;
+    int trajanjePjesme2;
+    double currentTimeInSeconds2;
+    WAVEFORMATEX waveFormat2;
+    double currentSamplePosition2;
 
 public:
+    AudioPlayer2();
 
-    AudioPlayer();
+    ~AudioPlayer2();
 
-    ~AudioPlayer();
+    void setNiz2();
 
-    void setNiz();
+    void Pokreni2();
 
-    void Pokreni();
+    void Lista2();
 
-    void Lista();
+    std::wstring ImeFajlaBezEkstenzije2(const std::wstring& filePath);
 
-    std::string ImeFajlaBezEkstenzije(const std::string& filePath);
+    void sveLista2();
 
-    void sveLista();
+    void Menu2();
 
-    void Menu();
+    void Izbornik2(int izbor);
 
-    void Izbornik(int izbor);
+    void unesiIme2();
 
-    void unesiIme();
+    void pustiPauza2();
 
-    void pustiPauza();
+    void Pojacaj2();
 
-    void Pojacaj();
+    void Smanji2();
 
-    void Smanji();
+    void Vrijeme2();
 
-    void Vrijeme();
+    int getSystemVolume2();
 
-    int getSystemVolume();
+    void setSystemVolume2(DWORD volume);
 
-    void setSystemVolume(DWORD volume);
+    void novaPjesma2();
 
-    void novaPjesma();
+    void premotajUnazad2();
 
-    void premotajUnazad();
+    void premotajUnaprijed2();
 
-    void premotajUnaprijed();
+    static void CALLBACK StartPlaybackCallbackStatic2(UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1, DWORD_PTR dw2);
 
-    void ScanFolderForMusicFiles(const std::string& folderPath, std::vector<std::string>& fileNames);
+    void StartPlaybackCallback2(UINT uTimerID, UINT uMsg, DWORD_PTR dw1, DWORD_PTR dw2);
 
-    void PromijeniBrzinuReprodukcije(double faktor);
+    void ScanFolderForMusicFiles2(const std::wstring& folderPath, std::vector<std::wstring>& fileNames);
 
-    void Ubrzaj();
+    void PromijeniBrzinuReprodukcije2(double faktor);
 
-    void Uspori();
+    void Ubrzaj2();
+
+    void Uspori2();
 
 };
-

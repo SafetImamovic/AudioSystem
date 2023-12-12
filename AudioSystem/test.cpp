@@ -1,7 +1,7 @@
-ï»¿#include "muzikaBeta.h"
+#include "muzikaTest.h"
 
 // Globalni mutex printMutex koristi se za sinhronizaciju ispisa na konzoli
-// kako bi se sprijeÃ¨ilo meÃ°usobno preplitanje poruka kada se koristi viÅ¡e niti.
+// kako bi se sprijeèilo meðusobno preplitanje poruka kada se koristi više niti.
 std::mutex printMutex2;
 
 WAVEFORMATEX waveformat2;
@@ -9,7 +9,7 @@ WAVEFORMATEX waveformat2;
 // Konstruktor klase AudioPlayer
 AudioPlayer2::AudioPlayer2()
 {
-    // Postavljanje inicijalnih vrijednosti Ã¨lanova klase
+    // Postavljanje inicijalnih vrijednosti èlanova klase
     this->soundFilePath2 = L"Akon-SmackThat";
     this->trenutniIndeksPjesme2 = 0;
     this->seconds2 = 0;
@@ -69,7 +69,7 @@ void AudioPlayer2::Lista2() {
     std::cout << std::endl;
 }
 
-// Funkcija koja vraÃ¦a ime fajla bez ekstenzije
+// Funkcija koja vraæa ime fajla bez ekstenzije
 std::wstring AudioPlayer2::ImeFajlaBezEkstenzije2(const std::wstring& filePath) {
     size_t lastDotPos = filePath.find_last_of(L".");
     return filePath.substr(0, lastDotPos);
@@ -200,7 +200,7 @@ void AudioPlayer2::pustiPauza2() {
         this->isPlaying2 = true;
         this->isPlaybackComplete2 = false;
 
-        // Pokretanje thread-a za praÃ¦enje vremena reprodukcije
+        // Pokretanje thread-a za praæenje vremena reprodukcije
         std::thread(&AudioPlayer2::Vrijeme2, this).detach();
     }
 }
@@ -212,7 +212,7 @@ void AudioPlayer2::Vrijeme2() {
 
         this->seconds2++;
 
-        // AÅ¾urirajte trenutno vrijeme i broj uzoraka
+        // Ažurirajte trenutno vrijeme i broj uzoraka
         currentTimeInSeconds2 = static_cast<double>(this->seconds2);
         currentSamplePosition2 = this->seconds2 * this->waveFormat2.nSamplesPerSec;
 
@@ -225,12 +225,12 @@ void AudioPlayer2::Vrijeme2() {
             std::cout << "    >> ";
         }
 
-        // Provjera zavrÅ¡etka reprodukcije
+        // Provjera završetka reprodukcije
         if (this->seconds2 >= this->trajanjePjesme2) {
             this->isPlaybackComplete2 = true;
         }
 
-        // Pokretanje nove pjesme nakon zavrÅ¡etka trenutne
+        // Pokretanje nove pjesme nakon završetka trenutne
         if (this->isPlaybackComplete2) {
             novaPjesma2();
             break;
@@ -238,7 +238,7 @@ void AudioPlayer2::Vrijeme2() {
     }
 }
 
-// Metoda za prelazak na sljedeÃ¦u pjesmu
+// Metoda za prelazak na sljedeæu pjesmu
 void AudioPlayer2::novaPjesma2() {
     this->trenutniIndeksPjesme2++;
     if (this->trenutniIndeksPjesme2 < songList2.size()) {
@@ -253,7 +253,7 @@ void AudioPlayer2::novaPjesma2() {
     }
 }
 
-// Metoda za pojaÃ¨avanje zvuka
+// Metoda za pojaèavanje zvuka
 void AudioPlayer2::Pojacaj2() {
     DWORD currentVolume = getSystemVolume2();
 
@@ -315,17 +315,17 @@ void AudioPlayer2::premotajUnaprijed2() {
 
 }
 
-//Staticka metoda koja se poziva pri svakom "timer" dogaÃ°aju tokom reprodukcije.
+//Staticka metoda koja se poziva pri svakom "timer" dogaðaju tokom reprodukcije.
 void CALLBACK AudioPlayer2::StartPlaybackCallbackStatic2(UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1, DWORD_PTR dw2) {
 
 }
 
-//Metoda koja se poziva pri svakom "timer" dogaÃ°aju tokom reprodukcije
+//Metoda koja se poziva pri svakom "timer" dogaðaju tokom reprodukcije
 void AudioPlayer2::StartPlaybackCallback2(UINT uTimerID, UINT uMsg, DWORD_PTR dw1, DWORD_PTR dw2) {
 
 }
 
-// Metoda koja skenira odreÃ°eni folder i popunjava set sa imenima muziÃ¨kih fajlova.
+// Metoda koja skenira odreðeni folder i popunjava set sa imenima muzièkih fajlova.
 void AudioPlayer2::ScanFolderForMusicFiles2(const std::wstring& folderPath, std::vector<std::wstring>& fileNames) {
     std::set<std::wstring> uniqueFileNames;  // Set za spremanje jedinstvenih imena
 
