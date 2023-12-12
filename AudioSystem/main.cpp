@@ -1,12 +1,13 @@
 ﻿#include "muzikaTest.h"
 #include "muzikaBeta.h"
-#include "AplikacijaGUI.h"
+//#include "AplikacijaGUI.h"
 
 int main()
 {
    AudioPlayer player;
    player.Pokreni();
-   
+
+   /*
    sf::Font arial;
    arial.loadFromFile("Arial.ttf");
    AplikacijaGUI GUI(arial);
