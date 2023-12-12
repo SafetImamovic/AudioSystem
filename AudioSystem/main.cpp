@@ -1,5 +1,6 @@
 #include "muzikaTest.h"
 #include "muzikaBeta.h"
+#include "AplikacijaGUI.h"
 
 int main()
 {
