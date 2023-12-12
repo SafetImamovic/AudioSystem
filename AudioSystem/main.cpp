@@ -1,4 +1,4 @@
-#include "muzikaTest.h"
+ï»¿#include "muzikaTest.h"
 #include "muzikaBeta.h"
 #include "AplikacijaGUI.h"
 
@@ -7,13 +7,17 @@ int main()
    AudioPlayer player;
    player.Pokreni();
    
+   sf::Font arial;
+   arial.loadFromFile("Arial.ttf");
+   AplikacijaGUI GUI(arial);
+
     /*
     sf::Music music;
 
-    // Postavite putanju do zvuènog fajla
+    // Postavite putanju do zvuÄnog fajla
     const std::string filePath = "Breskvica-Dogolekoze.wav";
 
-    // Uèitajte zvuèni fajl
+    // UÄitajte zvuÄni fajl
     if (!music.openFromFile(filePath)) {
         std::cerr << "Error opening sound file." << std::endl;
         return 1;
@@ -26,7 +30,13 @@ int main()
     // Reprodukcija zvuka
     music.play();
 
-    // Saèekajte dok se reprodukcija ne završi
+    // SaÄekajte dok se reprodukcija ne zavrÅ¡i
+    while (music.getStatus() == sf::Music::Playing) {
+        sf::sleep(sf::milliseconds(100));
+    }
+
+    /*
+    // SaÃ¨ekajte dok se reprodukcija ne zavrÅ¡i
     while (music.getStatus() == sf::Music::Playing) {
         sf::sleep(sf::milliseconds(100));
     }
@@ -36,19 +46,16 @@ int main()
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
 
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
 
-        window.clear();
-        window.draw(shape);
-        window.display();
+    while (AudioSystemGUI.getWindowIsOpen()) //petlja u kojoj se odvijaju akcije aplikacije dok je prozor otvoren
+    {
+        //update
+        AudioSystemGUI.UpdateGUI();
+
+        //render
+        AudioSystemGUI.RenderGUI();
     }
+    
     */
     return 0;
 }
