@@ -1,19 +1,22 @@
-#include "AplikacijaGUI.h"
 #include "muzikaTest.h"
 
 int main()
 {
-    sf::Font arial;
-    arial.loadFromFile("Arial.ttf");
-    AplikacijaGUI GUI(arial);
-    
+   AudioPlayer player;
+   player.Pokreni();
+
+   /*
+   sf::Font arial;
+   arial.loadFromFile("Arial.ttf");
+   AplikacijaGUI GUI(arial);
+
     /*
     sf::Music music;
 
-    // Postavite putanju do zvuènog fajla
-    const std::string filePath = "Breskvica-Dogolekoze";
+    // Postavite putanju do zvučnog fajla
+    const std::string filePath = "Breskvica-Dogolekoze.wav";
 
-    // Uèitajte zvuèni fajl
+    // Učitajte zvučni fajl
     if (!music.openFromFile(filePath)) {
         std::cerr << "Error opening sound file." << std::endl;
         return 1;
@@ -26,6 +29,12 @@ int main()
     // Reprodukcija zvuka
     music.play();
 
+    // Sačekajte dok se reprodukcija ne završi
+    while (music.getStatus() == sf::Music::Playing) {
+        sf::sleep(sf::milliseconds(100));
+    }
+
+    /*
     // Saèekajte dok se reprodukcija ne završi
     while (music.getStatus() == sf::Music::Playing) {
         sf::sleep(sf::milliseconds(100));
@@ -45,11 +54,7 @@ int main()
         //render
         AudioSystemGUI.RenderGUI();
     }
-
-
-    //AudioPlayer player;
-    //player.Pokreni();
     
-    return 0;
     */
+    return 0;
 }
