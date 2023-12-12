@@ -17,7 +17,6 @@
 class TextBox : public ElementarneKomponente
 {
 private:
-	std::string ID;
 	sf::Text textbox;
 	
 	std::ostringstream text;
@@ -43,7 +42,7 @@ public:
 	void SetOznacen(bool oznacen);
 	void SetBackground(sf::Color boja, sf::Vector2f velicina);
 	void SetPozadinaPozicija(sf::Vector2f pozicija);
-	void SetSve(int velicinaTeksta, sf::Color bojaTeksta, sf::Color bojaPozadine, bool oznacen, sf::Font& font, sf::Vector2f pozicija, sf::Vector2f padding, sf::Vector2f velicinaPozadine);
+	void SetSve(std::string ID, int velicinaTeksta, sf::Color bojaTeksta, sf::Color bojaPozadine, bool oznacen, sf::Font& font, sf::Vector2f pozicija, sf::Vector2f padding, sf::Vector2f velicinaPozadine);
 	bool JeOznacen();
 	void Clear();
 	std::string GetText();

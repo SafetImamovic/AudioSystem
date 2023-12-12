@@ -3,10 +3,14 @@
 
 int main()
 {
-    sf::Font arial;
-    arial.loadFromFile("seguisym.ttf");
+    sf::Color PrimarnaBoja = sf::Color(30, 30, 30);
+    sf::Color SekundarnaBoja = sf::Color(60, 60, 60);
+    sf::Color AkcenatBoja = sf::Color::Red;
 
-    AplikacijaGUI AudioSystemGUI(arial);
+    sf::Font font;
+    font.loadFromFile("seguisym.ttf");
+
+    AplikacijaGUI AudioSystemGUI(font, PrimarnaBoja, SekundarnaBoja, AkcenatBoja);
 
     while (AudioSystemGUI.getWindowIsOpen()) //petlja u kojoj se odvijaju akcije aplikacije dok je prozor otvoren
     {

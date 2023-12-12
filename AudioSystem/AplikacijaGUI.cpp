@@ -1,5 +1,6 @@
 ﻿#include "AplikacijaGUI.h"
 #include <iostream>
+#include "GlobalneFunkcije.h"
 //----------------------private----------------------------------//
 
 void AplikacijaGUI::InicijalizacijaVarijabli()
@@ -10,11 +11,6 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	this->videoMode.height = 720; //visina prozora koja se smijesta unutar this->videoMode
 	this->videoMode.width = 1280; //sirina prozora koja se smijesta unutar this->videoMode
 
-	this->PrimarnaBoja = sf::Color(30, 30, 30);
-	this->SekundarnaBoja = sf::Color(100, 100, 100);
-	this->AkcenatBoja = sf::Color::Red;
-	
-	
 }
 
 void AplikacijaGUI::InicijalizacijaProzora()
@@ -34,17 +30,45 @@ void AplikacijaGUI::InicijalizacijaElemenata()
 //ovo je vecinski dizajn i pozicioniranje elemenata na prozoru tako sto se instancira odgovarajuci element i nakon 
 //konfigurisanja push_back-a se nazad na vektore koji sadrze njih
 {
+	kontrole.SetKontrole(
+		this->videoMode, 
+		this->font,
+		this->PrimarnaBoja,
+		this->SekundarnaBoja,
+		this->AkcenatBoja
+	);
+
 	this->rect.setSize(sf::Vector2f(100.f, 100.f));
 	this->rect.setFillColor(sf::Color::Cyan);
 
 	TextBox textbox1, textbox2;
-	textbox1.SetSve(20, sf::Color::White, this->PrimarnaBoja, false, this->font, sf::Vector2f(200, 50), sf::Vector2f(20, 15), sf::Vector2f(1000, 50));
+	textbox1.SetSve(
+		"Prvi",
+		20,
+		sf::Color::White,
+		PrimarnaBoja,
+		false,
+		this->font,
+		sf::Vector2f(200, 50),
+		sf::Vector2f(20, 15),
+		sf::Vector2f(1000, 50)
+	);
 
-	textbox2.SetSve(20, sf::Color::White, this->PrimarnaBoja, false, this->font, sf::Vector2f(200, 250), sf::Vector2f(20, 15), sf::Vector2f(1000, 50));
+	textbox2.SetSve(
+		"Drugi",
+		20,
+		sf::Color::White, 
+		PrimarnaBoja, 
+		false, 
+		this->font, 
+		sf::Vector2f(200, 250), 
+		sf::Vector2f(20, 15), 
+		sf::Vector2f(1000, 50)
+	);
 
-	Tipka tipka1, TipkaPoslije, TipkaPrije, TipkaPustiPauziraj, TipkaLoop;
+	
 	//void Tipka::SetTipka(std::wstring text, sf::Vector2f velicina, int karakterVelicina, sf::Color bojaText, sf::Color bojaPozadine, sf::Font & font)
-	tipka1.SetTipka("tipka1" , L"", {200, 50}, 20, sf::Color(255, 255, 255, 255), this->PrimarnaBoja, this->font, {200, 400}, {20, 20});
+	
 	//L ispred string-a je wstring koji podrzava UTF-16 karaktere, ima funkcija u Tipka klasi u vezi ovoga "SetTextUTF16(std::wstring text)"
 
 	
@@ -54,57 +78,27 @@ void AplikacijaGUI::InicijalizacijaElemenata()
 	//TipkaPustiPauziraj.SetTipka(L"▶◼", { 40, 40 }, 16, sf::Color::White, this->PrimarnaBoja, this->font, { 540, 600 }, { 4, 10 });
 	//TipkaLoop.SetTipka(L"⟳", { 40, 40 }, 24, sf::Color::White, this->PrimarnaBoja, this->font, { 620, 600 }, { 9, 3 });
 
-	int visina = 100, sirina = 100;
-	sf::Vector2f velicinaTipke = sf::Vector2f(sirina, visina);
-	int pocetnaKoordinataX, pocetnaKoordinataY = 620;
-
-	pocetnaKoordinataX = this->videoMode.width / 2 - sirina * 4 / 2;
-	//formula koja racuna horizontalni centar prozora, sirina * 4 je 4 jer imaju 4 tipke
-	pocetnaKoordinataY = this->videoMode.height - visina;
-	//racuna donju granicu prozora
-
-	TipkaPoslije.SetTipka("Poslije", L"▷▷", velicinaTipke, 32, sf::Color::White, this->PrimarnaBoja, this->font, sf::Vector2f(pocetnaKoordinataX + 2 * sirina, pocetnaKoordinataY), {20, 26});
-	TipkaPrije.SetTipka("Prije", L"◁◁", velicinaTipke, 32, sf::Color::White, this->PrimarnaBoja, this->font, sf::Vector2f(pocetnaKoordinataX, pocetnaKoordinataY), {20, 26});
-	TipkaPustiPauziraj.SetTipka("PustiPauziraj", L"▶◼", velicinaTipke, 32, sf::Color::White, this->PrimarnaBoja, this->font, sf::Vector2f(pocetnaKoordinataX + sirina, pocetnaKoordinataY), {20, 26});
-	TipkaLoop.SetTipka("Loop", L"⟳", velicinaTipke, 50, sf::Color::White, this->PrimarnaBoja, this->font, sf::Vector2f(pocetnaKoordinataX + 3 * sirina, pocetnaKoordinataY), {25, 11});
-
-
-
 	this->TextBoxovi.push_back(textbox1);
 	this->TextBoxovi.push_back(textbox2);
-	this->Tipke.push_back(tipka1);
-	this->Tipke.push_back(TipkaPoslije);
-	this->Tipke.push_back(TipkaPrije);
-	this->Tipke.push_back(TipkaPustiPauziraj);
-	this->Tipke.push_back(TipkaLoop);
+
+	
 
 	//IPAK JE NALBOLJA PRAKSA NAPRAVITI ODVOJENU KLASU ZA PLAYER!
 }
 
 void AplikacijaGUI::ProvjeriHoverZaSveElemente()
 {
-	for (int i = 0; i < this->Tipke.size(); i++)
-	{
-		if (this->Tipke.at(i).Hover(*this->window, this->Tipke.at(i).tipka))//poziva metodu bool Hover(sf::RenderWindow& window) koja vraca true ako je kursor 
-			//unutar dimenzija tipke relativno dimenzijama ekrana
-		{
-			this->Tipke.at(i).PromijeniBojuPozadine(this->SekundarnaBoja);
-		}
-		else
-		{
-			this->Tipke.at(i).PromijeniBojuPozadine(this->PrimarnaBoja);
-		}
-	}
+	ProvjeriHoverZaSveTipke(*this->window, this->kontrole.Tipke, this->PrimarnaBoja, this->SekundarnaBoja);
 	
 	for(int i = 0; i < this->TextBoxovi.size(); i++)
 	{
 		if (this->TextBoxovi.at(i).Hover(*this->window, this->TextBoxovi.at(i).backgroundShape))
 		{
-			this->TextBoxovi.at(i).backgroundShape.setFillColor(this->SekundarnaBoja);
+			this->TextBoxovi.at(i).backgroundShape.setFillColor(SekundarnaBoja);
 		}
 		else
 		{
-			this->TextBoxovi.at(i).backgroundShape.setFillColor(this->PrimarnaBoja);
+			this->TextBoxovi.at(i).backgroundShape.setFillColor(PrimarnaBoja);
 		}
 	}
 	
@@ -124,18 +118,8 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 		}
 	}
 
-	for (int i = 0; i < this->Tipke.size(); i++)
-	{
-		if (this->Tipke.at(i).Hover(*this->window, this->Tipke.at(i).tipka))
-		{
-			this->Tipke.at(i).PromijeniBojuPozadine(this->AkcenatBoja);
-			std::cout << this->Tipke.at(i).GetID() << "\n";
-		}
-		else
-		{
-			this->Tipke.at(i).PromijeniBojuPozadine(this->PrimarnaBoja);
-		}
-	}
+	ProvjeriClickZaSveTipke(*this->window, this->kontrole.Tipke, this->PrimarnaBoja, this->AkcenatBoja);
+	this->kontrole.UpdatePozicijaSimbola(*this->window);
 }
 
 void AplikacijaGUI::RenderSveElemente()
@@ -144,18 +128,14 @@ void AplikacijaGUI::RenderSveElemente()
 	{
 		this->TextBoxovi.at(i).DrawTo(*this->window);
 	}
-	for (int i = 0; i < this->Tipke.size(); i++)
-	{
-		this->Tipke.at(i).DrawTo(*this->window);
-	}
+
+	DrawToSveTipke(*this->window, this->kontrole.Tipke);
+	this->kontrole.RenderScroll(*this->window);
 }
 
 void AplikacijaGUI::ResetPrimarneBoje()
 {
-	for (int i = 0; i < this->Tipke.size(); i++)
-	{
-		this->Tipke.at(i).PromijeniBojuPozadine(this->PrimarnaBoja);
-	}
+	ResetPrimarneBojeSveTipke(*this->window, this->kontrole.Tipke, this->PrimarnaBoja);
 }
 
 void AplikacijaGUI::GetOdgovarajuciTextBoxText()
@@ -173,9 +153,13 @@ void AplikacijaGUI::GetOdgovarajuciTextBoxText()
 
 //------------------end of private-------------------------------//
 
-AplikacijaGUI::AplikacijaGUI(sf::Font& font) //konstruktor poziva privatne metode koje inicijaliziraju varijable i prozor
+AplikacijaGUI::AplikacijaGUI(sf::Font& font, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja)
+//konstruktor poziva privatne metode koje inicijaliziraju varijable i prozor
 {
 	this->font = font;
+	this->PrimarnaBoja = PrimarnaBoja;
+	this->SekundarnaBoja = SekundarnaBoja;
+	this->AkcenatBoja = AkcenatBoja;
 	this->InicijalizacijaVarijabli();
 	this->InicijalizacijaProzora();
 	this->InicijalizacijaElemenata();
@@ -273,7 +257,6 @@ void AplikacijaGUI::RenderGUI() //renderuje objekte, elemente aplikacije
 	//--------ovdje krece pozivanje metoda koje iscrtavaju elemente----------
 
 	this->RenderSveElemente();
-
 	//--------ovdje zavrsava pozivanje metoda koje iscrtavaju elemente-------
 
 	this->window->display(); //ovo je indikator da je frame zavrsen sa crtanjem
