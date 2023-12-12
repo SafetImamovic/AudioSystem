@@ -246,10 +246,9 @@ void AudioPlayer::Vrijeme() {
             }
 
             // Pokretanje nove pjesme nakon završetka trenutne
-            if (this->isPlaybackComplete) {
-                PromijeniBrzinuReprodukcije(1.0);
-                music.setPitch(1.0);
-                novaPjesma();
+            if (this->isPlaybackComplete) {              
+                novaPjesma(); 
+                break;
             }
         }
     }
@@ -276,6 +275,7 @@ void AudioPlayer::novaPjesma() {
             music.setPitch(1.0);
             PromijeniBrzinuReprodukcije(1.0);
             music.play();
+            this->trajanjePjesme = music.getDuration().asSeconds();
             this->isPlaying = true;
             this->isPlaybackComplete = false;
             this->seconds = 0;
