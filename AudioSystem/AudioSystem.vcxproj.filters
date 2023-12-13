@@ -21,6 +21,8 @@
     <ClCompile Include="muzikaTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="muzikaBeta.cpp">
+=======
     <ClCompile Include="AplikacijaGUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -35,6 +37,8 @@
     <ClInclude Include="muzikaTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="muzikaBeta.h">
+=======
     <ClInclude Include="AplikacijaGUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
