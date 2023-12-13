@@ -30,7 +30,7 @@ private:
     bool isPlaybackComplete;
     size_t trenutniIndeksPjesme;
     size_t seconds;
-    size_t trajanjePjesme;
+    int trajanjePjesme;
     double currentTimeInSeconds;
     WAVEFORMATEX waveFormat;
     size_t currentSamplePosition;
@@ -40,7 +40,12 @@ private:
     double brzina;
     sf::Time startTime;
     sf::Time pauseTime;
-    std::thread timeTrackingThread;
+    //std::thread timeTrackingThread;
+    sf::Time newTime;
+    sf::Time currentTime;
+    bool shouldStop;
+    double effectiveSpeed;
+    int tempSekunde;
 
 public:
 
@@ -77,6 +82,8 @@ public:
     void setSystemVolume(DWORD volume);
 
     void novaPjesma();
+
+    void staraPjesma();
 
     void premotajUnazad();
 

@@ -1,7 +1,7 @@
 ﻿#include "muzikaTest.h"
 
 // Globalni mutex printMutex koristi se za sinhronizaciju ispisa na konzoli
-// kako bi se sprijeèilo meðusobno preplitanje poruka kada se koristi više niti.
+// kako bi se sprijecilo meðusobno preplitanje poruka kada se koristi više niti.
 std::mutex printMutex;
 
 WAVEFORMATEX waveformat;
@@ -10,14 +10,24 @@ WAVEFORMATEX waveformat;
 AudioPlayer::AudioPlayer()
 {
     // Postavljanje inicijalnih vrijednosti èlanova klase
-    this->soundFilePath = "Akon-SmackThat.wav";
+    this->soundFilePath = "Akon - SmackThat.wav";
     this->trenutniIndeksPjesme = 0;
-    this->seconds = 0;
+    this->seconds = 1;
     this->isPlaying = false;
     this->listaDisplayed = false;
     this->isPlaybackComplete = false;
     this->trajanjePjesme = 200;
-    this->brzina = 1;
+    this->brzina = 1.0;
+    this->effectiveSpeed = 1.0;
+    sf::Time tempVrijeme = sf::Time::Zero;
+    sf::Time startTime = sf::Time::Zero;
+    sf::Time pauseTime = sf::Time::Zero;
+    sf::Time newTime = sf::Time::Zero;
+    sf::Time currentTime = sf::Time::Zero;
+    bool shouldStop = false;
+    this->tempSekunde = 0;
+
+  // timeTrackingThread = std::thread(&AudioPlayer::Vrijeme, this);
 
     waveFormat.wFormatTag = WAVE_FORMAT_PCM;
     waveFormat.nChannels = 2;
@@ -44,7 +54,7 @@ void AudioPlayer::Pokreni() {
         }
         Izbornik(izbor);
 
-    } while (izbor != 12);
+    } while (izbor != 13);
 }
 
 // Inicijalizacija niza pjesama
@@ -96,12 +106,13 @@ void AudioPlayer::Menu() {
     std::cout << "       4.  Smanji" << std::endl;
     std::cout << "       5.  Lista" << std::endl;
     std::cout << "       6.  Preskoci trenutnu pjesmu" << std::endl;
-    std::cout << "       7.  Premotaj unazad" << std::endl;
-    std::cout << "       8.  Premotaj unaprijed" << std::endl;
-    std::cout << "       9.  Ubrzaj pjesmu" << std::endl;
-    std::cout << "       10. Uspori pjesmu" << std::endl;
-    std::cout << "       11. Normalna brzina pjesme" << std::endl;
-    std::cout << "       12. Exit" << std::endl;
+    std::cout << "       7.  Povratak na staru pjesmu" << std::endl;
+    std::cout << "       8.  Premotaj unazad" << std::endl;
+    std::cout << "       9.  Premotaj unaprijed" << std::endl;
+    std::cout << "       10. Ubrzaj pjesmu" << std::endl;
+    std::cout << "       11. Uspori pjesmu" << std::endl;
+    std::cout << "       12. Normalna brzina pjesme" << std::endl;
+    std::cout << "       13. Exit" << std::endl;
     std::cout << '\n';
     std::cout << '\n';
     if (listaDisplayed) {
@@ -117,6 +128,7 @@ void AudioPlayer::Menu() {
 void AudioPlayer::Izbornik(int izbor) {
     switch (izbor) {
     case 1:
+        this->isPlaying = false;
         unesiIme();
         break;
     case 2:
@@ -132,31 +144,36 @@ void AudioPlayer::Izbornik(int izbor) {
         listaDisplayed = true;
         break;
     case 6:
-        isPlaybackComplete = true;
+        this->tempSekunde = 0;
+        novaPjesma();
         break;
     case 7:
-        //std::cout << "Jos uvijek u testu!\n";
-        //Sleep(1000);
-        premotajUnazad();
+        this->tempSekunde = 0;
+        staraPjesma();
         break;
     case 8:
         //std::cout << "Jos uvijek u testu!\n";
         //Sleep(1000);
-        premotajUnaprijed();
+        premotajUnazad();
         break;
     case 9:
         //std::cout << "Jos uvijek u testu!\n";
         //Sleep(1000);
-        Ubrzaj();
+        premotajUnaprijed();
         break;
     case 10:
         //std::cout << "Jos uvijek u testu!\n";
         //Sleep(1000);
-        Uspori();
+        Ubrzaj();
         break;
     case 11:
-        music.setPitch(1);
+        //std::cout << "Jos uvijek u testu!\n";
+        //Sleep(1000);
+        Uspori();
+        break;
     case 12:
+        music.setPitch(1);
+    case 13:
         std::cout << "Hvala na koristenju!\n";
         break;
     default:
@@ -168,7 +185,8 @@ void AudioPlayer::Izbornik(int izbor) {
 void AudioPlayer::unesiIme() {
     std::string fileName;
     std::cout << "Unesi ime: ";
-    std::cin >> fileName;
+    std::cin.ignore();
+    getline(std::cin, fileName);
 
     if (!std::filesystem::path(fileName).has_extension()) {
         fileName += ".wav";
@@ -185,6 +203,11 @@ void AudioPlayer::unesiIme() {
     if (!found) {
         std::cout << "Nemamo tu pjesmu na stanju" << std::endl;
     }
+    this->isPlaying = false;
+    this->seconds = 1;
+    this->pauseTime = sf::Time::Zero;
+    this->isPlaybackComplete = true;
+    this->currentTime = sf::Time::Zero;
 }
 
 // Metoda za reprodukciju/pauziranje pjesme
@@ -195,62 +218,86 @@ void AudioPlayer::pustiPauza() {
         music.stop();
         this->isPlaying = false;
         this->pauseTime = this->tempVrijeme;
-        this->seconds = static_cast<int>(pauseTime.asSeconds());
-        //->isPlaybackComplete = true;
+        this->seconds = static_cast<int>(this->pauseTime.asSeconds());
+        //this->isPlaybackComplete = true;
     }
     else {
         // Pokretanje reprodukcije
         music.openFromFile(soundFilePath);
-        music.setPitch(1);
+        music.setPitch(1.0);
         music.play();
         this->trajanjePjesme = music.getDuration().asSeconds();
         this->startTime = music.getPlayingOffset() - this->tempVrijeme;
         music.setPlayingOffset(this->pauseTime);
         this->isPlaying = true;
         this->isPlaybackComplete = false;
-
-        // Pokretanje thread-a za praæenje vremena reprodukcije
+        this->shouldStop = false;
+        this->pauseTime = this->tempVrijeme;
+        // Pokretanje thread-a za pracenje vremena reprodukcije
         std::thread(&AudioPlayer::Vrijeme, this).detach();
+        this->tempSekunde = 0;
+        
     }
 }
 
 // Metoda koja prati trajanje reprodukcije
 void AudioPlayer::Vrijeme() {
     try {
-        while (this->isPlaying && !this->isPlaybackComplete) {
-            std::this_thread::sleep_for(std::chrono::seconds(1));
+        sf::Time lastOffset = sf::Time::Zero;
+        while (!this->shouldStop && this->isPlaying && !this->isPlaybackComplete) {
+            this->tempSekunde = static_cast<int>(this->seconds);
 
-            sf::Time currentTime = music.getPlayingOffset() - this->startTime;
+            if (this->shouldStop) {
+                break;
+            }
+
+            if (!this->isPlaying) {
+                break;
+            }
+            
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            //this->trajanjePjesme = music.getDuration().asSeconds();
+            lastOffset = music.getPlayingOffset();
+
+            this->currentTime = lastOffset;
             sf::Time playingOffset = music.getPlayingOffset();
+            
             this->seconds = static_cast<int>(currentTime.asSeconds());
 
-            double effectiveSpeed = this->brzina > 0 ? this->brzina : 1.0;
+            this->effectiveSpeed = this->brzina > 0 ? this->brzina : 1.0;
             this->seconds = static_cast<int>(currentTime.asSeconds() * effectiveSpeed);
 
             // Ažurirajte trenutno vrijeme i broj uzoraka
             currentTimeInSeconds = static_cast<double>(this->seconds);
-            currentSamplePosition = this->seconds * this->waveFormat.nSamplesPerSec;
-
+            currentSamplePosition = this->seconds * this->waveFormat.nSamplesPerSec;          
+            
             {
                 std::lock_guard<std::mutex> lockGuard(printMutex);
-                // Ispis trenutne pozicije pjesme
+                
+                    // Ispis trenutne pozicije pjesme
                 std::cout << "\rTrenutna pjesma na radiju: " << ImeFajlaBezEkstenzije(soundFilePath) << std::flush
                     << " ( " << this->seconds / 60 << ":" << this->seconds % 60 << " )" << std::flush;
-
-                std::cout << "    >> ";
+                   // << " " << tempSekunde << std::flush;
+                        
+                    
+                    std::cout << "    >> ";
+                
             }
-
+           
             // Provjera završetka reprodukcije
-            if (this->seconds >= this->trajanjePjesme) {
+            if (tempSekunde >= this->trajanjePjesme) {
                 this->isPlaybackComplete = true;
+                shouldStop = true;
+                novaPjesma();
+                tempSekunde = 0;
             }
 
             // Pokretanje nove pjesme nakon završetka trenutne
-            if (this->isPlaybackComplete) {              
-                novaPjesma(); 
-                break;
-            }
+            //if (this->isPlaybackComplete) {              
+             //   novaPjesma();
+            //}
         }
+
     }
     catch (const std::exception& e) {
         std::cerr << "Greska tokom pustanja: " << e.what() << std::endl;
@@ -262,25 +309,33 @@ void AudioPlayer::Vrijeme() {
         this->isPlaying = false;
         this->isPlaybackComplete = true;
     }
+    //std::thread(&AudioPlayer::Vrijeme, this).join();
 }
 
 // Metoda za prelazak na sljedecu pjesmu
 void AudioPlayer::novaPjesma() {
+    shouldStop = true;
+    tempSekunde = 0;
     trenutniIndeksPjesme++;
     if (this->trenutniIndeksPjesme < songList.size()) {
         try {
+            this->effectiveSpeed = 1.0;
+            this->brzina = 1.0;
             music.stop();
             this->soundFilePath = songList[this->trenutniIndeksPjesme];
             music.openFromFile(soundFilePath);
             music.setPitch(1.0);
             PromijeniBrzinuReprodukcije(1.0);
+            this->pauseTime = sf::Time::Zero;
+            //this->currentTime = sf::Time::Zero;
             music.play();
             this->trajanjePjesme = music.getDuration().asSeconds();
             this->isPlaying = true;
             this->isPlaybackComplete = false;
-            this->seconds = 0;
+            this->shouldStop = false;
+            this->seconds = 1;
 
-            std::thread(&AudioPlayer::Vrijeme, this).join();
+            std::thread(&AudioPlayer::Vrijeme, this).detach();
         }catch (const std::exception& e) {
             std::cerr << "Greska tokom pokretanja: " << e.what() << std::endl;
         
@@ -291,6 +346,50 @@ void AudioPlayer::novaPjesma() {
             std::cerr << "Random greska\n";
             this->isPlaying = false;
             this->isPlaybackComplete = true;            
+        }
+    }
+    else {
+        std::cout << "Kraj liste, stavljanje na pocetak." << std::endl;
+        this->isPlaying = false;
+        this->isPlaybackComplete = true;
+        this->soundFilePath = songList[0];
+    }
+}
+
+// Metoda za prelazak na sljedecu pjesmu
+void AudioPlayer::staraPjesma() {
+    shouldStop = true;
+    tempSekunde = 0;
+    trenutniIndeksPjesme--;
+    if (this->trenutniIndeksPjesme < songList.size()) {
+        try {
+            this->effectiveSpeed = 1.0;
+            this->brzina = 1.0;
+            music.stop();
+            this->soundFilePath = songList[this->trenutniIndeksPjesme];
+            music.openFromFile(soundFilePath);
+            music.setPitch(1.0);
+            PromijeniBrzinuReprodukcije(1.0);
+            this->pauseTime = sf::Time::Zero;
+            //this->currentTime = sf::Time::Zero;
+            music.play();
+            this->trajanjePjesme = music.getDuration().asSeconds();
+            this->isPlaying = true;
+            this->isPlaybackComplete = false;
+            this->shouldStop = false;
+            this->seconds = 1;
+            std::thread(&AudioPlayer::Vrijeme, this).detach();
+        }
+        catch (const std::exception& e) {
+            std::cerr << "Greska tokom pokretanja: " << e.what() << std::endl;
+
+            this->isPlaying = false;
+            this->isPlaybackComplete = true;
+        }
+        catch (...) {
+            std::cerr << "Random greska\n";
+            this->isPlaying = false;
+            this->isPlaybackComplete = true;
         }
     }
     else {
@@ -417,7 +516,9 @@ void AudioPlayer::Uspori() {
 // Destruktor klase AudioPlayer
 AudioPlayer::~AudioPlayer()
 {
-    if (timeTrackingThread.joinable()) {
+    shouldStop = true;
+
+   /* if (timeTrackingThread.joinable()) {
         timeTrackingThread.join();
-    }
+    }*/
 }
