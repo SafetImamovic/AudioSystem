@@ -17,23 +17,38 @@
 #include <set>
 #include <Shellapi.h>
 #include <fstream>
-#include <SFML/Audio.hpp>
+#include <SFML/Audio/Music.hpp>
+#include <cstring>
 
-class AudioPlayer {
+class AudioPlayer
+{
 private:
-    std::vector<std::wstring> songList;
-    std::wstring soundFilePath;
+    std::vector<std::string> songList;
+    std::string soundFilePath;
     bool isPlaying;
     bool listaDisplayed;
     bool isPlaybackComplete;
-    int trenutniIndeksPjesme;
-    int seconds;
+    size_t trenutniIndeksPjesme;
+    size_t seconds;
     int trajanjePjesme;
     double currentTimeInSeconds;
     WAVEFORMATEX waveFormat;
-    double currentSamplePosition;
+    size_t currentSamplePosition;
+    std::mutex printMutex;
+    sf::Music music;
+    sf::Time tempVrijeme;
+    double brzina;
+    sf::Time startTime;
+    sf::Time pauseTime;
+    //std::thread timeTrackingThread;
+    sf::Time newTime;
+    sf::Time currentTime;
+    bool shouldStop;
+    double effectiveSpeed;
+    int tempSekunde;
 
 public:
+
     AudioPlayer();
 
     ~AudioPlayer();
@@ -44,7 +59,7 @@ public:
 
     void Lista();
 
-    std::wstring ImeFajlaBezEkstenzije(const std::wstring& filePath);
+    std::string ImeFajlaBezEkstenzije(const std::string& filePath);
 
     void sveLista();
 
@@ -68,15 +83,13 @@ public:
 
     void novaPjesma();
 
+    void staraPjesma();
+
     void premotajUnazad();
 
     void premotajUnaprijed();
 
-    static void CALLBACK StartPlaybackCallbackStatic(UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1, DWORD_PTR dw2);
-
-    void StartPlaybackCallback(UINT uTimerID, UINT uMsg, DWORD_PTR dw1, DWORD_PTR dw2);
-
-    void ScanFolderForMusicFiles(const std::wstring& folderPath, std::vector<std::wstring>& fileNames);
+    void ScanFolderForMusicFiles(const std::string& folderPath, std::vector<std::string>& fileNames);
 
     void PromijeniBrzinuReprodukcije(double faktor);
 
