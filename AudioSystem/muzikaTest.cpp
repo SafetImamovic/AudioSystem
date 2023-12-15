@@ -1,21 +1,23 @@
 ﻿#include "muzikaTest.h"
 
+
 // Globalni mutex printMutex koristi se za sinhronizaciju ispisa na konzoli
 // kako bi se sprijecilo meðusobno preplitanje poruka kada se koristi više niti.
 std::mutex printMutex;
 
-WAVEFORMATEX waveformat;
-
 // Konstruktor klase AudioPlayer
 AudioPlayer::AudioPlayer()
 {
+
     // Postavljanje inicijalnih vrijednosti èlanova klase
     this->soundFilePath = "Akon - SmackThat.wav";
+
     this->trenutniIndeksPjesme = 0;
     this->seconds = 1;
     this->isPlaying = false;
     this->listaDisplayed = false;
     this->isPlaybackComplete = false;
+
     this->trajanjePjesme = music.getDuration().asSeconds();
     this->brzina = 1.0;
     this->effectiveSpeed = 1.0;
@@ -37,6 +39,7 @@ AudioPlayer::AudioPlayer()
     this->waveFormat.nAvgBytesPerSec = waveFormat.nSamplesPerSec * waveFormat.nBlockAlign;
     this->waveFormat.cbSize = 0;
 
+
 }
 
 // Glavna metoda za upravljanje audio playerom
@@ -54,12 +57,15 @@ void AudioPlayer::Pokreni() {
         }
         Izbornik(izbor);
 
+
     } while (izbor != 13);
+
 }
 
 // Inicijalizacija liste pjesama
 void AudioPlayer::setNiz()
 {
+
     ScanFolderForMusicFiles(".", songList);
 }
 
@@ -90,8 +96,8 @@ std::string AudioPlayer::ImeFajlaBezEkstenzije(const std::string& filePath) {
 void AudioPlayer::sveLista() {
     for (const auto& song : songList) {
         std::cout << song << std::endl;
+
     }
-    std::cout << std::endl;
 }
 
 // Ispis glavnog izbornika
@@ -100,6 +106,7 @@ void AudioPlayer::Menu() {
     std::cout << '\n';
     std::cout << "       ***** (Unesi '0' za refresh) *****        " << std::endl;
     std::cout << '\n';
+
     std::cout << "       1.  Unesi ime                                        " << std::endl;
     std::cout << "       2.  Pusti/pauziraj                           *****    " << std::endl;
     std::cout << "       3.  Pojacaj                                  **  ***  " << std::endl;
@@ -113,10 +120,11 @@ void AudioPlayer::Menu() {
     std::cout << "       11. Uspori pjesmu" << std::endl;
     std::cout << "       12. Normalna brzina pjesme" << std::endl;
     std::cout << "       13. Exit" << std::endl;
+
     std::cout << '\n';
     std::cout << '\n';
     if (listaDisplayed) {
-        Lista();
+        Lista(niz);
         std::cout << std::endl;
         std::cout << std::endl;
     }
@@ -148,6 +156,7 @@ void AudioPlayer::Izbornik(int izbor) {
         novaPjesma();
         break;
     case 7:
+
         this->tempSekunde = 0;
         staraPjesma();
         break;
@@ -175,6 +184,7 @@ void AudioPlayer::Izbornik(int izbor) {
         music.setPitch(1);
     case 13:
         std::cout << "Hvala na koristenju!\n";
+
         break;
     default:
         std::cout << "Greska!" << std::endl;
@@ -185,6 +195,7 @@ void AudioPlayer::Izbornik(int izbor) {
 void AudioPlayer::unesiIme() {
     std::string fileName;
     std::cout << "Unesi ime: ";
+
     std::cin.ignore();
     getline(std::cin, fileName);
 
@@ -192,9 +203,10 @@ void AudioPlayer::unesiIme() {
         fileName += ".wav";
     }
 
+
     bool found = false;
-    for (size_t i = 0; i < songList.size(); i++) {
-        if (fileName == songList[i]) {
+    for (int i = 0; i < 10; i++) {
+        if (fileName == niz[i]) {
             this->soundFilePath = fileName;
             found = true;
             break;
@@ -244,6 +256,7 @@ void AudioPlayer::Vrijeme() {
         while (!this->shouldStop && this->isPlaying && !this->isPlaybackComplete) {
             this->tempSekunde = static_cast<int>(this->seconds);
 
+
             if (this->shouldStop) {
                 break;
             }
@@ -292,6 +305,7 @@ void AudioPlayer::Vrijeme() {
             //if (this->isPlaybackComplete) {              
              //   novaPjesma();
             //}
+
         }
 
     }
@@ -354,6 +368,7 @@ void AudioPlayer::novaPjesma() {
     }
 }
 
+
 // Metoda za prelazak na sljedecu pjesmu
 void AudioPlayer::staraPjesma() {
     this->shouldStop = true;
@@ -395,6 +410,7 @@ void AudioPlayer::staraPjesma() {
         this->isPlaying = false;
         this->isPlaybackComplete = true;
         this->soundFilePath = songList[0];
+
     }
 }
 
@@ -449,6 +465,7 @@ int AudioPlayer::getSystemVolume() {
 void AudioPlayer::setSystemVolume(DWORD volume) {
     waveOutSetVolume(0, volume);
 }
+
 
 //    Metoda za premotavanje unazad tokom reprodukcije.
 void AudioPlayer::premotajUnazad() {
@@ -521,4 +538,5 @@ AudioPlayer::~AudioPlayer()
    /* if (timeTrackingThread.joinable()) {
         timeTrackingThread.join();
     }*/
+
 }
