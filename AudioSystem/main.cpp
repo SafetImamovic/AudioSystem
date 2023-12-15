@@ -1,4 +1,4 @@
-﻿#include "muzikaTest.h"
+#include "muzikaTest.h"
 
 int main()
 {
