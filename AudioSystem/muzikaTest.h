@@ -7,16 +7,49 @@
 #include <thread>
 #include <chrono>
 
-class AudioPlayer {
+#include <algorithm>
+#include <dshow.h>
+#include <uuids.h>
+#include <filesystem>
+#include <vector>
+#include <set>
+#include <Shellapi.h>
+#include <fstream>
+#include <SFML/Audio/Music.hpp>
+#include <cstring>
+#include <mutex>
+
+
+class AudioPlayer
+{
 private:
-    std::string niz[10];
+
+    std::vector<std::string> songList;
+
     std::string soundFilePath;
     bool isPlaying;
     bool listaDisplayed;  
     bool isPlaybackComplete;
-    int trenutniIndeksPjesme;
-    int seconds;
-    int trajanjePjesme;
+
+    size_t trenutniIndeksPjesme;
+    size_t seconds;
+    float trajanjePjesme;
+    double currentTimeInSeconds;
+    WAVEFORMATEX waveFormat;
+    size_t currentSamplePosition;
+    std::mutex printMutex;
+    sf::Music music;
+    sf::Time tempVrijeme;
+    double brzina;
+    sf::Time startTime;
+    sf::Time pauseTime;
+    //std::thread timeTrackingThread;
+    sf::Time newTime;
+    sf::Time currentTime;
+    bool shouldStop;
+    double effectiveSpeed;
+    int tempSekunde;
+
 
 public:
 
@@ -28,7 +61,13 @@ public:
 
     void Pokreni();
 
-    void Lista(std::string niz[]);
+
+    void Lista();
+
+    std::string ImeFajlaBezEkstenzije(const std::string& filePath);
+
+    void sveLista();
+
 
     void Menu();
 
@@ -49,4 +88,20 @@ public:
     void setSystemVolume(DWORD volume);
 
     void novaPjesma();
+
+
+    void staraPjesma();
+
+    void premotajUnazad();
+
+    void premotajUnaprijed();
+
+    void ScanFolderForMusicFiles(const std::string& folderPath, std::vector<std::string>& fileNames);
+
+    void PromijeniBrzinuReprodukcije(double faktor);
+
+    void Ubrzaj();
+
+    void Uspori();
+
 };
