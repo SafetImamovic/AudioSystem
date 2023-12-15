@@ -205,6 +205,7 @@ void AudioPlayer::unesiIme() {
     }
     this->isPlaying = false;
     this->pauseTime = sf::Time::Zero;
+    music.setPitch(1.0);
 }
 
 // Metoda za reprodukciju/pauziranje pjesme
@@ -215,13 +216,12 @@ void AudioPlayer::pustiPauza() {
         music.stop();
         this->isPlaying = false;
         this->pauseTime = this->tempVrijeme;
-        this->seconds = static_cast<int>(this->pauseTime.asSeconds());
+        this->seconds = static_cast<size_t>(this->pauseTime.asSeconds());
         //this->isPlaybackComplete = true;
     }
     else {
         // Pokretanje reprodukcije
         music.openFromFile(soundFilePath);
-        music.setPitch(1.0);
         music.play();
         this->startTime = music.getPlayingOffset() - this->tempVrijeme;
         music.setPlayingOffset(this->pauseTime);
