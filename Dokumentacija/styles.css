@@ -1,0 +1,333 @@
+:root
+{
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 2.1rem;
+    --background-color: rgb(41, 41, 41);
+    --background-base: black;
+    --font-color: rgb(223, 223, 223);
+    --accent-color-one: purple;
+    --transition-speed: 200ms ease;
+    --span-padding: 12px 0px 12px 20px;
+    --span-padding-sub: 12px 0px 12px 35px;
+    --top-main-padding: 15px;
+    --nav-bar-closed-width: 4rem;
+    --nav-bar-expanded-width: 20rem;
+}
+
+*
+{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: var(--font-color);
+}
+
+html
+{
+    background-color: var(--background-color);
+}
+
+body::-webkit-scrollbar, #navbar::-webkit-scrollbar
+{
+    width: 0.5rem;
+}
+
+body::-webkit-scrollbar-track, #navbar::-webkit-scrollbar-track
+{
+    background: var(--background-base);
+}
+
+body::-webkit-scrollbar-thumb, #navbar::-webkit-scrollbar-thumb
+{
+    background: var(--accent-color-one);
+}
+
+.default > .nav-link > span
+{
+    display: block;
+    font-size: 1.5rem;
+    background-color: var(--background-base);
+    width: 100%;
+    padding: var(--span-padding);
+    transition: var(--transition-speed);
+}
+
+.default .nav-link > span:hover
+{
+    background-color: var(--accent-color-one);
+    color: var(--background-base);
+    transition: var(--transition-speed);
+}
+
+.navbar-nav-sub > li > .nav-link > span
+{
+    display: block;
+    font-size: 1.3rem;
+    background-color: var(--background-base);
+    width: 100%;
+    padding: var(--span-padding-sub);
+    transition: var(--transition-speed);
+}
+
+.navbar-nav-sub > li > .nav-link > span:hover
+{
+    background-color: var(--accent-color-one);
+    color: var(--background-base);
+    transition: var(--transition-speed);
+}
+
+a
+{
+    text-decoration: none;
+}
+
+.side-nav-bar
+{
+    position: fixed;
+    height: 100vh;
+    width: var(--nav-bar-expanded-width);
+    background-color: var(--background-base);
+    transition: var(--transition-speed);
+    overflow-y: scroll;
+}
+
+.side-nav-bar-closed
+{
+    position: fixed;
+    height: 100vh;
+    width: var(--nav-bar-closed-width);
+    background-color: var(--background-base);
+    transition: var(--transition-speed);
+}
+
+.side-nav-bar > ul
+{
+    display: block;
+}
+
+.side-nav-bar-closed > ul
+{
+    display: none;
+}
+
+.side-nav-bar .navbar-nav .sub-nav-link .u
+{
+    display: block;
+}
+
+.side-nav-bar > #expand-button-super
+{
+    height: var(--nav-bar-closed-width);
+    background-color: var(--background-base);
+    padding: 0px var(--top-main-padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    transition: var(--transition-speed);
+}
+
+.side-nav-bar > #expand-button-super > .doc
+{
+    font-size: 2rem;
+}
+
+.side-nav-bar > #expand-button-super:hover .doc
+{
+    color: var(--background-base);
+}
+
+.side-nav-bar > #expand-button-super:hover
+{
+    background-color: var(--accent-color-one);
+    transition: var(--transition-speed);
+}
+
+.side-nav-bar > #expand-button-super:hover > .expand-button, .side-nav-bar-closed > #expand-button-super:hover .expand-button
+{
+    color: var(--background-base);
+}
+
+.side-nav-bar > #expand-button-super > .expand-button
+{
+    font-size: 3.5rem;
+    transform: rotate(180deg);
+    user-select: none;
+}
+
+.side-nav-bar-closed > #expand-button-super
+{
+    height: var(--nav-bar-closed-width);
+    padding: 15px var(--top-main-padding);
+    background-color: var(--background-base);
+    transition: var(--transition-speed);
+}
+
+.side-nav-bar-closed > #expand-button-super > .doc
+{
+    display: none;
+}
+
+.side-nav-bar-closed > #expand-button-super:hover
+{
+    background-color: var(--accent-color-one);
+    transition: var(--transition-speed);
+}
+
+.side-nav-bar-closed > #expand-button-super > .expand-button
+{
+    font-size: 3.5rem;
+    transform: rotate(0deg);
+    user-select: none;
+}
+
+.main
+{
+    padding-top: 40px;
+    padding-left: 40px;
+    margin-left: var(--nav-bar-expanded-width);
+    transition: var(--transition-speed);
+    padding-right: var(--nav-bar-closed-width);
+}
+
+.main-changed
+{
+    padding-top: 40px;
+    padding-left: 40px;
+    margin-left: var(--nav-bar-closed-width);
+    transition: var(--transition-speed);
+    padding-right: var(--nav-bar-closed-width);
+    overflow: hidden;
+}
+
+.Section
+{
+    margin-bottom: 4rem;
+}
+
+.Section > h1
+{
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+.subSection
+{
+    margin-bottom: 2rem;
+    margin-left: 20px;
+}
+
+.subSection > h2
+{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.Section > p, .subSection > p
+{
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    
+}
+
+.Section ul li
+{
+    margin-left: 40px;
+    font-size: 1.3rem;
+}
+
+.Section p a
+{
+    text-decoration:solid !important; 
+    background-color: var(--background-base);
+    padding: 2px 8px;
+    border-radius: 10px;
+    color: var(--font-color);
+    transition: var(--transition-speed);
+}
+
+.Section p a:hover
+{
+    text-decoration:solid !important; 
+    background-color: var(--accent-color-one);
+    padding: 2px 8px;
+    border-radius: 10px;
+    color: var(--background-base);
+    transition: var(--transition-speed);
+}
+
+.sepBig
+{
+    width: 100%;
+    height: 2px;
+    background-color: rgb(80, 80, 80);
+    margin-bottom: 2rem;
+}
+
+.sepSmall
+{
+    width: 100%;
+    height: 1px;
+    background-color: rgb(80, 80, 80);
+    margin-bottom: 1rem;
+}
+
+#Shift
+{
+    font-size: 16px !important;
+    color: rgb(126, 126, 126);
+}
+
+code 
+{
+    background-color: var(--background-base);
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    line-height: 2;
+    color: var(--font-color);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+
+}
+
+img
+{
+    max-width: 110%;
+    vertical-align: middle;
+    margin-bottom: 1rem;
+}
+
+.invert
+{
+    filter: invert(1);
+}
+
+
+.code-block
+{
+    font-family: 'Courier New', Courier, monospace;
+    background-color: var(--background-base);
+    padding: 10px;
+    border-radius: 10px;
+    white-space: pre;
+    overflow-x: scroll;
+}
+
+.code-block::-webkit-scrollbar
+{
+    width: 0.5rem;
+}
+
+.code-block::-webkit-scrollbar-track
+{
+    background: var(--background-base);
+}
+
+.code-block::-webkit-scrollbar-thumb
+{
+    background: var(--accent-color-one);
+}
