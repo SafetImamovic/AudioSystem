@@ -11,7 +11,6 @@
 #include <algorithm>
 #include <dshow.h>
 #include <uuids.h>
-#include <atlbase.h>
 #include <filesystem>
 #include <vector>
 #include <set>
@@ -19,6 +18,7 @@
 #include <fstream>
 #include <SFML/Audio/Music.hpp>
 #include <cstring>
+#include <mutex>
 
 class AudioPlayer
 {
@@ -30,7 +30,7 @@ private:
     bool isPlaybackComplete;
     size_t trenutniIndeksPjesme;
     size_t seconds;
-    int trajanjePjesme;
+    float trajanjePjesme;
     double currentTimeInSeconds;
     WAVEFORMATEX waveFormat;
     size_t currentSamplePosition;
