@@ -1,10 +1,21 @@
 #include "muzikaTest.h"
 
 
-int main()
-{
-   AudioPlayer player;
-   player.Pokreni();
+int main() {
+
+    AudioPlayer player;
+    player.Pokreni();
+
+    return 0;
+}
+
+//#include "muzikaTest.h"
+
+
+//int main()
+//{
+//   AudioPlayer player;
+//   player.Pokreni();
 
 
    /*
