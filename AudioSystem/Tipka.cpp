@@ -1,18 +1,16 @@
 #include "Tipka.h"
 
-void Tipka::SetTipka(std::string text, sf::Vector2f velicina, int karakterVelicina, sf::Color bojaText, sf::Color bojaPozadine)
+void Tipka::SetTipka(std::string ID, std::wstring text, sf::Vector2f velicina, int karakterVelicina, sf::Color bojaText, sf::Color bojaPozadine, sf::Font& font, sf::Vector2f pozicija, sf::Vector2f textPozicija)
 {
+	this->SetID(ID);
 	this->text.setString(text);
 	this->text.setFillColor(bojaText);
 	this->text.setCharacterSize(karakterVelicina);
-
+	this->text.setFont(font);
+	this->SetPozicija(pozicija);
 	this->tipka.setSize(velicina);
 	this->tipka.setFillColor(bojaPozadine);
-}
-
-void Tipka::SetFont(sf::Font& font)
-{
-	this->text.setFont(font);
+	this->SetTextPozicija(textPozicija);
 }
 
 void Tipka::PromijeniBojuPozadine(sf::Color boja)
@@ -26,34 +24,27 @@ void Tipka::PromijeniBojuTexta(sf::Color boja)
 }
 
 void Tipka::SetPozicija(sf::Vector2f pozicija)
+//
 {
 	this->tipka.setPosition(pozicija);
-
-	float xPos = (pozicija.x + this->tipka.getLocalBounds().width / 2.5) - (this->text.getLocalBounds().width / 2);
-	float yPos = (pozicija.y + this->tipka.getLocalBounds().height / 4) - (this->text.getLocalBounds().height / 2);
-	this->text.setPosition({xPos, yPos});
+	this->text.setPosition(pozicija);
 }
 
 void Tipka::DrawTo(sf::RenderWindow& window)
+//iscrtava na prozor
 {
 	window.draw(this->tipka);
 	window.draw(this->text);
 }
 
-bool Tipka::Hover(sf::RenderWindow& window)
+void Tipka::SetTextUTF16(std::wstring text)
+//metoda koja postavlja wstring unutar texta sto omogucava printanje UTF-16 karaktera
 {
-	float mouseX = sf::Mouse::getPosition(window).x;
-	float mouseY = sf::Mouse::getPosition(window).y;
-
-	float tipkaPosX = this->tipka.getPosition().x;
-	float tipkaPosY = this->tipka.getPosition().y;
-
-	float tipkaXPosSirina = this->tipka.getPosition().x + this->tipka.getLocalBounds().width;
-	float tipkaYPosVisina = this->tipka.getPosition().y + this->tipka.getLocalBounds().height;
-
-	if (mouseX < tipkaXPosSirina && mouseX > tipkaPosX && mouseY < tipkaYPosVisina && mouseY > tipkaPosY)
-	{
-		return true;
-	}
-	return false;
+	this->text.setString(text);
 }
+
+void Tipka::SetTextPozicija(sf::Vector2f pozicija)
+{
+	this->text.move(pozicija);
+}
+
