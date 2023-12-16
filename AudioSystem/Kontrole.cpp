@@ -115,38 +115,42 @@ void Kontrole::InicijalizacijaGlasnoca()
 		pocetnaKoordinataY + this->visinaGlasnoca / 2 - glasnocaBarInnerVisina / 2));
 }
 
-void Kontrole::UpdatePozicijaSimbolaWindow(sf::RenderWindow &window)
+float Kontrole::UpdatePozicijaSimbolaWindow(sf::RenderWindow &window)
 {
-	int glasnocaBarInnerVisina = 4;
-	int glasnocaBarInnerSirina = this->sirinaGlasnoca - 50;
-
-	int pocetnaKoordinataX = this->videoMode.width / 2 - this->sirinaGlasnoca / 2 + this->sirinaTipke * 4 / 2;
+	int scrollBarInnerVisina = 4;
+	int scrollBarInnerSirina = this->sirinaScroll - 50;
+	float pocetnaKoordinataX = this->videoMode.width / 2 - this->sirinaScroll / 2;
 	//formula koja racuna horizontalni centar prozora, sirina * 4 je 4 jer imaju 4 tipke
 
-	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke;
-
-
+	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke - this->visinaScroll;
+	
 	if (this->Hover(window, this->ScrollPozadina))
 	{
 
-		this->ScrollSimbol.setPosition(sf::Vector2f(sf::Mouse::getPosition(window).x - 10, 575));
+		this->ScrollSimbol.setPosition(sf::Vector2f(sf::Mouse::getPosition(window).x - 20, 575));
 		int DonjaGranica = 360;
 		int GornjaGranica = 900;
 
 		float Interval = GornjaGranica - DonjaGranica;
 
+		//std::cout << (sf::Mouse::getPosition(window).x - 10 - 360) / Interval  << "\n";
+		std::cout << "nice";
 		
-
-		std::cout << (sf::Mouse::getPosition(window).x - 10 - 360) / Interval  << "\n";
-
 	}
+	return ((sf::Mouse::getPosition(window).x - pocetnaKoordinataX) / this->sirinaScroll);
+}
 
+float Kontrole::UpdatePozicijaSimbolaWindowGlasnoca(sf::RenderWindow& window)
+{
+	float pocetnaKoordinataX = this->videoMode.width / 2 - this->sirinaGlasnoca / 2 + this->sirinaTipke * 4 / 2;
+	int glasnocaBarInnerVisina = 4;
+	float pocetnaKoordinataYGlasnoca = this->videoMode.height - this->visinaTipke;
 	if (this->Hover(window, this->GlasnocaPozadina))
 	{
 		this->GlasnocaSimbol.setPosition(sf::Vector2f(sf::Mouse::getPosition(window).x - 10, -18 +
-			pocetnaKoordinataY + this->visinaGlasnoca / 2 - glasnocaBarInnerVisina / 2));
+			pocetnaKoordinataYGlasnoca + this->visinaGlasnoca / 2 - glasnocaBarInnerVisina / 2));
 	}
-
+	return ((sf::Mouse::getPosition(window).x - pocetnaKoordinataX + 100) / this->sirinaGlasnoca) - 1;
 }
 
 void Kontrole::UpdatePozicijaSimbola(float index)

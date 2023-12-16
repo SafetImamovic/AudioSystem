@@ -23,6 +23,7 @@
 class AudioPlayer
 {
 private:
+
     std::vector<std::string> songList;
     std::string soundFilePath;
     bool isPlaying;
@@ -46,7 +47,8 @@ private:
     bool shouldStop;
     double effectiveSpeed;
     int tempSekunde;
-
+    float velicina;
+    DWORD glasnoca;
 public:
 
     AudioPlayer();
@@ -71,7 +73,7 @@ public:
 
     void pustiPauza();
 
-    void Pojacaj();
+    void Pojacaj(float velicina);
 
     void Smanji();
 
@@ -100,5 +102,7 @@ public:
     //Safet - dodao dva gettera
     size_t GetSekunde() const;
     float GetTrajanjePjesme() const;
+    void SetGlasnoca(float velicina);
+    void SetPozicija(int sekunde);
 
 };
