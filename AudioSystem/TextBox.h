@@ -18,7 +18,7 @@ class TextBox : public ElementarneKomponente
 {
 private:
 	sf::Text textbox;
-	
+
 	std::ostringstream text;
 	bool jeOznacen = false;
 	bool imaLimit = false;
@@ -27,7 +27,7 @@ private:
 	void InputLogika(int karakterIstipkan);
 	void IzbrisiZadnjiKarakter();
 
-	
+
 public:
 	sf::RectangleShape backgroundShape;
 	TextBox() = default;
