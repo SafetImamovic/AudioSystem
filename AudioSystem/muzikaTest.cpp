@@ -10,6 +10,7 @@ WAVEFORMATEX waveformat;
 AudioPlayer::AudioPlayer()
 {
     // Postavljanje inicijalnih vrijednosti èlanova klase
+    this->SetGlasnoca(1);
     this->soundFilePath = "Modestep & Virtual Riot & Barely Alive - By My Side.wav";
     this->trenutniIndeksPjesme = 0;
     this->seconds = 1;
@@ -532,6 +533,14 @@ void AudioPlayer::SetGlasnoca(float velicina)
     DWORD newVolume = MAKELONG(leftVolume, rightVolume);
 
     setSystemVolume(newVolume);
+}
+
+void AudioPlayer::SetPozicija(int sekunde)
+{
+    
+
+    sf::Time time = sf::seconds(sekunde);
+    music.setPlayingOffset(time);
 }
 
 

@@ -99,10 +99,10 @@ public:
 
     void Uspori();
 
-    void SetGlasnoca(float velicina);
-
     //Safet - dodao dva gettera
     size_t GetSekunde() const;
     float GetTrajanjePjesme() const;
+    void SetGlasnoca(float velicina);
+    void SetPozicija(int sekunde);
 
 };
