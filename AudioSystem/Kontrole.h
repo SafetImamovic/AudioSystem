@@ -25,7 +25,7 @@ public:
 	void InicijalizacijaScroll();
 	void InicijalizacijaGlasnoca();
 	void InicijalizacijaTipki();
-	void UpdatePozicijaSimbolaWindow(sf::RenderWindow& window);
+	float UpdatePozicijaSimbolaWindow(sf::RenderWindow& window);
 	void UpdatePozicijaSimbola(float index);
 	void RenderVrijeme(sf::RenderWindow& window, float sekunde, float trajanje, sf::Color PrimarnaBoja);
 

@@ -135,7 +135,7 @@ void AudioPlayer::Izbornik(int izbor) {
         pustiPauza();
         break;
     case 3:
-        Pojacaj();
+        Pojacaj(0);
         break;
     case 4:
         Smanji();
@@ -210,6 +210,7 @@ void AudioPlayer::unesiIme() {
 // Metoda za reprodukciju/pauziranje pjesme
 void AudioPlayer::pustiPauza() {
     if (this->isPlaying) {
+        this->glasnoca = getSystemVolume();
         // Zaustavljanje reprodukcije
         this->tempVrijeme = music.getPlayingOffset();
         music.stop();
@@ -217,12 +218,15 @@ void AudioPlayer::pustiPauza() {
         this->pauseTime = this->tempVrijeme;
         this->seconds = static_cast<int>(this->pauseTime.asSeconds());
         //this->isPlaybackComplete = true;
+        
     }
     else {
         // Pokretanje reprodukcije
+        
         music.openFromFile(soundFilePath);
-        music.setPitch(1.0);
+        //music.setPitch(1.0);
         music.play();
+        setSystemVolume(this->glasnoca);
         this->startTime = music.getPlayingOffset() - this->tempVrijeme;
         music.setPlayingOffset(this->pauseTime);
         this->trajanjePjesme = music.getDuration().asSeconds();
@@ -315,6 +319,7 @@ void AudioPlayer::novaPjesma() {
     this->shouldStop = true;
     this->tempSekunde = 0;
     this->trenutniIndeksPjesme++;
+        
     if (this->trenutniIndeksPjesme < this->songList.size()) {
         try {
             this->effectiveSpeed = 1.0;
@@ -399,7 +404,7 @@ void AudioPlayer::staraPjesma() {
 }
 
 // Metoda za pojacavanje zvuka
-void AudioPlayer::Pojacaj() {
+void AudioPlayer::Pojacaj(float velicina) {
     DWORD currentVolume = getSystemVolume();
 
     WORD leftVolume = LOWORD(currentVolume);
@@ -512,6 +517,23 @@ void AudioPlayer::Uspori() {
     PromijeniBrzinuReprodukcije(novaBrzina);
     this->brzina = novaBrzina;
 }
+
+void AudioPlayer::SetGlasnoca(float velicina)
+{
+    this->velicina = velicina;
+    if (this->velicina < 0 || this->velicina > 1)
+        return;
+
+    DWORD currentVolume = getSystemVolume();
+
+    WORD leftVolume = static_cast<WORD>(this->velicina * 0xFFFF);
+    WORD rightVolume = static_cast<WORD>(this->velicina * 0xFFFF);
+
+    DWORD newVolume = MAKELONG(leftVolume, rightVolume);
+
+    setSystemVolume(newVolume);
+}
+
 
 size_t AudioPlayer::GetSekunde() const
 {
