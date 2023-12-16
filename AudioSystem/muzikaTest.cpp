@@ -10,7 +10,7 @@ WAVEFORMATEX waveformat;
 AudioPlayer::AudioPlayer()
 {
     // Postavljanje inicijalnih vrijednosti èlanova klase
-    this->soundFilePath = "Akon - SmackThat.wav";
+    this->soundFilePath = "Modestep & Virtual Riot & Barely Alive - By My Side.wav";
     this->trenutniIndeksPjesme = 0;
     this->seconds = 1;
     this->isPlaying = false;
@@ -511,6 +511,16 @@ void AudioPlayer::Uspori() {
     double novaBrzina = this->brzina * 0.8;
     PromijeniBrzinuReprodukcije(novaBrzina);
     this->brzina = novaBrzina;
+}
+
+size_t AudioPlayer::GetSekunde() const
+{
+    return this->seconds;
+}
+
+float AudioPlayer::GetTrajanjePjesme() const
+{
+    return this->trajanjePjesme;
 }
 
 // Destruktor klase AudioPlayer

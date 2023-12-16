@@ -11,6 +11,7 @@ void Tipka::SetTipka(std::string ID, std::wstring text, sf::Vector2f velicina, i
 	this->tipka.setSize(velicina);
 	this->tipka.setFillColor(bojaPozadine);
 	this->SetTextPozicija(textPozicija);
+	
 }
 
 void Tipka::PromijeniBojuPozadine(sf::Color boja)

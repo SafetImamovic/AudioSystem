@@ -8,8 +8,8 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	this->window = nullptr; //dobra praksa da se pointer inicijalizira sa nullptr. incicijalizirmao prozor kao pointer jer zelimo da ga alociramo na heap
 	//i fleksibilnija je kontrola
 
-	this->videoMode.height = 720; //visina prozora koja se smijesta unutar this->videoMode
-	this->videoMode.width = 1280; //sirina prozora koja se smijesta unutar this->videoMode
+	this->videoMode.height = 900; //visina prozora koja se smijesta unutar this->videoMode
+	this->videoMode.width = 1600; //sirina prozora koja se smijesta unutar this->videoMode
 
 }
 
@@ -81,6 +81,17 @@ void AplikacijaGUI::InicijalizacijaElemenata()
 	this->TextBoxovi.push_back(textbox1);
 	this->TextBoxovi.push_back(textbox2);
 
+	this->PromijeniRezolucijuToggleTEST.SetTipka(
+		"Toggle_Rez",
+		L"Toggle",
+		sf::Vector2f(100, 100),
+		20,
+		sf::Color(255,255,255),
+		this->PrimarnaBoja,
+		this->font,
+		{0,0},
+		{0,0}
+	);
 	
 
 	//IPAK JE NALBOLJA PRAKSA NAPRAVITI ODVOJENU KLASU ZA PLAYER!
@@ -117,15 +128,37 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 			this->TextBoxovi.at(i).SetOznacen(false);
 		}
 	}
-
+	
 	std::string temp = ProvjeriClickZaSveTipke(*this->window, this->kontrole.Tipke, this->PrimarnaBoja, this->AkcenatBoja);
-	if (temp == "PustiPauziraj")//ovdje se za sad pozivaju sve audio funkcije
+	std::cout << Tipka::PRITISNUT << std::endl;
+
+	if (Tipka::PRITISNUT == "PustiPauziraj")//ovdje se za sad pozivaju sve audio funkcije
 		player.pustiPauza();
-	else if (temp == "Prije")
+	else if (Tipka::PRITISNUT == "Prije")
 		player.premotajUnazad();
-	else if (temp == "Poslije")
+	else if (Tipka::PRITISNUT == "Poslije")
 		player.premotajUnaprijed();
-	this->kontrole.UpdatePozicijaSimbola(*this->window);
+
+	this->kontrole.UpdatePozicijaSimbolaWindow(*this->window);
+
+	bool hover = false;
+
+	if (this->PromijeniRezolucijuToggleTEST.Hover(*this->window, PromijeniRezolucijuToggleTEST.tipka))
+	{
+		this->PromijeniRezolucijuToggleTEST.PromijeniBojuPozadine(AkcenatBoja);
+		
+		Tipka::PRITISNUT = PromijeniRezolucijuToggleTEST.GetID();
+		std::cout << Tipka::PRITISNUT;
+	}
+	else
+		this->PromijeniRezolucijuToggleTEST.PromijeniBojuPozadine(PrimarnaBoja);
+
+	if (hover == false)
+		Tipka::PRITISNUT = "";
+
+	if (Tipka::PRITISNUT == "Toggle_Rez")
+		this->PromijeniRezoluciju(1080, 1920);
+
 }
 
 void AplikacijaGUI::RenderSveElemente()
@@ -137,6 +170,7 @@ void AplikacijaGUI::RenderSveElemente()
 
 	DrawToSveTipke(*this->window, this->kontrole.Tipke);
 	this->kontrole.RenderScroll(*this->window);
+	this->kontrole.RenderGlasnoca(*this->window);
 }
 
 void AplikacijaGUI::ResetPrimarneBoje()
@@ -156,6 +190,21 @@ void AplikacijaGUI::GetOdgovarajuciTextBoxText()
 	}
 	
 }
+
+void AplikacijaGUI::UpdateScrollBar()
+{
+	float ProcenatPjesme = player.GetSekunde() / player.GetTrajanjePjesme();
+	//std::cout << ProcenatPjesme << "%" << std::endl;
+	this->kontrole.UpdatePozicijaSimbola(ProcenatPjesme);
+}
+
+void AplikacijaGUI::PromijeniRezoluciju(int height, int width)
+{
+	sf::VideoMode newVid(1920, 1080);
+	this->window->create(newVid, "Audio System", sf::Style::Close | sf::Style::Titlebar);
+}
+
+
 
 //------------------end of private-------------------------------//
 
@@ -249,6 +298,7 @@ void AplikacijaGUI::UpdateGUI() //metoda koja osvjezi "update-je" logiku vezanu 
 	this->UpdatePollEvents();//poziva metodu koja prate eventove
 	this->UpdatePozicijaMisa();
 	this->UpdateRect();
+	this->UpdateScrollBar();
 }
 
 void AplikacijaGUI::RenderRect()
@@ -264,6 +314,8 @@ void AplikacijaGUI::RenderGUI() //renderuje objekte, elemente aplikacije
 
 	this->RenderSveElemente();
 	//--------ovdje zavrsava pozivanje metoda koje iscrtavaju elemente-------
+	this->PromijeniRezolucijuToggleTEST.DrawTo(*this->window);
+	this->kontrole.RenderVrijeme(*this->window, this->player.GetSekunde(), this->player.GetTrajanjePjesme(), this->PrimarnaBoja);
 
 	this->window->display(); //ovo je indikator da je frame zavrsen sa crtanjem
     //izmedju window.clear() i window.display() crtamo prozor tj. elemente unutar prozora
