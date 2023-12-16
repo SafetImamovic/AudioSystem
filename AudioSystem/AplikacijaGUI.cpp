@@ -8,8 +8,8 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	this->window = nullptr; //dobra praksa da se pointer inicijalizira sa nullptr. incicijalizirmao prozor kao pointer jer zelimo da ga alociramo na heap
 	//i fleksibilnija je kontrola
 
-	this->videoMode.height = 1000; //visina prozora koja se smijesta unutar this->videoMode
-	this->videoMode.width = 1920; //sirina prozora koja se smijesta unutar this->videoMode
+	this->videoMode.height = 768; //visina prozora koja se smijesta unutar this->videoMode
+	this->videoMode.width = 1360; //sirina prozora koja se smijesta unutar this->videoMode
 
 	this->player.setNiz();
 
