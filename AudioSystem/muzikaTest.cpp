@@ -10,7 +10,9 @@ WAVEFORMATEX waveformat;
 AudioPlayer::AudioPlayer()
 {
     // Postavljanje inicijalnih vrijednosti èlanova klase
-    this->SetGlasnoca(1);
+    this->glasnocaJedan = 0xFFFF;
+    this->glasnocaDva = 0xFFFF;
+    this->glasnoca = MAKELONG(this->glasnocaJedan, this->glasnocaDva);
     this->soundFilePath = "Modestep & Virtual Riot & Barely Alive - By My Side.wav";
     this->trenutniIndeksPjesme = 0;
     this->seconds = 1;
@@ -218,6 +220,7 @@ void AudioPlayer::pustiPauza() {
         this->isPlaying = false;
         this->pauseTime = this->tempVrijeme;
         this->seconds = static_cast<int>(this->pauseTime.asSeconds());
+        this->miliseconds = static_cast<int>(this->pauseTime.asMilliseconds());
         //this->isPlaybackComplete = true;
         
     }
@@ -265,9 +268,11 @@ void AudioPlayer::Vrijeme() {
             sf::Time playingOffset = music.getPlayingOffset();
             
             this->seconds = static_cast<int>(currentTime.asSeconds());
+            this->miliseconds = static_cast<int>(currentTime.asMilliseconds());
 
             this->effectiveSpeed = this->brzina > 0 ? this->brzina : 1.0;
             this->seconds = static_cast<int>(currentTime.asSeconds() * effectiveSpeed);
+            this->miliseconds = static_cast<int>(currentTime.asMilliseconds() * effectiveSpeed);
 
             // Ažurirajte trenutno vrijeme i broj uzoraka
             currentTimeInSeconds = static_cast<double>(this->seconds);
@@ -338,6 +343,7 @@ void AudioPlayer::novaPjesma() {
             this->isPlaybackComplete = false;
             this->shouldStop = false;
             this->seconds = 1;
+            this->miliseconds = 100;
 
             std::thread(&AudioPlayer::Vrijeme, this).detach();
         }catch (const std::exception& e) {
@@ -382,6 +388,7 @@ void AudioPlayer::staraPjesma() {
             this->isPlaybackComplete = false;
             this->shouldStop = false;
             this->seconds = 1;
+            this->miliseconds = 100;
             std::thread(&AudioPlayer::Vrijeme, this).detach();
         }
         catch (const std::exception& e) {
@@ -535,14 +542,19 @@ void AudioPlayer::SetGlasnoca(float velicina)
     setSystemVolume(newVolume);
 }
 
+
 void AudioPlayer::SetPozicija(int sekunde)
 {
-    
-
     sf::Time time = sf::seconds(sekunde);
     music.setPlayingOffset(time);
 }
 
+size_t AudioPlayer::GetMiliSekunde()
+{
+    sf::Time current = music.getPlayingOffset();
+    int PLAY = static_cast<int>(current.asMilliseconds());
+    return PLAY;
+}
 
 size_t AudioPlayer::GetSekunde() const
 {
