@@ -23,14 +23,11 @@
 class AudioPlayer
 {
 private:
-
     std::vector<std::string> songList;
-
     std::string soundFilePath;
     bool isPlaying;
     bool listaDisplayed;  
     bool isPlaybackComplete;
-
     size_t trenutniIndeksPjesme;
     size_t seconds;
     float trajanjePjesme;
@@ -61,13 +58,11 @@ public:
 
     void Pokreni();
 
-
     void Lista();
 
     std::string ImeFajlaBezEkstenzije(const std::string& filePath);
 
     void sveLista();
-
 
     void Menu();
 
@@ -88,7 +83,6 @@ public:
     void setSystemVolume(DWORD volume);
 
     void novaPjesma();
-
 
     void staraPjesma();
 
