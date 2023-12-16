@@ -5,19 +5,17 @@
 // kako bi se sprijecilo meðusobno preplitanje poruka kada se koristi više niti.
 std::mutex printMutex;
 
+
 // Konstruktor klase AudioPlayer
 AudioPlayer::AudioPlayer()
 {
-
     // Postavljanje inicijalnih vrijednosti èlanova klase
     this->soundFilePath = "Akon - SmackThat.wav";
-
     this->trenutniIndeksPjesme = 0;
     this->seconds = 1;
     this->isPlaying = false;
     this->listaDisplayed = false;
     this->isPlaybackComplete = false;
-
     this->trajanjePjesme = music.getDuration().asSeconds();
     this->brzina = 1.0;
     this->effectiveSpeed = 1.0;
@@ -28,6 +26,7 @@ AudioPlayer::AudioPlayer()
     this->currentTime = sf::Time::Zero;
     this->shouldStop = false;
     this->tempSekunde = 200;
+    this->currentTimeInSeconds = 0.0;
 
   // timeTrackingThread = std::thread(&AudioPlayer::Vrijeme, this);
 
@@ -38,8 +37,7 @@ AudioPlayer::AudioPlayer()
     this->waveFormat.nBlockAlign = (waveFormat.nChannels * waveFormat.wBitsPerSample) / 8;
     this->waveFormat.nAvgBytesPerSec = waveFormat.nSamplesPerSec * waveFormat.nBlockAlign;
     this->waveFormat.cbSize = 0;
-
-
+    this->currentSamplePosition = 0;
 }
 
 // Glavna metoda za upravljanje audio playerom
@@ -124,7 +122,7 @@ void AudioPlayer::Menu() {
     std::cout << '\n';
     std::cout << '\n';
     if (listaDisplayed) {
-        Lista(niz);
+        Lista();
         std::cout << std::endl;
         std::cout << std::endl;
     }
@@ -156,7 +154,6 @@ void AudioPlayer::Izbornik(int izbor) {
         novaPjesma();
         break;
     case 7:
-
         this->tempSekunde = 0;
         staraPjesma();
         break;
@@ -182,9 +179,9 @@ void AudioPlayer::Izbornik(int izbor) {
         break;
     case 12:
         music.setPitch(1);
+        break;
     case 13:
         std::cout << "Hvala na koristenju!\n";
-
         break;
     default:
         std::cout << "Greska!" << std::endl;
@@ -206,7 +203,7 @@ void AudioPlayer::unesiIme() {
 
     bool found = false;
     for (int i = 0; i < 10; i++) {
-        if (fileName == niz[i]) {
+        if (fileName == songList[i]) {
             this->soundFilePath = fileName;
             found = true;
             break;
@@ -244,8 +241,7 @@ void AudioPlayer::pustiPauza() {
         this->pauseTime = this->tempVrijeme;
         // Pokretanje thread-a za pracenje vremena reprodukcije
         std::thread(&AudioPlayer::Vrijeme, this).detach();
-        this->tempSekunde = 0;
-        
+        this->tempSekunde = 0;       
     }
 }
 
