@@ -1,14 +1,11 @@
-//#include "muzikaTest.h"
+#include "muzikaTest.h"
 
-//int main()
-//{
 
-    //sf::Color PrimarnaBoja = sf::Color(30, 30, 30);
-    //sf::Color SekundarnaBoja = sf::Color(60, 60, 60);
-    //sf::Color AkcenatBoja = sf::Color::Red;
+int main()
+{
+   AudioPlayer player;
+   player.Pokreni();
 
-  // AudioPlayer player;
-   //player.Pokreni();
 
    /*
    sf::Font arial;
@@ -45,11 +42,11 @@
         sf::sleep(sf::milliseconds(100));
     }
 
+    /*
+    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    sf::CircleShape shape(100.f);
+    shape.setFillColor(sf::Color::Green);
 
-    sf::Font font;
-    font.loadFromFile("seguisym.ttf");
-
-    AplikacijaGUI AudioSystemGUI(font, PrimarnaBoja, SekundarnaBoja, AkcenatBoja);
 
     while (AudioSystemGUI.getWindowIsOpen()) //petlja u kojoj se odvijaju akcije aplikacije dok je prozor otvoren
     {
