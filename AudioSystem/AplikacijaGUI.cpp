@@ -8,8 +8,10 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	this->window = nullptr; //dobra praksa da se pointer inicijalizira sa nullptr. incicijalizirmao prozor kao pointer jer zelimo da ga alociramo na heap
 	//i fleksibilnija je kontrola
 
-	this->videoMode.height = 900; //visina prozora koja se smijesta unutar this->videoMode
-	this->videoMode.width = 1600; //sirina prozora koja se smijesta unutar this->videoMode
+	this->videoMode.height = 1000; //visina prozora koja se smijesta unutar this->videoMode
+	this->videoMode.width = 1920; //sirina prozora koja se smijesta unutar this->videoMode
+
+	this->player.setNiz();
 
 }
 
@@ -135,11 +137,14 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 	if (Tipka::PRITISNUT == "PustiPauziraj")//ovdje se za sad pozivaju sve audio funkcije
 		player.pustiPauza();
 	else if (Tipka::PRITISNUT == "Prije")
-		player.premotajUnazad();
+		player.staraPjesma();
 	else if (Tipka::PRITISNUT == "Poslije")
-		player.premotajUnaprijed();
+		player.novaPjesma();
 
-	this->kontrole.UpdatePozicijaSimbolaWindow(*this->window);
+	float tempp = this->kontrole.UpdatePozicijaSimbolaWindow(*this->window);
+	std::cout << tempp;
+
+	player.SetGlasnoca(tempp);
 
 	bool hover = false;
 

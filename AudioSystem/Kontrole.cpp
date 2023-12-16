@@ -115,12 +115,12 @@ void Kontrole::InicijalizacijaGlasnoca()
 		pocetnaKoordinataY + this->visinaGlasnoca / 2 - glasnocaBarInnerVisina / 2));
 }
 
-void Kontrole::UpdatePozicijaSimbolaWindow(sf::RenderWindow &window)
+float Kontrole::UpdatePozicijaSimbolaWindow(sf::RenderWindow &window)
 {
 	int glasnocaBarInnerVisina = 4;
 	int glasnocaBarInnerSirina = this->sirinaGlasnoca - 50;
 
-	int pocetnaKoordinataX = this->videoMode.width / 2 - this->sirinaGlasnoca / 2 + this->sirinaTipke * 4 / 2;
+	float pocetnaKoordinataX = this->videoMode.width / 2 - this->sirinaGlasnoca / 2 + this->sirinaTipke * 4 / 2;
 	//formula koja racuna horizontalni centar prozora, sirina * 4 je 4 jer imaju 4 tipke
 
 	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke;
@@ -147,6 +147,7 @@ void Kontrole::UpdatePozicijaSimbolaWindow(sf::RenderWindow &window)
 			pocetnaKoordinataY + this->visinaGlasnoca / 2 - glasnocaBarInnerVisina / 2));
 	}
 
+	return ((sf::Mouse::getPosition(window).x - pocetnaKoordinataX + 100) / this->sirinaGlasnoca) - 1;
 }
 
 void Kontrole::UpdatePozicijaSimbola(float index)
