@@ -97,4 +97,8 @@ public:
 
     void Uspori();
 
+    //Safet - dodao dva gettera
+    size_t GetSekunde() const;
+    float GetTrajanjePjesme() const;
+
 };

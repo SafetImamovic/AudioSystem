@@ -26,7 +26,7 @@ private:
 	sf::Vector2i mousePozProzor; //cuva poziciju misa relativnu prozoru (koordinate)
 	sf::Font font;
 	std::vector<TextBox> TextBoxovi; //vektor koji sadrzava sve textbox elemente
-
+	Tipka PromijeniRezolucijuToggleTEST;
 	sf::Color PrimarnaBoja, SekundarnaBoja, AkcenatBoja;
 
 	Kontrole kontrole;
@@ -54,6 +54,9 @@ private:
 	void RenderSveElemente();
 	void ResetPrimarneBoje();
 	void GetOdgovarajuciTextBoxText();
+	void UpdateScrollBar();
+	void PromijeniRezoluciju(int height, int width);
+	
 
 public:
 	AplikacijaGUI(sf::Font& font, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja);
@@ -66,8 +69,6 @@ public:
 
 	void RenderRect();
 	void RenderGUI();
-
-	void PromijeniRezoluciju();
 
 	const bool getWindowIsOpen() const;
 };
