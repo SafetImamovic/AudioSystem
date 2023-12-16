@@ -8,7 +8,7 @@
 class Tipka : public ElementarneKomponente
 {
 private:
-	
+
 	sf::Text text;
 public:
 	sf::RectangleShape tipka;
@@ -20,6 +20,5 @@ public:
 	void DrawTo(sf::RenderWindow& window);
 	void SetTextUTF16(std::wstring text);
 	void SetTextPozicija(sf::Vector2f pozicija);
-	
-};
 
+};

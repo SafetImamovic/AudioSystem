@@ -73,7 +73,7 @@ void TextBox::SetPosition(sf::Vector2f pozicija)//postavlja poziciju, overrida z
 {
 	this->textbox.setPosition(pozicija);
 
-	
+
 }
 
 void TextBox::SetLimit(bool ImaIliNema)//da li ima limit karakatera ili nema
@@ -111,7 +111,7 @@ void TextBox::SetBackground(sf::Color boja, sf::Vector2f velicina)
 {
 	this->backgroundShape.setFillColor(boja);
 
-	
+
 
 	this->backgroundShape.setSize(velicina);
 }

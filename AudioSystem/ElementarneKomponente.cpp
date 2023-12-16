@@ -1,5 +1,7 @@
 #include "ElementarneKomponente.h"
 
+std::string ElementarneKomponente::PRITISNUT = "";
+
 bool ElementarneKomponente::Hover(sf::RenderWindow& window, sf::RectangleShape oblik)
 {
 	float mouseX = sf::Mouse::getPosition(window).x;
@@ -25,4 +27,3 @@ std::string ElementarneKomponente::GetID()
 {
 	return this->ID;
 }
-
