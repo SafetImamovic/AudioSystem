@@ -26,6 +26,7 @@ public:
 	void InicijalizacijaGlasnoca();
 	void InicijalizacijaTipki();
 	float UpdatePozicijaSimbolaWindow(sf::RenderWindow& window);
+	float UpdatePozicijaSimbolaWindowGlasnoca(sf::RenderWindow& window);
 	void UpdatePozicijaSimbola(float index);
 	void RenderVrijeme(sf::RenderWindow& window, float sekunde, float trajanje, sf::Color PrimarnaBoja);
 

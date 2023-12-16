@@ -141,10 +141,16 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 	else if (Tipka::PRITISNUT == "Poslije")
 		player.novaPjesma();
 
-	float tempp = this->kontrole.UpdatePozicijaSimbolaWindow(*this->window);
-	std::cout << tempp;
+	float tempp = this->kontrole.UpdatePozicijaSimbolaWindowGlasnoca(*this->window);
+	
 
 	player.SetGlasnoca(tempp);
+
+	float temppp = this->kontrole.UpdatePozicijaSimbolaWindow(*this->window);
+	std::cout << temppp;
+
+	if(temppp > 0 && temppp < 1)
+		player.SetPozicija(temppp * this->player.GetTrajanjePjesme());
 
 	bool hover = false;
 
