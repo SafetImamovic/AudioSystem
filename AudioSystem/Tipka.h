@@ -2,24 +2,21 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <string>
-#include "ElementarneKomponente.h"
 
-class Tipka : public ElementarneKomponente
+class Tipka
 {
 private:
-	
-	sf::Text text;
-public:
 	sf::RectangleShape tipka;
+	sf::Text text;
+
+public:
 	Tipka() = default;
-	void SetTipka(std::string ID, std::wstring text, sf::Vector2f velicina, int karakterVelicina, sf::Color bojaText, sf::Color bojaPozadine, sf::Font& font, sf::Vector2f pozicija, sf::Vector2f textPozicija);
+	void SetTipka(std::string text, sf::Vector2f velicina, int karakterVelicina, sf::Color bojaText, sf::Color bojaPozadine);
+	void SetFont(sf::Font& font);//posto sfml nema default fontova, moramo manuelno proslijedit font po referenci
 	void PromijeniBojuPozadine(sf::Color boja);
 	void PromijeniBojuTexta(sf::Color boja);
 	void SetPozicija(sf::Vector2f pozicija);
 	void DrawTo(sf::RenderWindow& window);
-	void SetTextUTF16(std::wstring text);
-	void SetTextPozicija(sf::Vector2f pozicija);
-	
+	bool Hover(sf::RenderWindow& window);
 };
 
