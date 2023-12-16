@@ -10,7 +10,7 @@ WAVEFORMATEX waveformat;
 AudioPlayer::AudioPlayer()
 {
     // Postavljanje inicijalnih vrijednosti èlanova klase
-    this->soundFilePath = "Modestep & Virtual Riot & Barely Alive - By My Side.wav";
+    this->soundFilePath = "Akon - SmackThat.wav";
     this->trenutniIndeksPjesme = 0;
     this->seconds = 1;
     this->isPlaying = false;
@@ -26,6 +26,7 @@ AudioPlayer::AudioPlayer()
     this->currentTime = sf::Time::Zero;
     this->shouldStop = false;
     this->tempSekunde = 200;
+    this->currentTimeInSeconds = 0.0;
 
   // timeTrackingThread = std::thread(&AudioPlayer::Vrijeme, this);
 
@@ -36,7 +37,7 @@ AudioPlayer::AudioPlayer()
     this->waveFormat.nBlockAlign = (waveFormat.nChannels * waveFormat.wBitsPerSample) / 8;
     this->waveFormat.nAvgBytesPerSec = waveFormat.nSamplesPerSec * waveFormat.nBlockAlign;
     this->waveFormat.cbSize = 0;
-
+    this->currentSamplePosition = 0;
 }
 
 // Glavna metoda za upravljanje audio playerom
@@ -173,6 +174,7 @@ void AudioPlayer::Izbornik(int izbor) {
         break;
     case 12:
         music.setPitch(1);
+        break;
     case 13:
         std::cout << "Hvala na koristenju!\n";
         break;
@@ -205,6 +207,7 @@ void AudioPlayer::unesiIme() {
     }
     this->isPlaying = false;
     this->pauseTime = sf::Time::Zero;
+    music.setPitch(1.0);
 }
 
 // Metoda za reprodukciju/pauziranje pjesme
@@ -215,13 +218,12 @@ void AudioPlayer::pustiPauza() {
         music.stop();
         this->isPlaying = false;
         this->pauseTime = this->tempVrijeme;
-        this->seconds = static_cast<int>(this->pauseTime.asSeconds());
+        this->seconds = static_cast<size_t>(this->pauseTime.asSeconds());
         //this->isPlaybackComplete = true;
     }
     else {
         // Pokretanje reprodukcije
         music.openFromFile(soundFilePath);
-        music.setPitch(1.0);
         music.play();
         this->startTime = music.getPlayingOffset() - this->tempVrijeme;
         music.setPlayingOffset(this->pauseTime);
@@ -232,8 +234,7 @@ void AudioPlayer::pustiPauza() {
         this->pauseTime = this->tempVrijeme;
         // Pokretanje thread-a za pracenje vremena reprodukcije
         std::thread(&AudioPlayer::Vrijeme, this).detach();
-        this->tempSekunde = 0;
-        
+        this->tempSekunde = 0;       
     }
 }
 
