@@ -7,14 +7,14 @@ void DrawToSveTipke(sf::RenderWindow& window, std::vector<Tipka>& Tipke)
 		Tipke.at(i).DrawTo(window);
 }
 
-void ProvjeriClickZaSveTipke(sf::RenderWindow& window, std::vector<Tipka>& Tipke, sf::Color PrimarnaBoja, sf::Color AkcenatBoja)
+std::string ProvjeriClickZaSveTipke(sf::RenderWindow& window, std::vector<Tipka>& Tipke, sf::Color PrimarnaBoja, sf::Color AkcenatBoja)
 {
 	for (int i = 0; i < Tipke.size(); i++)
 	{
 		if (Tipke.at(i).Hover(window, Tipke.at(i).tipka))
 		{
 			Tipke.at(i).PromijeniBojuPozadine(AkcenatBoja);
-			std::cout << Tipke.at(i).GetID() << "\n";
+			return Tipke.at(i).GetID();
 		}
 		else
 		{

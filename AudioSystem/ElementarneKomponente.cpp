@@ -25,4 +25,3 @@ std::string ElementarneKomponente::GetID()
 {
 	return this->ID;
 }
-

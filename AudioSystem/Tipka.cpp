@@ -1,4 +1,4 @@
-﻿#include "Tipka.h"
+#include "Tipka.h"
 
 void Tipka::SetTipka(std::string ID, std::wstring text, sf::Vector2f velicina, int karakterVelicina, sf::Color bojaText, sf::Color bojaPozadine, sf::Font& font, sf::Vector2f pozicija, sf::Vector2f textPozicija)
 {
@@ -47,5 +47,4 @@ void Tipka::SetTextPozicija(sf::Vector2f pozicija)
 {
 	this->text.move(pozicija);
 }
-
 

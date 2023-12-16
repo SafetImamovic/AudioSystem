@@ -112,9 +112,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)External\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-
       <AdditionalDependencies>Strmiids.lib;Ole32.lib;Mmdevapi.lib;sfml-window-d.lib;sfml-system-d.lib;opengl32.lib;winmm.lib;gdi32.lib;sfml-graphics-d.lib;freetype.lib;sfml-audio-d.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;sfml-network-d.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -127,7 +125,6 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,18 +132,10 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)External\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-
-      <AdditionalDependencies>Strmiids.lib;Ole32.lib;Mmdevapi.lib;sfml-window-s.lib;sfml-system-s.lib;opengl32.lib;winmm.lib;gdi32.lib;sfml-graphics-s.lib;freetype.lib;sfml-audio-s.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;sfml-network-s.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-
+      <AdditionalDependencies>Strmiids.lib;Ole32.lib;Mmdevapi.lib;user32.lib;Advapi32.lib;sfml-window-s.lib;sfml-system-s.lib;opengl32.lib;winmm.lib;gdi32.lib;sfml-graphics-s.lib;freetype.lib;sfml-audio-s.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;sfml-network-s.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main2.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
-    </ClCompile>
     <ClCompile Include="AplikacijaGUI.cpp" />
     <ClCompile Include="ElementarneKomponente.cpp" />
     <ClCompile Include="GlobalneFunkcije.cpp" />
@@ -158,11 +147,11 @@
     <ClCompile Include="Tipka.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="muzikaBeta.h" />
-    <ClInclude Include="AplikacijaGUI.h" />
     <ClInclude Include="ElementarneKomponente.h" />
     <ClInclude Include="GlobalneFunkcije.h" />
     <ClInclude Include="Kontrole.h" />
+    <ClInclude Include="muzikaBeta.h" />
+    <ClInclude Include="AplikacijaGUI.h" />
     <ClInclude Include="muzikaTest.h" />
     <ClInclude Include="TextBox.h" />
     <ClInclude Include="Tipka.h" />

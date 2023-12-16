@@ -18,11 +18,9 @@
     <ClCompile Include="muzikaTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    
     <ClCompile Include="muzikaBeta.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-
     <ClCompile Include="AplikacijaGUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -32,16 +30,16 @@
     <ClCompile Include="Tipka.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ElementarneKomponente.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Kontrole.cpp">
+    <ClCompile Include="ElementarneKomponente.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GlobalneFunkcije.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main2.cpp">
+    <ClCompile Include="Kontrole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -64,10 +62,10 @@
     <ClInclude Include="ElementarneKomponente.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Kontrole.h">
+    <ClInclude Include="GlobalneFunkcije.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GlobalneFunkcije.h">
+    <ClInclude Include="Kontrole.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

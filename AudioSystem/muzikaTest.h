@@ -1,4 +1,6 @@
 #pragma once
+#pragma comment(lib, "Strmiids.lib")
+#pragma comment(lib, "winmm.lib")
 #include <iostream>
 #include <Windows.h>
 #include <mmsystem.h>
@@ -6,7 +8,6 @@
 #include <iomanip>
 #include <thread>
 #include <chrono>
-
 #include <algorithm>
 #include <dshow.h>
 #include <uuids.h>
@@ -19,18 +20,14 @@
 #include <cstring>
 #include <mutex>
 
-
 class AudioPlayer
 {
 private:
-
     std::vector<std::string> songList;
-
     std::string soundFilePath;
     bool isPlaying;
-    bool listaDisplayed;  
+    bool listaDisplayed;
     bool isPlaybackComplete;
-
     size_t trenutniIndeksPjesme;
     size_t seconds;
     float trajanjePjesme;
@@ -50,7 +47,6 @@ private:
     double effectiveSpeed;
     int tempSekunde;
 
-
 public:
 
     AudioPlayer();
@@ -61,13 +57,11 @@ public:
 
     void Pokreni();
 
-
     void Lista();
 
     std::string ImeFajlaBezEkstenzije(const std::string& filePath);
 
     void sveLista();
-
 
     void Menu();
 
@@ -88,7 +82,6 @@ public:
     void setSystemVolume(DWORD volume);
 
     void novaPjesma();
-
 
     void staraPjesma();
 

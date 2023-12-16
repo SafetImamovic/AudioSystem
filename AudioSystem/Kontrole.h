@@ -27,4 +27,3 @@ public:
 
 	void RenderScroll(sf::RenderWindow &window);
 };
-

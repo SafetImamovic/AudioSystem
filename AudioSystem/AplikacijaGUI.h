@@ -4,7 +4,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 
-
+#include "muzikaTest.h"
 #include "TextBox.h"
 #include "Tipka.h"
 #include "Kontrole.h"
@@ -30,6 +30,7 @@ private:
 	sf::Color PrimarnaBoja, SekundarnaBoja, AkcenatBoja;
 
 	Kontrole kontrole;
+	AudioPlayer player;
 
 	//elementi aplikacije
 	//tok definiranja, logike i iscrtavanja elemenata na prozor je sljedeci:

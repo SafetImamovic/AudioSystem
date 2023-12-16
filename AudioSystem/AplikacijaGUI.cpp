@@ -118,7 +118,13 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 		}
 	}
 
-	ProvjeriClickZaSveTipke(*this->window, this->kontrole.Tipke, this->PrimarnaBoja, this->AkcenatBoja);
+	std::string temp = ProvjeriClickZaSveTipke(*this->window, this->kontrole.Tipke, this->PrimarnaBoja, this->AkcenatBoja);
+	if (temp == "PustiPauziraj")//ovdje se za sad pozivaju sve audio funkcije
+		player.pustiPauza();
+	else if (temp == "Prije")
+		player.premotajUnazad();
+	else if (temp == "Poslije")
+		player.premotajUnaprijed();
 	this->kontrole.UpdatePozicijaSimbola(*this->window);
 }
 
