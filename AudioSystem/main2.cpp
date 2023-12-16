@@ -5,7 +5,7 @@
 int main()
 {
   AudioPlayer player;
-  player.play();
+  player.Pokreni();
 
   return 0;
 }
