@@ -18,7 +18,6 @@
     <ClCompile Include="muzikaTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <
     <ClCompile Include="AplikacijaGUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

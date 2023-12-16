@@ -149,7 +149,6 @@
     <ClInclude Include="ElementarneKomponente.h" />
     <ClInclude Include="GlobalneFunkcije.h" />
     <ClInclude Include="Kontrole.h" />
-    <ClInclude Include="muzikaBeta.h" />
     <ClInclude Include="AplikacijaGUI.h" />
     <ClInclude Include="muzikaTest.h" />
     <ClInclude Include="TextBox.h" />
