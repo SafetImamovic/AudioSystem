@@ -141,7 +141,6 @@
     <ClCompile Include="GlobalneFunkcije.cpp" />
     <ClCompile Include="Kontrole.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="muzikaBeta.cpp" />
     <ClCompile Include="muzikaTest.cpp" />
     <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="Tipka.cpp" />
