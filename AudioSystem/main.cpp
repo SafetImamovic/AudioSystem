@@ -1,14 +1,14 @@
-#include "muzikaTest.h"
+//#include "muzikaTest.h"
 
-int main()
-{
+//int main()
+//{
 
-    sf::Color PrimarnaBoja = sf::Color(30, 30, 30);
-    sf::Color SekundarnaBoja = sf::Color(60, 60, 60);
-    sf::Color AkcenatBoja = sf::Color::Red;
+    //sf::Color PrimarnaBoja = sf::Color(30, 30, 30);
+    //sf::Color SekundarnaBoja = sf::Color(60, 60, 60);
+    //sf::Color AkcenatBoja = sf::Color::Red;
 
-   AudioPlayer player;
-   player.Pokreni();
+  // AudioPlayer player;
+   //player.Pokreni();
 
    /*
    sf::Font arial;
@@ -61,5 +61,5 @@ int main()
     }
     
     */
-    return 0;
-}
+    //return 0;
+//}
