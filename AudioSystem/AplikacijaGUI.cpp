@@ -12,6 +12,7 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	this->videoMode.width = 1920; //sirina prozora koja se smijesta unutar this->videoMode
 
 	this->player.setNiz();
+	this->player.SetGlasnoca(0.99f);
 
 }
 
@@ -143,8 +144,11 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 
 	float tempp = this->kontrole.UpdatePozicijaSimbolaWindowGlasnoca(*this->window);
 	
-
 	player.SetGlasnoca(tempp);
+	std::cout << tempp;
+
+	if (!sf::Music::Playing)
+		player.SetGlasnoca(1.0f);
 
 	float temppp = this->kontrole.UpdatePozicijaSimbolaWindow(*this->window);
 	std::cout << temppp;
@@ -204,7 +208,8 @@ void AplikacijaGUI::GetOdgovarajuciTextBoxText()
 
 void AplikacijaGUI::UpdateScrollBar()
 {
-	float ProcenatPjesme = player.GetSekunde() / player.GetTrajanjePjesme();
+	float ProcenatPjesme = (static_cast<float>(player.GetMiliSekunde()) / 1000) / player.GetTrajanjePjesme();
+	//std::cout << player.GetMiliSekunde() << std::endl;
 	//std::cout << ProcenatPjesme << "%" << std::endl;
 	this->kontrole.UpdatePozicijaSimbola(ProcenatPjesme);
 }

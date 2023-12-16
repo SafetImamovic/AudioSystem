@@ -85,7 +85,8 @@ void Kontrole::InicijalizacijaScroll()
 		pocetnaKoordinataY + this->visinaScroll / 2 - scrollBarInnerVisina / 2));
 
 	this->ScrollSimbol.setFont(this->font);
-	this->ScrollSimbol.setString(L"⚫");
+	//this->ScrollSimbol.setString(L"⚫");
+	this->ScrollSimbol.setString(L"|");
 	this->ScrollSimbol.setPosition(sf::Vector2f(pocetnaKoordinataX + this->sirinaScroll/2 - scrollBarInnerSirina/2,
 		pocetnaKoordinataY + this->visinaScroll/2 - scrollBarInnerVisina/2));
 }
@@ -110,7 +111,8 @@ void Kontrole::InicijalizacijaGlasnoca()
 		pocetnaKoordinataY + this->visinaGlasnoca / 2 - glasnocaBarInnerVisina / 2));
 
 	this->GlasnocaSimbol.setFont(this->font);
-	this->GlasnocaSimbol.setString(L"⚫");
+	//this->GlasnocaSimbol.setString(L"⚫");
+	this->GlasnocaSimbol.setString(L"|");
 	this->GlasnocaSimbol.setPosition(sf::Vector2f(100 + pocetnaKoordinataX + this->sirinaGlasnoca / 2 - glasnocaBarInnerSirina / 2, -18 +
 		pocetnaKoordinataY + this->visinaGlasnoca / 2 - glasnocaBarInnerVisina / 2));
 }
@@ -126,18 +128,18 @@ float Kontrole::UpdatePozicijaSimbolaWindow(sf::RenderWindow &window)
 	
 	if (this->Hover(window, this->ScrollPozadina))
 	{
-
-		this->ScrollSimbol.setPosition(sf::Vector2f(sf::Mouse::getPosition(window).x - 20, 575));
+		/*
+		this->ScrollSimbol.setPosition(sf::Vector2f(sf::Mouse::getPosition(window).x - 40, 575));
 		int DonjaGranica = 360;
 		int GornjaGranica = 900;
-
+		
 		float Interval = GornjaGranica - DonjaGranica;
-
+		*/
 		//std::cout << (sf::Mouse::getPosition(window).x - 10 - 360) / Interval  << "\n";
 		std::cout << "nice";
-		
+		return ((sf::Mouse::getPosition(window).x - pocetnaKoordinataX) / this->sirinaScroll);
 	}
-	return ((sf::Mouse::getPosition(window).x - pocetnaKoordinataX) / this->sirinaScroll);
+	
 }
 
 float Kontrole::UpdatePozicijaSimbolaWindowGlasnoca(sf::RenderWindow& window)
@@ -149,8 +151,9 @@ float Kontrole::UpdatePozicijaSimbolaWindowGlasnoca(sf::RenderWindow& window)
 	{
 		this->GlasnocaSimbol.setPosition(sf::Vector2f(sf::Mouse::getPosition(window).x - 10, -18 +
 			pocetnaKoordinataYGlasnoca + this->visinaGlasnoca / 2 - glasnocaBarInnerVisina / 2));
+		return ((sf::Mouse::getPosition(window).x - pocetnaKoordinataX + 100) / this->sirinaGlasnoca) - 1;
 	}
-	return ((sf::Mouse::getPosition(window).x - pocetnaKoordinataX + 100) / this->sirinaGlasnoca) - 1;
+	
 }
 
 void Kontrole::UpdatePozicijaSimbola(float index)
@@ -162,7 +165,7 @@ void Kontrole::UpdatePozicijaSimbola(float index)
 	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke - this->visinaScroll;
 
 
-	this->ScrollSimbol.setPosition(sf::Vector2f(index*(this->sirinaScroll) + pocetnaKoordinataX - 10 + 25, pocetnaKoordinataY + 5));
+	this->ScrollSimbol.setPosition(sf::Vector2f(index*(this->sirinaScroll) + pocetnaKoordinataX - 10, pocetnaKoordinataY + 5));
 }
 
 void Kontrole::RenderScroll(sf::RenderWindow &window)
