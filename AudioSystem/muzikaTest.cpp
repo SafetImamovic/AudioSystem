@@ -413,22 +413,27 @@ void AudioPlayer::staraPjesma() {
 
 // Metoda za pojacavanje zvuka
 void AudioPlayer::Pojacaj(float velicina) {
+
     DWORD currentVolume = getSystemVolume();
 
     WORD leftVolume = LOWORD(currentVolume);
     WORD rightVolume = HIWORD(currentVolume);
 
-    if (leftVolume < 0xFFFF - 8000) {
-        leftVolume += 8000;
+    if (leftVolume < 0xFFFF - 4000 && rightVolume < 0xFFFF - 4000) {
+        leftVolume += 4000;
+        rightVolume += 4000;
     }
-
-    if (rightVolume < 0xFFFF - 8000) {
-        rightVolume += 8000;
+    else
+    {
+        leftVolume = 0xFFFF;
+        rightVolume = 0xFFFF;
     }
 
     DWORD newVolume = MAKELONG(leftVolume, rightVolume);
 
     setSystemVolume(newVolume);
+
+    this->velicina = (static_cast<float>(newVolume) / 0xFFFF) / 0xFFFF;
 }
 
 // Metoda za smanjenje zvuka
@@ -438,17 +443,22 @@ void AudioPlayer::Smanji() {
     WORD leftVolume = LOWORD(currentVolume);
     WORD rightVolume = HIWORD(currentVolume);
 
-    if (leftVolume > 8000) {
-        leftVolume -= 8000;
+    if (leftVolume > 4000 && rightVolume > 4000) {
+        leftVolume -= 4000;
+        rightVolume -= 4000;
+    }
+    else
+    {
+        leftVolume = 0;
+        rightVolume = 0;
     }
 
-    if (rightVolume > 8000) {
-        rightVolume -= 8000;
-    }
 
     DWORD newVolume = MAKELONG(leftVolume, rightVolume);
 
     setSystemVolume(newVolume);
+
+    this->velicina = (static_cast<float>(newVolume) / 0xFFFF) / 0xFFFF;
 }
 
 // Metoda za dobijanje trenutnog sistema zvuka
@@ -540,6 +550,7 @@ void AudioPlayer::SetGlasnoca(float velicina)
     DWORD newVolume = MAKELONG(leftVolume, rightVolume);
 
     setSystemVolume(newVolume);
+    //std::cout << this->velicina << std::endl;
 }
 
 
@@ -554,6 +565,11 @@ size_t AudioPlayer::GetMiliSekunde()
     sf::Time current = music.getPlayingOffset();
     int PLAY = static_cast<int>(current.asMilliseconds());
     return PLAY;
+}
+
+float AudioPlayer::GetGlasnoca()
+{
+    return this->velicina;
 }
 
 size_t AudioPlayer::GetSekunde() const

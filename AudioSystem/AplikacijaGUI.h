@@ -55,6 +55,7 @@ private:
 	void ResetPrimarneBoje();
 	void GetOdgovarajuciTextBoxText();
 	void UpdateScrollBar();
+	void UpdateGlasnocaBar();
 	void PromijeniRezoluciju(int height, int width);
 	
 
