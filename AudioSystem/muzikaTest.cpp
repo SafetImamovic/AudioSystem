@@ -13,7 +13,7 @@ AudioPlayer::AudioPlayer()
     this->glasnocaJedan = 0xFFFF;
     this->glasnocaDva = 0xFFFF;
     this->glasnoca = MAKELONG(this->glasnocaJedan, this->glasnocaDva);
-    this->soundFilePath = "Modestep & Virtual Riot & Barely Alive - By My Side.wav";
+    this->soundFilePath = "Dua Lipa - New Rules.wav";
     this->trenutniIndeksPjesme = 0;
     this->seconds = 1;
     this->isPlaying = false;
