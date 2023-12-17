@@ -28,7 +28,7 @@ private:
 	std::vector<TextBox> TextBoxovi; //vektor koji sadrzava sve textbox elemente
 	Tipka PromijeniRezolucijuToggleTEST;
 	sf::Color PrimarnaBoja, SekundarnaBoja, AkcenatBoja;
-
+	float TempGlasnoca;
 	Kontrole kontrole;
 	AudioPlayer player;
 
@@ -57,6 +57,7 @@ private:
 	void UpdateScrollBar();
 	void UpdateGlasnocaBar();
 	void PromijeniRezoluciju(int height, int width);
+	void Mute();
 	
 
 public:

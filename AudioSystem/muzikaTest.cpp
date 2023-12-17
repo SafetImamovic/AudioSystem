@@ -538,7 +538,8 @@ void AudioPlayer::Uspori() {
 
 void AudioPlayer::SetGlasnoca(float velicina)
 {
-    this->velicina = velicina;
+    if(velicina >= 0 && velicina <= 1)
+        this->velicina = velicina;
     if (this->velicina < 0 || this->velicina > 1)
         return;
 
@@ -569,7 +570,27 @@ size_t AudioPlayer::GetMiliSekunde()
 
 float AudioPlayer::GetGlasnoca()
 {
-    return this->velicina;
+    if (this->velicina > 0 && this->velicina < 1)
+    {
+        return this->velicina;
+    }
+}
+
+void AudioPlayer::Mute()
+{
+    std::cout << "MUTE!\n";
+    if (this->velicina != 0)
+    {
+        this->TempGlasnoca = this->velicina;
+        this->velicina = 0;
+    }
+    else
+    {
+        this->velicina = 1;
+    }
+    std::cout << this->velicina << "\n" << this->TempGlasnoca << "\n";
+    this->SetGlasnoca(this->velicina);
+
 }
 
 size_t AudioPlayer::GetSekunde() const
