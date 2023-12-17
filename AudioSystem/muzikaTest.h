@@ -49,6 +49,7 @@ private:
     double effectiveSpeed;
     int tempSekunde;
     float velicina;
+    float TempGlasnoca;
     WORD glasnocaJedan, glasnocaDva;
     DWORD glasnoca;
 public:
@@ -108,4 +109,5 @@ public:
     void SetPozicija(int sekunde);
     size_t GetMiliSekunde();
     float GetGlasnoca();
+    void Mute();
 };

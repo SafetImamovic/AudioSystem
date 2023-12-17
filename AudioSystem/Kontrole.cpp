@@ -2,7 +2,7 @@
 
 void Kontrole::InicijalizacijaTipki()
 {
-	Tipka TipkaPoslije, TipkaPrije, TipkaPustiPauziraj, TipkaLoop;
+	Tipka TipkaPoslije, TipkaPrije, TipkaPustiPauziraj, TipkaLoop, TipkaMute;
 
 	sf::Vector2f velicinaTipke = sf::Vector2f(this->visinaTipke, this->visinaTipke);
 
@@ -60,10 +60,23 @@ void Kontrole::InicijalizacijaTipki()
 		{ 27, 13 }
 	);
 
+	TipkaMute.SetTipka(
+		"Mute",
+		L"♬",
+		velicinaTipke,
+		50,
+		sf::Color::White,
+		PrimarnaBoja,
+		this->font,
+		sf::Vector2f(pocetnaKoordinataX + 6* this->sirinaTipke, pocetnaKoordinataY),
+		{27,20}
+	);
+
 	this->Tipke.push_back(TipkaPoslije);
 	this->Tipke.push_back(TipkaPrije);
 	this->Tipke.push_back(TipkaPustiPauziraj);
 	this->Tipke.push_back(TipkaLoop);
+	this->Tipke.push_back(TipkaMute);
 }
 
 void Kontrole::InicijalizacijaScroll()
@@ -136,7 +149,7 @@ float Kontrole::UpdatePozicijaSimbolaWindow(sf::RenderWindow &window)
 		float Interval = GornjaGranica - DonjaGranica;
 		*/
 		//std::cout << (sf::Mouse::getPosition(window).x - 10 - 360) / Interval  << "\n";
-		std::cout << "nice";
+		//std::cout << "nice";
 		return ((sf::Mouse::getPosition(window).x - pocetnaKoordinataX) / this->sirinaScroll);
 	}
 	
@@ -145,7 +158,7 @@ float Kontrole::UpdatePozicijaSimbolaWindow(sf::RenderWindow &window)
 float Kontrole::UpdatePozicijaSimbolaWindowGlasnoca(sf::RenderWindow& window)
 {
 	float pocetnaKoordinataX = this->videoMode.width / 2 - this->sirinaGlasnoca / 2 + this->sirinaTipke * 4 / 2;
-	std::cout << "nice\n";
+	//std::cout << "nice\n";
 	int glasnocaBarInnerVisina = 4;
 	float pocetnaKoordinataYGlasnoca = this->videoMode.height - this->visinaTipke + this->visinaTipke/4;
 	if (this->Hover(window, this->GlasnocaPozadina))
@@ -183,7 +196,7 @@ void Kontrole::UpdatePozicijaSimbolaGlasnoca(float index, sf::RenderWindow &wind
 
 	//this->GlasnocaBar.setPosition(sf::Vector2f(100 + pocetnaKoordinataX + this->sirinaGlasnoca / 2 - glasnocaBarInnerSirina / 2,
 		//pocetnaKoordinataY + this->visinaGlasnoca / 2 - glasnocaBarInnerVisina / 2));
-	std::cout << index << "\n";
+	//std::cout << index << "\n";
 	if (index < 0 || index > 1)
 		return;
 	this->GlasnocaSimbol.setPosition(sf::Vector2f(100 + -10 + index * (this->sirinaGlasnoca) + pocetnaKoordinataX, pocetnaKoordinataY + 5 + this->visinaGlasnoca / 4));
@@ -231,8 +244,8 @@ void Kontrole::RenderVrijeme(sf::RenderWindow& window, float sekunde, float traj
 	text.setFont(this->font);
 	std::string TEXT;
 
-
-	TEXT = formatTime(sekunde) + " / " + formatTime(trajanje);
+	
+		TEXT = formatTime(sekunde) + " / " + formatTime(trajanje);
 	pozadina.setPosition(sf::Vector2f(pocetnaKoordinataX + this->sirinaScroll, pocetnaKoordinataY));
 	text.setPosition(sf::Vector2f(pocetnaKoordinataX + this->sirinaScroll + 2, pocetnaKoordinataY + 14));
 

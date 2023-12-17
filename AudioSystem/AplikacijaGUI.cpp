@@ -141,6 +141,8 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 		player.staraPjesma();
 	else if (Tipka::PRITISNUT == "Poslije")
 		player.novaPjesma();
+	else if (Tipka::PRITISNUT == "Mute")
+		this->Mute();
 
 	float tempp = this->kontrole.UpdatePozicijaSimbolaWindowGlasnoca(*this->window);
 	
@@ -152,24 +154,7 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 
 	if(temppp > 0 && temppp < 1)
 		player.SetPozicija(temppp * this->player.GetTrajanjePjesme());
-
-	bool hover = false;
-
-	if (this->PromijeniRezolucijuToggleTEST.Hover(*this->window, PromijeniRezolucijuToggleTEST.tipka))
-	{
-		this->PromijeniRezolucijuToggleTEST.PromijeniBojuPozadine(AkcenatBoja);
-		
-		Tipka::PRITISNUT = PromijeniRezolucijuToggleTEST.GetID();
-		std::cout << Tipka::PRITISNUT;
-	}
-	else
-		this->PromijeniRezolucijuToggleTEST.PromijeniBojuPozadine(PrimarnaBoja);
-
-	if (hover == false)
-		Tipka::PRITISNUT = "";
-
-	if (Tipka::PRITISNUT == "Toggle_Rez")
-		this->PromijeniRezoluciju(1080, 1920);
+	
 
 	this->UpdateGlasnocaBar();
 }
@@ -197,7 +182,7 @@ void AplikacijaGUI::GetOdgovarajuciTextBoxText()
 	{
 		if (this->TextBoxovi.at(i).JeOznacen())
 		{
-			std::cout << this->TextBoxovi.at(i).GetText() << std::endl;//getText metoda vraca string koji je korinsik otkucao u textbox
+			//std::cout << this->TextBoxovi.at(i).GetText() << std::endl;//getText metoda vraca string koji je korinsik otkucao u textbox
 		}
 		
 	}
@@ -207,14 +192,18 @@ void AplikacijaGUI::GetOdgovarajuciTextBoxText()
 void AplikacijaGUI::UpdateScrollBar()
 {
 	float ProcenatPjesme = (static_cast<float>(player.GetMiliSekunde()) / 1000) / player.GetTrajanjePjesme();
+	//std::cout << "Procenat Pjesme\t" << ProcenatPjesme << "\n";
 	//std::cout << player.GetMiliSekunde() << std::endl;
 	//std::cout << ProcenatPjesme << "%" << std::endl;
+	if (ProcenatPjesme == 0)
+		return;
 	this->kontrole.UpdatePozicijaSimbola(ProcenatPjesme);
 }
 
 void AplikacijaGUI::UpdateGlasnocaBar()
 {
 	float ProcenatGlasnoce = this->player.GetGlasnoca();
+	std::cout << "Glasnoca	" << this->player.GetGlasnoca() << "\n";
 	//std::cout << "ProcenatGlasnoce   " << ProcenatGlasnoce << std::endl;
 	this->kontrole.UpdatePozicijaSimbolaGlasnoca(ProcenatGlasnoce, *this->window);
 }
@@ -223,6 +212,27 @@ void AplikacijaGUI::PromijeniRezoluciju(int height, int width)
 {
 	sf::VideoMode newVid(1920, 1080);
 	this->window->create(newVid, "Audio System", sf::Style::Close | sf::Style::Titlebar);
+}
+
+void AplikacijaGUI::Mute()
+{
+	if (this->player.GetGlasnoca() < 0 || this->player.GetGlasnoca() > 1)
+		return;
+
+	if (this->player.GetGlasnoca() != 0)
+	{
+		this->TempGlasnoca = this->player.GetGlasnoca();
+		std::cout << this->TempGlasnoca << std::endl;
+
+		this->player.SetGlasnoca(0.00);
+		this->kontrole.UpdatePozicijaSimbolaGlasnoca(0, *this->window);
+	}
+	else
+	{
+		std::cout << "Jest jednaka nuli\n";
+		this->player.SetGlasnoca(this->TempGlasnoca);
+		this->kontrole.UpdatePozicijaSimbolaGlasnoca(this->TempGlasnoca, *this->window);
+	}
 }
 
 
@@ -306,6 +316,8 @@ void AplikacijaGUI::UpdatePollEvents() //ova metoda osvjezava eventove, npr. int
 				this->player.Pojacaj(1);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 				this->player.Smanji();
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::M))
+				this->Mute();
 			break;
 
 		case sf::Event::MouseMoved://kada se mis krece
@@ -349,7 +361,7 @@ void AplikacijaGUI::RenderGUI() //renderuje objekte, elemente aplikacije
 
 	this->RenderSveElemente();
 	//--------ovdje zavrsava pozivanje metoda koje iscrtavaju elemente-------
-	this->PromijeniRezolucijuToggleTEST.DrawTo(*this->window);
+	
 	this->kontrole.RenderVrijeme(*this->window, this->player.GetSekunde(), this->player.GetTrajanjePjesme(), this->PrimarnaBoja);
 
 	this->window->display(); //ovo je indikator da je frame zavrsen sa crtanjem
