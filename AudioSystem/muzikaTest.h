@@ -107,4 +107,5 @@ public:
     void SetGlasnoca(float velicina);
     void SetPozicija(int sekunde);
     size_t GetMiliSekunde();
+    float GetGlasnoca();
 };

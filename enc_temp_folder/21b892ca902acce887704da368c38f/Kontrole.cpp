@@ -157,7 +157,6 @@ float Kontrole::UpdatePozicijaSimbolaWindowGlasnoca(sf::RenderWindow& window)
 }
 
 void Kontrole::UpdatePozicijaSimbola(float index)
-//uvijek update-uje poziciju simbola unutar scroll bara po procentu trenutne pjesme, konstantno je pozvana
 {
 	int scrollBarInnerVisina = 4;
 	int scrollBarInnerSirina = 600;
@@ -171,7 +170,6 @@ void Kontrole::UpdatePozicijaSimbola(float index)
 
 
 void Kontrole::UpdatePozicijaSimbolaGlasnoca(float index, sf::RenderWindow &window)
-//uvijek takodjer update-uje simbol unutar bara za glasnocu po procentu koji mu je uvijek poslan
 {
 	int glasnocaBarInnerVisina = 4;
 	int glasnocaBarInnerSirina = this->sirinaGlasnoca;
