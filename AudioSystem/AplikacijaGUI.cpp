@@ -8,8 +8,8 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	this->window = nullptr; //dobra praksa da se pointer inicijalizira sa nullptr. incicijalizirmao prozor kao pointer jer zelimo da ga alociramo na heap
 	//i fleksibilnija je kontrola
 
-	this->videoMode.height = 1000; //visina prozora koja se smijesta unutar this->videoMode
-	this->videoMode.width = 1920; //sirina prozora koja se smijesta unutar this->videoMode
+	this->videoMode.height = 720; //visina prozora koja se smijesta unutar this->videoMode
+	this->videoMode.width = 1280; //sirina prozora koja se smijesta unutar this->videoMode
 
 	this->player.setNiz();
 	this->player.SetGlasnoca(0.99f);
@@ -133,7 +133,7 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 	}
 	
 	std::string temp = ProvjeriClickZaSveTipke(*this->window, this->kontrole.Tipke, this->PrimarnaBoja, this->AkcenatBoja);
-	std::cout << Tipka::PRITISNUT << std::endl;
+	//std::cout << Tipka::PRITISNUT << std::endl;
 
 	if (Tipka::PRITISNUT == "PustiPauziraj")//ovdje se za sad pozivaju sve audio funkcije
 		player.pustiPauza();
@@ -145,13 +145,10 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 	float tempp = this->kontrole.UpdatePozicijaSimbolaWindowGlasnoca(*this->window);
 	
 	player.SetGlasnoca(tempp);
-	std::cout << tempp;
-
-	if (!sf::Music::Playing)
-		player.SetGlasnoca(1.0f);
+	//std::cout << tempp;
 
 	float temppp = this->kontrole.UpdatePozicijaSimbolaWindow(*this->window);
-	std::cout << temppp;
+	//std::cout << temppp;
 
 	if(temppp > 0 && temppp < 1)
 		player.SetPozicija(temppp * this->player.GetTrajanjePjesme());
@@ -174,6 +171,7 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 	if (Tipka::PRITISNUT == "Toggle_Rez")
 		this->PromijeniRezoluciju(1080, 1920);
 
+	this->UpdateGlasnocaBar();
 }
 
 void AplikacijaGUI::RenderSveElemente()
@@ -212,6 +210,13 @@ void AplikacijaGUI::UpdateScrollBar()
 	//std::cout << player.GetMiliSekunde() << std::endl;
 	//std::cout << ProcenatPjesme << "%" << std::endl;
 	this->kontrole.UpdatePozicijaSimbola(ProcenatPjesme);
+}
+
+void AplikacijaGUI::UpdateGlasnocaBar()
+{
+	float ProcenatGlasnoce = this->player.GetGlasnoca();
+	//std::cout << "ProcenatGlasnoce   " << ProcenatGlasnoce << std::endl;
+	this->kontrole.UpdatePozicijaSimbolaGlasnoca(ProcenatGlasnoce, *this->window);
 }
 
 void AplikacijaGUI::PromijeniRezoluciju(int height, int width)
@@ -289,6 +294,18 @@ void AplikacijaGUI::UpdatePollEvents() //ova metoda osvjezava eventove, npr. int
 					}
 				}
 			}
+
+			if (this->event.key.code == sf::Keyboard::Space)
+				this->player.pustiPauza();
+			if (this->event.key.code == sf::Keyboard::Right)
+				this->player.premotajUnaprijed();
+			if (this->event.key.code == sf::Keyboard::Left)
+				this->player.premotajUnazad();
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+				this->player.Pojacaj(1);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+				this->player.Smanji();
 			break;
 
 		case sf::Event::MouseMoved://kada se mis krece
@@ -315,6 +332,8 @@ void AplikacijaGUI::UpdateGUI() //metoda koja osvjezi "update-je" logiku vezanu 
 	this->UpdatePozicijaMisa();
 	this->UpdateRect();
 	this->UpdateScrollBar();
+	this->UpdateGlasnocaBar();
+	
 }
 
 void AplikacijaGUI::RenderRect()
