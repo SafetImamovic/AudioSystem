@@ -9,11 +9,10 @@ WAVEFORMATEX waveformat;
 // Konstruktor klase AudioPlayer
 AudioPlayer::AudioPlayer()
 {
-    // Postavljanje inicijalnih vrijednosti èlanova klase
+    // Postavljanje inicijalnih vrijednosti clanova klase
     this->glasnocaJedan = 0xFFFF;
     this->glasnocaDva = 0xFFFF;
     this->glasnoca = MAKELONG(this->glasnocaJedan, this->glasnocaDva);
-    this->soundFilePath = "Dua Lipa - New Rules.wav";
     this->trenutniIndeksPjesme = 0;
     this->seconds = 1;
     this->isPlaying = false;
@@ -361,10 +360,11 @@ void AudioPlayer::novaPjesma() {
         }
     }
     else {
-        std::cout << "Kraj liste, stavljanje na pocetak." << std::endl;
-        this->isPlaying = false;
-        this->isPlaybackComplete = true;
-        this->soundFilePath = songList[0];
+        std::cout << "Kraj liste." << std::endl;
+        this->shouldStop = true;
+        this->soundFilePath = "Jala i Buba - Dale.wav";
+        music.stop();
+        music.play();
     }
 }
 
@@ -406,10 +406,9 @@ void AudioPlayer::staraPjesma() {
         }
     }
     else {
-        std::cout << "Kraj liste, stavljanje na pocetak." << std::endl;
-        this->isPlaying = false;
-        this->isPlaybackComplete = true;
-        this->soundFilePath = songList[0];
+        std::cout << "Greska, ode ti." << std::endl;
+        this->shouldStop = false;
+        return;
     }
 }
 
