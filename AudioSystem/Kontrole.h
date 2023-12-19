@@ -28,6 +28,7 @@ public:
 	float UpdatePozicijaSimbolaWindow(sf::RenderWindow& window);
 	float UpdatePozicijaSimbolaWindowGlasnoca(sf::RenderWindow& window);
 	void UpdatePozicijaSimbola(float index);
+	void UpdatePozicijaSimbolaGlasnoca(float index, sf::RenderWindow& window);
 	void RenderVrijeme(sf::RenderWindow& window, float sekunde, float trajanje, sf::Color PrimarnaBoja);
 
 	void RenderScroll(sf::RenderWindow &window);

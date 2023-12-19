@@ -31,6 +31,7 @@ private:
     bool isPlaybackComplete;
     size_t trenutniIndeksPjesme;
     size_t seconds;
+    size_t miliseconds;
     float trajanjePjesme;
     double currentTimeInSeconds;
     WAVEFORMATEX waveFormat;
@@ -48,6 +49,8 @@ private:
     double effectiveSpeed;
     int tempSekunde;
     float velicina;
+    float TempGlasnoca;
+    WORD glasnocaJedan, glasnocaDva;
     DWORD glasnoca;
 public:
 
@@ -104,5 +107,7 @@ public:
     float GetTrajanjePjesme() const;
     void SetGlasnoca(float velicina);
     void SetPozicija(int sekunde);
-
+    size_t GetMiliSekunde();
+    float GetGlasnoca();
+    void Mute();
 };

@@ -8,9 +8,11 @@
 #include "TextBox.h"
 #include "Tipka.h"
 #include "Kontrole.h"
+#include "InfoPjesma.h"
 #include <string>
 #include <vector>
 #include <memory>
+
 
 /*
 	Klasa koja je odgovorna za GUI
@@ -28,10 +30,10 @@ private:
 	std::vector<TextBox> TextBoxovi; //vektor koji sadrzava sve textbox elemente
 	Tipka PromijeniRezolucijuToggleTEST;
 	sf::Color PrimarnaBoja, SekundarnaBoja, AkcenatBoja;
-
+	float TempGlasnoca;
 	Kontrole kontrole;
 	AudioPlayer player;
-
+	InfoPjesma infoPjesma;
 	//elementi aplikacije
 	//tok definiranja, logike i iscrtavanja elemenata na prozor je sljedeci:
 	//1. deklaracija elementa ovdje
@@ -55,7 +57,9 @@ private:
 	void ResetPrimarneBoje();
 	void GetOdgovarajuciTextBoxText();
 	void UpdateScrollBar();
+	void UpdateGlasnocaBar();
 	void PromijeniRezoluciju(int height, int width);
+	void Mute();
 	
 
 public:
