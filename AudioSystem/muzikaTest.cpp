@@ -10,8 +10,10 @@ WAVEFORMATEX waveformat;
 AudioPlayer::AudioPlayer()
 {
     // Postavljanje inicijalnih vrijednosti èlanova klase
-    this->SetGlasnoca(1);
-    this->soundFilePath = "Modestep & Virtual Riot & Barely Alive - By My Side.wav";
+    this->glasnocaJedan = 0xFFFF;
+    this->glasnocaDva = 0xFFFF;
+    this->glasnoca = MAKELONG(this->glasnocaJedan, this->glasnocaDva);
+    this->soundFilePath = "Dua Lipa - New Rules.wav";
     this->trenutniIndeksPjesme = 0;
     this->seconds = 1;
     this->isPlaying = false;
@@ -220,7 +222,8 @@ void AudioPlayer::pustiPauza() {
         music.stop();
         this->isPlaying = false;
         this->pauseTime = this->tempVrijeme;
-        this->seconds = static_cast<size_t>(this->pauseTime.asSeconds());
+        this->seconds = static_cast<int>(this->pauseTime.asSeconds());
+        this->miliseconds = static_cast<int>(this->pauseTime.asMilliseconds());
         //this->isPlaybackComplete = true;
         
     }
@@ -267,9 +270,11 @@ void AudioPlayer::Vrijeme() {
             sf::Time playingOffset = music.getPlayingOffset();
             
             this->seconds = static_cast<int>(currentTime.asSeconds());
+            this->miliseconds = static_cast<int>(currentTime.asMilliseconds());
 
             this->effectiveSpeed = this->brzina > 0 ? this->brzina : 1.0;
             this->seconds = static_cast<int>(currentTime.asSeconds() * effectiveSpeed);
+            this->miliseconds = static_cast<int>(currentTime.asMilliseconds() * effectiveSpeed);
 
             // Ažurirajte trenutno vrijeme i broj uzoraka
             currentTimeInSeconds = static_cast<double>(this->seconds);
@@ -340,6 +345,7 @@ void AudioPlayer::novaPjesma() {
             this->isPlaybackComplete = false;
             this->shouldStop = false;
             this->seconds = 1;
+            this->miliseconds = 100;
 
             std::thread(&AudioPlayer::Vrijeme, this).detach();
         }catch (const std::exception& e) {
@@ -384,6 +390,7 @@ void AudioPlayer::staraPjesma() {
             this->isPlaybackComplete = false;
             this->shouldStop = false;
             this->seconds = 1;
+            this->miliseconds = 100;
             std::thread(&AudioPlayer::Vrijeme, this).detach();
         }
         catch (const std::exception& e) {
@@ -408,22 +415,27 @@ void AudioPlayer::staraPjesma() {
 
 // Metoda za pojacavanje zvuka
 void AudioPlayer::Pojacaj(float velicina) {
+
     DWORD currentVolume = getSystemVolume();
 
     WORD leftVolume = LOWORD(currentVolume);
     WORD rightVolume = HIWORD(currentVolume);
 
-    if (leftVolume < 0xFFFF - 8000) {
-        leftVolume += 8000;
+    if (leftVolume < 0xFFFF - 4000 && rightVolume < 0xFFFF - 4000) {
+        leftVolume += 4000;
+        rightVolume += 4000;
     }
-
-    if (rightVolume < 0xFFFF - 8000) {
-        rightVolume += 8000;
+    else
+    {
+        leftVolume = 0xFFFF;
+        rightVolume = 0xFFFF;
     }
 
     DWORD newVolume = MAKELONG(leftVolume, rightVolume);
 
     setSystemVolume(newVolume);
+
+    this->velicina = (static_cast<float>(newVolume) / 0xFFFF) / 0xFFFF;
 }
 
 // Metoda za smanjenje zvuka
@@ -433,17 +445,22 @@ void AudioPlayer::Smanji() {
     WORD leftVolume = LOWORD(currentVolume);
     WORD rightVolume = HIWORD(currentVolume);
 
-    if (leftVolume > 8000) {
-        leftVolume -= 8000;
+    if (leftVolume > 4000 && rightVolume > 4000) {
+        leftVolume -= 4000;
+        rightVolume -= 4000;
+    }
+    else
+    {
+        leftVolume = 0;
+        rightVolume = 0;
     }
 
-    if (rightVolume > 8000) {
-        rightVolume -= 8000;
-    }
 
     DWORD newVolume = MAKELONG(leftVolume, rightVolume);
 
     setSystemVolume(newVolume);
+
+    this->velicina = (static_cast<float>(newVolume) / 0xFFFF) / 0xFFFF;
 }
 
 // Metoda za dobijanje trenutnog sistema zvuka
@@ -523,7 +540,8 @@ void AudioPlayer::Uspori() {
 
 void AudioPlayer::SetGlasnoca(float velicina)
 {
-    this->velicina = velicina;
+    if(velicina >= 0 && velicina <= 1)
+        this->velicina = velicina;
     if (this->velicina < 0 || this->velicina > 1)
         return;
 
@@ -535,16 +553,47 @@ void AudioPlayer::SetGlasnoca(float velicina)
     DWORD newVolume = MAKELONG(leftVolume, rightVolume);
 
     setSystemVolume(newVolume);
+    //std::cout << this->velicina << std::endl;
 }
+
 
 void AudioPlayer::SetPozicija(int sekunde)
 {
-    
-
     sf::Time time = sf::seconds(sekunde);
     music.setPlayingOffset(time);
 }
 
+size_t AudioPlayer::GetMiliSekunde()
+{
+    sf::Time current = music.getPlayingOffset();
+    int PLAY = static_cast<int>(current.asMilliseconds());
+    return PLAY;
+}
+
+float AudioPlayer::GetGlasnoca()
+{
+    if (this->velicina > 0 && this->velicina < 1)
+    {
+        return this->velicina;
+    }
+}
+
+void AudioPlayer::Mute()
+{
+    std::cout << "MUTE!\n";
+    if (this->velicina != 0)
+    {
+        this->TempGlasnoca = this->velicina;
+        this->velicina = 0;
+    }
+    else
+    {
+        this->velicina = 1;
+    }
+    std::cout << this->velicina << "\n" << this->TempGlasnoca << "\n";
+    this->SetGlasnoca(this->velicina);
+
+}
 
 size_t AudioPlayer::GetSekunde() const
 {
