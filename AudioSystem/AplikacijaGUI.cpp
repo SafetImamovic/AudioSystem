@@ -13,7 +13,7 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 
 	this->player.setNiz();
 	this->player.SetGlasnoca(0.99f);
-
+	InfoPjesma::SetPjesma("Pjesma neka fina", this->font);
 }
 
 void AplikacijaGUI::InicijalizacijaProzora()
@@ -169,6 +169,7 @@ void AplikacijaGUI::RenderSveElemente()
 	DrawToSveTipke(*this->window, this->kontrole.Tipke);
 	this->kontrole.RenderScroll(*this->window);
 	this->kontrole.RenderGlasnoca(*this->window);
+	InfoPjesma::RenderPjesma(*this->window);
 }
 
 void AplikacijaGUI::ResetPrimarneBoje()
