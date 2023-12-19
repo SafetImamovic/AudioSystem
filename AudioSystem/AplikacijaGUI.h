@@ -8,9 +8,11 @@
 #include "TextBox.h"
 #include "Tipka.h"
 #include "Kontrole.h"
+#include "InfoPjesma.h"
 #include <string>
 #include <vector>
 #include <memory>
+
 
 /*
 	Klasa koja je odgovorna za GUI
@@ -31,7 +33,7 @@ private:
 	float TempGlasnoca;
 	Kontrole kontrole;
 	AudioPlayer player;
-
+	InfoPjesma infoPjesma;
 	//elementi aplikacije
 	//tok definiranja, logike i iscrtavanja elemenata na prozor je sljedeci:
 	//1. deklaracija elementa ovdje
