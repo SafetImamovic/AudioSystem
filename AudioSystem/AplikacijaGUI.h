@@ -60,6 +60,8 @@ private:
 	void UpdateGlasnocaBar();
 	void PromijeniRezoluciju(int height, int width);
 	void Mute();
+	void InfoPjesmaKonfiguracija();
+	void UpdateInfoPjesma();
 	
 
 public:
