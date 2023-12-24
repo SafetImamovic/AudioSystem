@@ -1,5 +1,7 @@
 #pragma once
 #include "ElementarneKomponente.h"
+#include "Tipka.h"
+#include "TextBox.h"
 #include <string>
 class InfoPjesma : public ElementarneKomponente
 {
@@ -19,9 +21,16 @@ public:
 	static sf::Text textNaslov;
 	static std::string PjesniciPjesme;
 	static sf::Text textPjesnici;
+	static std::string NaslovListe;
+	static sf::Text textNaslovListe;
+	static std::string KreatorListe;
+	static sf::Text textKreatroListe;
 	static sf::Font font;
+	static sf::Font fontEmoji;
 	static int PaddingVertical;
 	static int PaddingHorizontal;
+	static int PaddingVerticalPlayLista;
+	static int PaddingHorizontalPlayLista;
 	static sf::RectangleShape CoverUpMain;
 	static sf::RectangleShape CoverUpMainTwo;
 	static sf::RectangleShape CoverUpSecondary;
@@ -29,12 +38,25 @@ public:
 	static sf::Sprite CoverRender;
 	static float rateNaslov;
 	static float ratePjesnici;
+	static std::wstring VrstaListe;
+	static sf::Text textVrstaListe;
+	static sf::Text textSimbolVrsta;
+	static std::vector<Tipka> Tipke;
+	static std::vector<TextBox> TextBoxovi;
+	static std::vector<sf::RectangleShape> PozadinePjesma;
+	static sf::RectangleShape CoverUpListaUp;
+	static sf::RectangleShape CoverUpListaDown;
 
 	InfoPjesma() = default;
-	static void SetPjesma(std::string naslov, std::string pjesnici, sf::Font &font);
+	static void SetPjesma(std::string naslov, std::string pjesnici, sf::Font &font, sf::Font& fontEmoji);
 	static void RenderPjesma(sf::RenderWindow& window);
-	static void SetList();
+	static void SetList(std::string naslov, std::string kreator, std::vector<std::string> &PjesmeZaSad, bool VrstaListeBool, sf::RenderWindow& window);
 	static void RenderList(sf::RenderWindow& window);
+	static void SetTextBox();
+	static std::vector<sf::RectangleShape> RenderSvePjesme(std::vector<std::string>& PjesmeZaSad, sf::RenderWindow& window);
+	static void PostaviCoverUpLista();
 	static void Update();
+	static void MoveUp(std::string id);
+	static void MoveDown(std::string id);
 };
 

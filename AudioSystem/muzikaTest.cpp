@@ -13,7 +13,7 @@ AudioPlayer::AudioPlayer()
     this->glasnocaJedan = 0xFFFF;
     this->glasnocaDva = 0xFFFF;
     this->glasnoca = MAKELONG(this->glasnocaJedan, this->glasnocaDva);
-    this->soundFilePath = "Skrillex, Bibi Bourelly, & Sonny Moore - Don't Get Too Close (Virtual Riot Remix).wav";
+    this->soundFilePath = "Virtual Riot - Back In Time ft. Angelika.wav";
     this->trenutniIndeksPjesme = 0;
     this->seconds = 1;
     this->isPlaying = false;

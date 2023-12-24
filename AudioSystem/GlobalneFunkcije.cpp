@@ -1,5 +1,69 @@
 #include "GlobalneFunkcije.h"
 
+bool ProvjeriHoverRegija(sf::RenderWindow& window, sf::Vector2f offset, sf::Vector2f regija)
+{
+	float mouseX = sf::Mouse::getPosition(window).x;
+	float mouseY = sf::Mouse::getPosition(window).y;
+
+	float tipkaPosX = offset.x;
+	float tipkaPosY = offset.y;
+
+	float tipkaXPosSirina = regija.x + offset.x;
+	float tipkaYPosVisina = regija.y;
+
+	if (mouseX < tipkaXPosSirina && mouseX > tipkaPosX && mouseY < tipkaYPosVisina && mouseY > tipkaPosY)
+		return true;
+	return false;
+}
+
+void DrawToSviTextBoxovi(sf::RenderWindow& window, std::vector<TextBox>& TextBoxovi)
+{
+	for (int i = 0; i < TextBoxovi.size(); i++)
+		TextBoxovi.at(i).DrawTo(window);
+}
+
+bool ProvjeriClickZaSveTextBoxove(sf::RenderWindow& window, std::vector<TextBox>& TextBoxovi, sf::Color PrimarnaBoja, sf::Color AkcenatBoja)
+{
+	for (int i = 0; i < TextBoxovi.size(); i++)
+	{
+		if (TextBoxovi.at(i).Hover(window, TextBoxovi.at(i).backgroundShape))
+		{
+			TextBoxovi.at(i).SetOznacen(true);
+			return true;
+		}
+		else
+		{
+			TextBoxovi.at(i).SetOznacen(false);
+			return false;
+		}
+	}
+}
+
+void ResetPrimarneBojeSviTextBoxovi(sf::RenderWindow& window, std::vector<TextBox>& TextBoxovi, sf::Color PrimarnaBoja)
+{
+	for (int i = 0; i < TextBoxovi.size(); i++)
+	{
+		TextBoxovi.at(i).PromijeniBojuPozadine(PrimarnaBoja);
+	}
+}
+
+void ProvjeriHoverZaSveTextBoxove(sf::RenderWindow& window, std::vector<TextBox>& TextBoxovi, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja)
+{
+	for (int i = 0; i < TextBoxovi.size(); i++)
+	{
+		if (TextBoxovi.at(i).Hover(window, TextBoxovi.at(i).backgroundShape))
+		{
+			TextBoxovi.at(i).backgroundShape.setFillColor(SekundarnaBoja);
+		}
+		else
+		{
+			TextBoxovi.at(i).backgroundShape.setFillColor(PrimarnaBoja);
+		}
+	}
+}
+
+
+
 void DrawToSveTipke(sf::RenderWindow& window, std::vector<Tipka>& Tipke)
 //iscrtava na prozor
 {

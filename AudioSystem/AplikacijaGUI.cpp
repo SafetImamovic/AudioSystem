@@ -36,6 +36,7 @@ void AplikacijaGUI::InicijalizacijaElemenata()
 	kontrole.SetKontrole(
 		this->videoMode, 
 		this->font,
+		this->fontEmoji,
 		this->PrimarnaBoja,
 		this->SekundarnaBoja,
 		this->AkcenatBoja
@@ -104,41 +105,24 @@ void AplikacijaGUI::ProvjeriHoverZaSveElemente()
 {
 	ProvjeriHoverZaSveTipke(*this->window, this->kontrole.Tipke, this->PrimarnaBoja, this->SekundarnaBoja);
 	
-	for(int i = 0; i < this->TextBoxovi.size(); i++)
-	{
-		if (this->TextBoxovi.at(i).Hover(*this->window, this->TextBoxovi.at(i).backgroundShape))
-		{
-			this->TextBoxovi.at(i).backgroundShape.setFillColor(SekundarnaBoja);
-		}
-		else
-		{
-			this->TextBoxovi.at(i).backgroundShape.setFillColor(PrimarnaBoja);
-		}
-	}
+	ProvjeriHoverZaSveTipke(*this->window, InfoPjesma::Tipke, this->PrimarnaBoja, this->SekundarnaBoja);
+
+	ProvjeriHoverZaSveTextBoxove(*this->window, InfoPjesma::TextBoxovi, this->PrimarnaBoja, this->SekundarnaBoja);
 	
 }
 
 void AplikacijaGUI::ProvjeriClickZaSveElemente()
 {
-	for (int i = 0; i < this->TextBoxovi.size(); i++)
-	{
-		if (this->TextBoxovi.at(i).Hover(*this->window, this->TextBoxovi.at(i).backgroundShape))
-		{
-			this->TextBoxovi.at(i).SetOznacen(true);
-		}
-		else
-		{
-			this->TextBoxovi.at(i).SetOznacen(false);
-		}
-	}
 	
+	ProvjeriClickZaSveTipke(*this->window, InfoPjesma::Tipke, this->PrimarnaBoja, this->SekundarnaBoja);
+
 	std::string temp = ProvjeriClickZaSveTipke(*this->window, this->kontrole.Tipke, this->PrimarnaBoja, this->AkcenatBoja);
-	//std::cout << Tipka::PRITISNUT << std::endl;
+
+	TextBox::JE_OZNACEN = ProvjeriClickZaSveTextBoxove(*this->window, InfoPjesma::TextBoxovi, this->PrimarnaBoja, this->AkcenatBoja);
 
 	if (Tipka::PRITISNUT == "PustiPauziraj")//ovdje se za sad pozivaju sve audio funkcije
 	{
 		player.pustiPauza();
-		this->kontrole.PromijeniKarakter("PustiPauziraj");
 	}
 	else if (Tipka::PRITISNUT == "SkipPrije")
 		player.premotajUnazad();
@@ -151,7 +135,6 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 	else if (Tipka::PRITISNUT == "Mute")
 	{
 		this->Mute();
-		this->kontrole.PromijeniKarakter("Mute");
 	}
 		
 
@@ -168,26 +151,34 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 	
 
 	this->UpdateGlasnocaBar();
+	ProvjeriClickZaSveTipke(*this->window, InfoPjesma::Tipke, this->PrimarnaBoja, this->AkcenatBoja);
 }
 
 void AplikacijaGUI::RenderSveElemente()
 {
 	InfoPjesma::RenderPjesma(*this->window);
+	InfoPjesma::RenderList(*this->window);
+	DrawToSveTipke(*this->window, InfoPjesma::Tipke);
 	//for (int i = 0; i < this->TextBoxovi.size(); i++)
 	//{
 	//	this->TextBoxovi.at(i).DrawTo(*this->window);
 	//}
+	
 
+	this->kontrole.RenderPozadina(*this->window);
 	DrawToSveTipke(*this->window, this->kontrole.Tipke);
 	this->kontrole.RenderVrijeme(*this->window, this->player.GetSekunde(), this->player.GetTrajanjePjesme(), this->PrimarnaBoja);
 	this->kontrole.RenderScroll(*this->window);
 	this->kontrole.RenderGlasnoca(*this->window);
+	DrawToSviTextBoxovi(*this->window, InfoPjesma::TextBoxovi);
 	
 }
 
 void AplikacijaGUI::ResetPrimarneBoje()
 {
 	ResetPrimarneBojeSveTipke(*this->window, this->kontrole.Tipke, this->PrimarnaBoja);
+	ResetPrimarneBojeSveTipke(*this->window, InfoPjesma::Tipke, this->PrimarnaBoja);
+	ResetPrimarneBojeSviTextBoxovi(*this->window, InfoPjesma::TextBoxovi, this->PrimarnaBoja);
 }
 
 void AplikacijaGUI::GetOdgovarajuciTextBoxText()
@@ -251,9 +242,17 @@ void AplikacijaGUI::Mute()
 
 void AplikacijaGUI::InfoPjesmaKonfiguracija()
 {
-	InfoPjesma::SetPjesma("Don't Get Too Close (Virtual Riot Remix)", "Skrillex, Bibi Bourelly, Sonny Moore, Virtual Riot" ,this->font);
+	InfoPjesma::SetPjesma("Don't Get Too Close (Virtual Riot Remix)", "Skrillex, Bibi Bourelly, Sonny Moore, Virtual Riot", this->font, this->fontEmoji);
 	InfoPjesma::Cover.loadFromFile("Covers/1.jpg");
 	InfoPjesma::CoverRender.setTexture(InfoPjesma::Cover);
+	std::vector<std::string> pjesmeZaSad;
+
+
+	for(int i = 0; i < 20; i++)
+		pjesmeZaSad.push_back("nice");
+	
+
+	InfoPjesma::SetList("Naslov Liste", "Kreator Liste", pjesmeZaSad, true, *this->window);
 
 
 }
@@ -263,14 +262,79 @@ void AplikacijaGUI::UpdateInfoPjesma()
 	InfoPjesma::Update();
 }
 
+void AplikacijaGUI::UpdateStanjeTipke()
+{
+	if (this->player.GetMiliSekunde() == 0)//cudan nacin mora se promijenit
+		this->kontrole.PromijeniKarakter("PustiPauziraj", L"\uE768");
+	else
+		this->kontrole.PromijeniKarakter("PustiPauziraj", L"\uE769");
+
+	if (this->player.GetGlasnoca() == 0)
+		this->kontrole.PromijeniKarakter("Mute", L"\uE74F");
+	else
+		this->kontrole.PromijeniKarakter("Mute", L"\uE767"); // E006
+
+	//uslov za like dole
+}
+
+void AplikacijaGUI::UpdateOtipkano()
+{
+	for (int i = 0; i < this->TextBoxovi.size(); i++)
+	{
+		this->TextBoxovi.at(i).OtipkanoNa(this->event);//kada je tekst otkucan poziva metodu objekta za ovaj textbox
+		//koja zapravo ispisuje tekst na prozoru
+	}
+
+	for (int i = 0; i < InfoPjesma::TextBoxovi.size(); i++)
+	{
+		InfoPjesma::TextBoxovi.at(i).OtipkanoNa(this->event);//kada je tekst otkucan poziva metodu objekta za ovaj textbox
+		//koja zapravo ispisuje tekst na prozoru
+	}
+}
+
+void AplikacijaGUI::LCtrlObrisi()
+{
+	for (int i = 0; i < this->TextBoxovi.size(); i++)
+	{
+		if (this->TextBoxovi.at(i).JeOznacen())
+		{
+			this->TextBoxovi.at(i).Clear();
+		}
+	}
+
+	for (int i = 0; i < InfoPjesma::TextBoxovi.size(); i++)
+	{
+		if (InfoPjesma::TextBoxovi.at(i).JeOznacen())
+		{
+			InfoPjesma::TextBoxovi.at(i).Clear();
+		}
+	}
+}
+
+void AplikacijaGUI::Scroll()
+{
+	if (ProvjeriHoverRegija(*this->window, { 500, 220 }, sf::Vector2f(1920 - 500 - 300, this->videoMode.height - 110)))
+	{
+		if (this->event.mouseWheel.delta == -1)
+		{
+			InfoPjesma::MoveUp("Pjesme");
+		}
+		else if (this->event.mouseWheel.delta == 1)
+		{
+			InfoPjesma::MoveDown("Pjesme");
+		}
+	}
+}
+
 
 
 //------------------end of private-------------------------------//
 
-AplikacijaGUI::AplikacijaGUI(sf::Font& font, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja)
+AplikacijaGUI::AplikacijaGUI(sf::Font& font, sf::Font& fontEmoji, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja)
 //konstruktor poziva privatne metode koje inicijaliziraju varijable i prozor
 {
 	this->font = font;
+	this->fontEmoji = fontEmoji;
 	this->PrimarnaBoja = PrimarnaBoja;
 	this->SekundarnaBoja = SekundarnaBoja;
 	this->AkcenatBoja = AkcenatBoja;
@@ -310,47 +374,44 @@ void AplikacijaGUI::UpdatePollEvents() //ova metoda osvjezava eventove, npr. int
 		case sf::Event::TextEntered:
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace) && sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
 				break;
-			for (int i = 0; i < this->TextBoxovi.size(); i++)
-			{
-				this->TextBoxovi.at(i).OtipkanoNa(this->event);//kada je tekst otkucan poziva metodu objekta za ovaj textbox
-				//koja zapravo ispisuje tekst na prozoru
-			}
+			this->UpdateOtipkano();
 			
 			break;
 
 		case sf::Event::KeyPressed:
+
+			std::cout << InfoPjesma::TextBoxovi.at(0).GetText() << std::endl;
+
 			if (this->event.key.code == sf::Keyboard::Enter) //Kada korisnik pritisne enter
 				this->GetOdgovarajuciTextBoxText();
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace) && sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
 				//Poseban slucaj ako korisnik u isto vrijme pritisne ctrl i backspace onda se obrise string unutar textboxa
-				for (int i = 0; i < this->TextBoxovi.size(); i++)
-				{
-					if (this->TextBoxovi.at(i).JeOznacen())
-					{
-						this->TextBoxovi.at(i).Clear();
-					}
-				}
+				this->LCtrlObrisi();
 			}
-
-			if (this->event.key.code == sf::Keyboard::Space)
-				this->player.pustiPauza();
 			
-			if (this->event.key.code == sf::Keyboard::Right)
-				this->player.premotajUnaprijed();
-			if (this->event.key.code == sf::Keyboard::Left)
-				this->player.premotajUnazad();
-				
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-				this->player.Pojacaj(1);
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-				this->player.Smanji();
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::M))
-				this->Mute();
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-				this->player.staraPjesma();
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-				this->player.novaPjesma();
+			if (TextBox::JE_OZNACEN == false)
+			{
+				if (this->event.key.code == sf::Keyboard::Space)
+					this->player.pustiPauza();
+
+				if (this->event.key.code == sf::Keyboard::Right)
+					this->player.premotajUnaprijed();
+				if (this->event.key.code == sf::Keyboard::Left)
+					this->player.premotajUnazad();
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+					this->player.Pojacaj(1);
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+					this->player.Smanji();
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::M))
+					this->Mute();
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+					this->player.staraPjesma();
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+					this->player.novaPjesma();
+			}
+			
 			break;
 
 		case sf::Event::MouseMoved://kada se mis krece
@@ -365,6 +426,9 @@ void AplikacijaGUI::UpdatePollEvents() //ova metoda osvjezava eventove, npr. int
 			this->ResetPrimarneBoje();
 			break;
 
+		case sf::Event::MouseWheelMoved:
+			this->Scroll();
+			break;
 		default:
 			break;
 		}
@@ -379,7 +443,8 @@ void AplikacijaGUI::UpdateGUI() //metoda koja osvjezi "update-je" logiku vezanu 
 	this->UpdateRect();
 	this->UpdateScrollBar();
 	this->UpdateGlasnocaBar();
-	
+	this->UpdateStanjeTipke();
+	this->Scroll();
 	
 }
 
@@ -390,7 +455,7 @@ void AplikacijaGUI::RenderRect()
 
 void AplikacijaGUI::RenderGUI() //renderuje objekte, elemente aplikacije
 {
-	this->window->clear(); //clear-a stari frame
+	this->window->clear(sf::Color(30, 30, 30)); //clear-a stari frame
 
 	//--------ovdje krece pozivanje metoda koje iscrtavaju elemente----------
 
