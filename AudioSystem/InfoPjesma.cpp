@@ -108,11 +108,11 @@ void InfoPjesma::Update()
 		
 		InfoPjesma::textNaslov.move(sf::Vector2f(InfoPjesma::rateNaslov, 0));
 		std::cout << InfoPjesma::textNaslov.getPosition().x << "\n";
-		if (InfoPjesma::textNaslov.getPosition().x == InfoPjesma::PaddingHorizontal + 10)
+		if (InfoPjesma::textNaslov.getPosition().x == InfoPjesma::PaddingHorizontal + 1)
 		{
-			InfoPjesma::rateNaslov = -0.005;
+			InfoPjesma::rateNaslov = -0.001;
 		}
-		else if (InfoPjesma::textNaslov.getPosition().x < InfoPjesma::PaddingHorizontal + 5)
+		else if (InfoPjesma::textNaslov.getPosition().x < InfoPjesma::PaddingHorizontal)
 		{
 			InfoPjesma::rateNaslov = -0.25;
 		}
@@ -127,11 +127,11 @@ void InfoPjesma::Update()
 	{
 		InfoPjesma::textPjesnici.move(sf::Vector2f(InfoPjesma::ratePjesnici, 0));
 		std::cout << InfoPjesma::textPjesnici.getPosition().x << "\n";
-		if (InfoPjesma::textPjesnici.getPosition().x == InfoPjesma::PaddingHorizontal + 10)
+		if (InfoPjesma::textPjesnici.getPosition().x == InfoPjesma::PaddingHorizontal + 1)
 		{
-			InfoPjesma::ratePjesnici = -0.005;
+			InfoPjesma::ratePjesnici = -0.001;
 		}
-		else if (InfoPjesma::textPjesnici.getPosition().x < InfoPjesma::PaddingHorizontal + 5)
+		else if (InfoPjesma::textPjesnici.getPosition().x < InfoPjesma::PaddingHorizontal)
 		{
 			InfoPjesma::ratePjesnici = -0.25;
 		}

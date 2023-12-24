@@ -250,8 +250,8 @@ void AplikacijaGUI::Mute()
 
 void AplikacijaGUI::InfoPjesmaKonfiguracija()
 {
-	InfoPjesma::SetPjesma("By My Side", "Modestep & Virtual Riot & Barely Alive" ,this->font);
-	InfoPjesma::Cover.loadFromFile("Covers/5.jpg");
+	InfoPjesma::SetPjesma("Don't Get Too Close (Virtual Riot Remix)", "Skrillex, Bibi Bourelly, Sonny Moore, Virtual Riot" ,this->font);
+	InfoPjesma::Cover.loadFromFile("Covers/1.jpg");
 	InfoPjesma::CoverRender.setTexture(InfoPjesma::Cover);
 
 
