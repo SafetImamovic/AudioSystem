@@ -9,13 +9,13 @@
 class Kontrole : public ElementarneKomponente
 {
 private:
-	int visinaTipke = 60, sirinaTipke = 60, sirinaScroll = 950, visinaScroll = 50, visinaGlasnoca = 60, sirinaGlasnoca = 200;
+	int visinaTipke = 60, sirinaTipke = 60, sirinaScroll, visinaScroll = 50, visinaGlasnoca = 60, sirinaGlasnoca = 200;
 	sf::VideoMode videoMode;
 	sf::Font font;
 	sf::Color PrimarnaBoja, SekundarnaBoja, AkcenatBoja;
 	sf::RectangleShape ScrollPozadina, GlasnocaPozadina, GlasnocaProcenatPozadina;
 	sf::Text ScrollSimbol, GlasnocaSimbol, GlasnocaProcenat;
-	sf::RectangleShape ScrollBar, GlasnocaBar;
+	sf::RectangleShape ScrollBar, GlasnocaBar, ScrollBarFollow, GlasnocaBarFollow;
 	int pocetnaKoordinataXTipke;
 
 	
