@@ -158,6 +158,8 @@ void AplikacijaGUI::RenderSveElemente()
 {
 	InfoPjesma::RenderPjesma(*this->window);
 	InfoPjesma::RenderList(*this->window);
+	InfoPjesma::RenderDesno(*this->window);
+	InfoPjesma::RenderListDesno(*this->window);
 	DrawToSveTipke(*this->window, InfoPjesma::Tipke);
 	//for (int i = 0; i < this->TextBoxovi.size(); i++)
 	//{
@@ -252,8 +254,9 @@ void AplikacijaGUI::InfoPjesmaKonfiguracija()
 		pjesmeZaSad.push_back("nice");
 	
 
-	InfoPjesma::SetList("Naslov Liste", "Kreator Liste", pjesmeZaSad, true, *this->window);
-
+	InfoPjesma::SetList("Naslov Liste", "Kreator Liste", pjesmeZaSad, false, *this->window);
+	InfoPjesma::PostaviPozadineDesno();
+	InfoPjesma::SetListeDesno(pjesmeZaSad, *this->window);
 
 }
 
@@ -322,6 +325,18 @@ void AplikacijaGUI::Scroll()
 		else if (this->event.mouseWheel.delta == 1)
 		{
 			InfoPjesma::MoveDown("Pjesme");
+		}
+	}
+
+	if (ProvjeriHoverRegija(*this->window, sf::Vector2f(1920 - 300, 0), sf::Vector2f(300, this->videoMode.height - 110)))
+	{
+		if (this->event.mouseWheel.delta == -1)
+		{
+			InfoPjesma::MoveUp("Playliste");
+		}
+		else if (this->event.mouseWheel.delta == 1)
+		{
+			InfoPjesma::MoveDown("Playliste");
 		}
 	}
 }
