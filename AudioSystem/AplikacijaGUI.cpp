@@ -8,8 +8,8 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	this->window = nullptr; //dobra praksa da se pointer inicijalizira sa nullptr. incicijalizirmao prozor kao pointer jer zelimo da ga alociramo na heap
 	//i fleksibilnija je kontrola
 
-	this->videoMode.height = 900; //visina prozora koja se smijesta unutar this->videoMode
-	this->videoMode.width = 1600; //sirina prozora koja se smijesta unutar this->videoMode
+	this->videoMode.height = 1000; //visina prozora koja se smijesta unutar this->videoMode
+	this->videoMode.width = 1920; //sirina prozora koja se smijesta unutar this->videoMode
 
 	this->player.setNiz();
 	this->player.SetGlasnoca(1);
@@ -173,10 +173,10 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 void AplikacijaGUI::RenderSveElemente()
 {
 	InfoPjesma::RenderPjesma(*this->window);
-	for (int i = 0; i < this->TextBoxovi.size(); i++)
-	{
-		this->TextBoxovi.at(i).DrawTo(*this->window);
-	}
+	//for (int i = 0; i < this->TextBoxovi.size(); i++)
+	//{
+	//	this->TextBoxovi.at(i).DrawTo(*this->window);
+	//}
 
 	DrawToSveTipke(*this->window, this->kontrole.Tipke);
 	this->kontrole.RenderScroll(*this->window);
@@ -250,7 +250,11 @@ void AplikacijaGUI::Mute()
 
 void AplikacijaGUI::InfoPjesmaKonfiguracija()
 {
-	InfoPjesma::SetPjesma("Skrillex, Bibi Bourelly, & Sonny Moore - Don't Get Too Close (Virtual Riot Remix)", this->font);
+	InfoPjesma::SetPjesma("By My Side", "Modestep & Virtual Riot & Barely Alive" ,this->font);
+	InfoPjesma::Cover.loadFromFile("Covers/5.jpg");
+	InfoPjesma::CoverRender.setTexture(InfoPjesma::Cover);
+
+
 }
 
 void AplikacijaGUI::UpdateInfoPjesma()
