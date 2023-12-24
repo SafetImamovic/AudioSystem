@@ -14,19 +14,19 @@ void Kontrole::InicijalizacijaTipki()
 
 	TipkaPrije.SetTipka(
 		"Prije",
-		L"⏮",
+		L"◁◁",
 		velicinaTipke,
-		28,
+		24,
 		sf::Color::White,
 		PrimarnaBoja,
 		this->font,
 		sf::Vector2f(this->pocetnaKoordinataXTipke, pocetnaKoordinataY),
-		{ 20, 8 }
+		{ 8, 14 }
 	);
 
 	TipkaSkipPrije.SetTipka(
 		"SkipPrije",
-		L"◁",
+		L"⬅",
 		velicinaTipke,
 		24,
 		sf::Color::White,
@@ -50,7 +50,7 @@ void Kontrole::InicijalizacijaTipki()
 
 	TipkaSkipNaprijed.SetTipka(
 		"SkipNaprijed",
-		L"▷",
+		L"➡",
 		velicinaTipke,
 		24,
 		sf::Color::White,
@@ -62,14 +62,14 @@ void Kontrole::InicijalizacijaTipki()
 
 	TipkaPoslije.SetTipka(
 		"Poslije",
-		L"⏭",
+		L"▷▷",
 		velicinaTipke,
-		28,
+		24,
 		sf::Color::White,
 		this->PrimarnaBoja,
 		this->font,
 		sf::Vector2f(this->pocetnaKoordinataXTipke + 4 * this->sirinaTipke, pocetnaKoordinataY),
-		{ 20, 8 }
+		{ 8, 14 }
 	);
 
 	TipkaLoop.SetTipka(
@@ -86,7 +86,7 @@ void Kontrole::InicijalizacijaTipki()
 
 	TipkaMute.SetTipka(
 		"Mute",
-		L"♪",
+		L"🔊",
 		velicinaTipke,
 		28,
 		sf::Color::White,
@@ -108,6 +108,7 @@ void Kontrole::InicijalizacijaTipki()
 
 void Kontrole::InicijalizacijaScroll()
 {
+	this->sirinaScroll = this->videoMode.width - 500 - 150;
 	int scrollBarInnerVisina = 2;
 	int scrollBarInnerSirina = this->sirinaScroll;
 	int pocetnaKoordinataX = 500;
@@ -120,8 +121,13 @@ void Kontrole::InicijalizacijaScroll()
 	this->ScrollPozadina.setPosition(sf::Vector2f(pocetnaKoordinataX, pocetnaKoordinataY));
 
 	this->ScrollBar.setSize(sf::Vector2f(scrollBarInnerSirina, scrollBarInnerVisina));
-	this->ScrollBar.setFillColor(sf::Color::White);
+	this->ScrollBar.setFillColor(sf::Color::Black);
 	this->ScrollBar.setPosition(sf::Vector2f(pocetnaKoordinataX,
+		pocetnaKoordinataY + this->visinaScroll / 2 - scrollBarInnerVisina / 2));
+
+	this->ScrollBarFollow.setSize(sf::Vector2f(0, scrollBarInnerVisina));//zavisi od save fajla gdje je stala pjesma zadnji put(prvi element Vector2f)
+	this->ScrollBarFollow.setFillColor(sf::Color::White);
+	this->ScrollBarFollow.setPosition(sf::Vector2f(pocetnaKoordinataX,
 		pocetnaKoordinataY + this->visinaScroll / 2 - scrollBarInnerVisina / 2));
 
 	this->ScrollSimbol.setFont(this->font);
@@ -144,8 +150,13 @@ void Kontrole::InicijalizacijaGlasnoca()
 	this->GlasnocaPozadina.setPosition(sf::Vector2f((this->pocetnaKoordinataXTipke + this->Tipke.size() * this->sirinaTipke), pocetnaKoordinataY));
 
 	this->GlasnocaBar.setSize(sf::Vector2f(glasnocaBarInnerSirina, glasnocaBarInnerVisina));
-	this->GlasnocaBar.setFillColor(sf::Color::White);
+	this->GlasnocaBar.setFillColor(sf::Color::Black);
 	this->GlasnocaBar.setPosition(sf::Vector2f((this->pocetnaKoordinataXTipke + this->Tipke.size() * this->sirinaTipke),
+		pocetnaKoordinataY + this->visinaGlasnoca / 2 - glasnocaBarInnerVisina / 2));
+
+	this->GlasnocaBarFollow.setSize(sf::Vector2f(glasnocaBarInnerSirina, glasnocaBarInnerVisina));
+	this->GlasnocaBarFollow.setFillColor(sf::Color::White);
+	this->GlasnocaBarFollow.setPosition(sf::Vector2f((this->pocetnaKoordinataXTipke + this->Tipke.size() * this->sirinaTipke),
 		pocetnaKoordinataY + this->visinaGlasnoca / 2 - glasnocaBarInnerVisina / 2));
 
 	this->GlasnocaSimbol.setFont(this->font);
@@ -206,6 +217,7 @@ void Kontrole::UpdatePozicijaSimbola(float index)
 
 
 	this->ScrollSimbol.setPosition(sf::Vector2f(-6 + index*(this->sirinaScroll) + pocetnaKoordinataX, pocetnaKoordinataY + 15));
+	this->ScrollBarFollow.setSize(sf::Vector2f(index * (this->sirinaScroll), 2));
 }
 
 
@@ -220,6 +232,7 @@ void Kontrole::UpdatePozicijaSimbolaGlasnoca(float index, sf::RenderWindow &wind
 	if (index < 0 || index > 1)
 		return;
 	this->GlasnocaSimbol.setPosition(sf::Vector2f(-6 + index * (this->sirinaGlasnoca) + (this->pocetnaKoordinataXTipke + this->Tipke.size() * this->sirinaTipke), pocetnaKoordinataY + 5 + this->visinaGlasnoca / 4));
+	this->GlasnocaBarFollow.setSize(sf::Vector2f(index * (this->sirinaGlasnoca), 2));
 	this->GlasnocaProcenat.setString(std::to_string(static_cast<int>(index * 100) ) + "%");
 	//this->GlasnocaProcenat.
 }
@@ -229,16 +242,19 @@ void Kontrole::RenderScroll(sf::RenderWindow &window)
 {
 	window.draw(this->ScrollPozadina);
 	window.draw(this->ScrollBar);
+	window.draw(this->ScrollBarFollow);
 	window.draw(this->ScrollSimbol);
+
 }
 
 void Kontrole::RenderGlasnoca(sf::RenderWindow& window)
 {
 	window.draw(this->GlasnocaPozadina);
 	window.draw(this->GlasnocaBar);
-	window.draw(this->GlasnocaSimbol);
+	window.draw(this->GlasnocaBarFollow);
 	window.draw(this->GlasnocaProcenatPozadina);
 	window.draw(this->GlasnocaProcenat);
+	window.draw(this->GlasnocaSimbol);
 }
 
 void Kontrole::SetKontrole(sf::VideoMode &videoMode, sf::Font &font, sf::Color PirmarnaBoja, sf::Color SekundrnaBoja, sf::Color AkcenatBoja)

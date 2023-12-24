@@ -179,6 +179,7 @@ void AplikacijaGUI::RenderSveElemente()
 	//}
 
 	DrawToSveTipke(*this->window, this->kontrole.Tipke);
+	this->kontrole.RenderVrijeme(*this->window, this->player.GetSekunde(), this->player.GetTrajanjePjesme(), this->PrimarnaBoja);
 	this->kontrole.RenderScroll(*this->window);
 	this->kontrole.RenderGlasnoca(*this->window);
 	
@@ -334,17 +335,22 @@ void AplikacijaGUI::UpdatePollEvents() //ova metoda osvjezava eventove, npr. int
 
 			if (this->event.key.code == sf::Keyboard::Space)
 				this->player.pustiPauza();
+			
 			if (this->event.key.code == sf::Keyboard::Right)
 				this->player.premotajUnaprijed();
 			if (this->event.key.code == sf::Keyboard::Left)
 				this->player.premotajUnazad();
-
+				
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 				this->player.Pojacaj(1);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 				this->player.Smanji();
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::M))
 				this->Mute();
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+				this->player.staraPjesma();
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+				this->player.novaPjesma();
 			break;
 
 		case sf::Event::MouseMoved://kada se mis krece
@@ -391,7 +397,7 @@ void AplikacijaGUI::RenderGUI() //renderuje objekte, elemente aplikacije
 	this->RenderSveElemente();
 	//--------ovdje zavrsava pozivanje metoda koje iscrtavaju elemente-------
 	
-	this->kontrole.RenderVrijeme(*this->window, this->player.GetSekunde(), this->player.GetTrajanjePjesme(), this->PrimarnaBoja);
+	
 
 	this->window->display(); //ovo je indikator da je frame zavrsen sa crtanjem
     //izmedju window.clear() i window.display() crtamo prozor tj. elemente unutar prozora
