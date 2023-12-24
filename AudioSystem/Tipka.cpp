@@ -1,4 +1,4 @@
-#include "Tipka.h"
+﻿#include "Tipka.h"
 
 void Tipka::SetTipka(std::string ID, std::wstring text, sf::Vector2f velicina, int karakterVelicina, sf::Color bojaText, sf::Color bojaPozadine, sf::Font& font, sf::Vector2f pozicija, sf::Vector2f textPozicija)
 {
@@ -11,7 +11,6 @@ void Tipka::SetTipka(std::string ID, std::wstring text, sf::Vector2f velicina, i
 	this->tipka.setSize(velicina);
 	this->tipka.setFillColor(bojaPozadine);
 	this->SetTextPozicija(textPozicija);
-	
 }
 
 void Tipka::PromijeniBojuPozadine(sf::Color boja)
@@ -47,5 +46,30 @@ void Tipka::SetTextUTF16(std::wstring text)
 void Tipka::SetTextPozicija(sf::Vector2f pozicija)
 {
 	this->text.move(pozicija);
+}
+
+std::wstring Tipka::GetTextUTF16()
+{
+	return this->text.getString();
+}
+
+sf::Text& Tipka::GetText()
+{
+	return this->text;
+}
+
+void Tipka::PromijeniKarakter()
+{
+	if(this->text.getString() == L"▶")
+		this->text.setString(L"| |");
+	else if(this->text.getString() == L"| |")
+		this->text.setString(L"▶");
+
+	if (this->text.getString() == L"♪")
+		this->text.setString(L"✖");
+	else if (this->text.getString() == L"✖")
+		this->text.setString(L"♪");
+
+	//std::cout << (std::string)this->text.getString();
 }
 

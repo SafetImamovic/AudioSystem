@@ -8,12 +8,12 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	this->window = nullptr; //dobra praksa da se pointer inicijalizira sa nullptr. incicijalizirmao prozor kao pointer jer zelimo da ga alociramo na heap
 	//i fleksibilnija je kontrola
 
-	this->videoMode.height = 720; //visina prozora koja se smijesta unutar this->videoMode
-	this->videoMode.width = 1280; //sirina prozora koja se smijesta unutar this->videoMode
+	this->videoMode.height = 1000; //visina prozora koja se smijesta unutar this->videoMode
+	this->videoMode.width = 1920; //sirina prozora koja se smijesta unutar this->videoMode
 
 	this->player.setNiz();
-	this->player.SetGlasnoca(0.99f);
-	InfoPjesma::SetPjesma("Pjesma neka fina", this->font);
+	this->player.SetGlasnoca(1);
+	this->InfoPjesmaKonfiguracija();
 }
 
 void AplikacijaGUI::InicijalizacijaProzora()
@@ -136,13 +136,24 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 	//std::cout << Tipka::PRITISNUT << std::endl;
 
 	if (Tipka::PRITISNUT == "PustiPauziraj")//ovdje se za sad pozivaju sve audio funkcije
+	{
 		player.pustiPauza();
+		this->kontrole.PromijeniKarakter("PustiPauziraj");
+	}
+	else if (Tipka::PRITISNUT == "SkipPrije")
+		player.premotajUnazad();
+	else if (Tipka::PRITISNUT == "SkipNaprijed")
+		player.premotajUnaprijed();
 	else if (Tipka::PRITISNUT == "Prije")
 		player.staraPjesma();
 	else if (Tipka::PRITISNUT == "Poslije")
 		player.novaPjesma();
 	else if (Tipka::PRITISNUT == "Mute")
+	{
 		this->Mute();
+		this->kontrole.PromijeniKarakter("Mute");
+	}
+		
 
 	float tempp = this->kontrole.UpdatePozicijaSimbolaWindowGlasnoca(*this->window);
 	
@@ -161,15 +172,16 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 
 void AplikacijaGUI::RenderSveElemente()
 {
-	for (int i = 0; i < this->TextBoxovi.size(); i++)
-	{
-		this->TextBoxovi.at(i).DrawTo(*this->window);
-	}
+	InfoPjesma::RenderPjesma(*this->window);
+	//for (int i = 0; i < this->TextBoxovi.size(); i++)
+	//{
+	//	this->TextBoxovi.at(i).DrawTo(*this->window);
+	//}
 
 	DrawToSveTipke(*this->window, this->kontrole.Tipke);
 	this->kontrole.RenderScroll(*this->window);
 	this->kontrole.RenderGlasnoca(*this->window);
-	InfoPjesma::RenderPjesma(*this->window);
+	
 }
 
 void AplikacijaGUI::ResetPrimarneBoje()
@@ -204,7 +216,7 @@ void AplikacijaGUI::UpdateScrollBar()
 void AplikacijaGUI::UpdateGlasnocaBar()
 {
 	float ProcenatGlasnoce = this->player.GetGlasnoca();
-	std::cout << "Glasnoca	" << this->player.GetGlasnoca() << "\n";
+	//std::cout << "Glasnoca	" << this->player.GetGlasnoca() << "\n";
 	//std::cout << "ProcenatGlasnoce   " << ProcenatGlasnoce << std::endl;
 	this->kontrole.UpdatePozicijaSimbolaGlasnoca(ProcenatGlasnoce, *this->window);
 }
@@ -223,17 +235,31 @@ void AplikacijaGUI::Mute()
 	if (this->player.GetGlasnoca() != 0)
 	{
 		this->TempGlasnoca = this->player.GetGlasnoca();
-		std::cout << this->TempGlasnoca << std::endl;
+		//std::cout << this->TempGlasnoca << std::endl;
 
 		this->player.SetGlasnoca(0.00);
 		this->kontrole.UpdatePozicijaSimbolaGlasnoca(0, *this->window);
 	}
 	else
 	{
-		std::cout << "Jest jednaka nuli\n";
+		//std::cout << "Jest jednaka nuli\n";
 		this->player.SetGlasnoca(this->TempGlasnoca);
 		this->kontrole.UpdatePozicijaSimbolaGlasnoca(this->TempGlasnoca, *this->window);
 	}
+}
+
+void AplikacijaGUI::InfoPjesmaKonfiguracija()
+{
+	InfoPjesma::SetPjesma("Don't Get Too Close (Virtual Riot Remix)", "Skrillex, Bibi Bourelly, Sonny Moore, Virtual Riot" ,this->font);
+	InfoPjesma::Cover.loadFromFile("Covers/1.jpg");
+	InfoPjesma::CoverRender.setTexture(InfoPjesma::Cover);
+
+
+}
+
+void AplikacijaGUI::UpdateInfoPjesma()
+{
+	InfoPjesma::Update();
 }
 
 
@@ -343,9 +369,11 @@ void AplikacijaGUI::UpdateGUI() //metoda koja osvjezi "update-je" logiku vezanu 
 {
 	this->UpdatePollEvents();//poziva metodu koja prate eventove
 	this->UpdatePozicijaMisa();
+	this->UpdateInfoPjesma();
 	this->UpdateRect();
 	this->UpdateScrollBar();
 	this->UpdateGlasnocaBar();
+	
 	
 }
 
