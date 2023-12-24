@@ -22,6 +22,6 @@ public:
 	void SetTextPozicija(sf::Vector2f pozicija);
 	std::wstring GetTextUTF16();
 	sf::Text& GetText();
-	void PromijeniKarakter();
+	void PromijeniKarakter(std::wstring promjena);
 
 };

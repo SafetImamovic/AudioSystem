@@ -1,5 +1,6 @@
 #include "TextBox.h"
 
+bool TextBox::JE_OZNACEN = false;
 
 //----------------------Private metode---------------------------
 
@@ -128,7 +129,8 @@ void TextBox::SetSve(std::string ID, int velicinaTeksta, sf::Color bojaTeksta, s
 	this->SetFont(font);
 	this->SetPosition(pozicija);
 	this->SetBackground(bojaPozadine, velicinaPozadine);
-	this->SetPozadinaPozicija(pozicija - padding);
+	this->SetPozadinaPozicija(pozicija);
+	this->SetPadding(padding, pozicija);
 }
 
 bool TextBox::JeOznacen()
@@ -140,6 +142,16 @@ void TextBox::Clear()
 {
 	this->text.str("");
 	this->textbox.setString("");
+}
+
+void TextBox::PromijeniBojuPozadine(sf::Color NovaBoja)
+{
+	this->backgroundShape.setFillColor(NovaBoja);
+}
+
+void TextBox::SetPadding(sf::Vector2f padding, sf::Vector2f pozicija)
+{
+	this->textbox.setPosition(pozicija + padding);
 }
 
 
