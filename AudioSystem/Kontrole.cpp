@@ -110,7 +110,7 @@ void Kontrole::InicijalizacijaScroll()
 {
 	int scrollBarInnerVisina = 2;
 	int scrollBarInnerSirina = this->sirinaScroll;
-	int pocetnaKoordinataX = this->videoMode.width/2 - this->sirinaScroll/2;
+	int pocetnaKoordinataX = 500;
 	//formula koja racuna horizontalni centar prozora, sirina * 4 je 4 jer imaju 4 tipke
 
 	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke - this->visinaScroll;
@@ -121,7 +121,7 @@ void Kontrole::InicijalizacijaScroll()
 
 	this->ScrollBar.setSize(sf::Vector2f(scrollBarInnerSirina, scrollBarInnerVisina));
 	this->ScrollBar.setFillColor(sf::Color::White);
-	this->ScrollBar.setPosition(sf::Vector2f(pocetnaKoordinataX + this->sirinaScroll / 2 - scrollBarInnerSirina / 2,
+	this->ScrollBar.setPosition(sf::Vector2f(pocetnaKoordinataX,
 		pocetnaKoordinataY + this->visinaScroll / 2 - scrollBarInnerVisina / 2));
 
 	this->ScrollSimbol.setFont(this->font);
@@ -168,7 +168,7 @@ float Kontrole::UpdatePozicijaSimbolaWindow(sf::RenderWindow &window)
 {
 	int scrollBarInnerVisina = 4;
 	int scrollBarInnerSirina = this->sirinaScroll - 50;
-	float pocetnaKoordinataX = this->videoMode.width / 2 - this->sirinaScroll / 2;
+	float pocetnaKoordinataX = 500;
 	//formula koja racuna horizontalni centar prozora, sirina * 4 je 4 jer imaju 4 tipke
 
 	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke - this->visinaScroll;
@@ -199,8 +199,8 @@ void Kontrole::UpdatePozicijaSimbola(float index)
 //uvijek update-uje poziciju simbola unutar scroll bara po procentu trenutne pjesme, konstantno je pozvana
 {
 	int scrollBarInnerVisina = 4;
-	int scrollBarInnerSirina = 600;
-	int pocetnaKoordinataX = this->videoMode.width / 2 - this->sirinaScroll / 2;
+	int scrollBarInnerSirina = 1000;
+	int pocetnaKoordinataX = 500;
 
 	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke - this->visinaScroll;
 
@@ -256,7 +256,7 @@ void Kontrole::SetKontrole(sf::VideoMode &videoMode, sf::Font &font, sf::Color P
 
 void Kontrole::RenderVrijeme(sf::RenderWindow& window, float sekunde, float trajanje, sf::Color PrimarnaBoja)
 {
-	int pocetnaKoordinataX = this->videoMode.width / 2 - this->sirinaScroll / 2;
+	int pocetnaKoordinataX = 500;
 	//formula koja racuna horizontalni centar prozora, sirina * 4 je 4 jer imaju 4 tipke
 
 	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke - this->visinaScroll;
