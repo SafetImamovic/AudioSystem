@@ -11,6 +11,8 @@ void Tipka::SetTipka(std::string ID, std::wstring text, sf::Vector2f velicina, i
 	this->tipka.setSize(velicina);
 	this->tipka.setFillColor(bojaPozadine);
 	this->SetTextPozicija(textPozicija);
+	this->text.setOutlineColor(sf::Color::White);
+	this->text.setOutlineThickness(0.3);
 }
 
 void Tipka::PromijeniBojuPozadine(sf::Color boja)
@@ -58,17 +60,9 @@ sf::Text& Tipka::GetText()
 	return this->text;
 }
 
-void Tipka::PromijeniKarakter()
+void Tipka::PromijeniKarakter(std::wstring promjena)
 {
-	if(this->text.getString() == L"▶")
-		this->text.setString(L"| |");
-	else if(this->text.getString() == L"| |")
-		this->text.setString(L"▶");
-
-	if (this->text.getString() == L"♪")
-		this->text.setString(L"✖");
-	else if (this->text.getString() == L"✖")
-		this->text.setString(L"♪");
+	this->text.setString(promjena);
 
 	//std::cout << (std::string)this->text.getString();
 }

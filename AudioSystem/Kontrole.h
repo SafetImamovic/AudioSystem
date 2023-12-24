@@ -11,18 +11,18 @@ class Kontrole : public ElementarneKomponente
 private:
 	int visinaTipke = 60, sirinaTipke = 60, sirinaScroll, visinaScroll = 50, visinaGlasnoca = 60, sirinaGlasnoca = 200;
 	sf::VideoMode videoMode;
-	sf::Font font;
+	sf::Font font, fontEmoji;
 	sf::Color PrimarnaBoja, SekundarnaBoja, AkcenatBoja;
 	sf::RectangleShape ScrollPozadina, GlasnocaPozadina, GlasnocaProcenatPozadina;
 	sf::Text ScrollSimbol, GlasnocaSimbol, GlasnocaProcenat;
-	sf::RectangleShape ScrollBar, GlasnocaBar, ScrollBarFollow, GlasnocaBarFollow;
+	sf::RectangleShape ScrollBar, GlasnocaBar, ScrollBarFollow, GlasnocaBarFollow, GlobalnaPozadina;
 	int pocetnaKoordinataXTipke;
 
 	
 public:
 
 	std::vector<Tipka> Tipke;		//vektor koja cuva sve tipke
-	void SetKontrole(sf::VideoMode &videoMode, sf::Font &font, sf::Color PirmarnaBoja, sf::Color SekundrnaBoja, sf::Color AkcenatBoja);
+	void SetKontrole(sf::VideoMode &videoMode, sf::Font &font, sf::Font& fontEmoji, sf::Color PirmarnaBoja, sf::Color SekundrnaBoja, sf::Color AkcenatBoja);
 
 	
 	void InicijalizacijaScroll();
@@ -33,7 +33,8 @@ public:
 	void UpdatePozicijaSimbola(float index);
 	void UpdatePozicijaSimbolaGlasnoca(float index, sf::RenderWindow& window);
 	void RenderVrijeme(sf::RenderWindow& window, float sekunde, float trajanje, sf::Color PrimarnaBoja);
-	void PromijeniKarakter(std::string text);
+	void PromijeniKarakter(std::string text, std::wstring promjena);
+	void RenderPozadina(sf::RenderWindow &window);
 
 	void RenderScroll(sf::RenderWindow &window);
 	void RenderGlasnoca(sf::RenderWindow& window);

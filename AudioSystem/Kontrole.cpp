@@ -2,28 +2,58 @@
 
 void Kontrole::InicijalizacijaTipki()
 {
+	this->GlobalnaPozadina.setFillColor(sf::Color(30, 30, 30));
+	this->GlobalnaPozadina.setPosition(0, 1000 - 110);
+	this->GlobalnaPozadina.setSize(sf::Vector2f(1920, 200));
 	
-	Tipka TipkaPoslije, TipkaPrije, TipkaPustiPauziraj, TipkaLoop, TipkaMute, TipkaSkipNaprijed, TipkaSkipPrije;
+	Tipka TipkaPoslije, TipkaPrije, TipkaPustiPauziraj, TipkaLoop, TipkaMute, TipkaSkipNaprijed, TipkaSkipPrije, TipkaLike, TipkaShuffle;
 	sf::Vector2f velicinaTipke = sf::Vector2f(this->visinaTipke, this->visinaTipke);
 
-	this->pocetnaKoordinataXTipke = (this->videoMode.width / 2) - (this->sirinaTipke * 8 / 2);
+	this->pocetnaKoordinataXTipke = (this->videoMode.width / 2) - (this->sirinaTipke * 4 / 2);
 	//formula koja racuna horizontalni centar prozora, sirina * 4 je 4 jer imaju 4 tipke
 
 	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke;
 	//racuna donju granicu prozora
 
-	TipkaPrije.SetTipka(
-		"Prije",
-		L"◁◁",
+
+
+	TipkaLike.SetTipka(
+		"Like",
+		L"\uE006\uE00B",
 		velicinaTipke,
 		24,
 		sf::Color::White,
 		PrimarnaBoja,
-		this->font,
-		sf::Vector2f(this->pocetnaKoordinataXTipke, pocetnaKoordinataY),
-		{ 8, 14 }
+		this->fontEmoji,
+		sf::Vector2f(0, pocetnaKoordinataY),
+		{ 18, 18 }
 	);
 
+	TipkaShuffle.SetTipka(
+		"Shuffle",
+		L"\uE8B1",
+		velicinaTipke,
+		24,
+		sf::Color::White,
+		PrimarnaBoja,
+		this->fontEmoji,
+		sf::Vector2f(this->pocetnaKoordinataXTipke - this->sirinaTipke, pocetnaKoordinataY),
+		{ 18, 18 }
+	);
+
+	TipkaPrije.SetTipka(
+		"Prije",
+		L"\uE892",
+		velicinaTipke,
+		24,
+		sf::Color::White,
+		PrimarnaBoja,
+		this->fontEmoji,
+		sf::Vector2f(this->pocetnaKoordinataXTipke, pocetnaKoordinataY),
+		{ 18, 18 }
+	);
+
+	/*
 	TipkaSkipPrije.SetTipka(
 		"SkipPrije",
 		L"⬅",
@@ -31,23 +61,25 @@ void Kontrole::InicijalizacijaTipki()
 		24,
 		sf::Color::White,
 		PrimarnaBoja,
-		this->font,
+		this->fontEmoji,
 		sf::Vector2f(this->pocetnaKoordinataXTipke + this->sirinaTipke, pocetnaKoordinataY),
 		{ 20, 14 }
 	);
+	*/
 
 	TipkaPustiPauziraj.SetTipka(
 		"PustiPauziraj",
-		L"▶",
+		L"\uE768",
 		velicinaTipke,
-		24,
+		26,
 		sf::Color::White,
 		PrimarnaBoja,
-		this->font,
-		sf::Vector2f(this->pocetnaKoordinataXTipke + this->sirinaTipke * 2, pocetnaKoordinataY),
-		{ 20, 14 }
+		this->fontEmoji,
+		sf::Vector2f(this->pocetnaKoordinataXTipke + this->sirinaTipke * 1, pocetnaKoordinataY),
+		{ 17, 17 }
 	);
 
+	/*
 	TipkaSkipNaprijed.SetTipka(
 		"SkipNaprijed",
 		L"➡",
@@ -55,45 +87,46 @@ void Kontrole::InicijalizacijaTipki()
 		24,
 		sf::Color::White,
 		PrimarnaBoja,
-		this->font,
+		this->fontEmoji,
 		sf::Vector2f(this->pocetnaKoordinataXTipke + this->sirinaTipke*3, pocetnaKoordinataY),
 		{ 20, 14 }
 	);
+	*/
 
 	TipkaPoslije.SetTipka(
 		"Poslije",
-		L"▷▷",
+		L"\uE893",
 		velicinaTipke,
 		24,
 		sf::Color::White,
 		this->PrimarnaBoja,
-		this->font,
-		sf::Vector2f(this->pocetnaKoordinataXTipke + 4 * this->sirinaTipke, pocetnaKoordinataY),
-		{ 8, 14 }
+		this->fontEmoji,
+		sf::Vector2f(this->pocetnaKoordinataXTipke + 2 * this->sirinaTipke, pocetnaKoordinataY),
+		{ 18, 18 }
 	);
 
 	TipkaLoop.SetTipka(
 		"Loop",
-		L"⟳",
+		L"\uE8EE",
 		velicinaTipke,
-		34,
+		24,
 		sf::Color::White,
 		PrimarnaBoja,
-		this->font,
-		sf::Vector2f(this->pocetnaKoordinataXTipke + 5 * this->sirinaTipke, pocetnaKoordinataY),
-		{ 14, 6 }
+		this->fontEmoji,
+		sf::Vector2f(this->pocetnaKoordinataXTipke + 3 * this->sirinaTipke, pocetnaKoordinataY),
+		{ 18, 18 }
 	);
 
 	TipkaMute.SetTipka(
 		"Mute",
-		L"🔊",
+		L"\uE767",
 		velicinaTipke,
-		28,
+		24,
 		sf::Color::White,
 		PrimarnaBoja,
-		this->font,
-		sf::Vector2f(this->pocetnaKoordinataXTipke + 6* this->sirinaTipke, pocetnaKoordinataY),
-		{ 20, 14 }
+		this->fontEmoji,
+		sf::Vector2f(this->videoMode.width - 200 - 120, pocetnaKoordinataY),
+		{ 18, 18 }
 	);
 
 	this->Tipke.push_back(TipkaPoslije);
@@ -103,15 +136,16 @@ void Kontrole::InicijalizacijaTipki()
 	this->Tipke.push_back(TipkaMute);
 	this->Tipke.push_back(TipkaSkipNaprijed);
 	this->Tipke.push_back(TipkaSkipPrije);
-	
+	this->Tipke.push_back(TipkaLike);
+	this->Tipke.push_back(TipkaShuffle);
 }
 
 void Kontrole::InicijalizacijaScroll()
 {
-	this->sirinaScroll = this->videoMode.width - 500 - 150;
+	this->sirinaScroll = this->videoMode.width - 150 - 40;
 	int scrollBarInnerVisina = 2;
 	int scrollBarInnerSirina = this->sirinaScroll;
-	int pocetnaKoordinataX = 500;
+	int pocetnaKoordinataX = 20;
 	//formula koja racuna horizontalni centar prozora, sirina * 4 je 4 jer imaju 4 tipke
 
 	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke - this->visinaScroll;
@@ -147,16 +181,16 @@ void Kontrole::InicijalizacijaGlasnoca()
 
 	this->GlasnocaPozadina.setSize(sf::Vector2f(this->sirinaGlasnoca, this->visinaGlasnoca));
 	this->GlasnocaPozadina.setFillColor(sf::Color(30, 30, 30));
-	this->GlasnocaPozadina.setPosition(sf::Vector2f((this->pocetnaKoordinataXTipke + this->Tipke.size() * this->sirinaTipke), pocetnaKoordinataY));
+	this->GlasnocaPozadina.setPosition(sf::Vector2f(this->videoMode.width - this->sirinaGlasnoca - this->sirinaTipke, pocetnaKoordinataY));
 
 	this->GlasnocaBar.setSize(sf::Vector2f(glasnocaBarInnerSirina, glasnocaBarInnerVisina));
 	this->GlasnocaBar.setFillColor(sf::Color::Black);
-	this->GlasnocaBar.setPosition(sf::Vector2f((this->pocetnaKoordinataXTipke + this->Tipke.size() * this->sirinaTipke),
+	this->GlasnocaBar.setPosition(sf::Vector2f(this->videoMode.width - this->sirinaGlasnoca - this->sirinaTipke,
 		pocetnaKoordinataY + this->visinaGlasnoca / 2 - glasnocaBarInnerVisina / 2));
 
 	this->GlasnocaBarFollow.setSize(sf::Vector2f(glasnocaBarInnerSirina, glasnocaBarInnerVisina));
 	this->GlasnocaBarFollow.setFillColor(sf::Color::White);
-	this->GlasnocaBarFollow.setPosition(sf::Vector2f((this->pocetnaKoordinataXTipke + this->Tipke.size() * this->sirinaTipke),
+	this->GlasnocaBarFollow.setPosition(sf::Vector2f(this->videoMode.width - this->sirinaGlasnoca - this->sirinaTipke,
 		pocetnaKoordinataY + this->visinaGlasnoca / 2 - glasnocaBarInnerVisina / 2));
 
 	this->GlasnocaSimbol.setFont(this->font);
@@ -165,13 +199,13 @@ void Kontrole::InicijalizacijaGlasnoca()
 
 	this->GlasnocaProcenatPozadina.setSize(sf::Vector2f(this->sirinaTipke, this->visinaTipke));
 	this->GlasnocaProcenatPozadina.setFillColor(sf::Color(30, 30, 30));
-	this->GlasnocaProcenatPozadina.setPosition((this->pocetnaKoordinataXTipke + this->Tipke.size() * this->sirinaTipke) + this->sirinaGlasnoca, pocetnaKoordinataY);
+	this->GlasnocaProcenatPozadina.setPosition(this->videoMode.width - this->sirinaTipke, pocetnaKoordinataY);
 
 	this->GlasnocaProcenat.setFont(this->font);
 	this->GlasnocaProcenat.setString("100%");
 	this->GlasnocaProcenat.setCharacterSize(16);
 	this->GlasnocaProcenat.setFillColor(sf::Color::White);
-	this->GlasnocaProcenat.setPosition((this->pocetnaKoordinataXTipke + this->Tipke.size() * this->sirinaTipke) + this->sirinaGlasnoca + 10, pocetnaKoordinataY + 18);
+	this->GlasnocaProcenat.setPosition(this->videoMode.width - this->sirinaTipke + 8, pocetnaKoordinataY + 18);
 
 }
 
@@ -179,13 +213,14 @@ float Kontrole::UpdatePozicijaSimbolaWindow(sf::RenderWindow &window)
 {
 	int scrollBarInnerVisina = 4;
 	int scrollBarInnerSirina = this->sirinaScroll - 50;
-	float pocetnaKoordinataX = 500;
+	float pocetnaKoordinataX = 20;
 	//formula koja racuna horizontalni centar prozora, sirina * 4 je 4 jer imaju 4 tipke
 
 	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke - this->visinaScroll;
 	
 	if (this->Hover(window, this->ScrollPozadina))
 	{
+		std::cout << ((sf::Mouse::getPosition(window).x - pocetnaKoordinataX) / this->sirinaScroll) << "\n";
 		return ((sf::Mouse::getPosition(window).x - pocetnaKoordinataX) / this->sirinaScroll);
 	}
 	
@@ -193,16 +228,15 @@ float Kontrole::UpdatePozicijaSimbolaWindow(sf::RenderWindow &window)
 
 float Kontrole::UpdatePozicijaSimbolaWindowGlasnoca(sf::RenderWindow& window)
 {
-	float pocetnaKoordinataX = this->videoMode.width / 2 - this->sirinaGlasnoca / 2 + this->sirinaTipke * 8 / 2;
+	float pocetnaKoordinataX = this->videoMode.width - this->sirinaGlasnoca - this->sirinaTipke;
 	//std::cout << "nice\n";
 	int glasnocaBarInnerVisina = 2;
 	float pocetnaKoordinataYGlasnoca = this->videoMode.height - this->visinaTipke + this->visinaTipke/4;
 	if (this->Hover(window, this->GlasnocaPozadina))
 	{
 
-		//this->GlasnocaSimbol.setPosition(sf::Vector2f(-10 + sf::Mouse::getPosition(window).x, pocetnaKoordinataYGlasnoca + 5));
-		std::cout << ((sf::Mouse::getPosition(window).x - static_cast<float>(this->pocetnaKoordinataXTipke + this->Tipke.size() * this->sirinaTipke)) / this->sirinaGlasnoca) << "\n";
-		return ((sf::Mouse::getPosition(window).x - static_cast<float>(this->pocetnaKoordinataXTipke + this->Tipke.size() * this->sirinaTipke)) / this->sirinaGlasnoca);
+		std::cout << sf::Mouse::getPosition(window).x - (pocetnaKoordinataX) / this->sirinaGlasnoca << "\n";
+		return (sf::Mouse::getPosition(window).x - (pocetnaKoordinataX)) / this->sirinaGlasnoca;
 	}
 }
 
@@ -211,12 +245,12 @@ void Kontrole::UpdatePozicijaSimbola(float index)
 {
 	int scrollBarInnerVisina = 4;
 	int scrollBarInnerSirina = 1000;
-	int pocetnaKoordinataX = 500;
+	int pocetnaKoordinataX = 20;
 
 	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke - this->visinaScroll;
 
 
-	this->ScrollSimbol.setPosition(sf::Vector2f(-6 + index*(this->sirinaScroll) + pocetnaKoordinataX, pocetnaKoordinataY + 15));
+	this->ScrollSimbol.setPosition(sf::Vector2f(static_cast<float>(- 6 + index * (this->sirinaScroll) + pocetnaKoordinataX), pocetnaKoordinataY + 15));
 	this->ScrollBarFollow.setSize(sf::Vector2f(index * (this->sirinaScroll), 2));
 }
 
@@ -224,6 +258,7 @@ void Kontrole::UpdatePozicijaSimbola(float index)
 void Kontrole::UpdatePozicijaSimbolaGlasnoca(float index, sf::RenderWindow &window)
 //uvijek takodjer update-uje simbol unutar bara za glasnocu po procentu koji mu je uvijek poslan
 {
+	float pocetnaKoordinataX = this->videoMode.width - this->sirinaGlasnoca - this->sirinaTipke;
 	int glasnocaBarInnerVisina = 2;
 	int glasnocaBarInnerSirina = this->sirinaGlasnoca;
 
@@ -231,7 +266,7 @@ void Kontrole::UpdatePozicijaSimbolaGlasnoca(float index, sf::RenderWindow &wind
 
 	if (index < 0 || index > 1)
 		return;
-	this->GlasnocaSimbol.setPosition(sf::Vector2f(-6 + index * (this->sirinaGlasnoca) + (this->pocetnaKoordinataXTipke + this->Tipke.size() * this->sirinaTipke), pocetnaKoordinataY + 5 + this->visinaGlasnoca / 4));
+	this->GlasnocaSimbol.setPosition(sf::Vector2f(-6 + index * (this->sirinaGlasnoca) + pocetnaKoordinataX, pocetnaKoordinataY + 5 + this->visinaGlasnoca / 4));
 	this->GlasnocaBarFollow.setSize(sf::Vector2f(index * (this->sirinaGlasnoca), 2));
 	this->GlasnocaProcenat.setString(std::to_string(static_cast<int>(index * 100) ) + "%");
 	//this->GlasnocaProcenat.
@@ -240,6 +275,7 @@ void Kontrole::UpdatePozicijaSimbolaGlasnoca(float index, sf::RenderWindow &wind
 
 void Kontrole::RenderScroll(sf::RenderWindow &window)
 {
+	
 	window.draw(this->ScrollPozadina);
 	window.draw(this->ScrollBar);
 	window.draw(this->ScrollBarFollow);
@@ -249,21 +285,28 @@ void Kontrole::RenderScroll(sf::RenderWindow &window)
 
 void Kontrole::RenderGlasnoca(sf::RenderWindow& window)
 {
+	
 	window.draw(this->GlasnocaPozadina);
 	window.draw(this->GlasnocaBar);
 	window.draw(this->GlasnocaBarFollow);
 	window.draw(this->GlasnocaProcenatPozadina);
 	window.draw(this->GlasnocaProcenat);
 	window.draw(this->GlasnocaSimbol);
+	
 }
 
-void Kontrole::SetKontrole(sf::VideoMode &videoMode, sf::Font &font, sf::Color PirmarnaBoja, sf::Color SekundrnaBoja, sf::Color AkcenatBoja)
+void Kontrole::SetKontrole(sf::VideoMode &videoMode, sf::Font &font, sf::Font &fontEmoji, sf::Color PirmarnaBoja, sf::Color SekundrnaBoja, sf::Color AkcenatBoja)
 {
+	
+
 	this->videoMode = videoMode;
 	this->font = font;
+	this->fontEmoji = fontEmoji;
 	this->PrimarnaBoja = PrimarnaBoja;
 	this->SekundarnaBoja = SekundrnaBoja;
 	this->AkcenatBoja = AkcenatBoja;
+
+	
 
 	this->InicijalizacijaTipki();
 	this->InicijalizacijaScroll();
@@ -272,7 +315,7 @@ void Kontrole::SetKontrole(sf::VideoMode &videoMode, sf::Font &font, sf::Color P
 
 void Kontrole::RenderVrijeme(sf::RenderWindow& window, float sekunde, float trajanje, sf::Color PrimarnaBoja)
 {
-	int pocetnaKoordinataX = 500;
+	int pocetnaKoordinataX = 20;
 	//formula koja racuna horizontalni centar prozora, sirina * 4 je 4 jer imaju 4 tipke
 
 	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke - this->visinaScroll;
@@ -295,11 +338,16 @@ void Kontrole::RenderVrijeme(sf::RenderWindow& window, float sekunde, float traj
 	window.draw(text);
 }
 
-void Kontrole::PromijeniKarakter(std::string text)
+void Kontrole::PromijeniKarakter(std::string text, std::wstring promjena)
 {
 	for (Tipka &tipka : Tipke)
 	{
 		if (tipka.GetID() == text)
-			tipka.PromijeniKarakter();
+			tipka.PromijeniKarakter(promjena);
 	}	
+}
+
+void Kontrole::RenderPozadina(sf::RenderWindow &window)
+{
+	window.draw(this->GlobalnaPozadina);
 }
