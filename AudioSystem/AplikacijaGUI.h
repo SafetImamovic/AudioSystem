@@ -26,7 +26,7 @@ private:
     //cak i van prozora ako je tako definisano
 	sf::VideoMode videoMode; //zadaje rezoluciju prozoru
 	sf::Vector2i mousePozProzor; //cuva poziciju misa relativnu prozoru (koordinate)
-	sf::Font font;
+	sf::Font font, fontEmoji;
 	std::vector<TextBox> TextBoxovi; //vektor koji sadrzava sve textbox elemente
 	Tipka PromijeniRezolucijuToggleTEST;
 	sf::Color PrimarnaBoja, SekundarnaBoja, AkcenatBoja;
@@ -62,10 +62,13 @@ private:
 	void Mute();
 	void InfoPjesmaKonfiguracija();
 	void UpdateInfoPjesma();
-	
+	void UpdateStanjeTipke();
+	void UpdateOtipkano();
+	void LCtrlObrisi();
+	void Scroll();
 
 public:
-	AplikacijaGUI(sf::Font& font, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja);
+	AplikacijaGUI(sf::Font& font, sf::Font& fontEmoji, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja);
 	~AplikacijaGUI();
 
 	void UpdateRect();
