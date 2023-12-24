@@ -13,7 +13,7 @@ AudioPlayer::AudioPlayer()
     this->glasnocaJedan = 0xFFFF;
     this->glasnocaDva = 0xFFFF;
     this->glasnoca = MAKELONG(this->glasnocaJedan, this->glasnocaDva);
-    this->soundFilePath = "Dua Lipa - New Rules.wav";
+    this->soundFilePath = "Skrillex, Bibi Bourelly, & Sonny Moore - Don't Get Too Close (Virtual Riot Remix).wav";
     this->trenutniIndeksPjesme = 0;
     this->seconds = 1;
     this->isPlaying = false;
@@ -419,9 +419,9 @@ void AudioPlayer::Pojacaj(float velicina) {
     WORD leftVolume = LOWORD(currentVolume);
     WORD rightVolume = HIWORD(currentVolume);
 
-    if (leftVolume < 0xFFFF - 4000 && rightVolume < 0xFFFF - 4000) {
-        leftVolume += 4000;
-        rightVolume += 4000;
+    if (leftVolume < 0xFFFF - 0xFFFF / 20 && rightVolume < 0xFFFF - 0xFFFF / 20) {
+        leftVolume += 0xFFFF / 20;
+        rightVolume += 0xFFFF / 20;
     }
     else
     {
@@ -443,9 +443,9 @@ void AudioPlayer::Smanji() {
     WORD leftVolume = LOWORD(currentVolume);
     WORD rightVolume = HIWORD(currentVolume);
 
-    if (leftVolume > 4000 && rightVolume > 4000) {
-        leftVolume -= 4000;
-        rightVolume -= 4000;
+    if (leftVolume > 0xFFFF / 20 && rightVolume > 0xFFFF / 20) {
+        leftVolume -= 0xFFFF / 20;
+        rightVolume -= 0xFFFF / 20;
     }
     else
     {

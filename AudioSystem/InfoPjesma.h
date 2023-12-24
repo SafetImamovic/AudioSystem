@@ -4,6 +4,8 @@
 class InfoPjesma : public ElementarneKomponente
 {
 private:
+	
+public:
 	static sf::RectangleShape pozadinaLista;
 	static sf::RectangleShape pozadinaPjesma;
 	static sf::Vector2f pozicijaLista;
@@ -15,12 +17,24 @@ private:
 	static int visinaWindow;
 	static std::string NaslovPjesme;
 	static sf::Text textNaslov;
+	static std::string PjesniciPjesme;
+	static sf::Text textPjesnici;
 	static sf::Font font;
-public:
+	static int PaddingVertical;
+	static int PaddingHorizontal;
+	static sf::RectangleShape CoverUpMain;
+	static sf::RectangleShape CoverUpMainTwo;
+	static sf::RectangleShape CoverUpSecondary;
+	static sf::Texture Cover;
+	static sf::Sprite CoverRender;
+	static float rateNaslov;
+	static float ratePjesnici;
+
 	InfoPjesma() = default;
-	static void SetPjesma(std::string naslov, sf::Font &font);
+	static void SetPjesma(std::string naslov, std::string pjesnici, sf::Font &font);
 	static void RenderPjesma(sf::RenderWindow& window);
 	static void SetList();
 	static void RenderList(sf::RenderWindow& window);
+	static void Update();
 };
 

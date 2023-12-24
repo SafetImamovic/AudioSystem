@@ -9,13 +9,16 @@
 class Kontrole : public ElementarneKomponente
 {
 private:
-	int visinaTipke = 100, sirinaTipke = 100, sirinaScroll = 600, visinaScroll = 50, visinaGlasnoca = 100, sirinaGlasnoca = 200;
+	int visinaTipke = 60, sirinaTipke = 60, sirinaScroll = 950, visinaScroll = 50, visinaGlasnoca = 60, sirinaGlasnoca = 200;
 	sf::VideoMode videoMode;
 	sf::Font font;
 	sf::Color PrimarnaBoja, SekundarnaBoja, AkcenatBoja;
-	sf::RectangleShape ScrollPozadina, GlasnocaPozadina;
-	sf::Text ScrollSimbol, GlasnocaSimbol;
+	sf::RectangleShape ScrollPozadina, GlasnocaPozadina, GlasnocaProcenatPozadina;
+	sf::Text ScrollSimbol, GlasnocaSimbol, GlasnocaProcenat;
 	sf::RectangleShape ScrollBar, GlasnocaBar;
+	int pocetnaKoordinataXTipke;
+
+	
 public:
 
 	std::vector<Tipka> Tipke;		//vektor koja cuva sve tipke
@@ -30,6 +33,7 @@ public:
 	void UpdatePozicijaSimbola(float index);
 	void UpdatePozicijaSimbolaGlasnoca(float index, sf::RenderWindow& window);
 	void RenderVrijeme(sf::RenderWindow& window, float sekunde, float trajanje, sf::Color PrimarnaBoja);
+	void PromijeniKarakter(std::string text);
 
 	void RenderScroll(sf::RenderWindow &window);
 	void RenderGlasnoca(sf::RenderWindow& window);
