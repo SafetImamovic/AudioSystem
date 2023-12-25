@@ -9,11 +9,10 @@ WAVEFORMATEX waveformat;
 // Konstruktor klase AudioPlayer
 AudioPlayer::AudioPlayer()
 {
-    // Postavljanje inicijalnih vrijednosti èlanova klase
+    // Postavljanje inicijalnih vrijednosti clanova klase
     this->glasnocaJedan = 0xFFFF;
     this->glasnocaDva = 0xFFFF;
     this->glasnoca = MAKELONG(this->glasnocaJedan, this->glasnocaDva);
-    //this->soundFilePath = "Skrillex, Bibi Bourelly, & Sonny Moore - Don't Get Too Close (Virtual Riot Remix).wav";
     this->trenutniIndeksPjesme = 0;
     this->seconds = 1;
     this->isPlaying = false;
@@ -29,6 +28,7 @@ AudioPlayer::AudioPlayer()
     this->currentTime = sf::Time::Zero;
     this->shouldStop = false;
     this->tempSekunde = 200;
+    this->currentTimeInSeconds = 0.0;
 
   // timeTrackingThread = std::thread(&AudioPlayer::Vrijeme, this);
 
@@ -39,7 +39,7 @@ AudioPlayer::AudioPlayer()
     this->waveFormat.nBlockAlign = (waveFormat.nChannels * waveFormat.wBitsPerSample) / 8;
     this->waveFormat.nAvgBytesPerSec = waveFormat.nSamplesPerSec * waveFormat.nBlockAlign;
     this->waveFormat.cbSize = 0;
-
+    this->currentSamplePosition = 0;
 }
 
 // Glavna metoda za upravljanje audio playerom
@@ -179,6 +179,7 @@ void AudioPlayer::Izbornik(int izbor) {
         break;
     case 12:
         music.setPitch(1);
+        break;
     case 13:
         std::cout << "Hvala na koristenju!\n";
         break;
@@ -201,6 +202,7 @@ void AudioPlayer::unesiIme(std::string fileName) {
    
     this->isPlaying = false;
     this->pauseTime = sf::Time::Zero;
+    music.setPitch(1.0);
 }
 
 // Metoda za reprodukciju/pauziranje pjesme
@@ -238,8 +240,7 @@ void AudioPlayer::pustiPauza() {
         this->pauseTime = this->tempVrijeme;
         // Pokretanje thread-a za pracenje vremena reprodukcije
         std::thread(&AudioPlayer::Vrijeme, this).detach();
-        this->tempSekunde = 0;
-        
+        this->tempSekunde = 0;       
     }
 }
 
@@ -362,6 +363,7 @@ void AudioPlayer::novaPjesma() {
         this->isPlaying = false;
         this->isPlaybackComplete = true;
         //this->soundFilePath = songList[0];
+
     }
 }
 
@@ -405,10 +407,12 @@ void AudioPlayer::staraPjesma() {
         }
     }
     else {
+
         std::cout << "Kraj liste, stavljanje na pocetak." << std::endl;
         this->isPlaying = false;
         this->isPlaybackComplete = true;
         //this->soundFilePath = songList[0];
+
     }
 }
 
