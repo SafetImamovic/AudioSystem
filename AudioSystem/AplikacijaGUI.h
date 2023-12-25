@@ -26,7 +26,7 @@ private:
     //cak i van prozora ako je tako definisano
 	sf::VideoMode videoMode; //zadaje rezoluciju prozoru
 	sf::Vector2i mousePozProzor; //cuva poziciju misa relativnu prozoru (koordinate)
-	sf::Font font;
+	sf::Font font, fontEmoji;
 	std::vector<TextBox> TextBoxovi; //vektor koji sadrzava sve textbox elemente
 	Tipka PromijeniRezolucijuToggleTEST;
 	sf::Color PrimarnaBoja, SekundarnaBoja, AkcenatBoja;
@@ -34,6 +34,7 @@ private:
 	Kontrole kontrole;
 	AudioPlayer player;
 	InfoPjesma infoPjesma;
+	std::vector<std::string> NizPjesmi;
 	//elementi aplikacije
 	//tok definiranja, logike i iscrtavanja elemenata na prozor je sljedeci:
 	//1. deklaracija elementa ovdje
@@ -60,10 +61,16 @@ private:
 	void UpdateGlasnocaBar();
 	void PromijeniRezoluciju(int height, int width);
 	void Mute();
-	
+	void InfoPjesmaKonfiguracija();
+	void UpdateInfoPjesma();
+	void UpdateStanjeTipke();
+	void UpdateOtipkano();
+	void LCtrlObrisi();
+	void Scroll();
+	void PostaviNizPjesmi();
 
 public:
-	AplikacijaGUI(sf::Font& font, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja);
+	AplikacijaGUI(sf::Font& font, sf::Font& fontEmoji, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja);
 	~AplikacijaGUI();
 
 	void UpdateRect();

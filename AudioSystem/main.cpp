@@ -8,10 +8,11 @@ int main()
     sf::Color SekundarnaBoja = sf::Color(60, 60, 60);
     sf::Color AkcenatBoja = sf::Color::Red;
 
-    sf::Font font;
+    sf::Font font, fontEmoji;
     font.loadFromFile("seguisym.ttf");
+    fontEmoji.loadFromFile("Segoe MDL2 Assets.ttf");
 
-    AplikacijaGUI AudioSystemGUI(font, PrimarnaBoja, SekundarnaBoja, AkcenatBoja);
+    AplikacijaGUI AudioSystemGUI(font, fontEmoji, PrimarnaBoja, SekundarnaBoja, AkcenatBoja);
 
     while (AudioSystemGUI.getWindowIsOpen()) //petlja u kojoj se odvijaju akcije aplikacije dok je prozor otvoren
     {
