@@ -58,7 +58,7 @@ public:
 
     ~AudioPlayer();
 
-    void setNiz();
+    void setNiz(std::vector<std::string> pjesme);
 
     void Pokreni();
 
@@ -72,7 +72,7 @@ public:
 
     void Izbornik(int izbor);
 
-    void unesiIme();
+    void unesiIme(std::string fileName);
 
     void pustiPauza();
 
@@ -110,4 +110,5 @@ public:
     size_t GetMiliSekunde();
     float GetGlasnoca();
     void Mute();
+    void PustiPjesmuPutanja(std::string putanja);
 };
