@@ -70,6 +70,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -125,6 +128,8 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,6 +144,8 @@
     <ClCompile Include="AplikacijaGUI.cpp" />
     <ClCompile Include="ElementarneKomponente.cpp" />
     <ClCompile Include="GlobalneFunkcije.cpp" />
+    <ClCompile Include="InfoPjesma.cpp" />
+	<ClCompile Include="Pjesma.cpp" />
     <ClCompile Include="Kontrole.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="muzikaTest.cpp" />
@@ -148,6 +155,8 @@
   <ItemGroup>
     <ClInclude Include="ElementarneKomponente.h" />
     <ClInclude Include="GlobalneFunkcije.h" />
+    <ClInclude Include="InfoPjesma.h" />
+	<ClInclude Include="Pjesma.h" />
     <ClInclude Include="Kontrole.h" />
     <ClInclude Include="AplikacijaGUI.h" />
     <ClInclude Include="muzikaTest.h" />

@@ -8,9 +8,11 @@
 #include "TextBox.h"
 #include "Tipka.h"
 #include "Kontrole.h"
+#include "InfoPjesma.h"
 #include <string>
 #include <vector>
 #include <memory>
+
 
 /*
 	Klasa koja je odgovorna za GUI
@@ -24,14 +26,15 @@ private:
     //cak i van prozora ako je tako definisano
 	sf::VideoMode videoMode; //zadaje rezoluciju prozoru
 	sf::Vector2i mousePozProzor; //cuva poziciju misa relativnu prozoru (koordinate)
-	sf::Font font;
+	sf::Font font, fontEmoji;
 	std::vector<TextBox> TextBoxovi; //vektor koji sadrzava sve textbox elemente
 	Tipka PromijeniRezolucijuToggleTEST;
 	sf::Color PrimarnaBoja, SekundarnaBoja, AkcenatBoja;
-
+	float TempGlasnoca;
 	Kontrole kontrole;
 	AudioPlayer player;
-
+	InfoPjesma infoPjesma;
+	std::vector<std::string> NizPjesmi;
 	//elementi aplikacije
 	//tok definiranja, logike i iscrtavanja elemenata na prozor je sljedeci:
 	//1. deklaracija elementa ovdje
@@ -57,10 +60,18 @@ private:
 	void UpdateScrollBar();
 	void UpdateGlasnocaBar();
 	void PromijeniRezoluciju(int height, int width);
-	
+	void Mute();
+	void InfoPjesmaKonfiguracija();
+	void UpdateInfoPjesma();
+	void UpdateStanjeTipke();
+	void UpdateOtipkano();
+	void LCtrlObrisi();
+	void Scroll();
+	void PostaviNizPjesmi();
+	void UpdateImePjesme();
 
 public:
-	AplikacijaGUI(sf::Font& font, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja);
+	AplikacijaGUI(sf::Font& font, sf::Font& fontEmoji, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja);
 	~AplikacijaGUI();
 
 	void UpdateRect();

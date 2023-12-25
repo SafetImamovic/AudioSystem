@@ -1,4 +1,4 @@
-#include "Tipka.h"
+﻿#include "Tipka.h"
 
 void Tipka::SetTipka(std::string ID, std::wstring text, sf::Vector2f velicina, int karakterVelicina, sf::Color bojaText, sf::Color bojaPozadine, sf::Font& font, sf::Vector2f pozicija, sf::Vector2f textPozicija)
 {
@@ -11,7 +11,8 @@ void Tipka::SetTipka(std::string ID, std::wstring text, sf::Vector2f velicina, i
 	this->tipka.setSize(velicina);
 	this->tipka.setFillColor(bojaPozadine);
 	this->SetTextPozicija(textPozicija);
-	
+	this->text.setOutlineColor(sf::Color::White);
+	this->text.setOutlineThickness(0.3);
 }
 
 void Tipka::PromijeniBojuPozadine(sf::Color boja)
@@ -47,5 +48,22 @@ void Tipka::SetTextUTF16(std::wstring text)
 void Tipka::SetTextPozicija(sf::Vector2f pozicija)
 {
 	this->text.move(pozicija);
+}
+
+std::wstring Tipka::GetTextUTF16()
+{
+	return this->text.getString();
+}
+
+sf::Text& Tipka::GetText()
+{
+	return this->text;
+}
+
+void Tipka::PromijeniKarakter(std::wstring promjena)
+{
+	this->text.setString(promjena);
+
+	//std::cout << (std::string)this->text.getString();
 }
 
