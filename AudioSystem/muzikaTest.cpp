@@ -13,7 +13,7 @@ AudioPlayer::AudioPlayer()
     this->glasnocaJedan = 0xFFFF;
     this->glasnocaDva = 0xFFFF;
     this->glasnoca = MAKELONG(this->glasnocaJedan, this->glasnocaDva);
-    this->soundFilePath = "Virtual Riot - Back In Time ft. Angelika.wav";
+    this->soundFilePath = "Zomboy & MUST DIE! - Last One Standing.wav";
     this->trenutniIndeksPjesme = 0;
     this->seconds = 1;
     this->isPlaying = false;
@@ -56,7 +56,7 @@ void AudioPlayer::Pokreni() {
             std::cin >> izbor;
         }
         Izbornik(izbor);
-
+        
     } while (izbor != 13);
 }
 
