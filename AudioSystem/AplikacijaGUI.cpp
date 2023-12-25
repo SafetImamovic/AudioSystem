@@ -244,8 +244,8 @@ void AplikacijaGUI::Mute()
 
 void AplikacijaGUI::InfoPjesmaKonfiguracija()
 {
-	InfoPjesma::SetPjesma("Don't Get Too Close (Virtual Riot Remix)", "Skrillex, Bibi Bourelly, Sonny Moore, Virtual Riot", this->font, this->fontEmoji);
-	InfoPjesma::Cover.loadFromFile("Covers/1.jpg");
+	InfoPjesma::SetPjesma("Last One Standing", "Zomboy & MUST DIE!", this->font, this->fontEmoji);
+	InfoPjesma::Cover.loadFromFile("Covers/Dead Man Walking.jpg");
 	InfoPjesma::CoverRender.setTexture(InfoPjesma::Cover);
 	std::vector<std::string> pjesmeZaSad;
 
