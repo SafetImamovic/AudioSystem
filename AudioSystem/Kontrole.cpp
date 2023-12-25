@@ -220,7 +220,7 @@ float Kontrole::UpdatePozicijaSimbolaWindow(sf::RenderWindow &window)
 	
 	if (this->Hover(window, this->ScrollPozadina))
 	{
-		std::cout << ((sf::Mouse::getPosition(window).x - pocetnaKoordinataX) / this->sirinaScroll) << "\n";
+		//std::cout << ((sf::Mouse::getPosition(window).x - pocetnaKoordinataX) / this->sirinaScroll) << "\n";
 		return ((sf::Mouse::getPosition(window).x - pocetnaKoordinataX) / this->sirinaScroll);
 	}
 	
@@ -235,7 +235,7 @@ float Kontrole::UpdatePozicijaSimbolaWindowGlasnoca(sf::RenderWindow& window)
 	if (this->Hover(window, this->GlasnocaPozadina))
 	{
 
-		std::cout << sf::Mouse::getPosition(window).x - (pocetnaKoordinataX) / this->sirinaGlasnoca << "\n";
+		//std::cout << sf::Mouse::getPosition(window).x - (pocetnaKoordinataX) / this->sirinaGlasnoca << "\n";
 		return (sf::Mouse::getPosition(window).x - (pocetnaKoordinataX)) / this->sirinaGlasnoca;
 	}
 }

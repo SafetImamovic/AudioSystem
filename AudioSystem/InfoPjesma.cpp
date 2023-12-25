@@ -78,7 +78,7 @@ void InfoPjesma::SetPjesma(std::string naslov, std::string pjesnici, sf::Font &f
 	InfoPjesma::textPjesnici.setString(InfoPjesma::PjesniciPjesme);
 
 	InfoPjesma::textNaslov.setPosition(
-		InfoPjesma::pozicijaPjesma.x + InfoPjesma::PaddingHorizontal,
+		InfoPjesma::pozicijaPjesma.x + InfoPjesma::PaddingHorizontal + 2,
 		InfoPjesma::pozicijaPjesma.y + InfoPjesma::PaddingVertical + 500
 		);
 

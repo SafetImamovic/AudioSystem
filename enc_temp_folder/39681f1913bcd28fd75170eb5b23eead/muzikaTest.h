@@ -102,7 +102,7 @@ public:
 
     void Uspori();
 
-    //Safet dodao ovo dole
+    //Safet - dodao dva gettera
     size_t GetSekunde() const;
     float GetTrajanjePjesme() const;
     void SetGlasnoca(float velicina);
@@ -112,5 +112,5 @@ public:
     void Mute();
     void PustiPjesmuPutanja(std::string putanja);
     std::string GetImePjesmePath();
-    bool DaLiJeNovaPjesma(std::string TrenutnaPjesma);
+    bool DaLiJeNovaPjesma(std::string TrenutnaPjesma);//treba ovo implementirat
 };

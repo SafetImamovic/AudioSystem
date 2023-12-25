@@ -9,8 +9,8 @@ int main()
     sf::Color AkcenatBoja = sf::Color::Red;
 
     sf::Font font, fontEmoji;
-    font.loadFromFile("seguisym.ttf");
-    fontEmoji.loadFromFile("Segoe MDL2 Assets.ttf");
+    font.loadFromFile("Fonts/seguisym.ttf");
+    fontEmoji.loadFromFile("Fonts/Segoe MDL2 Assets.ttf");
 
     AplikacijaGUI AudioSystemGUI(font, fontEmoji, PrimarnaBoja, SekundarnaBoja, AkcenatBoja);
 

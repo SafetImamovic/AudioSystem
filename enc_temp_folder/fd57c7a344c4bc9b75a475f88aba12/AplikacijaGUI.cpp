@@ -364,7 +364,7 @@ void AplikacijaGUI::UpdateImePjesme()
 	InfoPjesma::textNaslov.setString(temp);
 	//std::cout << this->player.DaLiJeNovaPjesma(this->player.GetImePjesmePath()) << "\n";
 
-	if (this->player.DaLiJeNovaPjesma(this->player.GetImePjesmePath()))
+	if (this->player.DaLiJeNovaPjesma(this->player.GetImePjesmePath()))//TREBA PROMIJENIT tako da ima funkcija koja vraca da li je nova pjesma pustena
 	{
 		std::cout << "Called!" << std::endl;
 		InfoPjesma::textNaslov.setPosition(

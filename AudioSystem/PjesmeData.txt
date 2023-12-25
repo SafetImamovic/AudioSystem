@@ -1,5 +1,5 @@
 1
-Zomboy & MUST DIE! - Last One Standing.wav
+Pjesme/Zomboy & MUST DIE! - Last One Standing.wav
 Covers/Dead Man Walking.jpg
 Last One Standing
 Zomboy
@@ -11,7 +11,7 @@ false
 Never Say Die Records
 -
 2
-Dua Lipa - Don't Start Now.wav
+Pjesme/Dua Lipa - Don't Start Now.wav
 Covers/Dua Lipa - Don't Start Now.jpg
 Don't Start Now
 Dua Lipa
@@ -23,7 +23,7 @@ false
 Warner Records Inc.
 -
 3
-Modestep & Virtual Riot & Barely Alive - By My Side.wav
+Pjesme/Modestep & Virtual Riot & Barely Alive - By My Side.wav
 Covers/Modestep & Virtual Riot & Barely Alive - By My Side.jpg
 By My Side
 Modestep & Virtual Riot & Barely Alive
@@ -35,7 +35,7 @@ false
 Disciple Recordings
 -
 4
-Skrillex & Boys Noize - Fine Day Anthem.wav
+Pjesme/Skrillex & Boys Noize - Fine Day Anthem.wav
 Covers/Skrillex & Boys Noize - Fine Day Anthem.jpg
 Fine Day Anthem
 Skrillex & Boys Noize
@@ -47,7 +47,7 @@ false
 OWSLA
 -
 5
-Skrillex, Bibi Bourelly, & Sonny Moore - Don't Get Too Close (Virtual Riot Remix).wav
+Pjesme/Skrillex, Bibi Bourelly, & Sonny Moore - Don't Get Too Close (Virtual Riot Remix).wav
 Covers/Skrillex, Bibi Bourelly, & Sonny Moore - Don't Get Too Close (Virtual Riot Remix).jpg
 Don't Get Too Close (Virtual Riot Remix)
 Skrillex, Bibi Bourelly, & Sonny Moore & Virtual Riot
@@ -59,7 +59,7 @@ false
 OWSLA
 -
 6
-Skrillex, Starrah & Four Tet - Butterflies.wav
+Pjesme/Skrillex, Starrah & Four Tet - Butterflies.wav
 Covers/Skrillex, Starrah & Four Tet - Butterflies.jpg
 Butterflies
 Skrillex & Starrah & Four Tet

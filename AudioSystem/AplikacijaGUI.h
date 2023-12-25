@@ -68,6 +68,7 @@ private:
 	void LCtrlObrisi();
 	void Scroll();
 	void PostaviNizPjesmi();
+	void UpdateImePjesme();
 
 public:
 	AplikacijaGUI(sf::Font& font, sf::Font& fontEmoji, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja);
