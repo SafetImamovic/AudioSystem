@@ -3,8 +3,8 @@
 void Kontrole::InicijalizacijaTipki()
 {
 	this->GlobalnaPozadina.setFillColor(sf::Color(30, 30, 30));
-	this->GlobalnaPozadina.setPosition(0, 1000 - 110);
-	this->GlobalnaPozadina.setSize(sf::Vector2f(1920, 200));
+	this->GlobalnaPozadina.setPosition(0, this->videoMode.height - 110);
+	this->GlobalnaPozadina.setSize(sf::Vector2f(this->videoMode.width, 200));
 	
 	Tipka TipkaPoslije, TipkaPrije, TipkaPustiPauziraj, TipkaLoop, TipkaMute, TipkaSkipNaprijed, TipkaSkipPrije, TipkaLike, TipkaShuffle;
 	sf::Vector2f velicinaTipke = sf::Vector2f(this->visinaTipke, this->visinaTipke);
@@ -205,7 +205,7 @@ void Kontrole::InicijalizacijaGlasnoca()
 	this->GlasnocaProcenat.setString("100%");
 	this->GlasnocaProcenat.setCharacterSize(16);
 	this->GlasnocaProcenat.setFillColor(sf::Color::White);
-	this->GlasnocaProcenat.setPosition(this->videoMode.width - this->sirinaTipke + 8, pocetnaKoordinataY + 18);
+	this->GlasnocaProcenat.setPosition(this->videoMode.width - this->sirinaTipke + 13, pocetnaKoordinataY + 18);
 
 }
 
@@ -330,7 +330,7 @@ void Kontrole::RenderVrijeme(sf::RenderWindow& window, float sekunde, float traj
 	
 		TEXT = formatTime(sekunde) + " / " + formatTime(trajanje);
 	pozadina.setPosition(sf::Vector2f(pocetnaKoordinataX + this->sirinaScroll, pocetnaKoordinataY));
-	text.setPosition(sf::Vector2f(pocetnaKoordinataX + this->sirinaScroll + 2, pocetnaKoordinataY + 14));
+	text.setPosition(sf::Vector2f(pocetnaKoordinataX + this->sirinaScroll + 13, pocetnaKoordinataY + 14));
 
 
 	text.setString(TEXT);

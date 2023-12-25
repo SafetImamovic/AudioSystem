@@ -10,8 +10,9 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 
 	this->videoMode.height = 1000; //visina prozora koja se smijesta unutar this->videoMode
 	this->videoMode.width = 1920; //sirina prozora koja se smijesta unutar this->videoMode
+	
 
-	this->player.setNiz();
+	this->PostaviNizPjesmi();
 	this->player.SetGlasnoca(1);
 	this->InfoPjesmaKonfiguracija();
 }
@@ -244,8 +245,8 @@ void AplikacijaGUI::Mute()
 
 void AplikacijaGUI::InfoPjesmaKonfiguracija()
 {
-	InfoPjesma::SetPjesma("Last One Standing", "Zomboy & MUST DIE!", this->font, this->fontEmoji);
-	InfoPjesma::Cover.loadFromFile("Covers/Dead Man Walking.jpg");
+	InfoPjesma::SetPjesma("Don't Get Too Close (Virtual Riot Remix)", "Skrillex & Bibi Bourelly & Sonny Moore & Virtual Riot", this->font, this->fontEmoji);
+	InfoPjesma::Cover.loadFromFile("Covers/Skrillex, Bibi Bourelly, & Sonny Moore - Don't Get Too Close (Virtual Riot Remix).jpg");
 	InfoPjesma::CoverRender.setTexture(InfoPjesma::Cover);
 	std::vector<std::string> pjesmeZaSad;
 
@@ -339,6 +340,13 @@ void AplikacijaGUI::Scroll()
 			InfoPjesma::MoveDown("Playliste");
 		}
 	}
+}
+
+void AplikacijaGUI::PostaviNizPjesmi()//test
+{
+	this->NizPjesmi.push_back("Zomboy & MUST DIE! - Last One Standing.wav");
+	this->NizPjesmi.push_back("Skrillex, Starrah & Four Tet - Butterflies.wav");
+	this->player.setNiz(this->NizPjesmi);
 }
 
 
