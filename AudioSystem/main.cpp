@@ -8,10 +8,11 @@ int main()
     sf::Color SekundarnaBoja = sf::Color(60, 60, 60);
     sf::Color AkcenatBoja = sf::Color::Red;
 
-    sf::Font font;
-    font.loadFromFile("seguisym.ttf");
+    sf::Font font, fontEmoji;
+    font.loadFromFile("Fonts/seguisym.ttf");
+    fontEmoji.loadFromFile("Fonts/Segoe MDL2 Assets.ttf");
 
-    AplikacijaGUI AudioSystemGUI(font, PrimarnaBoja, SekundarnaBoja, AkcenatBoja);
+    AplikacijaGUI AudioSystemGUI(font, fontEmoji, PrimarnaBoja, SekundarnaBoja, AkcenatBoja);
 
     while (AudioSystemGUI.getWindowIsOpen()) //petlja u kojoj se odvijaju akcije aplikacije dok je prozor otvoren
     {
@@ -31,12 +32,31 @@ int main()
 
 /*
     sf::Music music;
+//#include "muzikaTest.h"
+
+//int main()
+//**{
+
+    //sf::Color PrimarnaBoja = sf::Color(30, 30, 30);
+   // sf::Color SekundarnaBoja = sf::Color(60, 60, 60);
+  //  sf::Color AkcenatBoja = sf::Color::Red;
+
+//   AudioPlayer player;
+//   player.Pokreni();
+
+   
+   //sf::Font arial;
+ //  arial.loadFromFile("Arial.ttf");
+ //  AplikacijaGUI GUI(arial);
+
+    
+   // sf::Music music;
 
     // Postavite putanju do zvučnog fajla
-    const std::string filePath = "Breskvica-Dogolekoze.wav";
+  //  const std::string filePath = "Breskvica-Dogolekoze.wav";
 
     // Učitajte zvučni fajl
-    if (!music.openFromFile(filePath)) {
+  /*  if (!music.openFromFile(filePath)) {
         std::cerr << "Error opening sound file." << std::endl;
         return 1;
     }
@@ -77,3 +97,7 @@ int main()
     */
     //return 0;
 //}
+    
+  // ** return 0;
+//}
+

@@ -25,7 +25,7 @@ class AudioPlayer
 private:
 
     std::vector<std::string> songList;
-    std::string soundFilePath;
+    std::string soundFilePath, stariFilePath;
     bool isPlaying;
     bool listaDisplayed;
     bool isPlaybackComplete;
@@ -49,6 +49,7 @@ private:
     double effectiveSpeed;
     int tempSekunde;
     float velicina;
+    float TempGlasnoca;
     WORD glasnocaJedan, glasnocaDva;
     DWORD glasnoca;
 public:
@@ -57,7 +58,7 @@ public:
 
     ~AudioPlayer();
 
-    void setNiz();
+    void setNiz(std::vector<std::string> pjesme);
 
     void Pokreni();
 
@@ -71,7 +72,7 @@ public:
 
     void Izbornik(int izbor);
 
-    void unesiIme();
+    void unesiIme(std::string fileName);
 
     void pustiPauza();
 
@@ -101,11 +102,15 @@ public:
 
     void Uspori();
 
-    //Safet - dodao dva gettera
+    //Safet dodao ovo dole
     size_t GetSekunde() const;
     float GetTrajanjePjesme() const;
     void SetGlasnoca(float velicina);
     void SetPozicija(int sekunde);
     size_t GetMiliSekunde();
     float GetGlasnoca();
+    void Mute();
+    void PustiPjesmuPutanja(std::string putanja);
+    std::string GetImePjesmePath();
+    bool DaLiJeNovaPjesma(std::string TrenutnaPjesma);
 };
