@@ -13,7 +13,7 @@ AudioPlayer::AudioPlayer()
     this->glasnocaJedan = 0xFFFF;
     this->glasnocaDva = 0xFFFF;
     this->glasnoca = MAKELONG(this->glasnocaJedan, this->glasnocaDva);
-    this->soundFilePath = "Zomboy & MUST DIE! - Last One Standing.wav";
+    //this->soundFilePath = "Skrillex, Bibi Bourelly, & Sonny Moore - Don't Get Too Close (Virtual Riot Remix).wav";
     this->trenutniIndeksPjesme = 0;
     this->seconds = 1;
     this->isPlaying = false;
@@ -46,7 +46,7 @@ AudioPlayer::AudioPlayer()
 void AudioPlayer::Pokreni() {
     int izbor;
     do {
-        setNiz();
+        //setNiz();
         Menu();
         std::cout << ">> ";
         std::cin >> izbor;
@@ -61,9 +61,12 @@ void AudioPlayer::Pokreni() {
 }
 
 // Inicijalizacija liste pjesama
-void AudioPlayer::setNiz()
+void AudioPlayer::setNiz(std::vector<std::string> pjesme)
 {
-    ScanFolderForMusicFiles(".", songList);
+    this->songList = pjesme;
+    if(this->songList.size() != 0)
+        this->soundFilePath = this->songList.at(0);
+    //ScanFolderForMusicFiles(".", songList);
 }
 
 // Ispis liste pjesama
@@ -132,7 +135,7 @@ void AudioPlayer::Izbornik(int izbor) {
     switch (izbor) {
     case 1:
         this->isPlaying = false;
-        unesiIme();
+        //unesiIme();
         break;
     case 2:
         pustiPauza();
@@ -185,27 +188,17 @@ void AudioPlayer::Izbornik(int izbor) {
 }
 
 // Metoda za unos imena pjesme
-void AudioPlayer::unesiIme() {
-    std::string fileName;
-    std::cout << "Unesi ime: ";
-    std::cin.ignore();
-    getline(std::cin, fileName);
+void AudioPlayer::unesiIme(std::string fileName) {
+    //std::cout << "Unesi ime: ";
+    //std::cin.ignore();
+    //getline(std::cin, fileName);
 
-    if (!std::filesystem::path(fileName).has_extension()) {
-        fileName += ".wav";
-    }
+    //if (!std::filesystem::path(fileName).has_extension()) {
+    //    fileName += ".wav";
+    //} 
+    this->soundFilePath = fileName;
 
-    bool found = false;
-    for (size_t i = 0; i < songList.size(); i++) {
-        if (fileName == songList[i]) {
-            this->soundFilePath = fileName;
-            found = true;
-            break;
-        }
-    }
-    if (!found) {
-        std::cout << "Nemamo tu pjesmu na stanju" << std::endl;
-    }
+   
     this->isPlaying = false;
     this->pauseTime = sf::Time::Zero;
 }
@@ -225,6 +218,11 @@ void AudioPlayer::pustiPauza() {
         
     }
     else {
+        /*
+        vector putanje sve, 20
+        Playlist -> vector
+
+        */
         // Pokretanje reprodukcije
         
         music.openFromFile(soundFilePath);
@@ -324,7 +322,8 @@ void AudioPlayer::Vrijeme() {
 void AudioPlayer::novaPjesma() {
     this->shouldStop = true;
     this->tempSekunde = 0;
-    this->trenutniIndeksPjesme++;
+    if(this->trenutniIndeksPjesme < this->songList.size() - 1)
+        this->trenutniIndeksPjesme++;
         
     if (this->trenutniIndeksPjesme < this->songList.size()) {
         try {
@@ -362,7 +361,7 @@ void AudioPlayer::novaPjesma() {
         std::cout << "Kraj liste, stavljanje na pocetak." << std::endl;
         this->isPlaying = false;
         this->isPlaybackComplete = true;
-        this->soundFilePath = songList[0];
+        //this->soundFilePath = songList[0];
     }
 }
 
@@ -370,7 +369,9 @@ void AudioPlayer::novaPjesma() {
 void AudioPlayer::staraPjesma() {
     this->shouldStop = true;
     this->tempSekunde = 0;
-    this->trenutniIndeksPjesme--;
+    if(this->trenutniIndeksPjesme > 0)
+        this->trenutniIndeksPjesme--;
+
     if (this->trenutniIndeksPjesme < this->songList.size()) {
         try {
             this->effectiveSpeed = 1.0;
@@ -407,7 +408,7 @@ void AudioPlayer::staraPjesma() {
         std::cout << "Kraj liste, stavljanje na pocetak." << std::endl;
         this->isPlaying = false;
         this->isPlaybackComplete = true;
-        this->soundFilePath = songList[0];
+        //this->soundFilePath = songList[0];
     }
 }
 
