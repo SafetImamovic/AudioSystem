@@ -9,11 +9,10 @@ WAVEFORMATEX waveformat;
 // Konstruktor klase AudioPlayer
 AudioPlayer::AudioPlayer()
 {
-    // Postavljanje inicijalnih vrijednosti èlanova klase
+    // Postavljanje inicijalnih vrijednosti clanova klase
     this->glasnocaJedan = 0xFFFF;
     this->glasnocaDva = 0xFFFF;
     this->glasnoca = MAKELONG(this->glasnocaJedan, this->glasnocaDva);
-    this->soundFilePath = "Zomboy & MUST DIE! - Last One Standing.wav";
     this->trenutniIndeksPjesme = 0;
     this->seconds = 1;
     this->isPlaying = false;
@@ -29,6 +28,7 @@ AudioPlayer::AudioPlayer()
     this->currentTime = sf::Time::Zero;
     this->shouldStop = false;
     this->tempSekunde = 200;
+    this->currentTimeInSeconds = 0.0;
 
   // timeTrackingThread = std::thread(&AudioPlayer::Vrijeme, this);
 
@@ -39,14 +39,14 @@ AudioPlayer::AudioPlayer()
     this->waveFormat.nBlockAlign = (waveFormat.nChannels * waveFormat.wBitsPerSample) / 8;
     this->waveFormat.nAvgBytesPerSec = waveFormat.nSamplesPerSec * waveFormat.nBlockAlign;
     this->waveFormat.cbSize = 0;
-
+    this->currentSamplePosition = 0;
 }
 
 // Glavna metoda za upravljanje audio playerom
 void AudioPlayer::Pokreni() {
     int izbor;
     do {
-        setNiz();
+        //setNiz();
         Menu();
         std::cout << ">> ";
         std::cin >> izbor;
@@ -61,9 +61,12 @@ void AudioPlayer::Pokreni() {
 }
 
 // Inicijalizacija liste pjesama
-void AudioPlayer::setNiz()
+void AudioPlayer::setNiz(std::vector<std::string> pjesme)
 {
-    ScanFolderForMusicFiles(".", songList);
+    this->songList = pjesme;
+    if(this->songList.size() != 0)
+        this->soundFilePath = this->songList.at(0);
+    //ScanFolderForMusicFiles(".", songList);
 }
 
 // Ispis liste pjesama
@@ -132,7 +135,7 @@ void AudioPlayer::Izbornik(int izbor) {
     switch (izbor) {
     case 1:
         this->isPlaying = false;
-        unesiIme();
+        //unesiIme();
         break;
     case 2:
         pustiPauza();
@@ -176,6 +179,7 @@ void AudioPlayer::Izbornik(int izbor) {
         break;
     case 12:
         music.setPitch(1);
+        break;
     case 13:
         std::cout << "Hvala na koristenju!\n";
         break;
@@ -185,29 +189,20 @@ void AudioPlayer::Izbornik(int izbor) {
 }
 
 // Metoda za unos imena pjesme
-void AudioPlayer::unesiIme() {
-    std::string fileName;
-    std::cout << "Unesi ime: ";
-    std::cin.ignore();
-    getline(std::cin, fileName);
+void AudioPlayer::unesiIme(std::string fileName) {
+    //std::cout << "Unesi ime: ";
+    //std::cin.ignore();
+    //getline(std::cin, fileName);
 
-    if (!std::filesystem::path(fileName).has_extension()) {
-        fileName += ".wav";
-    }
+    //if (!std::filesystem::path(fileName).has_extension()) {
+    //    fileName += ".wav";
+    //} 
+    this->soundFilePath = fileName;
 
-    bool found = false;
-    for (size_t i = 0; i < songList.size(); i++) {
-        if (fileName == songList[i]) {
-            this->soundFilePath = fileName;
-            found = true;
-            break;
-        }
-    }
-    if (!found) {
-        std::cout << "Nemamo tu pjesmu na stanju" << std::endl;
-    }
+   
     this->isPlaying = false;
     this->pauseTime = sf::Time::Zero;
+    music.setPitch(1.0);
 }
 
 // Metoda za reprodukciju/pauziranje pjesme
@@ -225,6 +220,11 @@ void AudioPlayer::pustiPauza() {
         
     }
     else {
+        /*
+        vector putanje sve, 20
+        Playlist -> vector
+
+        */
         // Pokretanje reprodukcije
         
         music.openFromFile(soundFilePath);
@@ -240,8 +240,7 @@ void AudioPlayer::pustiPauza() {
         this->pauseTime = this->tempVrijeme;
         // Pokretanje thread-a za pracenje vremena reprodukcije
         std::thread(&AudioPlayer::Vrijeme, this).detach();
-        this->tempSekunde = 0;
-        
+        this->tempSekunde = 0;       
     }
 }
 
@@ -324,7 +323,8 @@ void AudioPlayer::Vrijeme() {
 void AudioPlayer::novaPjesma() {
     this->shouldStop = true;
     this->tempSekunde = 0;
-    this->trenutniIndeksPjesme++;
+    if(this->trenutniIndeksPjesme < this->songList.size() - 1)
+        this->trenutniIndeksPjesme++;
         
     if (this->trenutniIndeksPjesme < this->songList.size()) {
         try {
@@ -362,7 +362,8 @@ void AudioPlayer::novaPjesma() {
         std::cout << "Kraj liste, stavljanje na pocetak." << std::endl;
         this->isPlaying = false;
         this->isPlaybackComplete = true;
-        this->soundFilePath = songList[0];
+        //this->soundFilePath = songList[0];
+
     }
 }
 
@@ -370,7 +371,9 @@ void AudioPlayer::novaPjesma() {
 void AudioPlayer::staraPjesma() {
     this->shouldStop = true;
     this->tempSekunde = 0;
-    this->trenutniIndeksPjesme--;
+    if(this->trenutniIndeksPjesme > 0)
+        this->trenutniIndeksPjesme--;
+
     if (this->trenutniIndeksPjesme < this->songList.size()) {
         try {
             this->effectiveSpeed = 1.0;
@@ -404,10 +407,12 @@ void AudioPlayer::staraPjesma() {
         }
     }
     else {
+
         std::cout << "Kraj liste, stavljanje na pocetak." << std::endl;
         this->isPlaying = false;
         this->isPlaybackComplete = true;
-        this->soundFilePath = songList[0];
+        //this->soundFilePath = songList[0];
+
     }
 }
 
