@@ -51,6 +51,8 @@ public:
 	static sf::RectangleShape PozadinaPlaylist;
 	static sf::RectangleShape CoverUpDesno;
 	static sf::Text PlayListNaslov;
+	static sf::Vector2f VelicinaLijevo;
+	static int BaznaRezolucijaSlike;
 
 
 	InfoPjesma() = default;
@@ -69,5 +71,6 @@ public:
 	static void MoveDown(std::string id);
 	static void PostaviPozadineDesno();
 	static void RenderDesno(sf::RenderWindow &window);
+	static void ResizeCenter();
 };
 

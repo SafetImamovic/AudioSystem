@@ -10,7 +10,8 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 
 	this->videoMode.height = 1000; //visina prozora koja se smijesta unutar this->videoMode
 	this->videoMode.width = 1920; //sirina prozora koja se smijesta unutar this->videoMode
-	
+	InfoPjesma::visinaWindow = this->videoMode.height;
+	InfoPjesma::sirinaWindow = this->videoMode.width;
 
 	this->PostaviNizPjesmi();
 	this->player.SetGlasnoca(1);
@@ -19,7 +20,7 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 
 void AplikacijaGUI::InicijalizacijaProzora()
 {
-	this->window = new sf::RenderWindow(this->videoMode, "Audio System", sf::Style::Close | sf::Style::Titlebar);
+	this->window = new sf::RenderWindow(this->videoMode, "Audio System", sf::Style::Default);
 	//rezolucijom zadanom preko VideoMode konstruktora, naziv prozora je zadan
 	//drugim parametrom, treci parametar moze da primi bitwise argumente koji definisu da se prozor moze zatvoriti
 	//i da je prikazan naslov prozora
@@ -46,31 +47,6 @@ void AplikacijaGUI::InicijalizacijaElemenata()
 	this->rect.setSize(sf::Vector2f(100.f, 100.f));
 	this->rect.setFillColor(sf::Color::Cyan);
 
-	TextBox textbox1, textbox2;
-	textbox1.SetSve(
-		"Prvi",
-		20,
-		sf::Color::White,
-		PrimarnaBoja,
-		false,
-		this->font,
-		sf::Vector2f(200, 50),
-		sf::Vector2f(20, 15),
-		sf::Vector2f(1000, 50)
-	);
-
-	textbox2.SetSve(
-		"Drugi",
-		20,
-		sf::Color::White, 
-		PrimarnaBoja, 
-		false, 
-		this->font, 
-		sf::Vector2f(200, 250), 
-		sf::Vector2f(20, 15), 
-		sf::Vector2f(1000, 50)
-	);
-
 	
 	//void Tipka::SetTipka(std::wstring text, sf::Vector2f velicina, int karakterVelicina, sf::Color bojaText, sf::Color bojaPozadine, sf::Font & font)
 	
@@ -82,9 +58,6 @@ void AplikacijaGUI::InicijalizacijaElemenata()
 	//TipkaPrije.SetTipka(L"◁◁", { 40, 40 }, 16, sf::Color::White, this->PrimarnaBoja, this->font, { 500, 600 }, { 4, 10 });
 	//TipkaPustiPauziraj.SetTipka(L"▶◼", { 40, 40 }, 16, sf::Color::White, this->PrimarnaBoja, this->font, { 540, 600 }, { 4, 10 });
 	//TipkaLoop.SetTipka(L"⟳", { 40, 40 }, 24, sf::Color::White, this->PrimarnaBoja, this->font, { 620, 600 }, { 9, 3 });
-
-	this->TextBoxovi.push_back(textbox1);
-	this->TextBoxovi.push_back(textbox2);
 
 	this->PromijeniRezolucijuToggleTEST.SetTipka(
 		"Toggle_Rez",
@@ -186,15 +159,6 @@ void AplikacijaGUI::ResetPrimarneBoje()
 
 void AplikacijaGUI::GetOdgovarajuciTextBoxText()
 {
-	for (int i = 0; i < this->TextBoxovi.size(); i++)
-	{
-		if (this->TextBoxovi.at(i).JeOznacen())
-		{
-			//std::cout << this->TextBoxovi.at(i).GetText() << std::endl;//getText metoda vraca string koji je korinsik otkucao u textbox
-		}
-		
-	}
-	
 }
 
 void AplikacijaGUI::UpdateScrollBar()
@@ -251,11 +215,11 @@ void AplikacijaGUI::InfoPjesmaKonfiguracija()
 	std::vector<std::string> pjesmeZaSad;
 
 
-	for(int i = 0; i < 20; i++)
-		pjesmeZaSad.push_back("nice");
+	//for(int i = 0; i < 20; i++)
+	//	pjesmeZaSad.push_back("nice");
 	
 
-	InfoPjesma::SetList("Naslov Liste", "Kreator Liste", pjesmeZaSad, false, *this->window);
+	InfoPjesma::SetList("Naslov Liste", "Kreator Liste", this->NizPjesmi, false, *this->window);
 	InfoPjesma::PostaviPozadineDesno();
 	InfoPjesma::SetListeDesno(pjesmeZaSad, *this->window);
 
@@ -283,12 +247,6 @@ void AplikacijaGUI::UpdateStanjeTipke()
 
 void AplikacijaGUI::UpdateOtipkano()
 {
-	for (int i = 0; i < this->TextBoxovi.size(); i++)
-	{
-		this->TextBoxovi.at(i).OtipkanoNa(this->event);//kada je tekst otkucan poziva metodu objekta za ovaj textbox
-		//koja zapravo ispisuje tekst na prozoru
-	}
-
 	for (int i = 0; i < InfoPjesma::TextBoxovi.size(); i++)
 	{
 		InfoPjesma::TextBoxovi.at(i).OtipkanoNa(this->event);//kada je tekst otkucan poziva metodu objekta za ovaj textbox
@@ -298,13 +256,7 @@ void AplikacijaGUI::UpdateOtipkano()
 
 void AplikacijaGUI::LCtrlObrisi()
 {
-	for (int i = 0; i < this->TextBoxovi.size(); i++)
-	{
-		if (this->TextBoxovi.at(i).JeOznacen())
-		{
-			this->TextBoxovi.at(i).Clear();
-		}
-	}
+
 
 	for (int i = 0; i < InfoPjesma::TextBoxovi.size(); i++)
 	{
@@ -370,10 +322,35 @@ void AplikacijaGUI::UpdateImePjesme()
 		InfoPjesma::textNaslov.setPosition(
 			InfoPjesma::PaddingHorizontal + 1,
 			
-			InfoPjesma::PaddingVertical + 500
+			InfoPjesma::PaddingVertical + InfoPjesma::VelicinaLijevo.x
+
 		);
 		InfoPjesma::rateNaslov = -0.001;
 	}
+}
+
+void AplikacijaGUI::ResizeWindowEvent()
+{
+	sf::FloatRect vidljivaPovrsina(
+		0,
+		0,
+		this->event.size.width,
+		this->event.size.height
+	);
+	this->videoMode.height = vidljivaPovrsina.height;
+	this->videoMode.width = vidljivaPovrsina.width;
+	this->window->setView(sf::View(vidljivaPovrsina));
+	this->kontrole.SetRezolucija(this->videoMode);
+	std::cout << this->videoMode.width << "\n";
+	this->PromjenaRezolucijaStaticInfoPjesma();
+	//InfoPjesma::CoverRender.setScale(0.8f, 0.8f);
+
+}
+
+void AplikacijaGUI::PromjenaRezolucijaStaticInfoPjesma()
+{
+	InfoPjesma::visinaWindow = this->videoMode.height;
+	InfoPjesma::sirinaWindow = this->videoMode.width;
 }
 
 
@@ -478,6 +455,10 @@ void AplikacijaGUI::UpdatePollEvents() //ova metoda osvjezava eventove, npr. int
 
 		case sf::Event::MouseWheelMoved:
 			this->Scroll();
+			break;
+		case sf::Event::Resized:
+			this->ResizeWindowEvent();
+			this->kontrole.SetRezolucijaVrijeme(*this->window);
 			break;
 		default:
 			break;
