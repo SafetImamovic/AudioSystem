@@ -17,6 +17,8 @@ private:
 	sf::Text ScrollSimbol, GlasnocaSimbol, GlasnocaProcenat;
 	sf::RectangleShape ScrollBar, GlasnocaBar, ScrollBarFollow, GlasnocaBarFollow, GlobalnaPozadina;
 	int pocetnaKoordinataXTipke;
+	sf::RectangleShape pozadinaVrijeme;
+	sf::Text textVrijeme;
 
 	
 public:
@@ -35,6 +37,11 @@ public:
 	void RenderVrijeme(sf::RenderWindow& window, float sekunde, float trajanje, sf::Color PrimarnaBoja);
 	void PromijeniKarakter(std::string text, std::wstring promjena);
 	void RenderPozadina(sf::RenderWindow &window);
+	void SetRezolucija(sf::VideoMode &videoMode);
+	void SetRezolucijaKontrole();
+	void SetRezolucijaScrollBar();
+	void SetRezolucijaVrijeme(sf::RenderWindow& window);
+	void SetRezolucijaGlasnoca();
 
 	void RenderScroll(sf::RenderWindow &window);
 	void RenderGlasnoca(sf::RenderWindow& window);

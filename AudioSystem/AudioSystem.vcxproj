@@ -129,7 +129,8 @@
       <AdditionalIncludeDirectories>$(ProjectDir)External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <Optimization>Disabled</Optimization>
+      <Optimization>Full</Optimization>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,7 +146,7 @@
     <ClCompile Include="ElementarneKomponente.cpp" />
     <ClCompile Include="GlobalneFunkcije.cpp" />
     <ClCompile Include="InfoPjesma.cpp" />
-	<ClCompile Include="Pjesma.cpp" />
+    <ClCompile Include="Pjesma.cpp" />
     <ClCompile Include="Kontrole.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="muzikaTest.cpp" />
@@ -156,7 +157,7 @@
     <ClInclude Include="ElementarneKomponente.h" />
     <ClInclude Include="GlobalneFunkcije.h" />
     <ClInclude Include="InfoPjesma.h" />
-	<ClInclude Include="Pjesma.h" />
+    <ClInclude Include="Pjesma.h" />
     <ClInclude Include="Kontrole.h" />
     <ClInclude Include="AplikacijaGUI.h" />
     <ClInclude Include="muzikaTest.h" />
