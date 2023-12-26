@@ -53,6 +53,20 @@ void Kontrole::InicijalizacijaTipki()
 		{ 18, 18 }
 	);
 
+	/*
+	TipkaSkipPrije.SetTipka(
+		"SkipPrije",
+		L"⬅",
+		velicinaTipke,
+		24,
+		sf::Color::White,
+		PrimarnaBoja,
+		this->fontEmoji,
+		sf::Vector2f(this->pocetnaKoordinataXTipke + this->sirinaTipke, pocetnaKoordinataY),
+		{ 20, 14 }
+	);
+	*/
+
 	TipkaPustiPauziraj.SetTipka(
 		"PustiPauziraj",
 		L"\uE768",
@@ -109,7 +123,6 @@ void Kontrole::InicijalizacijaTipki()
 
 	this->Tipke.push_back(TipkaMute);
 	this->Tipke.push_back(TipkaLike);
-	
 }
 
 void Kontrole::InicijalizacijaScroll()
@@ -437,4 +450,3 @@ void Kontrole::SetRezolucijaGlasnoca()
 
 	this->GlasnocaProcenat.setPosition(this->videoMode.width - this->sirinaTipke + 13, pocetnaKoordinataY + 18);
 }
-

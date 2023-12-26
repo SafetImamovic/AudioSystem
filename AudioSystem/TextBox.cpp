@@ -159,7 +159,6 @@ void TextBox::PostaviVelicinu(sf::Vector2f velicina)
 	this->backgroundShape.setSize(velicina);
 }
 
-
 std::string TextBox::GetText()//vraca string koji je korisnik oktucao i submito
 {
 	return this->text.str();

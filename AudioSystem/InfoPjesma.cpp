@@ -49,6 +49,7 @@ int InfoPjesma::BaznaRezolucijaSlike = 500;
 
 void InfoPjesma::SetPjesma(std::string naslov, std::string pjesnici, sf::Font &font, sf::Font &fontEmoji)
 {
+
 	float Proporcija = InfoPjesma::VelicinaLijevo.x / InfoPjesma::BaznaRezolucijaSlike;
 	InfoPjesma::CoverRender.setScale(Proporcija, Proporcija);
 
@@ -81,7 +82,6 @@ void InfoPjesma::SetPjesma(std::string naslov, std::string pjesnici, sf::Font &f
 
 	InfoPjesma::textPjesnici.setFont(InfoPjesma::font);
 	InfoPjesma::textPjesnici.setString(InfoPjesma::PjesniciPjesme);
-
 	InfoPjesma::textPjesnici.setFillColor(sf::Color::White);
 
 	InfoPjesma::textPjesnici.setPosition(
@@ -118,7 +118,7 @@ void InfoPjesma::SetList(std::string naslov, std::string kreator, std::vector<st
 {
 	InfoPjesma::PaddingVerticalPlayLista = 20;
 	InfoPjesma::PaddingHorizontalPlayLista = 20;
-
+  
 	InfoPjesma::dimenzijeLista = sf::Vector2f(InfoPjesma::sirinaWindow - InfoPjesma::VelicinaLijevo.x - 300, InfoPjesma::visinaWindow - 60 - 50);
 	InfoPjesma::pozicijaLista = sf::Vector2f(InfoPjesma::VelicinaLijevo.x, 0);
 
@@ -319,6 +319,7 @@ void InfoPjesma::Update()
 	}
 
 	InfoPjesma::ResizeCenter();
+
 }
 
 void InfoPjesma::PostaviCoverUpLista()

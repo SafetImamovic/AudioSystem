@@ -159,8 +159,6 @@ void AplikacijaGUI::ResetPrimarneBoje()
 
 void AplikacijaGUI::GetOdgovarajuciTextBoxText()
 {
-	
-	
 }
 
 void AplikacijaGUI::UpdateScrollBar()
@@ -249,7 +247,6 @@ void AplikacijaGUI::UpdateStanjeTipke()
 
 void AplikacijaGUI::UpdateOtipkano()
 {
-
 	for (int i = 0; i < InfoPjesma::TextBoxovi.size(); i++)
 	{
 		InfoPjesma::TextBoxovi.at(i).OtipkanoNa(this->event);//kada je tekst otkucan poziva metodu objekta za ovaj textbox
@@ -259,6 +256,7 @@ void AplikacijaGUI::UpdateOtipkano()
 
 void AplikacijaGUI::LCtrlObrisi()
 {
+
 
 	for (int i = 0; i < InfoPjesma::TextBoxovi.size(); i++)
 	{
@@ -325,6 +323,7 @@ void AplikacijaGUI::UpdateImePjesme()
 			InfoPjesma::PaddingHorizontal + 1,
 			
 			InfoPjesma::PaddingVertical + InfoPjesma::VelicinaLijevo.x
+
 		);
 		InfoPjesma::rateNaslov = -0.001;
 	}
