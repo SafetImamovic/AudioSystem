@@ -333,6 +333,8 @@ void Kontrole::PromijeniKarakter(std::string text, std::wstring promjena)
 
 void Kontrole::RenderPozadina(sf::RenderWindow &window)
 {
+	this->GlobalnaPozadina.setPosition(0, this->videoMode.height - 110);
+	this->GlobalnaPozadina.setSize(sf::Vector2f(this->videoMode.width, 200));
 	window.draw(this->GlobalnaPozadina);
 }
 
@@ -349,7 +351,7 @@ void Kontrole::SetRezolucijaKontrole()
 	if (this->Tipke.size() < 7)//u slucaju da nema dovojno tipki ili da nisu uspjesno ucitane
 		return;
 
-	this->GlobalnaPozadina.setPosition(0, this->videoMode.height - 110);
+	
 
 	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke;
 

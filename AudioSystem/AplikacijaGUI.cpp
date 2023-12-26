@@ -8,8 +8,8 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	this->window = nullptr; //dobra praksa da se pointer inicijalizira sa nullptr. incicijalizirmao prozor kao pointer jer zelimo da ga alociramo na heap
 	//i fleksibilnija je kontrola
 
-	this->videoMode.height = 1000; //visina prozora koja se smijesta unutar this->videoMode
-	this->videoMode.width = 1920; //sirina prozora koja se smijesta unutar this->videoMode
+	this->videoMode.height = 600; //visina prozora koja se smijesta unutar this->videoMode
+	this->videoMode.width = 1000; //sirina prozora koja se smijesta unutar this->videoMode
 	InfoPjesma::visinaWindow = this->videoMode.height;
 	InfoPjesma::sirinaWindow = this->videoMode.width;
 
@@ -134,7 +134,20 @@ void AplikacijaGUI::RenderSveElemente()
 	InfoPjesma::RenderList(*this->window);
 	InfoPjesma::RenderDesno(*this->window);
 	InfoPjesma::RenderListDesno(*this->window);
+	InfoPjesma::pozadinaPjesma.setSize(sf::Vector2f(InfoPjesma::VelicinaLijevo.x, this->videoMode.height));
+
+	InfoPjesma::dimenzijeLista = sf::Vector2f(InfoPjesma::sirinaWindow - InfoPjesma::VelicinaLijevo.x - 300, InfoPjesma::visinaWindow - 60 - 50);
+	InfoPjesma::pozicijaLista = sf::Vector2f(InfoPjesma::VelicinaLijevo.x, 0);
+
+	InfoPjesma::pozadinaLista.setSize(InfoPjesma::dimenzijeLista);
+	InfoPjesma::pozadinaLista.setPosition(InfoPjesma::pozicijaLista);
+
+	InfoPjesma::CoverUpListaUp.setSize(sf::Vector2f(InfoPjesma::sirinaWindow - InfoPjesma::VelicinaLijevo.x - 300, 220));
+	InfoPjesma::CoverUpListaUp.setPosition(sf::Vector2f(InfoPjesma::VelicinaLijevo.x, 0));
+
 	DrawToSveTipke(*this->window, InfoPjesma::Tipke);
+
+
 	//for (int i = 0; i < this->TextBoxovi.size(); i++)
 	//{
 	//	this->TextBoxovi.at(i).DrawTo(*this->window);
@@ -209,8 +222,8 @@ void AplikacijaGUI::Mute()
 
 void AplikacijaGUI::InfoPjesmaKonfiguracija()
 {
-	InfoPjesma::SetPjesma("Don't Get Too Close (Virtual Riot Remix)", "Skrillex & Bibi Bourelly & Sonny Moore & Virtual Riot", this->font, this->fontEmoji);
-	InfoPjesma::Cover.loadFromFile("Covers/Skrillex, Bibi Bourelly, & Sonny Moore - Don't Get Too Close (Virtual Riot Remix).jpg");
+	InfoPjesma::SetPjesma("Don't Get Too Close (Virtual Riot Remix)", "Knock2", this->font, this->fontEmoji);
+	InfoPjesma::Cover.loadFromFile("Covers/Knock2 - dashstar (VIP).jpg");
 	InfoPjesma::CoverRender.setTexture(InfoPjesma::Cover);
 	std::vector<std::string> pjesmeZaSad;
 
@@ -269,7 +282,7 @@ void AplikacijaGUI::LCtrlObrisi()
 
 void AplikacijaGUI::Scroll()
 {
-	if (ProvjeriHoverRegija(*this->window, { 500, 220 }, sf::Vector2f(1920 - 500 - 300, this->videoMode.height - 110)))
+	if (ProvjeriHoverRegija(*this->window, { 500, 220 }, sf::Vector2f(this->videoMode.width - InfoPjesma::VelicinaLijevo.x - 300, this->videoMode.height - 110)))
 	{
 		if (this->event.mouseWheel.delta == -1)
 		{
@@ -281,7 +294,7 @@ void AplikacijaGUI::Scroll()
 		}
 	}
 
-	if (ProvjeriHoverRegija(*this->window, sf::Vector2f(1920 - 300, 0), sf::Vector2f(300, this->videoMode.height - 110)))
+	if (ProvjeriHoverRegija(*this->window, sf::Vector2f(this->videoMode.width - 300, 0), sf::Vector2f(300, this->videoMode.height - 110)))
 	{
 		if (this->event.mouseWheel.delta == -1)
 		{
@@ -296,6 +309,7 @@ void AplikacijaGUI::Scroll()
 
 void AplikacijaGUI::PostaviNizPjesmi()//test
 {
+	this->NizPjesmi.push_back("Pjesme/Knock2 - dashstar (VIP).wav");
 	this->NizPjesmi.push_back("Pjesme/Akon - SmackThat.wav");
 	this->NizPjesmi.push_back("Pjesme/Skrillex, Starrah & Four Tet - Butterflies.wav");
 	this->NizPjesmi.push_back("Pjesme/Dead Man Walking.wav");
@@ -305,6 +319,7 @@ void AplikacijaGUI::PostaviNizPjesmi()//test
 	this->NizPjesmi.push_back("Pjesme/Skrillex, Bibi Bourelly, & Sonny Moore - Don't Get Too Close (Virtual Riot Remix).wav");
 	this->NizPjesmi.push_back("Pjesme/Virtual Riot - Back In Time ft. Angelika.wav");
 	this->NizPjesmi.push_back("Pjesme/Zomboy & MUST DIE! - Last One Standing.wav");
+	
 	this->player.setNiz(this->NizPjesmi);
 }
 
