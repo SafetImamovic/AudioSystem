@@ -1,7 +1,7 @@
 ﻿#include "InfoPjesma.h"
 
-int InfoPjesma::sirinaWindow = 1920;
-int InfoPjesma::visinaWindow = 1000;
+int InfoPjesma::sirinaWindow;
+int InfoPjesma::visinaWindow;
 sf::RectangleShape InfoPjesma::pozadinaLista;
 sf::RectangleShape InfoPjesma::pozadinaPjesma;
 sf::Vector2f InfoPjesma::pozicijaLista;
@@ -43,10 +43,15 @@ sf::RectangleShape InfoPjesma::PozadinaPlaylist;
 std::vector<sf::RectangleShape> InfoPjesma::PozadineListi;
 sf::RectangleShape InfoPjesma::CoverUpDesno;
 sf::Text InfoPjesma::PlayListNaslov;
+sf::Vector2f InfoPjesma::VelicinaLijevo = sf::Vector2f(500, InfoPjesma::visinaWindow);
+int InfoPjesma::BaznaRezolucijaSlike = 500;
 
 
 void InfoPjesma::SetPjesma(std::string naslov, std::string pjesnici, sf::Font &font, sf::Font &fontEmoji)
 {
+	float Proporcija = InfoPjesma::VelicinaLijevo.x / InfoPjesma::BaznaRezolucijaSlike;
+	InfoPjesma::CoverRender.setScale(Proporcija, Proporcija);
+
 	InfoPjesma::PaddingVertical = 20;
 	InfoPjesma::PaddingHorizontal = 20;
 	InfoPjesma::NaslovPjesme = naslov;
@@ -54,21 +59,21 @@ void InfoPjesma::SetPjesma(std::string naslov, std::string pjesnici, sf::Font &f
 	InfoPjesma::font = font;
 	InfoPjesma::fontEmoji = fontEmoji;
 
-	InfoPjesma::dimenzijaPjesma = sf::Vector2f(500, 1000);
+	InfoPjesma::dimenzijaPjesma = sf::Vector2f(InfoPjesma::VelicinaLijevo.x, InfoPjesma::visinaWindow);
 	InfoPjesma::pozicijaPjesma = sf::Vector2f(0, 0);
 	InfoPjesma::PrimarnaBoja = sf::Color(sf::Color::Black);
 
-	InfoPjesma::CoverUpMain.setSize(sf::Vector2f(InfoPjesma::PaddingHorizontal, 1000));
+	InfoPjesma::CoverUpMain.setSize(sf::Vector2f(InfoPjesma::PaddingHorizontal, InfoPjesma::visinaWindow));
 	InfoPjesma::CoverUpMain.setFillColor(sf::Color::Black);
-	InfoPjesma::CoverUpMain.setPosition(sf::Vector2f(500 - InfoPjesma::PaddingHorizontal, 0));
+	InfoPjesma::CoverUpMain.setPosition(sf::Vector2f(InfoPjesma::VelicinaLijevo.x - InfoPjesma::PaddingHorizontal, 0));
 
-	InfoPjesma::CoverUpMainTwo.setSize(sf::Vector2f(InfoPjesma::PaddingHorizontal, 1000));
+	InfoPjesma::CoverUpMainTwo.setSize(sf::Vector2f(InfoPjesma::PaddingHorizontal, InfoPjesma::visinaWindow));
 	InfoPjesma::CoverUpMainTwo.setFillColor(sf::Color(sf::Color::Black));
 	InfoPjesma::CoverUpMainTwo.setPosition(sf::Vector2f(0, 0));
 
-	InfoPjesma::CoverUpSecondary.setSize(sf::Vector2f(4000, 900));
+	InfoPjesma::CoverUpSecondary.setSize(sf::Vector2f(4000, 4000));
 	InfoPjesma::CoverUpSecondary.setFillColor(sf::Color::Black);
-	InfoPjesma::CoverUpSecondary.setPosition(sf::Vector2f(500, 0));
+	InfoPjesma::CoverUpSecondary.setPosition(sf::Vector2f(InfoPjesma::VelicinaLijevo.x, 0));
 
 	InfoPjesma::textNaslov.setFont(InfoPjesma::font);
 	InfoPjesma::textNaslov.setString(InfoPjesma::NaslovPjesme);
@@ -77,22 +82,17 @@ void InfoPjesma::SetPjesma(std::string naslov, std::string pjesnici, sf::Font &f
 	InfoPjesma::textPjesnici.setFont(InfoPjesma::font);
 	InfoPjesma::textPjesnici.setString(InfoPjesma::PjesniciPjesme);
 
-	InfoPjesma::textNaslov.setPosition(
-		InfoPjesma::pozicijaPjesma.x + InfoPjesma::PaddingHorizontal + 2,
-		InfoPjesma::pozicijaPjesma.y + InfoPjesma::PaddingVertical + 500
-		);
-
 	InfoPjesma::textPjesnici.setFillColor(sf::Color::White);
 
 	InfoPjesma::textPjesnici.setPosition(
 		InfoPjesma::pozicijaPjesma.x + InfoPjesma::PaddingHorizontal,
-		InfoPjesma::pozicijaPjesma.y + InfoPjesma::PaddingVertical + 500 + InfoPjesma::textNaslov.getGlobalBounds().height + 20
+		InfoPjesma::pozicijaPjesma.y + InfoPjesma::PaddingVertical + InfoPjesma::VelicinaLijevo.x + InfoPjesma::textNaslov.getGlobalBounds().height + 20
 	);
 
-	InfoPjesma::textNaslov.setCharacterSize(36);
-	InfoPjesma::textNaslov.setOutlineThickness(1);
+	InfoPjesma::textNaslov.setCharacterSize(28);
+	InfoPjesma::textNaslov.setOutlineThickness(0.5);
 	InfoPjesma::textNaslov.setOutlineColor(sf::Color::White);
-	InfoPjesma::textPjesnici.setCharacterSize(28);
+	InfoPjesma::textPjesnici.setCharacterSize(22);
 
 	InfoPjesma::textNaslov.setFillColor(sf::Color::White);
 
@@ -119,8 +119,8 @@ void InfoPjesma::SetList(std::string naslov, std::string kreator, std::vector<st
 	InfoPjesma::PaddingVerticalPlayLista = 20;
 	InfoPjesma::PaddingHorizontalPlayLista = 20;
 
-	InfoPjesma::dimenzijeLista = sf::Vector2f(1920 - 500 - 300, 1000 - 60 - 50);
-	InfoPjesma::pozicijaLista = sf::Vector2f(500, 0);
+	InfoPjesma::dimenzijeLista = sf::Vector2f(InfoPjesma::sirinaWindow - InfoPjesma::VelicinaLijevo.x - 300, InfoPjesma::visinaWindow - 60 - 50);
+	InfoPjesma::pozicijaLista = sf::Vector2f(InfoPjesma::VelicinaLijevo.x, 0);
 
 	InfoPjesma::pozadinaLista.setSize(InfoPjesma::dimenzijeLista);
 	InfoPjesma::pozadinaLista.setPosition(InfoPjesma::pozicijaLista);
@@ -152,17 +152,20 @@ void InfoPjesma::SetList(std::string naslov, std::string kreator, std::vector<st
 	InfoPjesma::textVrstaListe.setFillColor(sf::Color::White);
 	InfoPjesma::textSimbolVrsta.setFillColor(sf::Color::White);
 
-	InfoPjesma::textNaslovListe.setCharacterSize(36);
-	InfoPjesma::textNaslovListe.setOutlineThickness(1);
+	InfoPjesma::textNaslovListe.setCharacterSize(28);
+	InfoPjesma::textNaslovListe.setOutlineThickness(0.5);
 	InfoPjesma::textNaslovListe.setOutlineColor(sf::Color::White);
-	InfoPjesma::textKreatroListe.setCharacterSize(28);
+	InfoPjesma::textKreatroListe.setCharacterSize(22);
 	InfoPjesma::textVrstaListe.setCharacterSize(16);
 	InfoPjesma::textSimbolVrsta.setCharacterSize(20);
 
-	InfoPjesma::textNaslovListe.setPosition(sf::Vector2f(500 + InfoPjesma::PaddingHorizontalPlayLista, InfoPjesma::PaddingVerticalPlayLista));
-	InfoPjesma::textKreatroListe.setPosition(sf::Vector2f(500 + InfoPjesma::PaddingHorizontalPlayLista, InfoPjesma::PaddingVerticalPlayLista + InfoPjesma::textNaslovListe.getGlobalBounds().height + 20));
-	InfoPjesma::textVrstaListe.setPosition(sf::Vector2f(500 + 1920 - 500 - 300 - InfoPjesma::textVrstaListe.getGlobalBounds().width - InfoPjesma::PaddingHorizontalPlayLista, InfoPjesma::PaddingVerticalPlayLista));
-	InfoPjesma::textSimbolVrsta.setPosition(sf::Vector2f(500 + 1920 - 500 - 300 + 14 - InfoPjesma::textVrstaListe.getGlobalBounds().width - InfoPjesma::PaddingHorizontalPlayLista - InfoPjesma::textVrstaListe.getGlobalBounds().width, InfoPjesma::PaddingVerticalPlayLista));
+	InfoPjesma::textNaslovListe.setPosition(sf::Vector2f(InfoPjesma::VelicinaLijevo.x + InfoPjesma::PaddingHorizontalPlayLista, InfoPjesma::PaddingVerticalPlayLista));
+
+
+
+	InfoPjesma::textKreatroListe.setPosition(sf::Vector2f(InfoPjesma::VelicinaLijevo.x + InfoPjesma::PaddingHorizontalPlayLista, InfoPjesma::PaddingVerticalPlayLista + InfoPjesma::textNaslovListe.getGlobalBounds().height + 20));
+	InfoPjesma::textVrstaListe.setPosition(sf::Vector2f(InfoPjesma::VelicinaLijevo.x + InfoPjesma::sirinaWindow - InfoPjesma::VelicinaLijevo.x - 300 - InfoPjesma::textVrstaListe.getGlobalBounds().width - InfoPjesma::PaddingHorizontalPlayLista, InfoPjesma::PaddingVerticalPlayLista));
+	InfoPjesma::textSimbolVrsta.setPosition(sf::Vector2f(InfoPjesma::VelicinaLijevo.x + InfoPjesma::sirinaWindow - InfoPjesma::VelicinaLijevo.x - 300 + 14 - InfoPjesma::textVrstaListe.getGlobalBounds().width - InfoPjesma::PaddingHorizontalPlayLista - InfoPjesma::textVrstaListe.getGlobalBounds().width, InfoPjesma::PaddingVerticalPlayLista));
 
 	Tipka Play, Shuffle, Pretraga;
 
@@ -174,7 +177,7 @@ void InfoPjesma::SetList(std::string naslov, std::string kreator, std::vector<st
 		sf::Color::White,
 		sf::Color(10, 10, 10),
 		InfoPjesma::fontEmoji,
-		{ 520, 140 },
+		sf::Vector2f(InfoPjesma::VelicinaLijevo.x + InfoPjesma::PaddingHorizontal, 120),
 		{ 18, 18 }
 	);
 
@@ -186,7 +189,7 @@ void InfoPjesma::SetList(std::string naslov, std::string kreator, std::vector<st
 		sf::Color::White,
 		sf::Color(10, 10, 10),
 		InfoPjesma::fontEmoji,
-		{ 580, 140 },
+		sf::Vector2f(InfoPjesma::VelicinaLijevo.x + InfoPjesma::PaddingHorizontal + 60, 120),
 		{ 18, 18 }
 	);
 
@@ -198,7 +201,7 @@ void InfoPjesma::SetList(std::string naslov, std::string kreator, std::vector<st
 		sf::Color::White,
 		sf::Color(10, 10, 10),
 		InfoPjesma::fontEmoji,
-		{ 1920 - 300 - 20 - 60, 140 },
+		sf::Vector2f(InfoPjesma::sirinaWindow - 300 - 20 - 60, 120),
 		{ 18, 18 }
 	);
 
@@ -236,9 +239,9 @@ void InfoPjesma::SetTextBox()
 		sf::Color(30, 30, 30),
 		false,
 		InfoPjesma::font,
-		{ 640, 140 },
+		sf::Vector2f(InfoPjesma::VelicinaLijevo.x + 140, 120),
 		{16,16},
-		{1920 - 500 - 20 - 20 - 300 - 120 - 60, 60}
+		sf::Vector2f(InfoPjesma::sirinaWindow - InfoPjesma::VelicinaLijevo.x - 20 - 20 - 300 - 120 - 60, 60)
 	);
 
 
@@ -248,7 +251,7 @@ void InfoPjesma::SetTextBox()
 std::vector<sf::RectangleShape> InfoPjesma::RenderSvePjesme(std::vector<std::string>& PjesmeZaSad, sf::RenderWindow &window)//za sad vektor samo stringova
 {
 	std::vector<sf::RectangleShape> Pozadine;
-	int x = 520;
+	int x = InfoPjesma::VelicinaLijevo.x + InfoPjesma::PaddingVertical;
 	int y = 240;
 
 	for (const std::string& text : PjesmeZaSad)
@@ -261,7 +264,7 @@ std::vector<sf::RectangleShape> InfoPjesma::RenderSvePjesme(std::vector<std::str
 		pozadinaPjesma.setFillColor(sf::Color(45,45,45));
 		imePjesme.setFillColor(sf::Color::White);
 
-		pozadinaPjesma.setSize(sf::Vector2f(1920 - 520 - 300 - 20, 50));
+		pozadinaPjesma.setSize(sf::Vector2f(InfoPjesma::sirinaWindow - x - 300 - 20, 50));
 
 		pozadinaPjesma.setPosition(sf::Vector2f(x, y));
 		imePjesme.setPosition(sf::Vector2f(x, y));
@@ -276,8 +279,8 @@ std::vector<sf::RectangleShape> InfoPjesma::RenderSvePjesme(std::vector<std::str
 
 void InfoPjesma::Update()
 {
-
-	if (InfoPjesma::textNaslov.getGlobalBounds().width > 500 - InfoPjesma::PaddingHorizontal * 2)
+	InfoPjesma::PozadinaPlaylist.setPosition(sf::Vector2f(InfoPjesma::sirinaWindow - 300, 0));
+	if (InfoPjesma::textNaslov.getGlobalBounds().width > InfoPjesma::VelicinaLijevo.x - InfoPjesma::PaddingHorizontal * 2)
 	{
 		
 		InfoPjesma::textNaslov.move(sf::Vector2f(InfoPjesma::rateNaslov, 0));
@@ -292,12 +295,12 @@ void InfoPjesma::Update()
 		}
 		if (InfoPjesma::textNaslov.getPosition().x <= -(InfoPjesma::textNaslov.getGlobalBounds().width + 10))
 		{
-			InfoPjesma::textNaslov.setPosition(sf::Vector2f(500 - InfoPjesma::PaddingHorizontal, 500 + InfoPjesma::PaddingVertical));
+			InfoPjesma::textNaslov.setPosition(sf::Vector2f(InfoPjesma::VelicinaLijevo.x - InfoPjesma::PaddingHorizontal, InfoPjesma::VelicinaLijevo.x + InfoPjesma::PaddingVertical));
 		}
 
 	}
 
-	if (InfoPjesma::textPjesnici.getGlobalBounds().width > 500 - InfoPjesma::PaddingHorizontal * 2)
+	if (InfoPjesma::textPjesnici.getGlobalBounds().width > InfoPjesma::VelicinaLijevo.x - InfoPjesma::PaddingHorizontal * 2)
 	{
 		InfoPjesma::textPjesnici.move(sf::Vector2f(InfoPjesma::ratePjesnici, 0));
 		//std::cout << InfoPjesma::textPjesnici.getPosition().x << "\n";
@@ -311,9 +314,11 @@ void InfoPjesma::Update()
 		}
 		if (InfoPjesma::textPjesnici.getPosition().x <= -(InfoPjesma::textPjesnici.getGlobalBounds().width + 10))
 		{
-			InfoPjesma::textPjesnici.setPosition(sf::Vector2f(500 - InfoPjesma::PaddingHorizontal, 500 + InfoPjesma::PaddingVertical + InfoPjesma::textNaslov.getGlobalBounds().height + 20));
+			InfoPjesma::textPjesnici.setPosition(sf::Vector2f(InfoPjesma::VelicinaLijevo.x - InfoPjesma::PaddingHorizontal, InfoPjesma::VelicinaLijevo.x + InfoPjesma::PaddingVertical + InfoPjesma::textNaslov.getGlobalBounds().height + 20));
 		}
 	}
+
+	InfoPjesma::ResizeCenter();
 }
 
 void InfoPjesma::PostaviCoverUpLista()
@@ -321,8 +326,8 @@ void InfoPjesma::PostaviCoverUpLista()
 	InfoPjesma::CoverUpListaUp.setFillColor(sf::Color(10, 10, 10));
 	InfoPjesma::CoverUpListaDown.setFillColor(sf::Color(10, 10, 10));
 
-	InfoPjesma::CoverUpListaUp.setSize(sf::Vector2f(InfoPjesma::sirinaWindow - 500 - 300, 220));
-	InfoPjesma::CoverUpListaUp.setPosition(sf::Vector2f(500, 0));
+	InfoPjesma::CoverUpListaUp.setSize(sf::Vector2f(InfoPjesma::sirinaWindow - InfoPjesma::VelicinaLijevo.x - 300, 220));
+	InfoPjesma::CoverUpListaUp.setPosition(sf::Vector2f(InfoPjesma::VelicinaLijevo.x, 0));
 }
 
 void InfoPjesma::SetListeDesno(std::vector<std::string> ListeZaSad, sf::RenderWindow& window)
@@ -337,7 +342,7 @@ void InfoPjesma::MoveUp(std::string id)
 	
 	if (id == "Pjesme")
 	{
-		if (InfoPjesma::PozadinePjesma.at(InfoPjesma::PozadinePjesma.size() - 1).getPosition().y > 1000 - 200)
+		if (InfoPjesma::PozadinePjesma.at(InfoPjesma::PozadinePjesma.size() - 1).getPosition().y > InfoPjesma::visinaWindow - 200)
 		{
 			for (sf::RectangleShape& shape : InfoPjesma::PozadinePjesma)
 			{
@@ -348,7 +353,7 @@ void InfoPjesma::MoveUp(std::string id)
 
 	if (id == "Playliste")
 	{
-		if (InfoPjesma::PozadineListi.at(InfoPjesma::PozadineListi.size() - 1).getPosition().y > 1000 - 200)
+		if (InfoPjesma::PozadineListi.at(InfoPjesma::PozadineListi.size() - 1).getPosition().y > InfoPjesma::visinaWindow - 200)
 		{
 			for (sf::RectangleShape& shape : InfoPjesma::PozadineListi)
 			{
@@ -362,15 +367,15 @@ void InfoPjesma::RenderListDesno(sf::RenderWindow& window)
 {
 	InfoPjesma::CoverUpDesno.setFillColor(sf::Color::Black);
 	InfoPjesma::CoverUpDesno.setSize(sf::Vector2f(300, 220));
-	InfoPjesma::CoverUpDesno.setPosition(sf::Vector2f(1920 - 300, 0));
+	InfoPjesma::CoverUpDesno.setPosition(sf::Vector2f(InfoPjesma::sirinaWindow - 300, 0));
 
 	
 	InfoPjesma::PlayListNaslov.setFont(InfoPjesma::font);
 	InfoPjesma::PlayListNaslov.setFillColor(sf::Color::White);
-	InfoPjesma::PlayListNaslov.setCharacterSize(36);
-	InfoPjesma::PlayListNaslov.setOutlineThickness(1);
+	InfoPjesma::PlayListNaslov.setCharacterSize(28);
+	InfoPjesma::PlayListNaslov.setOutlineThickness(0.5);
 	InfoPjesma::PlayListNaslov.setOutlineColor(sf::Color::White);
-	InfoPjesma::PlayListNaslov.setPosition(1920 - 300 + 20, 0 + 20);
+	InfoPjesma::PlayListNaslov.setPosition(InfoPjesma::sirinaWindow - 300 + 20, 0 + 20);
 	InfoPjesma::PlayListNaslov.setString("Playliste i \nAlbumi");
 
 
@@ -414,7 +419,7 @@ void InfoPjesma::MoveDown(std::string id)
 std::vector<sf::RectangleShape> InfoPjesma::RenderSveListe(std::vector<std::string>& ListeZaSasd, sf::RenderWindow& window)
 {
 	std::vector<sf::RectangleShape> Pozadine;
-	int x = 1920 - 300 + 20;
+	int x = InfoPjesma::sirinaWindow - 300 + 20;
 	int y = 240;
 
 	for (const std::string& text : ListeZaSasd)
@@ -442,7 +447,7 @@ std::vector<sf::RectangleShape> InfoPjesma::RenderSveListe(std::vector<std::stri
 void InfoPjesma::PostaviPozadineDesno()
 {
 	InfoPjesma::PozadinaPlaylist.setFillColor(sf::Color::Black);
-	InfoPjesma::PozadinaPlaylist.setSize(sf::Vector2f(300, InfoPjesma::visinaWindow - 55));
+	InfoPjesma::PozadinaPlaylist.setSize(sf::Vector2f(300, InfoPjesma::visinaWindow));
 	InfoPjesma::PozadinaPlaylist.setPosition(sf::Vector2f(InfoPjesma::sirinaWindow - 300, 0));
 }
 
@@ -450,4 +455,22 @@ void InfoPjesma::RenderDesno(sf::RenderWindow &window)
 {
 	window.draw(InfoPjesma::PozadinaPlaylist);
 	window.draw(InfoPjesma::PozadinaAlbum);
+}
+
+void InfoPjesma::ResizeCenter()
+{
+	for (TextBox& textbox : InfoPjesma::TextBoxovi)
+	{
+		textbox.PostaviVelicinu(sf::Vector2f(InfoPjesma::sirinaWindow - InfoPjesma::VelicinaLijevo.x - 20 - 20 - 300 - 120 - 60, 60));
+	}
+	int x = InfoPjesma::VelicinaLijevo.x + InfoPjesma::PaddingVertical;
+	for (sf::RectangleShape &pozadina : InfoPjesma::PozadinePjesma)
+	{
+		pozadina.setSize(sf::Vector2f(InfoPjesma::sirinaWindow - x - 300 - 20, 50));
+	}
+	InfoPjesma::Tipke.at(2).SetPozicija(sf::Vector2f(InfoPjesma::sirinaWindow - 300 - 20 - 60, 120));
+	InfoPjesma::Tipke.at(2).SetTextPozicija({ 18,18 });
+	InfoPjesma::textKreatroListe.setPosition(sf::Vector2f(InfoPjesma::VelicinaLijevo.x + InfoPjesma::PaddingHorizontalPlayLista, InfoPjesma::PaddingVerticalPlayLista + InfoPjesma::textNaslovListe.getGlobalBounds().height + 20));
+	InfoPjesma::textVrstaListe.setPosition(sf::Vector2f(InfoPjesma::VelicinaLijevo.x + InfoPjesma::sirinaWindow - InfoPjesma::VelicinaLijevo.x - 300 - InfoPjesma::textVrstaListe.getGlobalBounds().width - InfoPjesma::PaddingHorizontalPlayLista, InfoPjesma::PaddingVerticalPlayLista));
+	InfoPjesma::textSimbolVrsta.setPosition(sf::Vector2f(InfoPjesma::VelicinaLijevo.x + InfoPjesma::sirinaWindow - InfoPjesma::VelicinaLijevo.x - 300 + 14 - InfoPjesma::textVrstaListe.getGlobalBounds().width - InfoPjesma::PaddingHorizontalPlayLista - InfoPjesma::textVrstaListe.getGlobalBounds().width, InfoPjesma::PaddingVerticalPlayLista));
 }
