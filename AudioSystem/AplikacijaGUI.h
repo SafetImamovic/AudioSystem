@@ -27,7 +27,7 @@ private:
 	sf::VideoMode videoMode; //zadaje rezoluciju prozoru
 	sf::Vector2i mousePozProzor; //cuva poziciju misa relativnu prozoru (koordinate)
 	sf::Font font, fontEmoji;
-	std::vector<TextBox> TextBoxovi; //vektor koji sadrzava sve textbox elemente
+	//std::vector<TextBox> TextBoxovi; //vektor koji sadrzava sve textbox elemente
 	Tipka PromijeniRezolucijuToggleTEST;
 	sf::Color PrimarnaBoja, SekundarnaBoja, AkcenatBoja;
 	float TempGlasnoca;
@@ -69,6 +69,8 @@ private:
 	void Scroll();
 	void PostaviNizPjesmi();
 	void UpdateImePjesme();
+	void ResizeWindowEvent();
+	void PromjenaRezolucijaStaticInfoPjesma();
 
 public:
 	AplikacijaGUI(sf::Font& font, sf::Font& fontEmoji, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja);
