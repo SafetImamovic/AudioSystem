@@ -223,7 +223,7 @@ void AplikacijaGUI::Mute()
 void AplikacijaGUI::InfoPjesmaKonfiguracija()
 {
 	InfoPjesma::SetPjesma("Don't Get Too Close (Virtual Riot Remix)", "Knock2", this->font, this->fontEmoji);
-	InfoPjesma::Cover.loadFromFile("Covers/Knock2 - dashstar (VIP).jpg");
+	InfoPjesma::Cover.loadFromFile("Covers/Skrillex with Bobby Raps - Leave Me Like This.jpg");
 	InfoPjesma::CoverRender.setTexture(InfoPjesma::Cover);
 	std::vector<std::string> pjesmeZaSad;
 
@@ -309,7 +309,7 @@ void AplikacijaGUI::Scroll()
 
 void AplikacijaGUI::PostaviNizPjesmi()//test
 {
-	this->NizPjesmi.push_back("Pjesme/Knock2 - dashstar (VIP).wav");
+	this->NizPjesmi.push_back("Pjesme/Skrillex with Bobby Raps - Leave Me Like This.wav");
 	this->NizPjesmi.push_back("Pjesme/Akon - SmackThat.wav");
 	this->NizPjesmi.push_back("Pjesme/Skrillex, Starrah & Four Tet - Butterflies.wav");
 	this->NizPjesmi.push_back("Pjesme/Dead Man Walking.wav");
@@ -319,6 +319,7 @@ void AplikacijaGUI::PostaviNizPjesmi()//test
 	this->NizPjesmi.push_back("Pjesme/Skrillex, Bibi Bourelly, & Sonny Moore - Don't Get Too Close (Virtual Riot Remix).wav");
 	this->NizPjesmi.push_back("Pjesme/Virtual Riot - Back In Time ft. Angelika.wav");
 	this->NizPjesmi.push_back("Pjesme/Zomboy & MUST DIE! - Last One Standing.wav");
+	this->NizPjesmi.push_back("Pjesme/Knock2 - dashstar (VIP).wav");
 	
 	this->player.setNiz(this->NizPjesmi);
 }
