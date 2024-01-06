@@ -150,6 +150,8 @@
     <ClCompile Include="Kontrole.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="muzikaTest.cpp" />
+    <ClCompile Include="PlayList.cpp" />
+    <ClCompile Include="SkuPjesama.cpp" />
     <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="Tipka.cpp" />
   </ItemGroup>
@@ -161,6 +163,8 @@
     <ClInclude Include="Kontrole.h" />
     <ClInclude Include="AplikacijaGUI.h" />
     <ClInclude Include="muzikaTest.h" />
+    <ClInclude Include="PlayList.h" />
+    <ClInclude Include="SkuPjesama.h" />
     <ClInclude Include="TextBox.h" />
     <ClInclude Include="Tipka.h" />
   </ItemGroup>
