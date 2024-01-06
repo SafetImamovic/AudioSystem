@@ -61,12 +61,20 @@ void AudioPlayer::Pokreni() {
 }
 
 // Inicijalizacija liste pjesama
-void AudioPlayer::setNiz(std::vector<std::string> pjesme)
+void AudioPlayer::setNiz(PlayLista playLista)
 {
-    this->songList = pjesme;
-    if(this->songList.size() != 0)
-        this->soundFilePath = this->songList.at(0);
+    this->playLista = &playLista;
+    if(this->playLista->getPjesme().size() != 0)
+        this->soundFilePath = this->playLista->getPjesme().at(0).getLokacijaPjesme();
     //ScanFolderForMusicFiles(".", songList);
+    std::cout << "Velcina SetNiz() == " << this->playLista->getPjesme().size() << std::endl;
+
+    for (const Pjesma& pjesma : this->playLista->getPjesme())
+    {
+        pjesma.getInfo();
+    }
+    this->Pjesme = this->playLista->getPjesme();
+    this->Pjesme.resize(this->playLista->getPjesme().size());
 }
 
 // Ispis liste pjesama
@@ -78,10 +86,10 @@ void AudioPlayer::Lista() {
     //std::cout << std::left << std::setw(indexWidth) << "Mjesto " << std::setw(nameWidth) << " Pjesma" << std::endl;
     //std::cout << '\n';
     // Ispisivanje svake pesme u tabeli
-    for (size_t i = 0; i < songList.size(); i++) {
+    //for (size_t i = 0; i < this->playLista->getPjesme().size(); i++) {
         //std::cout << std::left << std::setw(indexWidth) << i + 1 << std::setw(nameWidth) << ImeFajlaBezEkstenzije(this->songList[i]) << std::endl;
         //std::cout << "---------------------------------" << '\n';
-    }
+    //}
 
     //std::cout << std::endl;
 }
@@ -94,9 +102,9 @@ std::string AudioPlayer::ImeFajlaBezEkstenzije(const std::string& filePath) {
 
 // Funkcija za ispis svih pjesama iako nisu dostupne
 void AudioPlayer::sveLista() {
-    for (const auto& song : songList) {
+    //for (const auto& song : songList) {
         //std::cout << song << std::endl;
-    }
+    //}
     //std::cout << std::endl;
 }
 
@@ -313,7 +321,7 @@ void AudioPlayer::Vrijeme() {
         std::cerr << "Nepoznata greska.\n";
         this->isPlaying = false;
         this->isPlaybackComplete = true;
-        this->soundFilePath = this->songList[3];
+        //this->soundFilePath = this->songList[3];
         novaPjesma();
     }
     //std::thread(&AudioPlayer::Vrijeme, this).join();
@@ -323,16 +331,16 @@ void AudioPlayer::Vrijeme() {
 void AudioPlayer::novaPjesma() {
     this->shouldStop = true;
     this->tempSekunde = 0;
-    if(this->trenutniIndeksPjesme < this->songList.size() - 1)
+    if(this->trenutniIndeksPjesme < this->Pjesme.size() - 1)
         this->trenutniIndeksPjesme++;
         
-    if (this->trenutniIndeksPjesme < this->songList.size()) {
+    if (this->trenutniIndeksPjesme < this->Pjesme.size()) {
         try {
             this->effectiveSpeed = 1.0;
             this->brzina = 1.0;
             music.stop();
             this->stariFilePath = this->soundFilePath;
-            this->soundFilePath = songList[this->trenutniIndeksPjesme];
+            this->soundFilePath = this->Pjesme.at(this->trenutniIndeksPjesme).getLokacijaPjesme();
 
             std::cout << "Stara pjesma:\t\t " << this->stariFilePath << "\n";
             std::cout << "Trenutna Pjesma:\t " << this->soundFilePath << "\n";
@@ -379,13 +387,13 @@ void AudioPlayer::staraPjesma() {
     if(this->trenutniIndeksPjesme > 0)
         this->trenutniIndeksPjesme--;
 
-    if (this->trenutniIndeksPjesme < this->songList.size()) {
+    if (this->trenutniIndeksPjesme < this->Pjesme.size()) {
         try {
             this->effectiveSpeed = 1.0;
             this->brzina = 1.0;
             music.stop();
             this->stariFilePath = this->soundFilePath;
-            this->soundFilePath = songList[this->trenutniIndeksPjesme];
+            this->soundFilePath = this->Pjesme.at(this->trenutniIndeksPjesme).getLokacijaPjesme();
 
             std::cout << "Stara pjesma:\t\t " << this->stariFilePath << "\n";
             std::cout << "Trenutna Pjesma:\t " << this->soundFilePath << "\n";
@@ -622,6 +630,11 @@ bool AudioPlayer::DaLiJeNovaPjesma(std::string TrenutnaPjesma)
     }
     else
         return false;
+}
+
+Pjesma& AudioPlayer::getPjesmaObjekat()
+{
+    return this->Pjesme.at(this->trenutniIndeksPjesme);
 }
 
 size_t AudioPlayer::GetSekunde() const

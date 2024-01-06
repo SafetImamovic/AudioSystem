@@ -1,6 +1,15 @@
 #include "Pjesma.h"
 
 // Implementacija konstruktora
+
+Pjesma::Pjesma()
+    : ID_Pjesme(0), lokacijaPjesme(""), lokacijaSlike(""), Ime(""), ImeAutora(""),
+    DaLiPripadaAlbumu(false), Album(""), ID_Album(0),
+    DaLiJeLajkana(false), DatumObjave(""), RecordLabel("")
+{
+
+}
+
 Pjesma::Pjesma(unsigned int idPjesme, std::string lokacijaPjesme, std::string lokcijaSlike, const std::string& ime, const std::string& imeAutora,
     bool pripadaAlbumu, const std::string& album, unsigned int idAlbum,
     bool jeLajkana, const std::string& datumObjave, const std::string& recordLabel)
