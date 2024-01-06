@@ -1,13 +1,7 @@
 #include "PlayList.h"
 #include <iostream> 
 
-PlayLista::PlayLista(const std::vector<Pjesma>& pjesme, const std::string& ime, const std::string& datumKreiranja,
-    bool ponoviSkupPjesama, bool shuffle, std::string kreator) : SkupPjesama(ime), Kreator(kreator) {
-
-    // Inicijalizacija datuma kreiranja
-    azurirajDatumKreiranja();
-}
-
+/*
 void PlayLista::dodajPjesmuUPlaylistu(Pjesma idPjesme) {
     Pjesma novaPjesma = pronadiPjesmuPoID(idPjesme);
     dodajPjesmu(novaPjesma);
@@ -19,6 +13,7 @@ void PlayLista::obrisiPjesmuIzPlayliste(Pjesma idPjesme) {
     obrisiPjesmu(pjesmaZaBrisanje);
     azurirajDatumKreiranja();
 }
+*/
 
 void PlayLista::azurirajDatumKreiranja() {
     // Primjer ažuriranja datuma kreiranja playliste
