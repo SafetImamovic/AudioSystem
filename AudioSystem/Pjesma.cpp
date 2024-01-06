@@ -123,3 +123,20 @@ void Pjesma::setRecordLabel(const std::string& recordLabel)
 {
     RecordLabel = recordLabel;
 }
+
+void Pjesma::getInfo()
+{
+    std::cout << this->getID_Pjesme() << "\n";
+    std::cout << this->getID_WAV() << "\n";
+    std::cout << this->getID_SLIKA() << "\n";
+    std::cout << this->getIme() << "\n";
+    std::cout << this->getImeAutora() << "\n";
+    std::cout << this->getDaLiPripadaAlbumu() << "\n";
+    std::cout << this->getAlbum() << "\n";
+    std::cout << this->getID_Album() << "\n";
+    std::cout << this->getDaLiJeLajkana () << "\n";
+    std::cout << this->getDatumObjave() << "\n";
+    std::cout << this->getRecordLabel() << "\n";
+}
+
+
