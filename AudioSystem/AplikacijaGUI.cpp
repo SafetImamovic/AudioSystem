@@ -16,17 +16,20 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	
 	
 
-	SkupPjesama svePjesme("Sve Pjesme", "6.1.2024", true, true, "Moja Mama");
+	PlayLista svePjesme("Sve Pjesme", "6.1.2024", true, true, "Moja Mama");
 	this->pSvePjesme = &svePjesme;
 
 
 	std::vector<Pjesma> pjesme = this->pSvePjesme->ucitajPjesmeIzDatoteke("PjesmeData.txt");
 	this->pSvePjesme->setPjesme(pjesme);
-	for (const Pjesma& pjesma : pjesme)
-	{
-		//pjesma.getInfo();
-	}
-	this->PostaviNizPjesmi();
+	//for (const Pjesma& pjesma : pjesme)
+	//{
+	//	pjesma.getInfo();
+	//}
+
+	this->player.setNiz(svePjesme);
+
+	//this->PostaviNizPjesmi();
 
 	this->player.SetGlasnoca(0.5);
 	this->InfoPjesmaKonfiguracija();
@@ -325,23 +328,22 @@ void AplikacijaGUI::Scroll()
 void AplikacijaGUI::PostaviNizPjesmi()//test
 {
 	
-	for (Pjesma& pjesma : this->pSvePjesme->getPjesme())
-	{
-		this->NizPjesmi.push_back(pjesma.getLokacijaPjesme());
-		std::cout << "\"" << pjesma.getLokacijaPjesme() << "\"" << std::endl;
-	}
+	//for (Pjesma& pjesma : this->pSvePjesme->getPjesme())
+	//{
+	//	this->NizPjesmi.push_back(pjesma.getLokacijaPjesme());
+	//	std::cout << "\"" << pjesma.getLokacijaPjesme() << "\"" << std::endl;
+	//}
 
-	this->player.setNiz(this->NizPjesmi);
+	
 	
 }
 
 void AplikacijaGUI::UpdateImePjesme()
 {
-	//std::cout << this->player.GetImePjesmePath() << std::endl;
-	std::string temp = this->player.GetImePjesmePath();
-	temp.erase(temp.begin(), temp.begin() + 7);//skida prvih 7 karaktera stringa to je direktorija Pjesme/
-	InfoPjesma::textNaslov.setString(temp);
-	//std::cout << this->player.DaLiJeNovaPjesma(this->player.GetImePjesmePath()) << "\n";
+	InfoPjesma::textNaslov.setString(this->player.getPjesmaObjekat().getIme());
+	InfoPjesma::Cover.loadFromFile(this->player.getPjesmaObjekat().getLokacijaSlike());
+	InfoPjesma::textPjesnici.setString(this->player.getPjesmaObjekat().getImeAutora());
+
 
 	if (this->player.DaLiJeNovaPjesma(this->player.GetImePjesmePath()))
 	{
