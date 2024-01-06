@@ -16,24 +16,25 @@ protected:
     std::string DatumKreiranja;
     bool PonoviSkupPjesama;
     bool Shuffle;
+    std::string Kreator;
 
 public:
 
     // Getteri
-    const std::vector<Pjesma>& getPjesme() const;
+    std::vector<Pjesma> getPjesme();
     std::string getIme() const;
     std::string getDatumKreiranja() const;
     bool getPonoviSkupPjesama() const;
     bool getShuffle() const;
 
     // Setteri
-    void setPjesme(const std::vector<Pjesma>& pjesme);
+    void setPjesme(std::vector<Pjesma>& pjesme);
     void setIme(const std::string& ime);
     void setDatumKreiranja(const std::string& datumKreiranja);
     void setPonoviSkupPjesama(bool ponoviSkupPjesama);
     void setShuffle(bool shuffle);
 
-    SkupPjesama()=default;
+    SkupPjesama(std::string ime, std::string datumKreiranja, bool ponovi, bool shuffle, std::string kreator);
 
     // Primjer dodavanja pjesme
     void dodajPjesmu(const Pjesma& pjesma);
