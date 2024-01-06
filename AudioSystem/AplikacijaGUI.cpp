@@ -13,9 +13,11 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	InfoPjesma::visinaWindow = this->videoMode.height;
 	InfoPjesma::sirinaWindow = this->videoMode.width;
 
+	this->svePjesme.ucitajPjesmeIzDatoteke("C:/Users/hasic/OneDrive/Desktop/AudioSystem/AudioSystem/PjesmeData.txt");
 	this->PostaviNizPjesmi();
 	this->player.SetGlasnoca(1);
 	this->InfoPjesmaKonfiguracija();
+
 }
 
 void AplikacijaGUI::InicijalizacijaProzora()
