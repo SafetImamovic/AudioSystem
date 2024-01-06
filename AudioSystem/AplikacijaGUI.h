@@ -9,6 +9,7 @@
 #include "Tipka.h"
 #include "Kontrole.h"
 #include "InfoPjesma.h"
+#include "Pjesma.h"
 #include <string>
 #include <vector>
 #include <memory>
@@ -33,7 +34,7 @@ private:
 	Kontrole kontrole;
 	AudioPlayer player;
 	InfoPjesma infoPjesma;
-	SkupPjesama svePjesme;
+	SkupPjesama* pSvePjesme;
 	std::vector<std::string> NizPjesmi;
 	//elementi aplikacije
 	//tok definiranja, logike i iscrtavanja elemenata na prozor je sljedeci:

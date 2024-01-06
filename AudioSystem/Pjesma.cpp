@@ -1,10 +1,10 @@
 #include "Pjesma.h"
 
 // Implementacija konstruktora
-Pjesma::Pjesma(unsigned int idPjesme, unsigned int idWav, unsigned int idSlika, const std::string& ime, const std::string& imeAutora,
+Pjesma::Pjesma(unsigned int idPjesme, std::string lokacijaPjesme, std::string lokcijaSlike, const std::string& ime, const std::string& imeAutora,
     bool pripadaAlbumu, const std::string& album, unsigned int idAlbum,
     bool jeLajkana, const std::string& datumObjave, const std::string& recordLabel)
-    : ID_Pjesme(idPjesme), ID_WAV(idWav), ID_SLIKA(idSlika), Ime(ime), ImeAutora(imeAutora),
+    : ID_Pjesme(idPjesme), lokacijaPjesme(lokacijaPjesme), lokacijaSlike(lokcijaSlike), Ime(ime), ImeAutora(imeAutora),
     DaLiPripadaAlbumu(pripadaAlbumu), Album(album), ID_Album(idAlbum),
     DaLiJeLajkana(jeLajkana), DatumObjave(datumObjave), RecordLabel(recordLabel)
 {
@@ -124,11 +124,21 @@ void Pjesma::setRecordLabel(const std::string& recordLabel)
     RecordLabel = recordLabel;
 }
 
-void Pjesma::getInfo()
+std::string Pjesma::getLokacijaPjesme() const
+{
+    return this->lokacijaPjesme;
+}
+
+std::string Pjesma::getLokacijaSlike() const
+{
+    return this->lokacijaSlike;
+}
+
+void Pjesma::getInfo() const
 {
     std::cout << this->getID_Pjesme() << "\n";
-    std::cout << this->getID_WAV() << "\n";
-    std::cout << this->getID_SLIKA() << "\n";
+    std::cout << this->getLokacijaPjesme() << "\n";
+    std::cout << this->getLokacijaSlike() << "\n";
     std::cout << this->getIme() << "\n";
     std::cout << this->getImeAutora() << "\n";
     std::cout << this->getDaLiPripadaAlbumu() << "\n";
