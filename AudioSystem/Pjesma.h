@@ -2,9 +2,9 @@
 
 #include <string>
 
-class Pjesma
-{
+class Pjesma {
 private:
+    unsigned int ID_Pjesme;
     unsigned int ID_WAV;
     unsigned int ID_SLIKA;
     std::string Ime;
@@ -17,12 +17,13 @@ private:
     std::string RecordLabel;
 
 public:
-    Pjesma(unsigned int idWav, unsigned int idSlika, const std::string& ime, const std::string& imeAutora,
+    Pjesma(unsigned int idPjesme, unsigned int idWav, unsigned int idSlika, const std::string& ime, const std::string& imeAutora,
         bool pripadaAlbumu, const std::string& album, unsigned int idAlbum,
         bool jeLajkana, const std::string& datumObjave, const std::string& recordLabel);
 
     ~Pjesma();
 
+    unsigned int getID_Pjesme() const;
     unsigned int getID_WAV() const;
     unsigned int getID_SLIKA() const;
     std::string getIme() const;
@@ -34,6 +35,7 @@ public:
     std::string getDatumObjave() const;
     std::string getRecordLabel() const;
 
+    void setID_Pjesme(unsigned int idPjesme);
     void setID_WAV(unsigned int idWav);
     void setID_SLIKA(unsigned int idSlika);
     void setIme(const std::string& ime);
