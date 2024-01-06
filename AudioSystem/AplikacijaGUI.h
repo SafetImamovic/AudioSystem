@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
-
+#include "SkuPjesama.h"
 #include "muzikaTest.h"
 #include "TextBox.h"
 #include "Tipka.h"
@@ -33,6 +33,7 @@ private:
 	Kontrole kontrole;
 	AudioPlayer player;
 	InfoPjesma infoPjesma;
+	SkupPjesama svePjesme;
 	std::vector<std::string> NizPjesmi;
 	//elementi aplikacije
 	//tok definiranja, logike i iscrtavanja elemenata na prozor je sljedeci:
