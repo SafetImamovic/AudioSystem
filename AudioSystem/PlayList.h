@@ -9,7 +9,7 @@ private:
 public:
     // Konstruktor
     PlayLista(const std::vector<Pjesma>& pjesme, const std::string& ime, const std::string& datumKreiranja,
-        bool ponoviSkupPjesama, bool shuffle);
+        bool ponoviSkupPjesama, bool shuffle, std::string kreator);
 
 
     // Primjer dodavanja pjesme u playlistu

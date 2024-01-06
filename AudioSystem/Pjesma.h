@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <iostream>
 
 class Pjesma {
 private:
@@ -46,5 +47,6 @@ public:
     void setDaLiJeLajkana(bool jeLajkana);
     void setDatumObjave(const std::string& datumObjave);
     void setRecordLabel(const std::string& recordLabel);
+    void getInfo();
 };
 

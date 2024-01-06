@@ -2,6 +2,10 @@
 #include <vector>
 #include "Pjesma.h"
 #include <string>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include <string>
 
 
 
@@ -29,8 +33,7 @@ public:
     void setPonoviSkupPjesama(bool ponoviSkupPjesama);
     void setShuffle(bool shuffle);
 
-
-    SkupPjesama(const std::string& ime);
+    SkupPjesama()=default;
 
     // Primjer dodavanja pjesme
     void dodajPjesmu(const Pjesma& pjesma);
@@ -40,17 +43,7 @@ public:
 
     // Funkcija za pretraživanje pjesama
     std::vector<Pjesma> pretraziPjesme(const std::string& kriterijum);
-};
 
-
-class PlayLista : public SkupPjesama {
-public:
-    // Konstruktor
-    PlayLista(const std::string& ime);
-
-    // Funkcija za uèitavanje svih instanci/objekata
-    void ucitajSveInstance(const SkupPjesama& skup);
-
-    // Funkcija za pretraživanje pjesama
-    void pretraziPjesme(const std::string& kriterijum);
+    //
+    std::vector<Pjesma> ucitajPjesmeIzDatoteke(const std::string& filename);
 };

@@ -2,7 +2,8 @@
 #include <iostream> 
 
 PlayLista::PlayLista(const std::vector<Pjesma>& pjesme, const std::string& ime, const std::string& datumKreiranja,
-    bool ponoviSkupPjesama, bool shuffle) : SkupPjesama(ime), Kreator(kreator) {
+    bool ponoviSkupPjesama, bool shuffle, std::string kreator) : SkupPjesama(ime), Kreator(kreator) {
+
     // Inicijalizacija datuma kreiranja
     azurirajDatumKreiranja();
 }
@@ -25,5 +26,6 @@ void PlayLista::azurirajDatumKreiranja() {
 
 
     std::cout << "Datum kreiranja playliste azuriran." << std::endl;
+ 
 }
 
