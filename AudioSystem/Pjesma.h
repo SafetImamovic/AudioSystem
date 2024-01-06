@@ -8,6 +8,8 @@ private:
     unsigned int ID_Pjesme;
     unsigned int ID_WAV;
     unsigned int ID_SLIKA;
+    std::string lokacijaPjesme;
+    std::string lokacijaSlike;
     std::string Ime;
     std::string ImeAutora;
     bool DaLiPripadaAlbumu;
@@ -18,11 +20,11 @@ private:
     std::string RecordLabel;
 
 public:
-    Pjesma(unsigned int idPjesme, unsigned int idWav, unsigned int idSlika, const std::string& ime, const std::string& imeAutora,
+    Pjesma(unsigned int idPjesme, std::string lokacijaPjesme, std::string lokcijaSlike, const std::string& ime, const std::string& imeAutora,
         bool pripadaAlbumu, const std::string& album, unsigned int idAlbum,
         bool jeLajkana, const std::string& datumObjave, const std::string& recordLabel);
 
-    ~Pjesma();
+    ~Pjesma() = default;
 
     unsigned int getID_Pjesme() const;
     unsigned int getID_WAV() const;
@@ -47,6 +49,8 @@ public:
     void setDaLiJeLajkana(bool jeLajkana);
     void setDatumObjave(const std::string& datumObjave);
     void setRecordLabel(const std::string& recordLabel);
-    void getInfo();
+    std::string getLokacijaPjesme() const;
+    std::string getLokacijaSlike() const;
+    void getInfo() const;
 };
 
