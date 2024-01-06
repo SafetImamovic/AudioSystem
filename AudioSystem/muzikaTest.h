@@ -1,6 +1,8 @@
 #pragma once
 #pragma comment(lib, "Strmiids.lib")
 #pragma comment(lib, "winmm.lib")
+#include "Pjesma.h"
+#include "PlayList.h"
 #include <iostream>
 #include <Windows.h>
 #include <mmsystem.h>
@@ -23,8 +25,9 @@
 class AudioPlayer
 {
 private:
-
-    std::vector<std::string> songList;
+    PlayLista* playLista;
+    std::vector<Pjesma> Pjesme;
+    
     std::string soundFilePath, stariFilePath;
     bool isPlaying;
     bool listaDisplayed;
@@ -58,7 +61,7 @@ public:
 
     ~AudioPlayer();
 
-    void setNiz(std::vector<std::string> pjesme);
+    void setNiz(PlayLista playLista);
 
     void Pokreni();
 
@@ -113,4 +116,5 @@ public:
     void PustiPjesmuPutanja(std::string putanja);
     std::string GetImePjesmePath();
     bool DaLiJeNovaPjesma(std::string TrenutnaPjesma);
+    Pjesma& getPjesmaObjekat();
 };
