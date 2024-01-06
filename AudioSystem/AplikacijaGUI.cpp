@@ -9,13 +9,26 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	//i fleksibilnija je kontrola
 
 	this->videoMode.height = 600; //visina prozora koja se smijesta unutar this->videoMode
-	this->videoMode.width = 1000; //sirina prozora koja se smijesta unutar this->videoMode
+	this->videoMode.width = 1280; //sirina prozora koja se smijesta unutar this->videoMode
 	InfoPjesma::visinaWindow = this->videoMode.height;
 	InfoPjesma::sirinaWindow = this->videoMode.width;
 
-	this->svePjesme.ucitajPjesmeIzDatoteke("C:/Users/hasic/OneDrive/Desktop/AudioSystem/AudioSystem/PjesmeData.txt");
+	
+	
+
+	SkupPjesama svePjesme("Sve Pjesme", "6.1.2024", true, true, "Moja Mama");
+	this->pSvePjesme = &svePjesme;
+
+
+	std::vector<Pjesma> pjesme = this->pSvePjesme->ucitajPjesmeIzDatoteke("PjesmeData.txt");
+	this->pSvePjesme->setPjesme(pjesme);
+	for (const Pjesma& pjesma : pjesme)
+	{
+		//pjesma.getInfo();
+	}
 	this->PostaviNizPjesmi();
-	this->player.SetGlasnoca(1);
+
+	this->player.SetGlasnoca(0.5);
 	this->InfoPjesmaKonfiguracija();
 
 }
@@ -311,19 +324,15 @@ void AplikacijaGUI::Scroll()
 
 void AplikacijaGUI::PostaviNizPjesmi()//test
 {
-	this->NizPjesmi.push_back("Pjesme/Skrillex with Bobby Raps - Leave Me Like This.wav");
-	this->NizPjesmi.push_back("Pjesme/Akon - SmackThat.wav");
-	this->NizPjesmi.push_back("Pjesme/Skrillex, Starrah & Four Tet - Butterflies.wav");
-	this->NizPjesmi.push_back("Pjesme/Dead Man Walking.wav");
-	this->NizPjesmi.push_back("Pjesme/Dua Lipa - New Rules.wav");
-	this->NizPjesmi.push_back("Pjesme/Skrillex - Fuji Opener (feat. Alvin Risk).wav");
-	this->NizPjesmi.push_back("Pjesme/Skrillex & Boys Noize - Fine Day Anthem.wav");
-	this->NizPjesmi.push_back("Pjesme/Skrillex, Bibi Bourelly, & Sonny Moore - Don't Get Too Close (Virtual Riot Remix).wav");
-	this->NizPjesmi.push_back("Pjesme/Virtual Riot - Back In Time ft. Angelika.wav");
-	this->NizPjesmi.push_back("Pjesme/Zomboy & MUST DIE! - Last One Standing.wav");
-	this->NizPjesmi.push_back("Pjesme/Knock2 - dashstar (VIP).wav");
 	
+	for (Pjesma& pjesma : this->pSvePjesme->getPjesme())
+	{
+		this->NizPjesmi.push_back(pjesma.getLokacijaPjesme());
+		std::cout << "\"" << pjesma.getLokacijaPjesme() << "\"" << std::endl;
+	}
+
 	this->player.setNiz(this->NizPjesmi);
+	
 }
 
 void AplikacijaGUI::UpdateImePjesme()
@@ -378,6 +387,7 @@ void AplikacijaGUI::PromjenaRezolucijaStaticInfoPjesma()
 AplikacijaGUI::AplikacijaGUI(sf::Font& font, sf::Font& fontEmoji, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja)
 //konstruktor poziva privatne metode koje inicijaliziraju varijable i prozor
 {
+
 	this->font = font;
 	this->fontEmoji = fontEmoji;
 	this->PrimarnaBoja = PrimarnaBoja;
