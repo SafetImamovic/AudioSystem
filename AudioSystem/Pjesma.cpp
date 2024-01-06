@@ -1,24 +1,23 @@
-
 #include "Pjesma.h"
 
 // Implementacija konstruktora
-Pjesma::Pjesma(unsigned int idWav, unsigned int idSlika, const std::string& ime, const std::string& imeAutora,
+Pjesma::Pjesma(unsigned int idPjesme, unsigned int idWav, unsigned int idSlika, const std::string& ime, const std::string& imeAutora,
     bool pripadaAlbumu, const std::string& album, unsigned int idAlbum,
     bool jeLajkana, const std::string& datumObjave, const std::string& recordLabel)
-    : ID_WAV(idWav), ID_SLIKA(idSlika), Ime(ime), ImeAutora(imeAutora),
+    : ID_Pjesme(idPjesme), ID_WAV(idWav), ID_SLIKA(idSlika), Ime(ime), ImeAutora(imeAutora),
     DaLiPripadaAlbumu(pripadaAlbumu), Album(album), ID_Album(idAlbum),
     DaLiJeLajkana(jeLajkana), DatumObjave(datumObjave), RecordLabel(recordLabel)
 {
 
 }
 
-// Implementacija destruktora
-Pjesma::~Pjesma()
+// Implementacija gettera
+unsigned int Pjesma::getID_Pjesme() const
 {
-    // Nije potrebno ništa posebno oslobaðati jer ne koristimo dinamièki alocirane resurse u ovoj klasi
+    return ID_Pjesme;
 }
 
-// Implementacija gettera
+
 unsigned int Pjesma::getID_WAV() const
 {
     return ID_WAV;
@@ -70,6 +69,11 @@ std::string Pjesma::getRecordLabel() const
 }
 
 // Implementacija settera
+void Pjesma::setID_Pjesme(unsigned int idPjesme)
+{
+    ID_Pjesme = idPjesme;
+}
+
 void Pjesma::setID_WAV(unsigned int idWav)
 {
     ID_WAV = idWav;
