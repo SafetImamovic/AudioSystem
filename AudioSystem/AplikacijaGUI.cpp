@@ -223,18 +223,15 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 	{
 		if (this->IPRMain.at(i).Hover(*this->window, this->IPRMain.at(i).GlavnaPozadina))
 		{
-			if (this->IPRMain.at(i).GlavnaPozadina.getPosition().y < this->videoMode.height - 120)
-			{
-				this->IPRMain.at(i).PromijeniBojuPozadine(this->AkcenatBoja);
-
-				//this->player.unesiIme(this->IPRMain.at(i).lokacijaPjesme);
-				this->player.setTrenutniIndexPjesme(this->IPRMain.at(i).intID - 1);
-				//TREBA NAPRAVITI FUNKCIJU
-				this->player.novaPjesma();
-				//std::cout << "Pozvana!\n";
-
-				this->UpdateImePjesme();
-			}
+			this->IPRMain.at(i).PromijeniBojuPozadine(this->AkcenatBoja);
+			
+			//this->player.unesiIme(this->IPRMain.at(i).lokacijaPjesme);
+			this->player.setTrenutniIndexPjesme(this->IPRMain.at(i).intID - 1);
+			//TREBA NAPRAVITI FUNKCIJU
+			this->player.trenutnaPjesma();
+			std::cout << "Pozvana!\n";
+			
+			this->UpdateImePjesme();
 		}
 		else
 		{
