@@ -61,7 +61,7 @@ public:
 
     ~AudioPlayer();
 
-    void setNiz(PlayLista playLista);
+    void setNiz(PlayLista playLista, float startSystemVolume);
 
     void Pokreni();
 
