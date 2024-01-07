@@ -9,12 +9,12 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	//i fleksibilnija je kontrola
 
 	this->videoMode.height = 600; //visina prozora koja se smijesta unutar this->videoMode
-	this->videoMode.width = 1280; //sirina prozora koja se smijesta unutar this->videoMode
+	this->videoMode.width = 1920; //sirina prozora koja se smijesta unutar this->videoMode
 	InfoPjesma::visinaWindow = this->videoMode.height;
 	InfoPjesma::sirinaWindow = this->videoMode.width;
 
 	
-	
+	this->CreateShorcut();
 
 	PlayLista svePjesme("Sve Pjesme", "6.1.2024", true, true, "Moja Mama");
 	this->pSvePjesme = &svePjesme;
@@ -27,11 +27,25 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	//	pjesma.getInfo();
 	//}
 
-	this->player.setNiz(svePjesme);
+
+	//this->IPR.SetInfoPjesmaRender(pjesme.at(0), this->font, this->fontEmoji);
+	//this->IPR2.SetInfoPjesmaRender(pjesme.at(1), this->font, this->fontEmoji);
+
+
+	for (const Pjesma& pjesma : pjesme)
+	{
+		InfoPjesma::InfoPjesmaRender temp;
+		temp.SetInfoPjesmaRender(pjesma, pjesma.getLokacijaSlike(), this->font, this->fontEmoji);
+		this->IPRMain.push_back(temp);
+	}
+	
+
+
+	this->player.setNiz(svePjesme, 0.5f);
 
 	//this->PostaviNizPjesmi();
 
-	this->player.SetGlasnoca(0.5);
+	
 	this->InfoPjesmaKonfiguracija();
 
 }
@@ -171,6 +185,10 @@ void AplikacijaGUI::RenderSveElemente()
 	//	this->TextBoxovi.at(i).DrawTo(*this->window);
 	//}
 	
+	for (InfoPjesma::InfoPjesmaRender& pjesma : this->IPRMain)
+	{
+		pjesma.Render(*this->window, "");
+	}
 
 	this->kontrole.RenderPozadina(*this->window);
 	DrawToSveTipke(*this->window, this->kontrole.Tipke);
@@ -249,8 +267,11 @@ void AplikacijaGUI::InfoPjesmaKonfiguracija()
 	//for(int i = 0; i < 20; i++)
 	//	pjesmeZaSad.push_back("nice");
 	
+	std::vector<Pjesma> Pjesme = this->pSvePjesme->getPjesme();
+	Pjesme.resize(this->pSvePjesme->getPjesme().size());
 
-	InfoPjesma::SetList("Naslov Liste", "Kreator Liste", this->NizPjesmi, false, *this->window);
+	InfoPjesma::SetList("Naslov Liste", "Kreator Liste", Pjesme, false, *this->window);
+	InfoPjesma::PostaviPozadineDesno();
 	InfoPjesma::PostaviPozadineDesno();
 	InfoPjesma::SetListeDesno(pjesmeZaSad, *this->window);
 
@@ -259,6 +280,7 @@ void AplikacijaGUI::InfoPjesmaKonfiguracija()
 void AplikacijaGUI::UpdateInfoPjesma()
 {
 	InfoPjesma::Update();
+	
 }
 
 void AplikacijaGUI::UpdateStanjeTipke()
@@ -355,6 +377,12 @@ void AplikacijaGUI::UpdateImePjesme()
 
 		);
 		InfoPjesma::rateNaslov = -0.001;
+
+		InfoPjesma::textPjesnici.setPosition(
+			InfoPjesma::PaddingHorizontal + 1,
+			InfoPjesma::VelicinaLijevo.x + InfoPjesma::PaddingVertical + 20 + 20
+		);
+		InfoPjesma::ratePjesnici = -0.001;
 	}
 }
 
@@ -380,6 +408,18 @@ void AplikacijaGUI::PromjenaRezolucijaStaticInfoPjesma()
 {
 	InfoPjesma::visinaWindow = this->videoMode.height;
 	InfoPjesma::sirinaWindow = this->videoMode.width;
+	for(int i = 0; i < this->IPRMain.size(); i++)
+		this->IPRMain.at(i).FixPozicija(400, this->videoMode.width - 400 - 300);
+	//InfoPjesma::VelicinaLijevo = sf::Vector2f(300, InfoPjesma::visinaWindow);
+	//InfoPjesma::BaznaRezolucijaSlike = 300;
+	
+	//InfoPjesma::ResizeCenter();
+
+}
+
+void AplikacijaGUI::CreateShorcut()
+{
+	
 }
 
 
@@ -450,7 +490,12 @@ void AplikacijaGUI::UpdatePollEvents() //ova metoda osvjezava eventove, npr. int
 			if (TextBox::JE_OZNACEN == false)
 			{
 				if (this->event.key.code == sf::Keyboard::Space)
+				{
 					this->player.pustiPauza();
+					float tempp = this->kontrole.UpdatePozicijaSimbolaWindowGlasnoca(*this->window);
+					player.SetGlasnoca(tempp);
+				}
+					
 
 				if (this->event.key.code == sf::Keyboard::Right)
 					this->player.premotajUnaprijed();
@@ -525,6 +570,11 @@ void AplikacijaGUI::RenderGUI() //renderuje objekte, elemente aplikacije
 	//--------ovdje zavrsava pozivanje metoda koje iscrtavaju elemente-------
 	
 	
+	//this->IPR.Render(*this->window);
+	//this->IPR2.Render(*this->window);
+
+	
+
 
 	this->window->display(); //ovo je indikator da je frame zavrsen sa crtanjem
     //izmedju window.clear() i window.display() crtamo prozor tj. elemente unutar prozora
