@@ -93,6 +93,8 @@ public:
 
     void staraPjesma();
 
+    void trenutnaPjesma();
+
     void premotajUnazad();
 
     void premotajUnaprijed();
