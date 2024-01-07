@@ -141,7 +141,7 @@ bool TextBox::JeOznacen()
 void TextBox::Clear()
 {
 	this->text.str("");
-	this->textbox.setString("");
+	this->textbox.setString("_");
 }
 
 void TextBox::PromijeniBojuPozadine(sf::Color NovaBoja)

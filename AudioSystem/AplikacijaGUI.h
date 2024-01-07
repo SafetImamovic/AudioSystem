@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
+#include <ShlObj.h>
 #include "SkuPjesama.h"
 #include "muzikaTest.h"
 #include "TextBox.h"
@@ -37,6 +38,7 @@ private:
 	InfoPjesma infoPjesma;
 	PlayLista* pSvePjesme;
 	std::vector<std::string> NizPjesmi;
+	std::vector<InfoPjesma::InfoPjesmaRender> IPRMain;
 	//elementi aplikacije
 	//tok definiranja, logike i iscrtavanja elemenata na prozor je sljedeci:
 	//1. deklaracija elementa ovdje
@@ -73,6 +75,7 @@ private:
 	void UpdateImePjesme();
 	void ResizeWindowEvent();
 	void PromjenaRezolucijaStaticInfoPjesma();
+	void CreateShorcut();
 
 
 public:
