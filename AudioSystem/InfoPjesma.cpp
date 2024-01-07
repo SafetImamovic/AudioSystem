@@ -279,9 +279,12 @@ void InfoPjesma::RenderSvePjesme(std::vector<Pjesma> &Pjesme, sf::RenderWindow& 
 
 void InfoPjesma::Update()
 {
+	//std::cout << "move\n";
+	//InfoPjesma::textNaslov.move(sf::Vector2f(InfoPjesma::rateNaslov, 0));
 	InfoPjesma::PozadinaPlaylist.setPosition(sf::Vector2f(InfoPjesma::sirinaWindow - 300, 0));
 	if (InfoPjesma::textNaslov.getGlobalBounds().width > InfoPjesma::VelicinaLijevo.x - InfoPjesma::PaddingHorizontal * 2)
 	{
+		std::cout << "velicina lijevo " << InfoPjesma::VelicinaLijevo.x << ", global bounds x " << InfoPjesma::textNaslov.getGlobalBounds().width << "\n";
 		
 		InfoPjesma::textNaslov.move(sf::Vector2f(InfoPjesma::rateNaslov, 0));
 		//std::cout << InfoPjesma::textNaslov.getPosition().x << "\n";

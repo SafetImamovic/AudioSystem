@@ -10,16 +10,17 @@
 class InfoPjesma : public ElementarneKomponente
 {
 public:
-	struct InfoPjesmaRender //ovo je strukt za render pjesme koja ce se nalazit u centru GUI-a, skupina pjesama
+	struct InfoPjesmaRender : public ElementarneKomponente //ovo je strukt za render pjesme koja ce se nalazit u centru GUI-a, skupina pjesama
 	{
 		static int BrojPjesama;
 		int Visina = 40;
 		int paddingHorizontal = 10;
 		int paddingVertical = 8;
-		sf::Color PrimarnaBoja;
+		sf::Color PrimarnaBoja = sf::Color(10, 10, 10);
 		sf::Font font;
 		sf::Font fontEmoji;
 		std::string lokacijaSlike;
+		std::string lokacijaPjesme;
 
 		int intID;
 		sf::Texture Cover;
@@ -34,6 +35,7 @@ public:
 
 		std::vector<Tipka> Tipke;
 
+		sf::RectangleShape GlavnaPozadina;
 		sf::RectangleShape IDPozadina;
 		sf::RectangleShape ImePozadina;
 		sf::RectangleShape ImeAutoraPozadina;
@@ -43,6 +45,9 @@ public:
 
 		void SetInfoPjesmaRender(const Pjesma& pjesma, std::string lokacijaSlike, sf::Font& font, sf::Font& fontEmoji)
 		{
+			this->GlavnaPozadina.setFillColor(this->PrimarnaBoja);
+			this->lokacijaPjesme = pjesma.getLokacijaPjesme();
+
 			this->lokacijaSlike = lokacijaSlike;
 			intID = pjesma.getID_Pjesme();
 			InfoPjesmaRender::BrojPjesama++;
@@ -63,6 +68,8 @@ public:
 			this->TrajanjePjesme.setString("3:30");
 			this->DodajPjesmuUPlaylist.setString("+");
 			this->Like.setString(L"\uE006");
+
+			this->LoadCover();
 		}
 
 		void SetFont(sf::Font& font, sf::Font& fontEmoji)
@@ -88,11 +95,8 @@ public:
 
 		void Render(sf::RenderWindow& window, std::string lokacijaSlike)
 		{
+			window.draw(this->GlavnaPozadina);
 			window.draw(this->ID);
-
-			this->Cover.loadFromFile(this->lokacijaSlike);
-			this->CoverRender.setTexture(this->Cover);
-
 			window.draw(this->CoverRender);
 			window.draw(this->Ime);
 			window.draw(this->ImeAutora);
@@ -103,8 +107,18 @@ public:
 
 		void FixPozicija(int lijeviOffset, int sirinaCentar)
 		{
+			this->LoadCover();
 			int spacing = (sirinaCentar - 20 - 40 - 120) / 3;
 
+			this->GlavnaPozadina.setPosition(sf::Vector2f(
+				lijeviOffset,
+				200 + (50 * (this->intID - 1)) - 5
+			));
+
+			this->GlavnaPozadina.setSize(sf::Vector2f(
+				sirinaCentar,
+				this->Visina + 10
+			));
 
 			this->ID.setPosition(lijeviOffset + this->paddingHorizontal, 200 + paddingVertical + (50 * (this->intID - 1)));
 			this->CoverRender.setPosition(lijeviOffset + this->paddingHorizontal + 20, 200 + (50 * (this->intID - 1)));
@@ -115,6 +129,17 @@ public:
 			this->TrajanjePjesme.setPosition(lijeviOffset + this->paddingHorizontal + sirinaCentar - 120, 200 + paddingVertical + (50 * (this->intID - 1)));
 			this->DodajPjesmuUPlaylist.setPosition(lijeviOffset + this->paddingHorizontal + sirinaCentar - 80, 200 + paddingVertical + (50 * (this->intID - 1)));
 			this->Like.setPosition(lijeviOffset + this->paddingHorizontal + sirinaCentar - 40, 200 + paddingVertical + (50 * (this->intID - 1)));
+		}
+
+		void PromijeniBojuPozadine(sf::Color boja)
+		{
+			this->GlavnaPozadina.setFillColor(boja);
+		}
+
+		void LoadCover()
+		{
+			this->Cover.loadFromFile(this->lokacijaSlike);
+			this->CoverRender.setTexture(this->Cover);
 		}
 	};
 

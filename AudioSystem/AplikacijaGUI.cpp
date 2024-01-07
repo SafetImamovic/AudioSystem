@@ -37,7 +37,12 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 		InfoPjesma::InfoPjesmaRender temp;
 		temp.SetInfoPjesmaRender(pjesma, pjesma.getLokacijaSlike(), this->font, this->fontEmoji);
 		this->IPRMain.push_back(temp);
+		
 	}
+
+	for(int i = 0; i < pjesme.size(); i++)
+		this->IPRMain.at(i).LoadCover();
+	
 	
 
 
@@ -114,6 +119,14 @@ void AplikacijaGUI::ProvjeriHoverZaSveElemente()
 	ProvjeriHoverZaSveTipke(*this->window, InfoPjesma::Tipke, this->PrimarnaBoja, this->SekundarnaBoja);
 
 	ProvjeriHoverZaSveTextBoxove(*this->window, InfoPjesma::TextBoxovi, this->PrimarnaBoja, this->SekundarnaBoja);
+
+	for (int i = 0; i < this->IPRMain.size(); i++)
+	{
+		if (this->IPRMain.at(i).Hover(*this->window, this->IPRMain.at(i).GlavnaPozadina))
+			this->IPRMain.at(i).PromijeniBojuPozadine(sf::Color::Black);
+		else
+			this->IPRMain.at(i).PromijeniBojuPozadine(sf::Color(10,10,10));
+	}
 	
 }
 
@@ -158,6 +171,27 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 
 	this->UpdateGlasnocaBar();
 	ProvjeriClickZaSveTipke(*this->window, InfoPjesma::Tipke, this->PrimarnaBoja, this->AkcenatBoja);
+
+	for (int i = 0; i < this->IPRMain.size(); i++)
+	{
+		if (this->IPRMain.at(i).Hover(*this->window, this->IPRMain.at(i).GlavnaPozadina))
+		{
+			this->IPRMain.at(i).PromijeniBojuPozadine(this->AkcenatBoja);
+			
+			//this->player.unesiIme(this->IPRMain.at(i).lokacijaPjesme);
+			this->player.setTrenutniIndexPjesme(this->IPRMain.at(i).intID - 2);
+			//TREBA NAPRAVITI FUNKCIJU
+			this->player.novaPjesma();
+			std::cout << "Pozvana!\n";
+			
+			this->UpdateImePjesme();
+		}
+		else
+		{
+			this->IPRMain.at(i).PromijeniBojuPozadine(sf::Color(10, 10, 10));
+
+		}
+	}
 }
 
 void AplikacijaGUI::RenderSveElemente()
@@ -167,6 +201,11 @@ void AplikacijaGUI::RenderSveElemente()
 	InfoPjesma::RenderDesno(*this->window);
 	InfoPjesma::RenderListDesno(*this->window);
 	InfoPjesma::pozadinaPjesma.setSize(sf::Vector2f(InfoPjesma::VelicinaLijevo.x, this->videoMode.height));
+
+	for (InfoPjesma::InfoPjesmaRender& pjesma : this->IPRMain)
+	{
+		pjesma.Render(*this->window, "");
+	}
 
 	InfoPjesma::dimenzijeLista = sf::Vector2f(InfoPjesma::sirinaWindow - InfoPjesma::VelicinaLijevo.x - 300, InfoPjesma::visinaWindow - 60 - 50);
 	InfoPjesma::pozicijaLista = sf::Vector2f(InfoPjesma::VelicinaLijevo.x, 0);
@@ -185,10 +224,7 @@ void AplikacijaGUI::RenderSveElemente()
 	//	this->TextBoxovi.at(i).DrawTo(*this->window);
 	//}
 	
-	for (InfoPjesma::InfoPjesmaRender& pjesma : this->IPRMain)
-	{
-		pjesma.Render(*this->window, "");
-	}
+	
 
 	this->kontrole.RenderPozadina(*this->window);
 	DrawToSveTipke(*this->window, this->kontrole.Tipke);
