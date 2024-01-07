@@ -179,9 +179,9 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 			this->IPRMain.at(i).PromijeniBojuPozadine(this->AkcenatBoja);
 			
 			//this->player.unesiIme(this->IPRMain.at(i).lokacijaPjesme);
-			this->player.setTrenutniIndexPjesme(this->IPRMain.at(i).intID - 2);
+			this->player.setTrenutniIndexPjesme(this->IPRMain.at(i).intID - 1);
 			//TREBA NAPRAVITI FUNKCIJU
-			this->player.novaPjesma();
+			this->player.trenutnaPjesma();
 			std::cout << "Pozvana!\n";
 			
 			this->UpdateImePjesme();
