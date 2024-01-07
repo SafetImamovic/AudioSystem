@@ -431,6 +431,60 @@ void AudioPlayer::staraPjesma() {
     }
 }
 
+void AudioPlayer::trenutnaPjesma() {
+    this->shouldStop = true;
+    this->tempSekunde = 0;    
+
+    if(this->trenutniIndeksPjesme == -1)
+		this->trenutniIndeksPjesme=0;
+
+    if (this->trenutniIndeksPjesme < this->Pjesme.size()) {
+        try {
+            this->effectiveSpeed = 1.0;
+            this->brzina = 1.0;
+            music.stop();
+            this->stariFilePath = this->soundFilePath;
+            this->soundFilePath = this->Pjesme.at(this->trenutniIndeksPjesme).getLokacijaPjesme();
+
+            std::cout << "Stara pjesma:\t\t " << this->stariFilePath << "\n";
+            std::cout << "Trenutna Pjesma:\t " << this->soundFilePath << "\n";
+
+            music.openFromFile(soundFilePath);
+            music.setPitch(1.0);
+            PromijeniBrzinuReprodukcije(1.0);
+            this->pauseTime = sf::Time::Zero;
+            //this->currentTime = sf::Time::Zero;
+            music.play();
+            this->trajanjePjesme = music.getDuration().asSeconds();
+            this->isPlaying = true;
+            this->isPlaybackComplete = false;
+            this->shouldStop = false;
+            this->seconds = 1;
+            this->miliseconds = 100;
+
+            std::thread(&AudioPlayer::Vrijeme, this).detach();
+        }
+        catch (const std::exception& e) {
+            std::cerr << "Greska tokom pokretanja: " << e.what() << std::endl;
+
+            this->isPlaying = false;
+            this->isPlaybackComplete = true;
+        }
+        catch (...) {
+            std::cerr << "Random greska\n";
+            this->isPlaying = false;
+            this->isPlaybackComplete = true;
+        }
+    }
+    else {
+        //std::cout << "Kraj liste, stavljanje na pocetak." << std::endl;
+        this->isPlaying = false;
+        this->isPlaybackComplete = true;
+        //this->soundFilePath = songList[0];
+
+    }
+}
+
 // Metoda za pojacavanje zvuka
 void AudioPlayer::Pojacaj(float velicina) {
 
