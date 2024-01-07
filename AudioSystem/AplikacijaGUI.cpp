@@ -3,6 +3,53 @@
 #include "GlobalneFunkcije.h"
 //----------------------private----------------------------------//
 
+void AplikacijaGUI::MoveUp()
+{
+	sf::Vector2f moveRate(0, -20);
+
+	if (this->IPRMain.size() == 0)
+		return;
+
+	if (this->IPRMain.at(this->IPRMain.size() - 1).GlavnaPozadina.getPosition().y > InfoPjesma::visinaWindow - 200)
+	{
+		for (int i = 0; i < this->IPRMain.size(); i++)
+		{
+			this->IPRMain.at(i).GlavnaPozadina.move(moveRate);
+			this->IPRMain.at(i).ID.move(moveRate);
+			this->IPRMain.at(i).CoverRender.move(moveRate);
+			this->IPRMain.at(i).Ime.move(moveRate);
+			this->IPRMain.at(i).ImeAutora.move(moveRate);
+			this->IPRMain.at(i).TrajanjePjesme.move(moveRate);
+			this->IPRMain.at(i).DodajPjesmuUPlaylist.move(moveRate);
+			this->IPRMain.at(i).Like.move(moveRate);
+		}
+	}
+}
+
+void AplikacijaGUI::MoveDown()
+{
+	sf::Vector2f moveRate(0, 20);
+
+	if (this->IPRMain.size() == 0)
+		return;
+
+	if (this->IPRMain.at(0).GlavnaPozadina.getPosition().y < 180)
+	{
+		for (int i = 0; i < this->IPRMain.size(); i++)
+		{
+			this->IPRMain.at(i).GlavnaPozadina.move(moveRate);
+			this->IPRMain.at(i).ID.move(moveRate);
+			this->IPRMain.at(i).CoverRender.move(moveRate);
+			this->IPRMain.at(i).Ime.move(moveRate);
+			this->IPRMain.at(i).ImeAutora.move(moveRate);
+			this->IPRMain.at(i).TrajanjePjesme.move(moveRate);
+			this->IPRMain.at(i).DodajPjesmuUPlaylist.move(moveRate);
+			this->IPRMain.at(i).Like.move(moveRate);
+		}
+	}
+
+}
+
 void AplikacijaGUI::InicijalizacijaVarijabli()
 {
 	this->window = nullptr; //dobra praksa da se pointer inicijalizira sa nullptr. incicijalizirmao prozor kao pointer jer zelimo da ga alociramo na heap
@@ -197,15 +244,23 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 void AplikacijaGUI::RenderSveElemente()
 {
 	InfoPjesma::RenderPjesma(*this->window);
-	InfoPjesma::RenderList(*this->window);
+	
 	InfoPjesma::RenderDesno(*this->window);
 	InfoPjesma::RenderListDesno(*this->window);
+	
 	InfoPjesma::pozadinaPjesma.setSize(sf::Vector2f(InfoPjesma::VelicinaLijevo.x, this->videoMode.height));
-
+	window->draw(InfoPjesma::pozadinaLista);
 	for (InfoPjesma::InfoPjesmaRender& pjesma : this->IPRMain)
 	{
 		pjesma.Render(*this->window, "");
 	}
+
+	InfoPjesma::RenderList(*this->window);
+	
+
+	DrawToSveTipke(*this->window, InfoPjesma::Tipke);
+
+	
 
 	InfoPjesma::dimenzijeLista = sf::Vector2f(InfoPjesma::sirinaWindow - InfoPjesma::VelicinaLijevo.x - 300, InfoPjesma::visinaWindow - 60 - 50);
 	InfoPjesma::pozicijaLista = sf::Vector2f(InfoPjesma::VelicinaLijevo.x, 0);
@@ -213,10 +268,7 @@ void AplikacijaGUI::RenderSveElemente()
 	InfoPjesma::pozadinaLista.setSize(InfoPjesma::dimenzijeLista);
 	InfoPjesma::pozadinaLista.setPosition(InfoPjesma::pozicijaLista);
 
-	InfoPjesma::CoverUpListaUp.setSize(sf::Vector2f(InfoPjesma::sirinaWindow - InfoPjesma::VelicinaLijevo.x - 300, 220));
-	InfoPjesma::CoverUpListaUp.setPosition(sf::Vector2f(InfoPjesma::VelicinaLijevo.x, 0));
-
-	DrawToSveTipke(*this->window, InfoPjesma::Tipke);
+	
 
 
 	//for (int i = 0; i < this->TextBoxovi.size(); i++)
@@ -358,29 +410,20 @@ void AplikacijaGUI::LCtrlObrisi()
 
 void AplikacijaGUI::Scroll()
 {
-	if (ProvjeriHoverRegija(*this->window, { 500, 220 }, sf::Vector2f(this->videoMode.width - InfoPjesma::VelicinaLijevo.x - 300, this->videoMode.height - 110)))
+	if (ProvjeriHoverRegija(*this->window, { 400, 200 }, sf::Vector2f(this->videoMode.width - InfoPjesma::VelicinaLijevo.x - 300, this->videoMode.height - 110)))
 	{
+		std::cout << "Nice" << "\n";
 		if (this->event.mouseWheel.delta == -1)
 		{
-			InfoPjesma::MoveUp("Pjesme");
+			this->MoveUp();
 		}
 		else if (this->event.mouseWheel.delta == 1)
 		{
-			InfoPjesma::MoveDown("Pjesme");
+			this->MoveDown();
 		}
 	}
-
-	if (ProvjeriHoverRegija(*this->window, sf::Vector2f(this->videoMode.width - 300, 0), sf::Vector2f(300, this->videoMode.height - 110)))
-	{
-		if (this->event.mouseWheel.delta == -1)
-		{
-			InfoPjesma::MoveUp("Playliste");
-		}
-		else if (this->event.mouseWheel.delta == 1)
-		{
-			InfoPjesma::MoveDown("Playliste");
-		}
-	}
+	else
+		std::cout << "X" << "\n";
 }
 
 void AplikacijaGUI::PostaviNizPjesmi()//test
@@ -405,7 +448,7 @@ void AplikacijaGUI::UpdateImePjesme()
 
 	if (this->player.DaLiJeNovaPjesma(this->player.GetImePjesmePath()))
 	{
-		std::cout << "Called!" << std::endl;
+		//std::cout << "Called!" << std::endl;
 		InfoPjesma::textNaslov.setPosition(
 			InfoPjesma::PaddingHorizontal + 1,
 			
@@ -434,7 +477,7 @@ void AplikacijaGUI::ResizeWindowEvent()
 	this->videoMode.width = vidljivaPovrsina.width;
 	this->window->setView(sf::View(vidljivaPovrsina));
 	this->kontrole.SetRezolucija(this->videoMode);
-	std::cout << this->videoMode.width << "\n";
+	//std::cout << this->videoMode.width << "\n";
 	this->PromjenaRezolucijaStaticInfoPjesma();
 	//InfoPjesma::CoverRender.setScale(0.8f, 0.8f);
 

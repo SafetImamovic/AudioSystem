@@ -39,6 +39,8 @@ private:
 	PlayLista* pSvePjesme;
 	std::vector<std::string> NizPjesmi;
 	std::vector<InfoPjesma::InfoPjesmaRender> IPRMain;
+	void MoveUp();
+	void MoveDown();
 	//elementi aplikacije
 	//tok definiranja, logike i iscrtavanja elemenata na prozor je sljedeci:
 	//1. deklaracija elementa ovdje
