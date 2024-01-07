@@ -117,4 +117,5 @@ public:
     std::string GetImePjesmePath();
     bool DaLiJeNovaPjesma(std::string TrenutnaPjesma);
     Pjesma& getPjesmaObjekat();
+    void setTrenutniIndexPjesme(size_t index);
 };

@@ -201,13 +201,7 @@ void AudioPlayer::Izbornik(int izbor) {
 
 // Metoda za unos imena pjesme
 void AudioPlayer::unesiIme(std::string fileName) {
-    //std::cout << "Unesi ime: ";
-    //std::cin.ignore();
-    //getline(std::cin, fileName);
-
-    //if (!std::filesystem::path(fileName).has_extension()) {
-    //    fileName += ".wav";
-    //} 
+    
     this->soundFilePath = fileName;
 
    
@@ -648,6 +642,11 @@ bool AudioPlayer::DaLiJeNovaPjesma(std::string TrenutnaPjesma)
 Pjesma& AudioPlayer::getPjesmaObjekat()
 {
     return this->Pjesme.at(this->trenutniIndeksPjesme);
+}
+
+void AudioPlayer::setTrenutniIndexPjesme(size_t index)
+{
+    this->trenutniIndeksPjesme = index;
 }
 
 size_t AudioPlayer::GetSekunde() const
