@@ -67,7 +67,11 @@ public:
 			this->ImeAutora.setString(pjesma.getImeAutora());
 			this->TrajanjePjesme.setString("3:30");
 			this->DodajPjesmuUPlaylist.setString("+");
-			this->Like.setString(L"\uE006");
+
+			if(!pjesma.getDaLiJeLajkana())
+				this->Like.setString(L"\uE006");
+			else
+				this->Like.setString(L"\uE00B");
 
 			this->LoadCover();
 		}
@@ -120,7 +124,11 @@ public:
 				this->Visina + 10
 			));
 
-			this->ID.setPosition(lijeviOffset + this->paddingHorizontal, 200 + paddingVertical + (50 * (this->intID - 1)));
+			if(this->intID < 10)
+				this->ID.setPosition(lijeviOffset + this->paddingHorizontal, 200 + paddingVertical + (50 * (this->intID - 1)));
+			else
+				this->ID.setPosition(lijeviOffset + this->paddingHorizontal - 6, 200 + paddingVertical + (50 * (this->intID - 1)));
+
 			this->CoverRender.setPosition(lijeviOffset + this->paddingHorizontal + 20, 200 + (50 * (this->intID - 1)));
 			this->CoverRender.setScale({ 0.1, 0.1 });
 
@@ -128,7 +136,7 @@ public:
 			this->ImeAutora.setPosition(lijeviOffset + this->paddingHorizontal + (spacing * 1.5), 200 + paddingVertical + (50 * (this->intID - 1)));
 			this->TrajanjePjesme.setPosition(lijeviOffset + this->paddingHorizontal + sirinaCentar - 120, 200 + paddingVertical + (50 * (this->intID - 1)));
 			this->DodajPjesmuUPlaylist.setPosition(lijeviOffset + this->paddingHorizontal + sirinaCentar - 80, 200 + paddingVertical + (50 * (this->intID - 1)));
-			this->Like.setPosition(lijeviOffset + this->paddingHorizontal + sirinaCentar - 40, 200 + paddingVertical + (50 * (this->intID - 1)));
+			this->Like.setPosition(lijeviOffset + this->paddingHorizontal + sirinaCentar - 40, 200 + paddingVertical + (50 * (this->intID - 1)) + 2);
 		}
 
 		void PromijeniBojuPozadine(sf::Color boja)
@@ -158,9 +166,9 @@ public:
 	static sf::Text textNaslov;
 	static std::string PjesniciPjesme;
 	static sf::Text textPjesnici;
-	static std::string NaslovListe;
+	static std::wstring NaslovListe;
 	static sf::Text textNaslovListe;
-	static std::string KreatorListe;
+	static std::wstring KreatorListe;
 	static sf::Text textKreatroListe;
 	static sf::Font font;
 	static sf::Font fontEmoji;
@@ -198,7 +206,7 @@ public:
 	InfoPjesma() = default;
 	static void SetPjesma(std::string naslov, std::string pjesnici, sf::Font &font, sf::Font& fontEmoji);
 	static void RenderPjesma(sf::RenderWindow& window);
-	static void SetList(std::string naslov, std::string kreator, std::vector<Pjesma>& Pjesme, bool VrstaListeBool, sf::RenderWindow& window);
+	static void SetList(std::wstring naslov, std::wstring kreator, std::vector<Pjesma>& Pjesme, bool VrstaListeBool, sf::RenderWindow& window);
 	static void SetListeDesno(std::vector<std::string> ListeZaSad, sf::RenderWindow& window);
 	static void RenderList(sf::RenderWindow& window);
 	static void RenderListDesno(sf::RenderWindow& window);
