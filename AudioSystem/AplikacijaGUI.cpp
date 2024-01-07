@@ -5,7 +5,7 @@
 
 void AplikacijaGUI::MoveUp()
 {
-	sf::Vector2f moveRate(0, -20);
+	sf::Vector2f moveRate(0, -40);
 
 	if (this->IPRMain.size() == 0)
 		return;
@@ -28,7 +28,7 @@ void AplikacijaGUI::MoveUp()
 
 void AplikacijaGUI::MoveDown()
 {
-	sf::Vector2f moveRate(0, 20);
+	sf::Vector2f moveRate(0, 40);
 
 	if (this->IPRMain.size() == 0)
 		return;
@@ -169,12 +169,14 @@ void AplikacijaGUI::ProvjeriHoverZaSveElemente()
 
 	for (int i = 0; i < this->IPRMain.size(); i++)
 	{
-		if (this->IPRMain.at(i).Hover(*this->window, this->IPRMain.at(i).GlavnaPozadina))
-			this->IPRMain.at(i).PromijeniBojuPozadine(sf::Color::Black);
-		else
-			this->IPRMain.at(i).PromijeniBojuPozadine(sf::Color(10,10,10));
+		if (this->IPRMain.at(i).GlavnaPozadina.getPosition().y < this->videoMode.height - 160)
+		{
+			if (this->IPRMain.at(i).Hover(*this->window, this->IPRMain.at(i).GlavnaPozadina))
+				this->IPRMain.at(i).PromijeniBojuPozadine(sf::Color::Black);
+			else
+				this->IPRMain.at(i).PromijeniBojuPozadine(sf::Color(10, 10, 10));
+		}
 	}
-	
 }
 
 void AplikacijaGUI::ProvjeriClickZaSveElemente()
@@ -223,15 +225,18 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 	{
 		if (this->IPRMain.at(i).Hover(*this->window, this->IPRMain.at(i).GlavnaPozadina))
 		{
-			this->IPRMain.at(i).PromijeniBojuPozadine(this->AkcenatBoja);
-			
-			//this->player.unesiIme(this->IPRMain.at(i).lokacijaPjesme);
-			this->player.setTrenutniIndexPjesme(this->IPRMain.at(i).intID - 1);
-			//TREBA NAPRAVITI FUNKCIJU
-			this->player.trenutnaPjesma();
-			std::cout << "Pozvana!\n";
-			
-			this->UpdateImePjesme();
+			if (this->IPRMain.at(i).GlavnaPozadina.getPosition().y < this->videoMode.height - 160)
+			{
+				this->IPRMain.at(i).PromijeniBojuPozadine(this->AkcenatBoja);
+
+				//this->player.unesiIme(this->IPRMain.at(i).lokacijaPjesme);
+				this->player.setTrenutniIndexPjesme(this->IPRMain.at(i).intID - 1);
+				//TREBA NAPRAVITI FUNKCIJU
+				this->player.trenutnaPjesma();
+				std::cout << "Pozvana!\n";
+
+				this->UpdateImePjesme();
+			}
 		}
 		else
 		{
@@ -358,7 +363,7 @@ void AplikacijaGUI::InfoPjesmaKonfiguracija()
 	std::vector<Pjesma> Pjesme = this->pSvePjesme->getPjesme();
 	Pjesme.resize(this->pSvePjesme->getPjesme().size());
 
-	InfoPjesma::SetList("Naslov Liste", "Kreator Liste", Pjesme, false, *this->window);
+	InfoPjesma::SetList(L"Sve Pjesme Trenutno u Bazi", L"Safet Imamovic, Hamza Gacic, Nedim Hasic", Pjesme, false, *this->window);
 	InfoPjesma::PostaviPozadineDesno();
 	InfoPjesma::PostaviPozadineDesno();
 	InfoPjesma::SetListeDesno(pjesmeZaSad, *this->window);
@@ -473,6 +478,7 @@ void AplikacijaGUI::ResizeWindowEvent()
 		this->event.size.width,
 		this->event.size.height
 	);
+	std::cout << this->videoMode.height << "\n";
 	this->videoMode.height = vidljivaPovrsina.height;
 	this->videoMode.width = vidljivaPovrsina.width;
 	this->window->setView(sf::View(vidljivaPovrsina));
