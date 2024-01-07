@@ -4,7 +4,7 @@
 
 int main()
 {
-    sf::Color PrimarnaBoja = sf::Color(30, 30, 30);
+    sf::Color PrimarnaBoja = sf::Color(30,30,30);
     sf::Color SekundarnaBoja = sf::Color(60, 60, 60);
     sf::Color AkcenatBoja = sf::Color::Red;
 
