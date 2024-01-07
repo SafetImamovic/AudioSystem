@@ -61,8 +61,11 @@ void AudioPlayer::Pokreni() {
 }
 
 // Inicijalizacija liste pjesama
-void AudioPlayer::setNiz(PlayLista playLista)
+void AudioPlayer::setNiz(PlayLista playLista, float startSystemVolume)
 {
+    this->SetGlasnoca(startSystemVolume);
+    //this->setSystemVolume(0xFFF / 2);
+
     this->playLista = &playLista;
     if(this->playLista->getPjesme().size() != 0)
         this->soundFilePath = this->playLista->getPjesme().at(0).getLokacijaPjesme();
@@ -500,8 +503,14 @@ void AudioPlayer::premotajUnazad() {
     if (music.getStatus() == sf::Music::Playing) {
         sf::Time currentPosition = music.getPlayingOffset();
 
+
+
         sf::Time rewindDuration = sf::seconds(5.0f);
-        currentPosition -= rewindDuration;
+
+        if (this->seconds > 5)
+            currentPosition -= rewindDuration;
+        else
+            currentPosition = sf::seconds(0);
 
         music.setPlayingOffset(currentPosition);
         this->seconds -= 5.0;
@@ -513,9 +522,13 @@ void AudioPlayer::premotajUnaprijed() {
     if (music.getStatus() == sf::Music::Playing) {
         sf::Time currentPosition = music.getPlayingOffset();
 
+        
         sf::Time fastForwardDuration = sf::seconds(5.0f);
-        currentPosition += fastForwardDuration;
-
+        if (this->seconds < this->trajanjePjesme - 5)
+            currentPosition += fastForwardDuration;
+        else
+            currentPosition = sf::seconds(this->trajanjePjesme);
+        
         music.setPlayingOffset(currentPosition);
         this->seconds += 5.0;
     }
