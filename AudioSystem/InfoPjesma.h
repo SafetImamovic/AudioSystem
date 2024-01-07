@@ -207,8 +207,6 @@ public:
 	static std::vector<sf::RectangleShape> RenderSveListe(std::vector<std::string>& ListeZaSasd, sf::RenderWindow& window);
 	static void PostaviCoverUpLista();
 	static void Update();
-	static void MoveUp(std::string id);
-	static void MoveDown(std::string id);
 	static void PostaviPozadineDesno();
 	static void RenderDesno(sf::RenderWindow &window);
 	static void ResizeCenter();
