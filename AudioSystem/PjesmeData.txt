@@ -5,8 +5,8 @@ GOAT
 Virtual Riot
 1
 
-
-0
+1
+1
 2020
 Disciple Recordings
 -
@@ -30,7 +30,7 @@ Virtual Riot
 1
 
 
-0
+1
 2020
 Disciple Recordings
 -
@@ -66,7 +66,7 @@ Virtual Riot
 1
 
 
-0
+1
 2020
 Disciple Recordings
 -
@@ -102,7 +102,7 @@ Skrillex with Bobby Raps
 1
 
 
-0
+1
 2023
 OWSLA
 -
@@ -114,7 +114,7 @@ Flowdan, Lil Baby, & Skrillex
 1
 
 
-0
+1
 2023
 OWSLA
 -
@@ -126,7 +126,7 @@ Knock2
 1
 
 
-0
+1
 2023
 
 -
@@ -138,7 +138,7 @@ Zomboy
 1
 Dead Man Walking Pt. 1
 
-0
+1
 2022
 Never Say Die Records
 -
@@ -150,7 +150,7 @@ Dua Lipa
 1
 Future Nostalgia
 
-0
+1
 2019
 Warner Records Inc.
 -
@@ -174,7 +174,7 @@ Skrillex & Boys Noize
 0
 
 
-0
+1
 2023
 OWSLA
 -
@@ -270,7 +270,7 @@ Skrillex with Bobby Raps
 1
 
 
-0
+1
 2023
 OWSLA
 -

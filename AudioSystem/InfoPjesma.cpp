@@ -13,9 +13,9 @@ std::string InfoPjesma::NaslovPjesme;
 sf::Text InfoPjesma::textNaslov;
 std::string InfoPjesma::PjesniciPjesme;
 sf::Text InfoPjesma::textPjesnici;
-std::string InfoPjesma::NaslovListe;
+std::wstring InfoPjesma::NaslovListe;
 sf::Text InfoPjesma::textNaslovListe;
-std::string InfoPjesma::KreatorListe;
+std::wstring InfoPjesma::KreatorListe;
 sf::Text InfoPjesma::textKreatroListe;
 sf::Font InfoPjesma::font;
 sf::Font InfoPjesma::fontEmoji;
@@ -56,8 +56,8 @@ void InfoPjesma::SetPjesma(std::string naslov, std::string pjesnici, sf::Font &f
 	float Proporcija = InfoPjesma::VelicinaLijevo.x / InfoPjesma::BaznaRezolucijaSlike;
 	InfoPjesma::CoverRender.setScale(Proporcija, Proporcija);
 
-	InfoPjesma::PaddingVertical = 10;
-	InfoPjesma::PaddingHorizontal = 10;
+	InfoPjesma::PaddingVertical = 15;
+	InfoPjesma::PaddingHorizontal = 15;
 	InfoPjesma::NaslovPjesme = naslov;
 	InfoPjesma::PjesniciPjesme = pjesnici;
 	InfoPjesma::font = font;
@@ -117,10 +117,10 @@ void InfoPjesma::RenderPjesma(sf::RenderWindow &window)
 	
 }
 
-void InfoPjesma::SetList(std::string naslov, std::string kreator, std::vector<Pjesma>& Pjesme, bool VrstaListeBool, sf::RenderWindow& window)
+void InfoPjesma::SetList(std::wstring naslov, std::wstring kreator, std::vector<Pjesma>& Pjesme, bool VrstaListeBool, sf::RenderWindow& window)
 {
-	InfoPjesma::PaddingVerticalPlayLista = 10;
-	InfoPjesma::PaddingHorizontalPlayLista = 10;
+	InfoPjesma::PaddingVerticalPlayLista = 15;
+	InfoPjesma::PaddingHorizontalPlayLista = 15;
   
 	InfoPjesma::dimenzijeLista = sf::Vector2f(InfoPjesma::sirinaWindow - InfoPjesma::VelicinaLijevo.x - 300, InfoPjesma::visinaWindow - 60 - 50);
 	InfoPjesma::pozicijaLista = sf::Vector2f(InfoPjesma::VelicinaLijevo.x, 0);
@@ -155,9 +155,10 @@ void InfoPjesma::SetList(std::string naslov, std::string kreator, std::vector<Pj
 	InfoPjesma::textVrstaListe.setFillColor(sf::Color::White);
 	InfoPjesma::textSimbolVrsta.setFillColor(sf::Color::White);
 
-	InfoPjesma::textNaslovListe.setCharacterSize(InfoPjesma::NaslovFontSize);
-	InfoPjesma::textNaslovListe.setOutlineThickness(0.5);
-	InfoPjesma::textNaslovListe.setOutlineColor(sf::Color::White);
+	InfoPjesma::textNaslovListe.setCharacterSize(InfoPjesma::NaslovFontSize + 8);
+	InfoPjesma::textNaslovListe.setOutlineThickness(1);
+	InfoPjesma::textNaslovListe.setLetterSpacing(1);
+	InfoPjesma::textNaslovListe.setOutlineColor(sf::Color(255, 255, 255));
 	InfoPjesma::textKreatroListe.setCharacterSize(InfoPjesma::NaslovFontSize2);
 	InfoPjesma::textVrstaListe.setCharacterSize(InfoPjesma::NaslovFontSize3);
 	InfoPjesma::textSimbolVrsta.setCharacterSize(InfoPjesma::NaslovFontSize2);
