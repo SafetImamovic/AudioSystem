@@ -1,4 +1,100 @@
 1
+Pjesme/Save Yourself EP/GOAT.ogg
+Covers/Save Yourself EP.jpg
+GOAT
+Virtual Riot
+1
+
+
+0
+2020
+Disciple Recordings
+-
+1
+Pjesme/Save Yourself EP/Hysteria.ogg
+Covers/Save Yourself EP.jpg
+Hysteria
+Virtual Riot
+1
+
+
+0
+2020
+Disciple Recordings
+-
+1
+Pjesme/Save Yourself EP/Insides.ogg
+Covers/Save Yourself EP.jpg
+Insides
+Virtual Riot
+1
+
+
+0
+2020
+Disciple Recordings
+-
+1
+Pjesme/Save Yourself EP/Iteration (Interlude).ogg
+Covers/Save Yourself EP.jpg
+Iteration (Interlude)
+Virtual Riot
+1
+
+
+0
+2020
+Disciple Recordings
+-
+1
+Pjesme/Save Yourself EP/Virtual Riot - Save Yourself.ogg
+Covers/Save Yourself EP.jpg
+Save Yourself
+Virtual Riot
+1
+
+
+0
+2020
+Disciple Recordings
+-
+1
+Pjesme/Save Yourself EP/Virtual Riot - Self Checkout.ogg
+Covers/Save Yourself EP.jpg
+Self Checkout
+Virtual Riot
+1
+
+
+0
+2020
+Disciple Recordings
+-
+1
+Pjesme/Save Yourself EP/Virtual Riot - The Recall.ogg
+Covers/Save Yourself EP.jpg
+The Recall
+Virtual Riot
+1
+
+
+0
+2020
+Disciple Recordings
+-
+1
+Pjesme/Save Yourself EP/Virtual Riot - Wallmonger.ogg
+Covers/Save Yourself EP.jpg
+Wallmonger
+Virtual Riot
+1
+
+
+0
+2020
+Disciple Recordings
+-
+1
 Pjesme/Skrillex with Bobby Raps - Leave Me Like This.wav
 Covers/Skrillex with Bobby Raps - Leave Me Like This.jpg
 Leave Me Like This
@@ -105,3 +201,4 @@ Quest For Fire
 0
 2023
 OWSLA
+-

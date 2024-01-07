@@ -70,7 +70,7 @@ void AudioPlayer::setNiz(PlayLista playLista, float startSystemVolume)
     if(this->playLista->getPjesme().size() != 0)
         this->soundFilePath = this->playLista->getPjesme().at(0).getLokacijaPjesme();
     //ScanFolderForMusicFiles(".", songList);
-    std::cout << "Velcina SetNiz() == " << this->playLista->getPjesme().size() << std::endl;
+    //std::cout << "Velcina SetNiz() == " << this->playLista->getPjesme().size() << std::endl;
 
     for (const Pjesma& pjesma : this->playLista->getPjesme())
     {
@@ -192,10 +192,11 @@ void AudioPlayer::Izbornik(int izbor) {
         music.setPitch(1);
         break;
     case 13:
-        std::cout << "Hvala na koristenju!\n";
+        //std::cout << "Hvala na koristenju!\n";
         break;
     default:
-        std::cout << "Greska!" << std::endl;
+        break;
+        //std::cout << "Greska!" << std::endl;
     }
 }
 
@@ -339,8 +340,8 @@ void AudioPlayer::novaPjesma() {
             this->stariFilePath = this->soundFilePath;
             this->soundFilePath = this->Pjesme.at(this->trenutniIndeksPjesme).getLokacijaPjesme();
 
-            std::cout << "Stara pjesma:\t\t " << this->stariFilePath << "\n";
-            std::cout << "Trenutna Pjesma:\t " << this->soundFilePath << "\n";
+            //std::cout << "Stara pjesma:\t\t " << this->stariFilePath << "\n";
+            //std::cout << "Trenutna Pjesma:\t " << this->soundFilePath << "\n";
 
             music.openFromFile(soundFilePath);
             music.setPitch(1.0);
@@ -392,8 +393,8 @@ void AudioPlayer::staraPjesma() {
             this->stariFilePath = this->soundFilePath;
             this->soundFilePath = this->Pjesme.at(this->trenutniIndeksPjesme).getLokacijaPjesme();
 
-            std::cout << "Stara pjesma:\t\t " << this->stariFilePath << "\n";
-            std::cout << "Trenutna Pjesma:\t " << this->soundFilePath << "\n";
+            //std::cout << "Stara pjesma:\t\t " << this->stariFilePath << "\n";
+            //std::cout << "Trenutna Pjesma:\t " << this->soundFilePath << "\n";
 
             music.openFromFile(soundFilePath);
             music.setPitch(1.0);
