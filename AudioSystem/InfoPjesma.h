@@ -36,16 +36,17 @@ public:
 		std::vector<Tipka> Tipke;
 
 		sf::RectangleShape GlavnaPozadina;
-		sf::RectangleShape IDPozadina;
-		sf::RectangleShape ImePozadina;
-		sf::RectangleShape ImeAutoraPozadina;
-		sf::RectangleShape TrajanjePjesmePozadina;
-		sf::RectangleShape DodajPjesmuUPlaylistPozadina;
-		sf::RectangleShape LikePozadina;
+		sf::RectangleShape ID_Cover_Ime_Pozadina;
+		sf::RectangleShape Autor_Pozadina;
+		sf::RectangleShape Trajanje_Add_Like_Pozadina;
 
 		void SetInfoPjesmaRender(const Pjesma& pjesma, std::string lokacijaSlike, sf::Font& font, sf::Font& fontEmoji)
 		{
 			this->GlavnaPozadina.setFillColor(this->PrimarnaBoja);
+			this->ID_Cover_Ime_Pozadina.setFillColor(this->PrimarnaBoja);
+			this->Autor_Pozadina.setFillColor(this->PrimarnaBoja);
+			this->Trajanje_Add_Like_Pozadina.setFillColor(this->PrimarnaBoja);
+
 			this->lokacijaPjesme = pjesma.getLokacijaPjesme();
 
 			this->lokacijaSlike = lokacijaSlike;
@@ -100,10 +101,13 @@ public:
 		void Render(sf::RenderWindow& window, std::string lokacijaSlike)
 		{
 			window.draw(this->GlavnaPozadina);
+			window.draw(this->ID_Cover_Ime_Pozadina);
 			window.draw(this->ID);
 			window.draw(this->CoverRender);
 			window.draw(this->Ime);
+			window.draw(this->Autor_Pozadina);
 			window.draw(this->ImeAutora);
+			window.draw(this->Trajanje_Add_Like_Pozadina);
 			window.draw(this->TrajanjePjesme);
 			window.draw(this->DodajPjesmuUPlaylist);
 			window.draw(this->Like);
@@ -124,6 +128,40 @@ public:
 				this->Visina + 10
 			));
 
+
+			this->ID_Cover_Ime_Pozadina.setPosition(sf::Vector2f(
+				lijeviOffset,
+				200 + (50 * (this->intID - 1)) - 5
+			));
+
+			this->ID_Cover_Ime_Pozadina.setSize(sf::Vector2f(
+				sirinaCentar,
+				this->Visina + 10
+			));
+
+
+			this->Autor_Pozadina.setPosition(sf::Vector2f(
+				lijeviOffset + (spacing * 1.5),
+				200 + (50 * (this->intID - 1)) - 5
+			));
+
+			this->Autor_Pozadina.setSize(sf::Vector2f(
+				sirinaCentar - (spacing * 1.5),
+				this->Visina + 10
+			));
+
+
+			this->Trajanje_Add_Like_Pozadina.setPosition(sf::Vector2f(
+				lijeviOffset + sirinaCentar - 120,
+				200 + (50 * (this->intID - 1)) - 5
+			));
+
+			this->Trajanje_Add_Like_Pozadina.setSize(sf::Vector2f(
+				sirinaCentar - sirinaCentar + 120,
+				this->Visina + 10
+			));
+
+
 			if(this->intID < 10)
 				this->ID.setPosition(lijeviOffset + this->paddingHorizontal, 200 + paddingVertical + (50 * (this->intID - 1)));
 			else
@@ -142,6 +180,9 @@ public:
 		void PromijeniBojuPozadine(sf::Color boja)
 		{
 			this->GlavnaPozadina.setFillColor(boja);
+			this->ID_Cover_Ime_Pozadina.setFillColor(boja);
+			this->Autor_Pozadina.setFillColor(boja);
+			this->Trajanje_Add_Like_Pozadina.setFillColor(boja);
 		}
 
 		void LoadCover()
@@ -150,8 +191,6 @@ public:
 			this->CoverRender.setTexture(this->Cover);
 		}
 	};
-
-
 
 	static sf::RectangleShape pozadinaLista;
 	static sf::RectangleShape pozadinaPjesma;
