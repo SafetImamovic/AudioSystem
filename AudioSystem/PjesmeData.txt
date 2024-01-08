@@ -94,30 +94,6 @@ Virtual Riot
 2020
 Disciple Recordings
 -
-1
-Pjesme/Skrillex with Bobby Raps - Leave Me Like This.wav
-Covers/Skrillex with Bobby Raps - Leave Me Like This.jpg
-Leave Me Like This
-Skrillex with Bobby Raps
-1
-
-
-1
-2023
-OWSLA
--
-0
-Pjesme/Flowdan, Lil Baby, & Skrillex - Pepper.wav
-Covers/Flowdan, Lil Baby, & Skrillex - Pepper.jpg
-Pepper
-Flowdan, Lil Baby, & Skrillex
-1
-
-
-1
-2023
-OWSLA
--
 0
 Pjesme/Knock2 - dashstar (VIP).wav
 Covers/Knock2 - dashstar (VIP).jpg
@@ -384,7 +360,7 @@ Devito i Breskvica
 -
 22
 Pjesme/Dua Lipa - New Rules.wav
-Covers/Dua Lipa - New Rules.jpg
+Covers/Dua Lipa.jpg
 New Rules
 Dua Lipa
 1
@@ -537,4 +513,88 @@ Joker Out
 0
 2023
 
+-
+0
+Pjesme/German Engineering EP/Virtual Riot - Chop Chop.ogg
+Covers/German Engineering EP.jpg
+Chop Chop
+Virtual Riot
+1
+
+
+0
+2019
+Disciple Recordings
+-
+0
+Pjesme/German Engineering EP/Virtual Riot - Jump The Gun [NEST HQ Premiere].ogg
+Covers/German Engineering EP.jpg
+Jump The Gun
+Virtual Riot
+1
+
+
+0
+2019
+Disciple Recordings
+-
+0
+Pjesme/German Engineering EP/Virtual Riot - Komputermusik.ogg
+Covers/German Engineering EP.jpg
+Komputermusik
+Virtual Riot
+1
+
+
+0
+2019
+Disciple Recordings
+-
+0
+Pjesme/German Engineering EP/Virtual Riot - Pray For Riddim.ogg
+Covers/German Engineering EP.jpg
+Pray For Riddim
+Virtual Riot
+1
+
+
+0
+2019
+Disciple Recordings
+-
+0
+Pjesme/German Engineering EP/Virtual Riot - Shindeiru [FREE DOWNLOAD].ogg
+Covers/German Engineering EP.jpg
+Shindeiru
+Virtual Riot
+1
+
+
+0
+2019
+Disciple Recordings
+-
+0
+Pjesme/German Engineering EP/Virtual Riot - The Darkest Night.ogg
+Covers/German Engineering EP.jpg
+The Darkest Night
+Virtual Riot
+1
+
+
+0
+2019
+Disciple Recordings
+-
+0
+Pjesme/German Engineering EP/Virtual Riot - Show Up Ft. Virus Syndicate.ogg
+Covers/German Engineering EP.jpg
+Show Up Ft. Virus Syndicate
+Virtual Riot & Virus Syndicate
+1
+
+
+0
+2019
+Disciple Recordings
 -
