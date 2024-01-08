@@ -15,10 +15,19 @@ void AplikacijaGUI::MoveUp()
 		for (int i = 0; i < this->IPRMain.size(); i++)
 		{
 			this->IPRMain.at(i).GlavnaPozadina.move(moveRate);
+
+			this->IPRMain.at(i).ID_Cover_Ime_Pozadina.move(moveRate);
+
 			this->IPRMain.at(i).ID.move(moveRate);
 			this->IPRMain.at(i).CoverRender.move(moveRate);
 			this->IPRMain.at(i).Ime.move(moveRate);
+
+			this->IPRMain.at(i).Autor_Pozadina.move(moveRate);
+
 			this->IPRMain.at(i).ImeAutora.move(moveRate);
+
+			this->IPRMain.at(i).Trajanje_Add_Like_Pozadina.move(moveRate);
+
 			this->IPRMain.at(i).TrajanjePjesme.move(moveRate);
 			this->IPRMain.at(i).DodajPjesmuUPlaylist.move(moveRate);
 			this->IPRMain.at(i).Like.move(moveRate);
@@ -38,10 +47,15 @@ void AplikacijaGUI::MoveDown()
 		for (int i = 0; i < this->IPRMain.size(); i++)
 		{
 			this->IPRMain.at(i).GlavnaPozadina.move(moveRate);
+			this->IPRMain.at(i).ID_Cover_Ime_Pozadina.move(moveRate);
 			this->IPRMain.at(i).ID.move(moveRate);
 			this->IPRMain.at(i).CoverRender.move(moveRate);
 			this->IPRMain.at(i).Ime.move(moveRate);
+			this->IPRMain.at(i).Autor_Pozadina.move(moveRate);
+
 			this->IPRMain.at(i).ImeAutora.move(moveRate);
+
+			this->IPRMain.at(i).Trajanje_Add_Like_Pozadina.move(moveRate);
 			this->IPRMain.at(i).TrajanjePjesme.move(moveRate);
 			this->IPRMain.at(i).DodajPjesmuUPlaylist.move(moveRate);
 			this->IPRMain.at(i).Like.move(moveRate);
@@ -251,7 +265,7 @@ void AplikacijaGUI::RenderSveElemente()
 	InfoPjesma::RenderPjesma(*this->window);
 	
 	InfoPjesma::RenderDesno(*this->window);
-	InfoPjesma::RenderListDesno(*this->window);
+	
 	
 	InfoPjesma::pozadinaPjesma.setSize(sf::Vector2f(InfoPjesma::VelicinaLijevo.x, this->videoMode.height));
 	window->draw(InfoPjesma::pozadinaLista);
@@ -261,6 +275,7 @@ void AplikacijaGUI::RenderSveElemente()
 	}
 
 	InfoPjesma::RenderList(*this->window);
+	InfoPjesma::RenderListDesno(*this->window);
 	
 
 	DrawToSveTipke(*this->window, InfoPjesma::Tipke);
@@ -597,6 +612,10 @@ void AplikacijaGUI::UpdatePollEvents() //ova metoda osvjezava eventove, npr. int
 					this->player.staraPjesma();
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 					this->player.novaPjesma();
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+					this->MoveUp();
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+					this->MoveDown();
 			}
 			
 			break;
@@ -628,6 +647,7 @@ void AplikacijaGUI::UpdatePollEvents() //ova metoda osvjezava eventove, npr. int
 
 void AplikacijaGUI::UpdateGUI() //metoda koja osvjezi "update-je" logiku vezanu za GUI prije nego sto se frame renderuje
 {
+	
 	this->UpdatePollEvents();//poziva metodu koja prate eventove
 	this->UpdatePozicijaMisa();
 	this->UpdateInfoPjesma();
@@ -652,6 +672,7 @@ void AplikacijaGUI::RenderGUI() //renderuje objekte, elemente aplikacije
 	//--------ovdje krece pozivanje metoda koje iscrtavaju elemente----------
 
 	this->RenderSveElemente();
+
 	//--------ovdje zavrsava pozivanje metoda koje iscrtavaju elemente-------
 	
 	
