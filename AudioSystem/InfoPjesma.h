@@ -40,7 +40,7 @@ public:
 		sf::RectangleShape Autor_Pozadina;
 		sf::RectangleShape Trajanje_Add_Like_Pozadina;
 
-		void SetInfoPjesmaRender(const Pjesma& pjesma, std::string lokacijaSlike, sf::Font& font, sf::Font& fontBold, sf::Font& fontEmoji)
+		void SetInfoPjesmaRender(const Pjesma& pjesma, std::string lokacijaSlike, sf::Font& font, sf::Font& fontBold, sf::Font& fontEmoji, int index)
 		{
 			this->GlavnaPozadina.setFillColor(this->PrimarnaBoja);
 			this->ID_Cover_Ime_Pozadina.setFillColor(this->PrimarnaBoja);
@@ -55,7 +55,7 @@ public:
 			//std::cout << "Broj Pjesama = " << InfoPjesmaRender::BrojPjesama << "\n";
 			//std::cout << "Slika: " << pjesma.getLokacijaPjesme() << "\n";
 			this->SetFont(font, fontBold, fontEmoji);
-			this->FixPozicija(400, InfoPjesma::sirinaWindow - 400 - 300);
+			this->FixPozicija(400, InfoPjesma::sirinaWindow - 400 - 300, index);
 
 			this->ID.setString(std::to_string(pjesma.getID_Pjesme()));
 
@@ -113,14 +113,14 @@ public:
 			window.draw(this->Like);
 		}
 
-		void FixPozicija(int lijeviOffset, int sirinaCentar)
+		void FixPozicija(int lijeviOffset, int sirinaCentar, int index)
 		{
 			this->LoadCover();
 			int spacing = (sirinaCentar - 40 - 40 - 120) / 3;
 
 			this->GlavnaPozadina.setPosition(sf::Vector2f(
 				lijeviOffset,
-				200 + (50 * (this->intID - 1)) - 5
+				200 + (50 * (index - 1)) - 5
 			));
 
 			this->GlavnaPozadina.setSize(sf::Vector2f(
@@ -131,7 +131,7 @@ public:
 
 			this->ID_Cover_Ime_Pozadina.setPosition(sf::Vector2f(
 				lijeviOffset,
-				200 + (50 * (this->intID - 1)) - 5
+				200 + (50 * (index - 1)) - 5
 			));
 
 			this->ID_Cover_Ime_Pozadina.setSize(sf::Vector2f(
@@ -142,7 +142,7 @@ public:
 
 			this->Autor_Pozadina.setPosition(sf::Vector2f(
 				lijeviOffset + (spacing * 1.7),
-				200 + (50 * (this->intID - 1)) - 5
+				200 + (50 * (index - 1)) - 5
 			));
 
 			this->Autor_Pozadina.setSize(sf::Vector2f(
@@ -153,7 +153,7 @@ public:
 
 			this->Trajanje_Add_Like_Pozadina.setPosition(sf::Vector2f(
 				lijeviOffset + sirinaCentar - 120,
-				200 + (50 * (this->intID - 1)) - 5
+				200 + (50 * (index - 1)) - 5
 			));
 
 			this->Trajanje_Add_Like_Pozadina.setSize(sf::Vector2f(
@@ -163,18 +163,18 @@ public:
 
 
 			if(this->intID < 10)
-				this->ID.setPosition(lijeviOffset + 2*this->paddingHorizontal , 200 + paddingVertical + (50 * (this->intID - 1)));
+				this->ID.setPosition(lijeviOffset + 2*this->paddingHorizontal , 200 + paddingVertical + (50 * (index - 1)));
 			else
-				this->ID.setPosition(lijeviOffset + 2*this->paddingHorizontal - 6, 200 + paddingVertical + (50 * (this->intID - 1)));
+				this->ID.setPosition(lijeviOffset + 2*this->paddingHorizontal - 6, 200 + paddingVertical + (50 * (index - 1)));
 
-			this->CoverRender.setPosition(lijeviOffset + this->paddingHorizontal + 40, 200 + (50 * (this->intID - 1)));
+			this->CoverRender.setPosition(lijeviOffset + this->paddingHorizontal + 40, 200 + (50 * (index - 1)));
 			this->CoverRender.setScale({ 0.1, 0.1 });
 
-			this->Ime.setPosition(lijeviOffset + 2*this->paddingHorizontal + (spacing * 0) + 80, 200 + paddingVertical + (50 * (this->intID - 1)));
-			this->ImeAutora.setPosition(lijeviOffset + this->paddingHorizontal + (spacing * 1.7), 200 + paddingVertical + (50 * (this->intID - 1)));
-			this->TrajanjePjesme.setPosition(lijeviOffset + this->paddingHorizontal + sirinaCentar - 120, 200 + paddingVertical + (50 * (this->intID - 1)));
-			this->DodajPjesmuUPlaylist.setPosition(lijeviOffset + this->paddingHorizontal + sirinaCentar - 80, 200 + paddingVertical + (50 * (this->intID - 1)));
-			this->Like.setPosition(lijeviOffset + this->paddingHorizontal + sirinaCentar - 40, 200 + paddingVertical + (50 * (this->intID - 1)) + 2);
+			this->Ime.setPosition(lijeviOffset + 2*this->paddingHorizontal + (spacing * 0) + 80, 200 + paddingVertical + (50 * (index - 1)));
+			this->ImeAutora.setPosition(lijeviOffset + this->paddingHorizontal + (spacing * 1.7), 200 + paddingVertical + (50 * (index - 1)));
+			this->TrajanjePjesme.setPosition(lijeviOffset + this->paddingHorizontal + sirinaCentar - 120, 200 + paddingVertical + (50 * (index - 1)));
+			this->DodajPjesmuUPlaylist.setPosition(lijeviOffset + this->paddingHorizontal + sirinaCentar - 80, 200 + paddingVertical + (50 * (index - 1)));
+			this->Like.setPosition(lijeviOffset + this->paddingHorizontal + sirinaCentar - 40, 200 + paddingVertical + (50 * (index - 1)) + 2);
 		}
 
 		void PromijeniBojuPozadine(sf::Color boja)
