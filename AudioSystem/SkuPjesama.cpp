@@ -3,10 +3,15 @@
 
 
 SkupPjesama::SkupPjesama(std::string ime, std::string datumKreiranja, bool ponovi, bool shuffle, std::string kreator)
-    : Ime(ime), DatumKreiranja(datumKreiranja), PonoviSkupPjesama(ponovi), Shuffle(shuffle), Kreator(kreator){}
+    : Ime(ime), DatumKreiranja(datumKreiranja), PonoviSkupPjesama(ponovi), Shuffle(shuffle), Kreator(kreator), BrojPjesama(0) {}
 
 void SkupPjesama::dodajPjesmu(const Pjesma& pjesma) {
     Pjesme.push_back(pjesma);
+}
+
+void SkupPjesama::IzbaciPjesmu(int index)
+{
+    this->Pjesme.erase(this->Pjesme.begin() + index);
 }
 
 const std::vector<Pjesma>& SkupPjesama::dohvatiSvePjesme() const {
@@ -79,6 +84,27 @@ std::vector<Pjesma> SkupPjesama::ucitajPjesmeIzDatoteke(const std::string& filen
     return pjesme;
 }
 
+//preklopljeni operator koji dodaje pjesmu na vektor
+void SkupPjesama::operator+(const Pjesma& pjesma)
+{
+    this->BrojPjesama++;
+    this->Pjesme.push_back(pjesma);
+}
+
+//brise pjesmu s vektora
+void SkupPjesama::operator-(const Pjesma& pjesma)
+{
+    this->BrojPjesama--;
+    for (int i = 0; i < this->Pjesme.size(); i++)
+    {
+        if (pjesma.getID_Pjesme() == this->Pjesme.at(i).getID_Pjesme())
+        {
+            this->Pjesme.erase(this->Pjesme.begin() + i - 1);
+            break;
+        }
+    }
+}
+
 std::vector<Pjesma> SkupPjesama::getPjesme()
 {
     return this->Pjesme;
@@ -88,3 +114,4 @@ void SkupPjesama::setPjesme(std::vector<Pjesma>& pjesme)
 {
     this->Pjesme = pjesme;
 }
+
