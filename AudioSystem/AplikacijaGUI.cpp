@@ -96,7 +96,7 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	for (const Pjesma& pjesma : pjesme)
 	{
 		InfoPjesma::InfoPjesmaRender temp;
-		temp.SetInfoPjesmaRender(pjesma, pjesma.getLokacijaSlike(), this->font, this->fontEmoji);
+		temp.SetInfoPjesmaRender(pjesma, pjesma.getLokacijaSlike(), this->font, this->fontBold, this->fontEmoji);
 		this->IPRMain.push_back(temp);
 		
 	}
@@ -247,7 +247,7 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 				this->player.setTrenutniIndexPjesme(this->IPRMain.at(i).intID - 1);
 				//TREBA NAPRAVITI FUNKCIJU
 				this->player.trenutnaPjesma();
-				std::cout << "Pozvana!\n";
+				//std::cout << "Pozvana!\n";
 
 				this->UpdateImePjesme();
 			}
@@ -366,7 +366,7 @@ void AplikacijaGUI::Mute()
 
 void AplikacijaGUI::InfoPjesmaKonfiguracija()
 {
-	InfoPjesma::SetPjesma("Don't Get Too Close (Virtual Riot Remix)", "Knock2", this->font, this->fontEmoji);
+	InfoPjesma::SetPjesma("Don't Get Too Close (Virtual Riot Remix)", "Knock2", this->font, this->fontBold, this->fontBoldest, this->fontEmoji);
 	InfoPjesma::Cover.loadFromFile("Covers/Skrillex with Bobby Raps - Leave Me Like This.jpg");
 	InfoPjesma::CoverRender.setTexture(InfoPjesma::Cover);
 	std::vector<std::string> pjesmeZaSad;
@@ -432,7 +432,7 @@ void AplikacijaGUI::Scroll()
 {
 	if (ProvjeriHoverRegija(*this->window, { 400, 200 }, sf::Vector2f(this->videoMode.width - InfoPjesma::VelicinaLijevo.x - 300, this->videoMode.height - 110)))
 	{
-		std::cout << "Nice" << "\n";
+		//std::cout << "Nice" << "\n";
 		if (this->event.mouseWheel.delta == -1)
 		{
 			this->MoveUp();
@@ -442,8 +442,8 @@ void AplikacijaGUI::Scroll()
 			this->MoveDown();
 		}
 	}
-	else
-		std::cout << "X" << "\n";
+	
+		//std::cout << "X" << "\n";
 }
 
 void AplikacijaGUI::PostaviNizPjesmi()//test
@@ -455,8 +455,6 @@ void AplikacijaGUI::PostaviNizPjesmi()//test
 	//	std::cout << "\"" << pjesma.getLokacijaPjesme() << "\"" << std::endl;
 	//}
 
-	
-	
 }
 
 void AplikacijaGUI::UpdateImePjesme()
@@ -464,7 +462,8 @@ void AplikacijaGUI::UpdateImePjesme()
 	InfoPjesma::textNaslov.setString(this->player.getPjesmaObjekat().getIme());
 	InfoPjesma::Cover.loadFromFile(this->player.getPjesmaObjekat().getLokacijaSlike());
 	InfoPjesma::textPjesnici.setString(this->player.getPjesmaObjekat().getImeAutora());
-
+	InfoPjesma::textDatumObjave.setString(this->player.getPjesmaObjekat().getDatumObjave());
+	InfoPjesma::textRecordLabel.setString(this->player.getPjesmaObjekat().getRecordLabel());
 
 	if (this->player.DaLiJeNovaPjesma(this->player.GetImePjesmePath()))
 	{
@@ -479,7 +478,7 @@ void AplikacijaGUI::UpdateImePjesme()
 
 		InfoPjesma::textPjesnici.setPosition(
 			InfoPjesma::PaddingHorizontal + 1,
-			InfoPjesma::VelicinaLijevo.x + InfoPjesma::PaddingVertical + 20 + 20
+			InfoPjesma::pozicijaPjesma.y + InfoPjesma::PaddingVertical + InfoPjesma::VelicinaLijevo.x + 26 + 20
 		);
 		InfoPjesma::ratePjesnici = -0.001;
 	}
@@ -493,7 +492,7 @@ void AplikacijaGUI::ResizeWindowEvent()
 		this->event.size.width,
 		this->event.size.height
 	);
-	std::cout << this->videoMode.height << "\n";
+	//std::cout << this->videoMode.height << "\n";
 	this->videoMode.height = vidljivaPovrsina.height;
 	this->videoMode.width = vidljivaPovrsina.width;
 	this->window->setView(sf::View(vidljivaPovrsina));
@@ -526,11 +525,12 @@ void AplikacijaGUI::CreateShorcut()
 
 //------------------end of private-------------------------------//
 
-AplikacijaGUI::AplikacijaGUI(sf::Font& font, sf::Font& fontEmoji, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja)
+AplikacijaGUI::AplikacijaGUI(sf::Font& font, sf::Font& fontBold, sf::Font& fontBoldest, sf::Font& fontEmoji, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja)
 //konstruktor poziva privatne metode koje inicijaliziraju varijable i prozor
 {
-
 	this->font = font;
+	this->fontBold = fontBold;
+	this->fontBoldest = fontBoldest;
 	this->fontEmoji = fontEmoji;
 	this->PrimarnaBoja = PrimarnaBoja;
 	this->SekundarnaBoja = SekundarnaBoja;

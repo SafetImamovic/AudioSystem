@@ -1,51 +1,4 @@
-1
-Pjesme/Save Yourself EP/GOAT.ogg
-Covers/Save Yourself EP.jpg
-GOAT
-Virtual Riot
-1
-
-1
-1
-2020
-Disciple Recordings
--
-1
-Pjesme/Save Yourself EP/Hysteria.ogg
-Covers/Save Yourself EP.jpg
-Hysteria
-Virtual Riot
-1
-
-
-0
-2020
-Disciple Recordings
--
-1
-Pjesme/Save Yourself EP/Insides.ogg
-Covers/Save Yourself EP.jpg
-Insides
-Virtual Riot
-1
-
-
-1
-2020
-Disciple Recordings
--
-1
-Pjesme/Save Yourself EP/Iteration (Interlude).ogg
-Covers/Save Yourself EP.jpg
-Iteration (Interlude)
-Virtual Riot
-1
-
-
-0
-2020
-Disciple Recordings
--
+---------------------------------------------------------------
 1
 Pjesme/Save Yourself EP/Virtual Riot - Save Yourself.ogg
 Covers/Save Yourself EP.jpg
@@ -57,32 +10,10 @@ Virtual Riot
 0
 2020
 Disciple Recordings
+3:06
 -
-1
-Pjesme/Save Yourself EP/Virtual Riot - Self Checkout.ogg
-Covers/Save Yourself EP.jpg
-Self Checkout
-Virtual Riot
-1
-
-
-1
-2020
-Disciple Recordings
--
-1
-Pjesme/Save Yourself EP/Virtual Riot - The Recall.ogg
-Covers/Save Yourself EP.jpg
-The Recall
-Virtual Riot
-1
-
-
-0
-2020
-Disciple Recordings
--
-1
+---------------------------------------------------------------
+2
 Pjesme/Save Yourself EP/Virtual Riot - Wallmonger.ogg
 Covers/Save Yourself EP.jpg
 Wallmonger
@@ -93,8 +24,94 @@ Virtual Riot
 0
 2020
 Disciple Recordings
+4:28
 -
+---------------------------------------------------------------
+3
+Pjesme/Save Yourself EP/Hysteria.ogg
+Covers/Save Yourself EP.jpg
+Hysteria
+Virtual Riot
+1
+
+
 0
+2020
+Disciple Recordings
+4:03
+-
+---------------------------------------------------------------
+4
+Pjesme/Save Yourself EP/Iteration (Interlude).ogg
+Covers/Save Yourself EP.jpg
+Iteration (Interlude)
+Virtual Riot
+1
+
+
+0
+2020
+Disciple Recordings
+1:41
+-
+---------------------------------------------------------------
+5
+Pjesme/Save Yourself EP/Virtual Riot - Self Checkout.ogg
+Covers/Save Yourself EP.jpg
+Self Checkout
+Virtual Riot
+1
+
+
+1
+2020
+Disciple Recordings
+3:12
+-
+---------------------------------------------------------------
+6
+Pjesme/Save Yourself EP/GOAT.ogg
+Covers/Save Yourself EP.jpg
+GOAT
+Virtual Riot
+1
+
+1
+1
+2020
+Disciple Recordings
+3:13
+-
+---------------------------------------------------------------
+7
+Pjesme/Save Yourself EP/Virtual Riot - The Recall.ogg
+Covers/Save Yourself EP.jpg
+The Recall
+Virtual Riot
+1
+
+
+0
+2020
+Disciple Recordings
+4:20
+-
+---------------------------------------------------------------
+8
+Pjesme/Save Yourself EP/Insides.ogg
+Covers/Save Yourself EP.jpg
+Insides
+Virtual Riot
+1
+
+
+1
+2020
+Disciple Recordings
+3:44
+-
+---------------------------------------------------------------
+9
 Pjesme/Knock2 - dashstar (VIP).wav
 Covers/Knock2 - dashstar (VIP).jpg
 dashstar (VIP)
@@ -105,8 +122,10 @@ Knock2
 1
 2023
 
+2:20
 -
-1
+---------------------------------------------------------------
+10
 Pjesme/Zomboy & MUST DIE! - Last One Standing.wav
 Covers/Dead Man Walking.jpg
 Last One Standing
@@ -117,8 +136,10 @@ Dead Man Walking Pt. 1
 1
 2022
 Never Say Die Records
+4:33
 -
-2
+---------------------------------------------------------------
+11
 Pjesme/Dua Lipa - Don't Start Now.wav
 Covers/Dua Lipa - Don't Start Now.jpg
 Don't Start Now
@@ -129,8 +150,10 @@ Future Nostalgia
 1
 2019
 Warner Records Inc.
+3:23
 -
-3
+---------------------------------------------------------------
+12
 Pjesme/Modestep & Virtual Riot & Barely Alive - By My Side.wav
 Covers/Modestep & Virtual Riot & Barely Alive - By My Side.jpg
 By My Side
@@ -141,8 +164,10 @@ Modestep & Virtual Riot & Barely Alive
 0
 2018
 Disciple Recordings
+3:50
 -
-4
+---------------------------------------------------------------
+13
 Pjesme/Skrillex & Boys Noize - Fine Day Anthem.wav
 Covers/Skrillex & Boys Noize - Fine Day Anthem.jpg
 Fine Day Anthem
@@ -153,11 +178,13 @@ Skrillex & Boys Noize
 1
 2023
 OWSLA
+3:13
 -
-5
+---------------------------------------------------------------
+14
 Pjesme/Skrillex, Bibi Bourelly, & Sonny Moore - Don't Get Too Close (Virtual Riot Remix).wav
 Covers/Skrillex, Bibi Bourelly, & Sonny Moore - Don't Get Too Close (Virtual Riot Remix).jpg
-Don't Get Too Close
+Don't Get Too Close (Virtual Riot Remix)
 Skrillex, Bibi Bourelly, Sonny Moore & Virtual Riot
 0
 
@@ -165,8 +192,10 @@ Skrillex, Bibi Bourelly, Sonny Moore & Virtual Riot
 0
 2023
 OWSLA
+4:03
 -
-6
+---------------------------------------------------------------
+15
 Pjesme/Skrillex, Starrah & Four Tet - Butterflies.wav
 Covers/Skrillex, Starrah & Four Tet - Butterflies.jpg
 Butterflies
@@ -177,8 +206,10 @@ Quest For Fire
 0
 2023
 OWSLA
+3:15
 -
-7
+---------------------------------------------------------------
+16
 Pjesme/Knock2 - dashstar (VIP).wav
 Covers/Knock2 - dashstar (VIP).jpg
 dashstar (VIP)
@@ -189,8 +220,10 @@ Knock2
 0
 2023
 
+2:20
 -
-8
+---------------------------------------------------------------
+17
 Pjesme/Jala i Buba - Padam.wav
 Covers/Jala i Buba - Padam.jpg
 Padam
@@ -201,8 +234,10 @@ Zamisli
 0
 2023
 Fuck this shit i am out
+2:15
 - 
-9
+---------------------------------------------------------------
+18
 Pjesme/Henny i Breskvica - Sava i Dunav.wav
 Covers/Henny i Breskvica - Sava i Dunav.jpg
 Sava i Dunav
@@ -213,8 +248,10 @@ Zamisli
 0
 2023
 Fuck this shit i am out
+2:45
 - 
-10
+---------------------------------------------------------------
+19
 Pjesme/Maneskin - Beggin.wav
 Covers/Maneskin - Beggin.jpg
 Beggin
@@ -225,8 +262,10 @@ Zamisli
 0
 2023
 Fuck this shit i am out
+3:29
 - 
-11
+---------------------------------------------------------------
+20
 Pjesme/Maneskin - I wanna be your slave.wav
 Covers/Maneskin - Beggin.jpg
 I wanna be your slave
@@ -237,8 +276,10 @@ Zamisli
 0
 2023
 Fuck this shit i am out
-- 
-12
+2:53
+-
+---------------------------------------------------------------
+21
 Pjesme/Skrillex with Bobby Raps - Leave Me Like This.wav
 Covers/Skrillex with Bobby Raps - Leave Me Like This.jpg
 Leave Me Like This
@@ -249,8 +290,10 @@ Skrillex with Bobby Raps
 1
 2023
 OWSLA
+3:08
 -
-13
+---------------------------------------------------------------
+22
 Pjesme/Flowdan, Lil Baby, & Skrillex - Pepper.wav
 Covers/Flowdan, Lil Baby, & Skrillex - Pepper.jpg
 Pepper
@@ -261,8 +304,10 @@ Flowdan, Lil Baby, & Skrillex
 0
 2023
 OWSLA
+2:28
 -
-14
+---------------------------------------------------------------
+23
 Pjesme/Akon - SmackThat.wav
 Covers/Akon - SmackThat.jpg
 SmackThat
@@ -273,8 +318,10 @@ Akon
 0
 2023
 
+4:11
 -
-15
+---------------------------------------------------------------
+24
 Pjesme/Aleksandra Prijovic - Dam dam dam.wav
 Covers/Aleksandra Prijovic - Dam dam dam.jpg
 Dam dam dam
@@ -285,8 +332,10 @@ Aleksandra Prijovic
 0
 2023
 
+2:44
 -
-16
+---------------------------------------------------------------
+25
 Pjesme/Breskvica - Do gole koze.wav
 Covers/Breskvica - Do gole koze.jpg
 Do gole koze
@@ -297,8 +346,10 @@ Breskvica
 0
 2023
 
+3:45
 -
-17
+---------------------------------------------------------------
+26
 Pjesme/Aleksandra Prijovic - Psiho.wav
 Covers/Aleksandra Prijovic - Psiho.jpg
 Psiho
@@ -309,8 +360,10 @@ Aleksandra Prijovic
 0
 2023
 
+3:17
 -
-18
+---------------------------------------------------------------
+27
 Pjesme/Cunami - Capcarap .wav
 Covers/Cunami - Capcarap.jpg
 Capcarap
@@ -321,8 +374,10 @@ Cunami
 0
 2023
 
+3:16
 -
-19
+---------------------------------------------------------------
+28
 Pjesme/Cunami - Droga Amsterdam.wav
 Covers/Cunami - Droga Amsterdam.jpg
 Droga Amsterdam
@@ -333,8 +388,10 @@ Cunami
 0
 2023
 
+2:28
 -
-20
+---------------------------------------------------------------
+29
 Pjesme/Devito - Rolex.wav
 Covers/Devito - Rolex.jpg
 Rolex
@@ -345,8 +402,10 @@ Devito
 0
 2023
 
+2:18
 -
-21
+---------------------------------------------------------------
+30
 Pjesme/Devito i Breskvica - Tu tu tu.wav
 Covers/Devito i Breskvica - Tu tu tu.jpg
 Tu tu tu
@@ -357,8 +416,10 @@ Devito i Breskvica
 0
 2023
 
+2:29
 -
-22
+---------------------------------------------------------------
+31
 Pjesme/Dua Lipa - New Rules.wav
 Covers/Dua Lipa.jpg
 New Rules
@@ -369,8 +430,10 @@ Dua Lipa
 0
 2023
 
+3:29
 -
-23
+---------------------------------------------------------------
+32
 Pjesme/Henny i Breskvica - Ko to tamo.wav
 Covers/Henny i Breskvica - Ko to tamo.jpg
 Ko to tamo
@@ -381,8 +444,10 @@ Henny i Breskvica
 0
 2023
 
+2:42
 -
-24
+---------------------------------------------------------------
+33
 Pjesme/Jala i Buba - Dale.wav
 Covers/Jala i Buba - Dale.jpg
 Dale
@@ -393,8 +458,10 @@ Jala i Buba
 0
 2023
 
+2:47
 -
-25
+---------------------------------------------------------------
+34
 Pjesme/Maco Mamuko - Whiskey.wav
 Covers/Maco Mamuko - Whiskey.jpg
 Whiskey
@@ -405,8 +472,10 @@ Maco Mamuko
 0
 2023
 
+3:04
 -
-26
+---------------------------------------------------------------
+35
 Pjesme/Milan Stankovic- Nepopravljivo.wav
 Covers/Milan Stankovic- Nepopravljivo.jpg
 Nepopravljivo
@@ -417,8 +486,10 @@ Milan Stankovic
 0
 2023
 
+3:29
 -
-27
+---------------------------------------------------------------
+36
 Pjesme/Seksi - Superstar.wav
 Covers/Seksi - Superstar.jpg
 Superstar
@@ -429,8 +500,10 @@ Seksi
 0
 2023
 
+2:37
 -
-28
+---------------------------------------------------------------
+37
 Pjesme/Skrillex - Fuji Opener (feat. Alvin Risk).wav
 Covers/Skrillex - Fuji Opener (feat. Alvin Risk).jpg
 Fuji Opener
@@ -441,8 +514,10 @@ Skrillex i Alvin Risk
 0
 2023
 
+2:47
 -
-29
+---------------------------------------------------------------
+38
 Pjesme/Coby x Rouzi - Jao Mama.wav
 Covers/Coby x Rouzi - Jao Mama.jpg
 Jao Mama
@@ -453,8 +528,10 @@ Coby x Rouzi
 0
 2023
 
+2:44
 -
-30
+---------------------------------------------------------------
+39
 Pjesme/Skrillex i Damian - Make it bun dem .wav
 Covers/Skrillex i Damian - Make it bun dem.jpg
 Make it bun dem
@@ -465,8 +542,10 @@ Skrillex i Damian
 0
 2023
 
+3:38
 -
-31
+---------------------------------------------------------------
+40
 Pjesme/Virtual Riot - Back In Time ft. Angelika.wav
 Covers/Virtual Riot - Back In Time ft. Angelika.jpg
 Back In Time
@@ -477,8 +556,10 @@ Virtual Riot i Angelika
 0
 2023
 
+4:45
 -
-32
+---------------------------------------------------------------
+41
 Pjesme/Vlada Matovic - Patrola.wav
 Covers/Vlada Matovic - Patrola.jpg
 Patrola
@@ -489,8 +570,10 @@ Vlada Matovic
 0
 2023
 
+2:50
 -
-33
+---------------------------------------------------------------
+42
 Pjesme/Max Power - 33 Max Verstappen.wav
 Covers/Max Power - 33 Max Verstappen.jpg
 33 Max Verstappen
@@ -501,8 +584,10 @@ Max Power
 0
 2023
 
+2:52
 -
-34
+---------------------------------------------------------------
+43
 Pjesme/Joker Out - Carpe Diem .wav
 Covers/Joker Out - Carpe Diem.jpg
 Carpe Diem
@@ -513,8 +598,10 @@ Joker Out
 0
 2023
 
+2:56
 -
-0
+---------------------------------------------------------------
+44
 Pjesme/German Engineering EP/Virtual Riot - Chop Chop.ogg
 Covers/German Engineering EP.jpg
 Chop Chop
@@ -525,8 +612,10 @@ Virtual Riot
 0
 2019
 Disciple Recordings
+2:40
 -
-0
+---------------------------------------------------------------
+45
 Pjesme/German Engineering EP/Virtual Riot - Jump The Gun [NEST HQ Premiere].ogg
 Covers/German Engineering EP.jpg
 Jump The Gun
@@ -537,8 +626,10 @@ Virtual Riot
 0
 2019
 Disciple Recordings
+3:41
 -
-0
+---------------------------------------------------------------
+46
 Pjesme/German Engineering EP/Virtual Riot - Komputermusik.ogg
 Covers/German Engineering EP.jpg
 Komputermusik
@@ -549,8 +640,10 @@ Virtual Riot
 0
 2019
 Disciple Recordings
+3:21
 -
-0
+---------------------------------------------------------------
+47
 Pjesme/German Engineering EP/Virtual Riot - Pray For Riddim.ogg
 Covers/German Engineering EP.jpg
 Pray For Riddim
@@ -561,8 +654,10 @@ Virtual Riot
 0
 2019
 Disciple Recordings
+3:37
 -
-0
+---------------------------------------------------------------
+48
 Pjesme/German Engineering EP/Virtual Riot - Shindeiru [FREE DOWNLOAD].ogg
 Covers/German Engineering EP.jpg
 Shindeiru
@@ -573,8 +668,10 @@ Virtual Riot
 0
 2019
 Disciple Recordings
+2:46
 -
-0
+---------------------------------------------------------------
+49
 Pjesme/German Engineering EP/Virtual Riot - The Darkest Night.ogg
 Covers/German Engineering EP.jpg
 The Darkest Night
@@ -585,8 +682,10 @@ Virtual Riot
 0
 2019
 Disciple Recordings
+4:08
 -
-0
+---------------------------------------------------------------
+50
 Pjesme/German Engineering EP/Virtual Riot - Show Up Ft. Virus Syndicate.ogg
 Covers/German Engineering EP.jpg
 Show Up Ft. Virus Syndicate
@@ -597,4 +696,19 @@ Virtual Riot & Virus Syndicate
 0
 2019
 Disciple Recordings
+4:27
+-
+---------------------------------------------------------------
+51
+Pjesme/ROCK N' ROLL (WILL TAKE YOU TO THE MOUNTAIN).ogg
+Covers/ROCK N' ROLL (WILL TAKE YOU TO THE MOUNTAIN).jpg
+ROCK N' ROLL (WILL TAKE YOU TO THE MOUNTAIN)
+Skrillex
+1
+
+
+0
+2011
+OWSLA
+4:44
 -

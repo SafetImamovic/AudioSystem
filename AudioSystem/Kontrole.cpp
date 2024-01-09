@@ -421,7 +421,7 @@ void Kontrole::SetRezolucijaVrijeme(sf::RenderWindow& window)
 	this->pozadinaVrijeme.setPosition(sf::Vector2f(pocetnaKoordinataX + this->sirinaScroll, pocetnaKoordinataY));
 	this->textVrijeme.setPosition(sf::Vector2f(pocetnaKoordinataX + this->sirinaScroll + 13, pocetnaKoordinataY + 14));
 
-	std::cout << "Vrijeme: " << this->pozadinaVrijeme.getPosition().x << ", " << this->pozadinaVrijeme.getPosition().y << "\n";
+	//std::cout << "Vrijeme: " << this->pozadinaVrijeme.getPosition().x << ", " << this->pozadinaVrijeme.getPosition().y << "\n";
 
 	window.draw(this->pozadinaVrijeme);
 	window.draw(this->textVrijeme);
