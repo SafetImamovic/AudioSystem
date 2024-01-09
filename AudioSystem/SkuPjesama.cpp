@@ -39,39 +39,40 @@ std::vector<Pjesma> SkupPjesama::ucitajPjesmeIzDatoteke(const std::string& filen
     std::string temp = "";
 
     int idPjesme = 0, idWav, idSlika, idAlbum;
-    std::string lokacijaPjesme, lokacijeSlike, ime, imeAutora, album, datumObjave, recordLabel;
+    std::string lokacijaPjesme, lokacijeSlike, ime, imeAutora, album, datumObjave, recordLabel, trajanjePjesme;
     bool pripadaAlbumu, jeLajkana;
-
-    int pocetniIndex = 1;
 
     while (std::getline(file, line)) {
         std::istringstream iss(line);
 
-        std::getline(file, line); lokacijaPjesme = line; temp = "";
+        std::getline(file, line); temp = line; idPjesme = std::atoi(temp.c_str()); temp = "";
 
-        std::getline(file, line); lokacijeSlike = line; temp = "";
+        std::getline(file, line); temp = line;  lokacijaPjesme = temp; temp = "";
 
-        std::getline(file, line); ime = line; temp = "";
+        std::getline(file, line); temp = line; lokacijeSlike = temp; temp = "";
 
-        std::getline(file, line); imeAutora = line; temp = "";
+        std::getline(file, line); temp = line; ime = temp; temp = "";
+
+        std::getline(file, line); temp = line; imeAutora = temp; temp = "";
 
         std::getline(file, line); temp = line; pripadaAlbumu = std::atoi(temp.c_str()); temp = "";
 
-        std::getline(file, line); album = line; temp = "";
+        std::getline(file, line); temp = line; album = temp; temp = "";
 
         std::getline(file, line); temp = line; idAlbum = std::atoi(temp.c_str()); temp = "";
 
         std::getline(file, line); temp = line; jeLajkana = std::atoi(temp.c_str()); temp = "";
 
-        std::getline(file, line); datumObjave = line; temp = "";
+        std::getline(file, line); temp = line;  datumObjave = temp; temp = "";
 
-        std::getline(file, line); recordLabel = line; temp = "";
+        std::getline(file, line); temp = line; recordLabel = temp; temp = "";
+
+        std::getline(file, line); temp = line; trajanjePjesme = temp; temp = "";
 
         std::getline(file, line); temp = line; temp = "";
 
-        Pjesma p(pocetniIndex, lokacijaPjesme, lokacijeSlike, ime, imeAutora, pripadaAlbumu, album, idAlbum, jeLajkana, datumObjave, recordLabel);
+        Pjesma p(idPjesme, lokacijaPjesme, lokacijeSlike, ime, imeAutora, pripadaAlbumu, album, idAlbum, jeLajkana, datumObjave, recordLabel, trajanjePjesme);
         pjesme.push_back(p);
-        pocetniIndex++;
     }
 
     file.close();
