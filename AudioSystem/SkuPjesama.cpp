@@ -3,10 +3,15 @@
 
 
 SkupPjesama::SkupPjesama(std::string ime, std::string datumKreiranja, bool ponovi, bool shuffle, std::string kreator)
-    : Ime(ime), DatumKreiranja(datumKreiranja), PonoviSkupPjesama(ponovi), Shuffle(shuffle), Kreator(kreator){}
+    : Ime(ime), DatumKreiranja(datumKreiranja), PonoviSkupPjesama(ponovi), Shuffle(shuffle), Kreator(kreator), BrojPjesama(0) {}
 
 void SkupPjesama::dodajPjesmu(const Pjesma& pjesma) {
     Pjesme.push_back(pjesma);
+}
+
+void SkupPjesama::IzbaciPjesmu(int index)
+{
+    this->Pjesme.erase(this->Pjesme.begin() + index);
 }
 
 const std::vector<Pjesma>& SkupPjesama::dohvatiSvePjesme() const {
@@ -39,46 +44,68 @@ std::vector<Pjesma> SkupPjesama::ucitajPjesmeIzDatoteke(const std::string& filen
     std::string temp = "";
 
     int idPjesme = 0, idWav, idSlika, idAlbum;
-    std::string lokacijaPjesme, lokacijeSlike, ime, imeAutora, album, datumObjave, recordLabel;
+    std::string lokacijaPjesme, lokacijeSlike, ime, imeAutora, album, datumObjave, recordLabel, trajanjePjesme;
     bool pripadaAlbumu, jeLajkana;
-
-    int pocetniIndex = 1;
 
     while (std::getline(file, line)) {
         std::istringstream iss(line);
 
-        std::getline(file, line); lokacijaPjesme = line; temp = "";
+        std::getline(file, line); temp = line; idPjesme = std::atoi(temp.c_str()); temp = "";
 
-        std::getline(file, line); lokacijeSlike = line; temp = "";
+        std::getline(file, line); temp = line;  lokacijaPjesme = temp; temp = "";
 
-        std::getline(file, line); ime = line; temp = "";
+        std::getline(file, line); temp = line; lokacijeSlike = temp; temp = "";
 
-        std::getline(file, line); imeAutora = line; temp = "";
+        std::getline(file, line); temp = line; ime = temp; temp = "";
+
+        std::getline(file, line); temp = line; imeAutora = temp; temp = "";
 
         std::getline(file, line); temp = line; pripadaAlbumu = std::atoi(temp.c_str()); temp = "";
 
-        std::getline(file, line); album = line; temp = "";
+        std::getline(file, line); temp = line; album = temp; temp = "";
 
         std::getline(file, line); temp = line; idAlbum = std::atoi(temp.c_str()); temp = "";
 
         std::getline(file, line); temp = line; jeLajkana = std::atoi(temp.c_str()); temp = "";
 
-        std::getline(file, line); datumObjave = line; temp = "";
+        std::getline(file, line); temp = line; datumObjave = temp; temp = "";
 
-        std::getline(file, line); recordLabel = line; temp = "";
+        std::getline(file, line); temp = line; recordLabel = temp; temp = "";
+
+        std::getline(file, line); temp = line; trajanjePjesme = temp; temp = "";
 
         std::getline(file, line); temp = line; temp = "";
 
-        Pjesma p(pocetniIndex, lokacijaPjesme, lokacijeSlike, ime, imeAutora, pripadaAlbumu, album, idAlbum, jeLajkana, datumObjave, recordLabel);
+        Pjesma p(idPjesme, lokacijaPjesme, lokacijeSlike, ime, imeAutora, pripadaAlbumu, album, idAlbum, jeLajkana, datumObjave, recordLabel, trajanjePjesme);
         pjesme.push_back(p);
-        pocetniIndex++;
     }
 
     file.close();
     return pjesme;
 }
 
-std::vector<Pjesma> SkupPjesama::getPjesme()
+//preklopljeni operator koji dodaje pjesmu na vektor
+void SkupPjesama::operator+(const Pjesma& pjesma)
+{
+    this->BrojPjesama++;
+    this->Pjesme.push_back(pjesma);
+}
+
+//brise pjesmu s vektora
+void SkupPjesama::operator-(const Pjesma& pjesma)
+{
+    this->BrojPjesama--;
+    for (int i = 0; i < this->Pjesme.size(); i++)
+    {
+        if (pjesma.getID_Pjesme() == this->Pjesme.at(i).getID_Pjesme())
+        {
+            this->Pjesme.erase(this->Pjesme.begin() + i - 1);
+            break;
+        }
+    }
+}
+
+std::vector<Pjesma> &SkupPjesama::getPjesme()
 {
     return this->Pjesme;
 }
@@ -87,3 +114,4 @@ void SkupPjesama::setPjesme(std::vector<Pjesma>& pjesme)
 {
     this->Pjesme = pjesme;
 }
+

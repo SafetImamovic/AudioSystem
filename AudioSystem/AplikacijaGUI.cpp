@@ -66,6 +66,8 @@ void AplikacijaGUI::MoveDown()
 
 void AplikacijaGUI::InicijalizacijaVarijabli()
 {
+	
+	this->like = false;
 	this->window = nullptr; //dobra praksa da se pointer inicijalizira sa nullptr. incicijalizirmao prozor kao pointer jer zelimo da ga alociramo na heap
 	//i fleksibilnija je kontrola
 
@@ -74,12 +76,8 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	InfoPjesma::visinaWindow = this->videoMode.height;
 	InfoPjesma::sirinaWindow = this->videoMode.width;
 
-	
-	this->CreateShorcut();
-
 	PlayLista svePjesme("Sve Pjesme", "6.1.2024", true, true, "Moja Mama");
 	this->pSvePjesme = &svePjesme;
-
 
 	std::vector<Pjesma> pjesme = this->pSvePjesme->ucitajPjesmeIzDatoteke("PjesmeData.txt");
 	this->pSvePjesme->setPjesme(pjesme);
@@ -92,28 +90,66 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	//this->IPR.SetInfoPjesmaRender(pjesme.at(0), this->font, this->fontEmoji);
 	//this->IPR2.SetInfoPjesmaRender(pjesme.at(1), this->font, this->fontEmoji);
 
-
-	for (const Pjesma& pjesma : pjesme)
+	/*
+	for (int i = 0; i < pjesme.size(); i++)
 	{
 		InfoPjesma::InfoPjesmaRender temp;
-		temp.SetInfoPjesmaRender(pjesma, pjesma.getLokacijaSlike(), this->font, this->fontEmoji);
+		temp.SetInfoPjesmaRender(pjesme.at(i), pjesme.at(i).getLokacijaSlike(), this->font, this->fontBold, this->fontEmoji, i + 1);
 		this->IPRMain.push_back(temp);
 		
 	}
-
+	
+	
 	for(int i = 0; i < pjesme.size(); i++)
 		this->IPRMain.at(i).LoadCover();
+		*/
+
 	
 	
 
 
-	this->player.setNiz(svePjesme, 0.5f);
+	//this->player.setNiz(svePjesme, 0.5f);
 
 	//this->PostaviNizPjesmi();
 
+	//-----------------------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------------------
 	
+	std::cout << "this->PlayListe.size(): " << this->PlayListe.size() << "\n";
+	this->KreirajPlayListu("Name", "09.01.2024", false, false, "Me");
+	std::cout << "this->PlayListe.size(): " << this->PlayListe.size() << "\n";
+
+	std::cout << "this->PlayListe.at(0).getPjesme().size(): " << this->PlayListe.at(0).getPjesme().size() << "\n";
+	this->PlayListe.at(0) + this->pSvePjesme->getPjesme().at(0);
+	this->PlayListe.at(0) + this->pSvePjesme->getPjesme().at(1);
+	this->PlayListe.at(0) + this->pSvePjesme->getPjesme().at(10);
+	this->PlayListe.at(0) + this->pSvePjesme->getPjesme().at(20);
+	this->PlayListe.at(0) + this->pSvePjesme->getPjesme().at(33);
+	this->PlayListe.at(0).IzbaciPjesmu(1);
+	std::cout << "this->PlayListe.at(0).getPjesme().size(): " << this->PlayListe.at(0).getPjesme().size() << "\n";
+	std::cout << "Track: \n"; this->PlayListe.at(0).getPjesme().at(0).getInfo();
+
+	std::vector<Pjesma> PJesme = this->PlayListe.at(0).getPjesme();
+	PJesme.resize(PJesme.size());
+
+	for (int i = 0; i < PJesme.size(); i++)
+	{
+		InfoPjesma::InfoPjesmaRender temp;
+		temp.SetInfoPjesmaRender(PJesme.at(i), PJesme.at(i).getLokacijaSlike(), this->font, this->fontBold, this->fontEmoji, i + 1);
+		this->IPRMain.push_back(temp);
+	}
+	for(int i = 0; i < PJesme.size(); i++)
+		this->IPRMain.at(i).LoadCover();
+
+	this->player.setNiz(this->PlayListe.at(0), 0.5f);
+
+	//-----------------------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------------------
+
+
 	this->InfoPjesmaKonfiguracija();
 
+	
 }
 
 void AplikacijaGUI::InicijalizacijaProzora()
@@ -218,6 +254,11 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 	{
 		this->Mute();
 	}
+	else if (Tipka::PRITISNUT == "Like")
+	{
+		this->LikeTrackHook();
+		std::cout << "Like!\n";
+	}
 		
 
 	float tempp = this->kontrole.UpdatePozicijaSimbolaWindowGlasnoca(*this->window);
@@ -244,10 +285,10 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 				this->IPRMain.at(i).PromijeniBojuPozadine(this->AkcenatBoja);
 
 				//this->player.unesiIme(this->IPRMain.at(i).lokacijaPjesme);
-				this->player.setTrenutniIndexPjesme(this->IPRMain.at(i).intID - 1);
+				this->player.setTrenutniIndexPjesme(i);
 				//TREBA NAPRAVITI FUNKCIJU
 				this->player.trenutnaPjesma();
-				std::cout << "Pozvana!\n";
+				//std::cout << "Pozvana!\n";
 
 				this->UpdateImePjesme();
 			}
@@ -366,7 +407,7 @@ void AplikacijaGUI::Mute()
 
 void AplikacijaGUI::InfoPjesmaKonfiguracija()
 {
-	InfoPjesma::SetPjesma("Don't Get Too Close (Virtual Riot Remix)", "Knock2", this->font, this->fontEmoji);
+	InfoPjesma::SetPjesma("Don't Get Too Close (Virtual Riot Remix)", "Knock2", this->font, this->fontBold, this->fontBoldest, this->fontEmoji);
 	InfoPjesma::Cover.loadFromFile("Covers/Skrillex with Bobby Raps - Leave Me Like This.jpg");
 	InfoPjesma::CoverRender.setTexture(InfoPjesma::Cover);
 	std::vector<std::string> pjesmeZaSad;
@@ -432,7 +473,7 @@ void AplikacijaGUI::Scroll()
 {
 	if (ProvjeriHoverRegija(*this->window, { 400, 200 }, sf::Vector2f(this->videoMode.width - InfoPjesma::VelicinaLijevo.x - 300, this->videoMode.height - 110)))
 	{
-		std::cout << "Nice" << "\n";
+		//std::cout << "Nice" << "\n";
 		if (this->event.mouseWheel.delta == -1)
 		{
 			this->MoveUp();
@@ -442,8 +483,8 @@ void AplikacijaGUI::Scroll()
 			this->MoveDown();
 		}
 	}
-	else
-		std::cout << "X" << "\n";
+	
+		//std::cout << "X" << "\n";
 }
 
 void AplikacijaGUI::PostaviNizPjesmi()//test
@@ -455,8 +496,6 @@ void AplikacijaGUI::PostaviNizPjesmi()//test
 	//	std::cout << "\"" << pjesma.getLokacijaPjesme() << "\"" << std::endl;
 	//}
 
-	
-	
 }
 
 void AplikacijaGUI::UpdateImePjesme()
@@ -464,7 +503,8 @@ void AplikacijaGUI::UpdateImePjesme()
 	InfoPjesma::textNaslov.setString(this->player.getPjesmaObjekat().getIme());
 	InfoPjesma::Cover.loadFromFile(this->player.getPjesmaObjekat().getLokacijaSlike());
 	InfoPjesma::textPjesnici.setString(this->player.getPjesmaObjekat().getImeAutora());
-
+	InfoPjesma::textDatumObjave.setString(this->player.getPjesmaObjekat().getDatumObjave());
+	InfoPjesma::textRecordLabel.setString(this->player.getPjesmaObjekat().getRecordLabel());
 
 	if (this->player.DaLiJeNovaPjesma(this->player.GetImePjesmePath()))
 	{
@@ -479,7 +519,7 @@ void AplikacijaGUI::UpdateImePjesme()
 
 		InfoPjesma::textPjesnici.setPosition(
 			InfoPjesma::PaddingHorizontal + 1,
-			InfoPjesma::VelicinaLijevo.x + InfoPjesma::PaddingVertical + 20 + 20
+			InfoPjesma::pozicijaPjesma.y + InfoPjesma::PaddingVertical + InfoPjesma::VelicinaLijevo.x + 26 + 20
 		);
 		InfoPjesma::ratePjesnici = -0.001;
 	}
@@ -493,7 +533,7 @@ void AplikacijaGUI::ResizeWindowEvent()
 		this->event.size.width,
 		this->event.size.height
 	);
-	std::cout << this->videoMode.height << "\n";
+	//std::cout << this->videoMode.height << "\n";
 	this->videoMode.height = vidljivaPovrsina.height;
 	this->videoMode.width = vidljivaPovrsina.width;
 	this->window->setView(sf::View(vidljivaPovrsina));
@@ -508,8 +548,11 @@ void AplikacijaGUI::PromjenaRezolucijaStaticInfoPjesma()
 {
 	InfoPjesma::visinaWindow = this->videoMode.height;
 	InfoPjesma::sirinaWindow = this->videoMode.width;
-	for(int i = 0; i < this->IPRMain.size(); i++)
-		this->IPRMain.at(i).FixPozicija(400, this->videoMode.width - 400 - 300);
+	for (int i = 0; i < this->IPRMain.size(); i++)
+	{
+		this->IPRMain.at(i).FixPozicija(400, this->videoMode.width - 400 - 300, i + 1);
+	}
+		
 	//InfoPjesma::VelicinaLijevo = sf::Vector2f(300, InfoPjesma::visinaWindow);
 	//InfoPjesma::BaznaRezolucijaSlike = 300;
 	
@@ -522,15 +565,34 @@ void AplikacijaGUI::CreateShorcut()
 	
 }
 
+//Metoda koja kreira playlistu, stavlja je na glavni vektor skoro svih playlisti i vraca index playliste u vektoru
+int AplikacijaGUI::KreirajPlayListu(const std::string& ime, const std::string& datumKreiranja,
+	bool ponoviSkupPjesama, bool shuffle, std::string kreator)
+{
+	PlayLista p(ime, datumKreiranja, ponoviSkupPjesama, shuffle, kreator);
+	this->PlayListe.push_back(p);
+	return this->PlayListe.size() - 1;
+}
 
+void AplikacijaGUI::LikeTrackHook()
+{
+	std::cout << "ovo oznacava like " << this->PlayListe.at(0).getPjesme().at(0).getDaLiJeLajkana() << "\n";
+
+	if(this->PlayListe.at(0).getPjesme().at(0).getDaLiJeLajkana() == false)
+		this->PlayListe.at(0).getPjesme().at(0).DaLiJeLajkana = true;
+	else
+		this->PlayListe.at(0).getPjesme().at(0).DaLiJeLajkana = false;
+
+}
 
 //------------------end of private-------------------------------//
 
-AplikacijaGUI::AplikacijaGUI(sf::Font& font, sf::Font& fontEmoji, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja)
+AplikacijaGUI::AplikacijaGUI(sf::Font& font, sf::Font& fontBold, sf::Font& fontBoldest, sf::Font& fontEmoji, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja)
 //konstruktor poziva privatne metode koje inicijaliziraju varijable i prozor
 {
-
 	this->font = font;
+	this->fontBold = fontBold;
+	this->fontBoldest = fontBoldest;
 	this->fontEmoji = fontEmoji;
 	this->PrimarnaBoja = PrimarnaBoja;
 	this->SekundarnaBoja = SekundarnaBoja;
@@ -657,6 +719,8 @@ void AplikacijaGUI::UpdateGUI() //metoda koja osvjezi "update-je" logiku vezanu 
 	this->UpdateStanjeTipke();
 	this->Scroll();
 	this->UpdateImePjesme();
+	//--------------------------------------------
+	this->kontrole.PromijeniLikeTipku(this->PlayListe.at(0).getPjesme().at(0).getDaLiJeLajkana());
 	
 }
 
