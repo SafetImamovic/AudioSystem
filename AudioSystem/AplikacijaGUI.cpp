@@ -66,6 +66,8 @@ void AplikacijaGUI::MoveDown()
 
 void AplikacijaGUI::InicijalizacijaVarijabli()
 {
+	
+	this->like = false;
 	this->window = nullptr; //dobra praksa da se pointer inicijalizira sa nullptr. incicijalizirmao prozor kao pointer jer zelimo da ga alociramo na heap
 	//i fleksibilnija je kontrola
 
@@ -76,7 +78,6 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 
 	PlayLista svePjesme("Sve Pjesme", "6.1.2024", true, true, "Moja Mama");
 	this->pSvePjesme = &svePjesme;
-
 
 	std::vector<Pjesma> pjesme = this->pSvePjesme->ucitajPjesmeIzDatoteke("PjesmeData.txt");
 	this->pSvePjesme->setPjesme(pjesme);
@@ -124,7 +125,7 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	this->PlayListe.at(0) + this->pSvePjesme->getPjesme().at(10);
 	this->PlayListe.at(0) + this->pSvePjesme->getPjesme().at(20);
 	this->PlayListe.at(0) + this->pSvePjesme->getPjesme().at(33);
-	this->PlayListe.at(0).IzbaciPjesmu(4);
+	this->PlayListe.at(0).IzbaciPjesmu(1);
 	std::cout << "this->PlayListe.at(0).getPjesme().size(): " << this->PlayListe.at(0).getPjesme().size() << "\n";
 	std::cout << "Track: \n"; this->PlayListe.at(0).getPjesme().at(0).getInfo();
 
@@ -147,6 +148,8 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 
 
 	this->InfoPjesmaKonfiguracija();
+
+	
 }
 
 void AplikacijaGUI::InicijalizacijaProzora()
@@ -250,6 +253,11 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 	else if (Tipka::PRITISNUT == "Mute")
 	{
 		this->Mute();
+	}
+	else if (Tipka::PRITISNUT == "Like")
+	{
+		this->LikeTrackHook();
+		std::cout << "Like!\n";
 	}
 		
 
@@ -566,7 +574,16 @@ int AplikacijaGUI::KreirajPlayListu(const std::string& ime, const std::string& d
 	return this->PlayListe.size() - 1;
 }
 
+void AplikacijaGUI::LikeTrackHook()
+{
+	std::cout << "ovo oznacava like " << this->PlayListe.at(0).getPjesme().at(0).getDaLiJeLajkana() << "\n";
 
+	if(this->PlayListe.at(0).getPjesme().at(0).getDaLiJeLajkana() == false)
+		this->PlayListe.at(0).getPjesme().at(0).DaLiJeLajkana = true;
+	else
+		this->PlayListe.at(0).getPjesme().at(0).DaLiJeLajkana = false;
+
+}
 
 //------------------end of private-------------------------------//
 
@@ -702,6 +719,8 @@ void AplikacijaGUI::UpdateGUI() //metoda koja osvjezi "update-je" logiku vezanu 
 	this->UpdateStanjeTipke();
 	this->Scroll();
 	this->UpdateImePjesme();
+	//--------------------------------------------
+	this->kontrole.PromijeniLikeTipku(this->PlayListe.at(0).getPjesme().at(0).getDaLiJeLajkana());
 	
 }
 
