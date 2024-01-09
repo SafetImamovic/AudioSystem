@@ -421,7 +421,7 @@ Devito i Breskvica
 ---------------------------------------------------------------
 31
 Pjesme/Dua Lipa - New Rules.wav
-Covers/Dua Lipa.jpg
+Covers/Dua Lipa - New Rules.jpg
 New Rules
 Dua Lipa
 1
@@ -610,7 +610,7 @@ Virtual Riot
 
 
 0
-2019
+2020
 Disciple Recordings
 2:40
 -
@@ -623,8 +623,8 @@ Virtual Riot
 1
 
 
-0
-2019
+1
+2020
 Disciple Recordings
 3:41
 -
@@ -638,7 +638,7 @@ Virtual Riot
 
 
 0
-2019
+2020
 Disciple Recordings
 3:21
 -
@@ -652,7 +652,7 @@ Virtual Riot
 
 
 0
-2019
+2020
 Disciple Recordings
 3:37
 -
@@ -665,8 +665,8 @@ Virtual Riot
 1
 
 
-0
-2019
+1
+2020
 Disciple Recordings
 2:46
 -
@@ -680,7 +680,7 @@ Virtual Riot
 
 
 0
-2019
+2020
 Disciple Recordings
 4:08
 -
@@ -694,7 +694,7 @@ Virtual Riot & Virus Syndicate
 
 
 0
-2019
+2020
 Disciple Recordings
 4:27
 -
