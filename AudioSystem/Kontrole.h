@@ -29,7 +29,7 @@ public:
 	
 	void InicijalizacijaScroll();
 	void InicijalizacijaGlasnoca();
-	void InicijalizacijaTipki();
+	void InicijalizacijaTipki(bool DaLiJeLajkana);
 	float UpdatePozicijaSimbolaWindow(sf::RenderWindow& window);
 	float UpdatePozicijaSimbolaWindowGlasnoca(sf::RenderWindow& window);
 	void UpdatePozicijaSimbola(float index);
@@ -42,6 +42,7 @@ public:
 	void SetRezolucijaScrollBar();
 	void SetRezolucijaVrijeme(sf::RenderWindow& window);
 	void SetRezolucijaGlasnoca();
+	void PromijeniLikeTipku(bool da);
 
 	void RenderScroll(sf::RenderWindow &window);
 	void RenderGlasnoca(sf::RenderWindow& window);

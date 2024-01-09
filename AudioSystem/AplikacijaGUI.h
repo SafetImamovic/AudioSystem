@@ -29,7 +29,7 @@ private:
     //cak i van prozora ako je tako definisano
 	sf::VideoMode videoMode; //zadaje rezoluciju prozoru
 	sf::Vector2i mousePozProzor; //cuva poziciju misa relativnu prozoru (koordinate)
-	sf::Font font, fontEmoji;
+	sf::Font font, fontBold, fontBoldest, fontEmoji;
 	Tipka PromijeniRezolucijuToggleTEST;
 	sf::Color PrimarnaBoja, SekundarnaBoja, AkcenatBoja;
 	float TempGlasnoca;
@@ -39,6 +39,10 @@ private:
 	PlayLista* pSvePjesme;
 	std::vector<std::string> NizPjesmi;
 	std::vector<InfoPjesma::InfoPjesmaRender> IPRMain;
+	bool like;
+
+	std::vector<PlayLista> PlayListe;
+
 	void MoveUp();
 	void MoveDown();
 	//elementi aplikacije
@@ -78,10 +82,13 @@ private:
 	void ResizeWindowEvent();
 	void PromjenaRezolucijaStaticInfoPjesma();
 	void CreateShorcut();
+	int KreirajPlayListu(const std::string& ime, const std::string& datumKreiranja,
+		bool ponoviSkupPjesama, bool shuffle, std::string kreator);
+	void LikeTrackHook();
 
 
 public:
-	AplikacijaGUI(sf::Font& font, sf::Font& fontEmoji, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja);
+	AplikacijaGUI(sf::Font& font, sf::Font& fontBold, sf::Font& fontBoldest, sf::Font& fontEmoji, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja);
 	~AplikacijaGUI();
 
 	void UpdateRect();

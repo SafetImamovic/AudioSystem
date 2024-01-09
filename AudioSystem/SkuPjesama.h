@@ -17,11 +17,14 @@ protected:
     bool PonoviSkupPjesama;
     bool Shuffle;
     std::string Kreator;
+    int BrojPjesama;
 
 public:
+    void operator + (const Pjesma& pjesma);
+    void operator - (const Pjesma& pjesma);
 
     // Getteri
-    std::vector<Pjesma> getPjesme();
+    std::vector<Pjesma> &getPjesme();
     std::string getIme() const;
     std::string getDatumKreiranja() const;
     bool getPonoviSkupPjesama() const;
@@ -38,6 +41,8 @@ public:
 
     // Primjer dodavanja pjesme
     void dodajPjesmu(const Pjesma& pjesma);
+
+    void IzbaciPjesmu(int index);
 
     // Primjer dohvaæanja svih pjesama
     const std::vector<Pjesma>& dohvatiSvePjesme() const;
