@@ -74,9 +74,6 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	InfoPjesma::visinaWindow = this->videoMode.height;
 	InfoPjesma::sirinaWindow = this->videoMode.width;
 
-	
-	this->CreateShorcut();
-
 	PlayLista svePjesme("Sve Pjesme", "6.1.2024", true, true, "Moja Mama");
 	this->pSvePjesme = &svePjesme;
 
@@ -92,28 +89,64 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	//this->IPR.SetInfoPjesmaRender(pjesme.at(0), this->font, this->fontEmoji);
 	//this->IPR2.SetInfoPjesmaRender(pjesme.at(1), this->font, this->fontEmoji);
 
-
-	for (const Pjesma& pjesma : pjesme)
+	/*
+	for (int i = 0; i < pjesme.size(); i++)
 	{
 		InfoPjesma::InfoPjesmaRender temp;
-		temp.SetInfoPjesmaRender(pjesma, pjesma.getLokacijaSlike(), this->font, this->fontBold, this->fontEmoji);
+		temp.SetInfoPjesmaRender(pjesme.at(i), pjesme.at(i).getLokacijaSlike(), this->font, this->fontBold, this->fontEmoji, i + 1);
 		this->IPRMain.push_back(temp);
 		
 	}
-
+	
+	
 	for(int i = 0; i < pjesme.size(); i++)
 		this->IPRMain.at(i).LoadCover();
+		*/
+
 	
 	
 
 
-	this->player.setNiz(svePjesme, 0.5f);
+	//this->player.setNiz(svePjesme, 0.5f);
 
 	//this->PostaviNizPjesmi();
 
+	//-----------------------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------------------
 	
-	this->InfoPjesmaKonfiguracija();
+	std::cout << "this->PlayListe.size(): " << this->PlayListe.size() << "\n";
+	this->KreirajPlayListu("Name", "09.01.2024", false, false, "Me");
+	std::cout << "this->PlayListe.size(): " << this->PlayListe.size() << "\n";
 
+	std::cout << "this->PlayListe.at(0).getPjesme().size(): " << this->PlayListe.at(0).getPjesme().size() << "\n";
+	this->PlayListe.at(0) + this->pSvePjesme->getPjesme().at(0);
+	this->PlayListe.at(0) + this->pSvePjesme->getPjesme().at(1);
+	this->PlayListe.at(0) + this->pSvePjesme->getPjesme().at(10);
+	this->PlayListe.at(0) + this->pSvePjesme->getPjesme().at(20);
+	this->PlayListe.at(0) + this->pSvePjesme->getPjesme().at(33);
+	this->PlayListe.at(0).IzbaciPjesmu(4);
+	std::cout << "this->PlayListe.at(0).getPjesme().size(): " << this->PlayListe.at(0).getPjesme().size() << "\n";
+	std::cout << "Track: \n"; this->PlayListe.at(0).getPjesme().at(0).getInfo();
+
+	std::vector<Pjesma> PJesme = this->PlayListe.at(0).getPjesme();
+	PJesme.resize(PJesme.size());
+
+	for (int i = 0; i < PJesme.size(); i++)
+	{
+		InfoPjesma::InfoPjesmaRender temp;
+		temp.SetInfoPjesmaRender(PJesme.at(i), PJesme.at(i).getLokacijaSlike(), this->font, this->fontBold, this->fontEmoji, i + 1);
+		this->IPRMain.push_back(temp);
+	}
+	for(int i = 0; i < PJesme.size(); i++)
+		this->IPRMain.at(i).LoadCover();
+
+	this->player.setNiz(this->PlayListe.at(0), 0.5f);
+
+	//-----------------------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------------------
+
+
+	this->InfoPjesmaKonfiguracija();
 }
 
 void AplikacijaGUI::InicijalizacijaProzora()
@@ -244,7 +277,7 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 				this->IPRMain.at(i).PromijeniBojuPozadine(this->AkcenatBoja);
 
 				//this->player.unesiIme(this->IPRMain.at(i).lokacijaPjesme);
-				this->player.setTrenutniIndexPjesme(this->IPRMain.at(i).intID - 1);
+				this->player.setTrenutniIndexPjesme(i);
 				//TREBA NAPRAVITI FUNKCIJU
 				this->player.trenutnaPjesma();
 				//std::cout << "Pozvana!\n";
@@ -507,8 +540,11 @@ void AplikacijaGUI::PromjenaRezolucijaStaticInfoPjesma()
 {
 	InfoPjesma::visinaWindow = this->videoMode.height;
 	InfoPjesma::sirinaWindow = this->videoMode.width;
-	for(int i = 0; i < this->IPRMain.size(); i++)
-		this->IPRMain.at(i).FixPozicija(400, this->videoMode.width - 400 - 300);
+	for (int i = 0; i < this->IPRMain.size(); i++)
+	{
+		this->IPRMain.at(i).FixPozicija(400, this->videoMode.width - 400 - 300, i + 1);
+	}
+		
 	//InfoPjesma::VelicinaLijevo = sf::Vector2f(300, InfoPjesma::visinaWindow);
 	//InfoPjesma::BaznaRezolucijaSlike = 300;
 	
@@ -519,6 +555,15 @@ void AplikacijaGUI::PromjenaRezolucijaStaticInfoPjesma()
 void AplikacijaGUI::CreateShorcut()
 {
 	
+}
+
+//Metoda koja kreira playlistu, stavlja je na glavni vektor skoro svih playlisti i vraca index playliste u vektoru
+int AplikacijaGUI::KreirajPlayListu(const std::string& ime, const std::string& datumKreiranja,
+	bool ponoviSkupPjesama, bool shuffle, std::string kreator)
+{
+	PlayLista p(ime, datumKreiranja, ponoviSkupPjesama, shuffle, kreator);
+	this->PlayListe.push_back(p);
+	return this->PlayListe.size() - 1;
 }
 
 

@@ -39,6 +39,9 @@ private:
 	PlayLista* pSvePjesme;
 	std::vector<std::string> NizPjesmi;
 	std::vector<InfoPjesma::InfoPjesmaRender> IPRMain;
+
+	std::vector<PlayLista> PlayListe;
+
 	void MoveUp();
 	void MoveDown();
 	//elementi aplikacije
@@ -78,6 +81,8 @@ private:
 	void ResizeWindowEvent();
 	void PromjenaRezolucijaStaticInfoPjesma();
 	void CreateShorcut();
+	int KreirajPlayListu(const std::string& ime, const std::string& datumKreiranja,
+		bool ponoviSkupPjesama, bool shuffle, std::string kreator);
 
 
 public:
