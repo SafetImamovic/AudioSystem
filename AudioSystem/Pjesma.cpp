@@ -5,17 +5,17 @@
 Pjesma::Pjesma()
     : ID_Pjesme(0), lokacijaPjesme(""), lokacijaSlike(""), Ime(""), ImeAutora(""),
     DaLiPripadaAlbumu(false), Album(""), ID_Album(0),
-    DaLiJeLajkana(false), DatumObjave(""), RecordLabel("")
+    DaLiJeLajkana(false), DatumObjave(""), RecordLabel(""), TrajanjePjesme("")
 {
 
 }
 
 Pjesma::Pjesma(unsigned int idPjesme, std::string lokacijaPjesme, std::string lokcijaSlike, const std::string& ime, const std::string& imeAutora,
     bool pripadaAlbumu, const std::string& album, unsigned int idAlbum,
-    bool jeLajkana, const std::string& datumObjave, const std::string& recordLabel)
+    bool jeLajkana, const std::string& datumObjave, const std::string& recordLabel, const std::string &trajanjePjesme)
     : ID_Pjesme(idPjesme), lokacijaPjesme(lokacijaPjesme), lokacijaSlike(lokcijaSlike), Ime(ime), ImeAutora(imeAutora),
     DaLiPripadaAlbumu(pripadaAlbumu), Album(album), ID_Album(idAlbum),
-    DaLiJeLajkana(jeLajkana), DatumObjave(datumObjave), RecordLabel(recordLabel)
+    DaLiJeLajkana(jeLajkana), DatumObjave(datumObjave), RecordLabel(recordLabel), TrajanjePjesme(trajanjePjesme)
 {
 
 }
@@ -69,18 +69,23 @@ bool Pjesma::getDaLiJeLajkana() const
 
 std::string Pjesma::getDatumObjave() const
 {
-    return DatumObjave;
+    return this->DatumObjave;
 }
 
 std::string Pjesma::getRecordLabel() const
 {
-    return RecordLabel;
+    return this->RecordLabel;
 }
 
 // Implementacija settera
 void Pjesma::setID_Pjesme(unsigned int idPjesme)
 {
     ID_Pjesme = idPjesme;
+}
+
+std::string Pjesma::getTrajanjePjesme() const
+{
+    return this->TrajanjePjesme;
 }
 
 void Pjesma::setID_WAV(unsigned int idWav)
