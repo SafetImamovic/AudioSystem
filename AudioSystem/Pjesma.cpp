@@ -64,7 +64,7 @@ unsigned int Pjesma::getID_Album() const
 
 bool Pjesma::getDaLiJeLajkana() const
 {
-    return DaLiJeLajkana;
+    return this->DaLiJeLajkana;
 }
 
 std::string Pjesma::getDatumObjave() const
@@ -125,7 +125,7 @@ void Pjesma::setID_Album(unsigned int idAlbum)
 
 void Pjesma::setDaLiJeLajkana(bool jeLajkana)
 {
-    DaLiJeLajkana = jeLajkana;
+    this->DaLiJeLajkana = jeLajkana;
 }
 
 void Pjesma::setDatumObjave(const std::string& datumObjave)

@@ -15,12 +15,13 @@ private:
     bool DaLiPripadaAlbumu;
     std::string Album;
     unsigned int ID_Album;
-    bool DaLiJeLajkana;
+    
     std::string DatumObjave;
     std::string RecordLabel;
     std::string TrajanjePjesme;
 
 public:
+    bool DaLiJeLajkana;
     Pjesma();
     Pjesma(unsigned int idPjesme, std::string lokacijaPjesme, std::string lokcijaSlike, const std::string& ime, const std::string& imeAutora,
         bool pripadaAlbumu, const std::string& album, unsigned int idAlbum,

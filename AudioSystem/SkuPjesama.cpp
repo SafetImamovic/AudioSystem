@@ -68,7 +68,7 @@ std::vector<Pjesma> SkupPjesama::ucitajPjesmeIzDatoteke(const std::string& filen
 
         std::getline(file, line); temp = line; jeLajkana = std::atoi(temp.c_str()); temp = "";
 
-        std::getline(file, line); temp = line;  datumObjave = temp; temp = "";
+        std::getline(file, line); temp = line; datumObjave = temp; temp = "";
 
         std::getline(file, line); temp = line; recordLabel = temp; temp = "";
 
@@ -105,7 +105,7 @@ void SkupPjesama::operator-(const Pjesma& pjesma)
     }
 }
 
-std::vector<Pjesma> SkupPjesama::getPjesme()
+std::vector<Pjesma> &SkupPjesama::getPjesme()
 {
     return this->Pjesme;
 }

@@ -24,7 +24,7 @@ public:
     void operator - (const Pjesma& pjesma);
 
     // Getteri
-    std::vector<Pjesma> getPjesme();
+    std::vector<Pjesma> &getPjesme();
     std::string getIme() const;
     std::string getDatumKreiranja() const;
     bool getPonoviSkupPjesama() const;

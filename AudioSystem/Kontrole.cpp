@@ -1,6 +1,6 @@
 ﻿#include "Kontrole.h"
 
-void Kontrole::InicijalizacijaTipki()
+void Kontrole::InicijalizacijaTipki(bool DaLiJeLajkana)
 {
 	this->GlobalnaPozadina.setFillColor(sf::Color(30, 30, 30));
 	this->GlobalnaPozadina.setPosition(0, this->videoMode.height - 110);
@@ -17,9 +17,16 @@ void Kontrole::InicijalizacijaTipki()
 
 
 
+	std::wstring like; //EmptyLikeIcon
+
+	if(!DaLiJeLajkana)
+		like = L"\uE006";
+	else
+		like = L"\uE00B";
+
 	TipkaLike.SetTipka(
 		"Like",
-		L"\uE006\uE00B",
+		like, //\uE00B
 		velicinaTipke,
 		24,
 		sf::Color::White,
@@ -293,7 +300,7 @@ void Kontrole::SetKontrole(sf::VideoMode &videoMode, sf::Font &font, sf::Font &f
 
 	
 
-	this->InicijalizacijaTipki();
+	this->InicijalizacijaTipki(true);
 	this->InicijalizacijaScroll();
 	this->InicijalizacijaGlasnoca();
 }
@@ -451,4 +458,16 @@ void Kontrole::SetRezolucijaGlasnoca()
 	this->GlasnocaProcenatPozadina.setPosition(this->videoMode.width - this->sirinaTipke, pocetnaKoordinataY);
 
 	this->GlasnocaProcenat.setPosition(this->videoMode.width - this->sirinaTipke + 13, pocetnaKoordinataY + 18);
+}
+
+void Kontrole::PromijeniLikeTipku(bool da)
+{
+	std::wstring like;
+
+	if (!da)
+		like = L"\uE006";
+	else
+		like = L"\uE00B";
+
+	this->Tipke.at(6).SetTextUTF16(like);
 }
