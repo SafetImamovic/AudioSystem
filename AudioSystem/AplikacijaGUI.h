@@ -39,6 +39,7 @@ private:
 	PlayLista* pSvePjesme;
 	std::vector<std::string> NizPjesmi;
 	std::vector<InfoPjesma::InfoPjesmaRender> IPRMain;
+	bool like;
 
 	std::vector<PlayLista> PlayListe;
 
@@ -83,6 +84,7 @@ private:
 	void CreateShorcut();
 	int KreirajPlayListu(const std::string& ime, const std::string& datumKreiranja,
 		bool ponoviSkupPjesama, bool shuffle, std::string kreator);
+	void LikeTrackHook();
 
 
 public:
