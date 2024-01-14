@@ -35,7 +35,7 @@ private:
     size_t trenutniIndeksPjesme;
     size_t seconds;
     size_t miliseconds;
-    float trajanjePjesme;
+    int trajanjePjesme;
     double currentTimeInSeconds;
     WAVEFORMATEX waveFormat;
     size_t currentSamplePosition;
@@ -55,6 +55,7 @@ private:
     float TempGlasnoca;
     WORD glasnocaJedan, glasnocaDva;
     DWORD glasnoca;
+    float procenatBrzine;
 public:
 
     AudioPlayer();
@@ -105,6 +106,8 @@ public:
 
     void Ubrzaj();
 
+    void Normal();
+
     void Uspori();
 
     //Safet dodao ovo dole
@@ -120,4 +123,8 @@ public:
     bool DaLiJeNovaPjesma(std::string TrenutnaPjesma);
     Pjesma& getPjesmaObjekat();
     void setTrenutniIndexPjesme(size_t index);
+    double getPitch() const;
+    void setPitch(double pitch);
+    float getProcenatBrzine();
+    void setProcenatBrzine(float index);
 };
