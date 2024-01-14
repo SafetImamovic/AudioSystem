@@ -37,10 +37,12 @@ unsigned int Pjesma::getID_SLIKA() const
     return ID_SLIKA;
 }
 
-std::string Pjesma::getIme() const
+std::string Pjesma::getImePjesme() const
 {
-    return Ime;
+    return this->Ime;
 }
+
+
 
 std::string Pjesma::getImeAutora() const
 {
@@ -153,7 +155,7 @@ void Pjesma::getInfo() const
     std::cout << this->getID_Pjesme() << "\n";
     std::cout << this->getLokacijaPjesme() << "\n";
     std::cout << this->getLokacijaSlike() << "\n";
-    std::cout << this->getIme() << "\n";
+    std::cout << this->getImePjesme() << "\n";
     std::cout << this->getImeAutora() << "\n";
     std::cout << this->getDaLiPripadaAlbumu() << "\n";
     std::cout << this->getAlbum() << "\n";

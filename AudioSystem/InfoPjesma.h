@@ -57,14 +57,14 @@ public:
 			this->SetFont(font, fontBold, fontEmoji);
 			this->FixPozicija(400, InfoPjesma::sirinaWindow - 400 - 300, index);
 
-			this->ID.setString(std::to_string(pjesma.getID_Pjesme()));
+			this->ID.setString(std::to_string(index));
 
 			sf::Texture Cover;
 			Cover.loadFromFile(lokacijaSlike);
 
 			this->CoverRender.setTexture(Cover);
 
-			this->Ime.setString(pjesma.getIme());
+			this->Ime.setString(pjesma.getImePjesme());
 			this->ImeAutora.setString(pjesma.getImeAutora());
 			this->TrajanjePjesme.setString(pjesma.getTrajanjePjesme());
 			this->DodajPjesmuUPlaylist.setString("+");
@@ -79,7 +79,7 @@ public:
 
 		void SetFont(sf::Font& font, sf::Font& fontBold, sf::Font& fontEmoji)
 		{
-			this->ID.setFont(font);
+			this->ID.setFont(fontBold);
 			this->Ime.setFont(fontBold);
 			this->ImeAutora.setFont(font);
 			this->TrajanjePjesme.setFont(font);
@@ -162,7 +162,7 @@ public:
 			));
 
 
-			if(this->intID < 10)
+			if(index < 10)
 				this->ID.setPosition(lijeviOffset + 2*this->paddingHorizontal , 200 + paddingVertical + (50 * (index - 1)));
 			else
 				this->ID.setPosition(lijeviOffset + 2*this->paddingHorizontal - 6, 200 + paddingVertical + (50 * (index - 1)));
@@ -192,6 +192,58 @@ public:
 		}
 	};
 
+	struct InfoPlaylisteRender : public ElementarneKomponente
+	{
+		int Visina = 40;
+		int paddingHorizontal = 10;
+		int paddingVertical = 12;
+		sf::Color PrimarnaBoja = sf::Color(10, 10, 10);
+		sf::Font font;
+		sf::Font fontEmoji;
+
+		
+
+		int intID;
+		sf::Text Ime;
+
+		sf::RectangleShape GlavnaPozadina;
+
+		void SetInfoPlaylisteRender(const PlayLista& playlista, sf::Font& font, sf::Font& fontBold, int index)
+		{
+			this->intID = index;
+			this->GlavnaPozadina.setFillColor(this->PrimarnaBoja);
+			this->GlavnaPozadina.setSize({300, 40});
+			this->FixPozicija(sirinaWindow - 300, 100, index);
+
+			this->Ime.setCharacterSize(14);
+			this->Ime.setFont(font);
+			playlista.getIme();
+			this->Ime.setString(playlista.getIme());
+		}
+
+		void FixPozicija(int lijeviOffset, int sirinaCentar, int index)
+		{
+			this->GlavnaPozadina.setPosition(sf::Vector2f(
+				sirinaWindow - 300,
+				60 + (40 *(index - 1))
+			));
+
+			this->Ime.setPosition(sf::Vector2f(
+				sirinaWindow - 300 + this->paddingHorizontal,
+				60 + this->paddingVertical + (40 * (index - 1))
+			));
+
+		}
+
+		void Render(sf::RenderWindow& window, std::string lokacijaSlike)
+		{
+			window.draw(this->GlavnaPozadina);
+			window.draw(this->Ime);
+		}
+	};
+	
+	
+	static int Trenutna_Playlista;
 	static sf::RectangleShape pozadinaLista;
 	static sf::RectangleShape pozadinaPjesma;
 	static sf::Vector2f pozicijaLista;
@@ -238,6 +290,7 @@ public:
 	static sf::RectangleShape PozadinaAlbum;
 	static sf::RectangleShape PozadinaPlaylist;
 	static sf::RectangleShape CoverUpDesno;
+	static sf::RectangleShape PozadinaDesno;
 	static sf::Text PlayListNaslov;
 	static sf::Vector2f VelicinaLijevo;
 	static int BaznaRezolucijaSlike;
@@ -255,7 +308,7 @@ public:
 	static void RenderListDesno(sf::RenderWindow& window);
 	static void SetTextBox();
 	static void RenderSvePjesme(std::vector<Pjesma> &Pjesme, sf::RenderWindow& window);
-	static std::vector<sf::RectangleShape> RenderSveListe(std::vector<std::string>& ListeZaSasd, sf::RenderWindow& window);
+	static void RenderSveListe(std::vector<PlayLista>& Playliste, sf::RenderWindow& window);
 	static void PostaviCoverUpLista();
 	static void Update();
 	static void PostaviPozadineDesno();
