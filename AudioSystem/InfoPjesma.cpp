@@ -34,8 +34,8 @@ sf::RectangleShape InfoPjesma::CoverUpListaUp;
 sf::RectangleShape InfoPjesma::CoverUpListaDown;
 sf::Texture InfoPjesma::Cover;
 sf::Sprite InfoPjesma::CoverRender;
-float InfoPjesma::rateNaslov = -0.45;
-float InfoPjesma::ratePjesnici = -0.45;
+float InfoPjesma::rateNaslov = -0.65;
+float InfoPjesma::ratePjesnici = -0.65;
 std::wstring InfoPjesma::VrstaListe;
 sf::Text InfoPjesma::textVrstaListe;
 sf::Text InfoPjesma::textSimbolVrsta;
@@ -316,15 +316,15 @@ void InfoPjesma::Update()
 		//std::cout << "velicina lijevo " << InfoPjesma::VelicinaLijevo.x << ", global bounds x " << InfoPjesma::textNaslov.getGlobalBounds().width << "\n";
 		
 		InfoPjesma::textNaslov.move(sf::Vector2f(InfoPjesma::rateNaslov, 0));
-		//std::cout << InfoPjesma::textNaslov.getPosition().x << "\n";
+		std::cout << InfoPjesma::rateNaslov << "\n";
 		if (InfoPjesma::textNaslov.getPosition().x <= InfoPjesma::PaddingHorizontal + 2 && 
 			InfoPjesma::textNaslov.getPosition().x >= InfoPjesma::PaddingHorizontal + 1)
 		{
-			InfoPjesma::rateNaslov = -0.0025;
+			InfoPjesma::rateNaslov = -0.04;
 		}
 		else if (InfoPjesma::textNaslov.getPosition().x < InfoPjesma::PaddingHorizontal)
 		{
-			InfoPjesma::rateNaslov = -0.65;
+			InfoPjesma::rateNaslov = -0.85;
 		}
 		if (InfoPjesma::textNaslov.getPosition().x <= -(InfoPjesma::textNaslov.getGlobalBounds().width + 10))
 		{
@@ -340,11 +340,11 @@ void InfoPjesma::Update()
 		if (InfoPjesma::textPjesnici.getPosition().x >= InfoPjesma::PaddingHorizontal + 1 &&
 			InfoPjesma::textPjesnici.getPosition().x <= InfoPjesma::PaddingHorizontal + 2)
 		{
-			InfoPjesma::ratePjesnici = -0.0025;
+			InfoPjesma::ratePjesnici = -0.04;
 		}
 		else if (InfoPjesma::textPjesnici.getPosition().x < InfoPjesma::PaddingHorizontal)
 		{
-			InfoPjesma::ratePjesnici = -0.65;
+			InfoPjesma::ratePjesnici = -0.85;
 		}
 		if (InfoPjesma::textPjesnici.getPosition().x <= -(InfoPjesma::textPjesnici.getGlobalBounds().width + 10))
 		{
