@@ -43,7 +43,7 @@ private:
 	bool like;
 	bool DodavanjeUPlaylistAktivno = false;
 	std::vector<PlayLista> PlayListe;
-
+	int ID_TRENUTNE_PLAYLISTE;
 	int ID_PJESMA_ZA_DODAT;
 	void MoveUp();
 	void MoveDown();
