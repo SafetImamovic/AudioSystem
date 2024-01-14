@@ -30,7 +30,11 @@ void AplikacijaGUI::MoveUp()
 
 			this->IPRMain.at(i).TrajanjePjesme.move(moveRate);
 			this->IPRMain.at(i).DodajPjesmuUPlaylist.move(moveRate);
+			this->IPRMain.at(i).ObrisiPjesmuIzPlayliste.move(moveRate);
 			this->IPRMain.at(i).Like.move(moveRate);
+
+			this->IPRMain.at(i).DodajPjesmu.move(moveRate);
+			this->IPRMain.at(i).ObrisiPjesmu.move(moveRate);
 		}
 	}
 }
@@ -58,7 +62,11 @@ void AplikacijaGUI::MoveDown()
 			this->IPRMain.at(i).Trajanje_Add_Like_Pozadina.move(moveRate);
 			this->IPRMain.at(i).TrajanjePjesme.move(moveRate);
 			this->IPRMain.at(i).DodajPjesmuUPlaylist.move(moveRate);
+			this->IPRMain.at(i).ObrisiPjesmuIzPlayliste.move(moveRate);
 			this->IPRMain.at(i).Like.move(moveRate);
+
+			this->IPRMain.at(i).DodajPjesmu.move(moveRate);
+			this->IPRMain.at(i).ObrisiPjesmu.move(moveRate);
 		}
 	}
 
@@ -66,6 +74,7 @@ void AplikacijaGUI::MoveDown()
 
 void AplikacijaGUI::InicijalizacijaVarijabli()
 {
+	ID_TRENUTNE_PLAYLISTE = 0;
 	this->like = false;
 	this->window = nullptr; //dobra praksa da se pointer inicijalizira sa nullptr. incicijalizirmao prozor kao pointer jer zelimo da ga alociramo na heap
 	//i fleksibilnija je kontrola
@@ -82,8 +91,8 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	this->pSvePjesme->setPjesme(pjesme);
 	
 	this->KreirajPlayListu("Sve Pjesme", "09.01.2024", false, false, "Me");
-	this->KreirajPlayListu("Quest For Fire", "09.01.2024", false, false, "Me");
-	this->KreirajPlayListu("Save Yourself", "09.01.2024", false, false, "Me");
+	this->KreirajPlayListu("Quest For Fire", "09.01.2024", true, false, "Me");
+	this->KreirajPlayListu("Save Yourself", "09.01.2024", true, false, "Me");
 
 
 
@@ -111,9 +120,18 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	//-------------------------------------------------------------------------------------------
 	//-------------------------------------------------------------------------------------------
 
+	this->PlayListe.at(2) + pjesme.at(0);
+	this->PlayListe.at(2) + pjesme.at(1);
+	this->PlayListe.at(2) + pjesme.at(2);
+	this->PlayListe.at(2) + pjesme.at(3);
+	this->PlayListe.at(2) + pjesme.at(4);
+	this->PlayListe.at(2) + pjesme.at(5);
+	this->PlayListe.at(2) + pjesme.at(6);
+	this->PlayListe.at(2) + pjesme.at(7);
 
-
-
+	//-------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------
 
 	std::cout << "this->PlayListe.at(0).getPjesme().size(): " << this->PlayListe.at(0).getPjesme().size() << "\n";
 	
@@ -211,16 +229,44 @@ void AplikacijaGUI::ProvjeriHoverZaSveElemente()
 			&& this->IPRMain.at(i).GlavnaPozadina.getPosition().y > 160)
 		{
 			if (this->IPRMain.at(i).Hover(*this->window, this->IPRMain.at(i).GlavnaPozadina))
+			{
 				this->IPRMain.at(i).PromijeniBojuPozadine(sf::Color::Black);
+				this->IPRMain.at(i).DodajPjesmu.setFillColor(sf::Color::Black);
+			}
+				
 			else
+			{
 				this->IPRMain.at(i).PromijeniBojuPozadine(sf::Color(10, 10, 10));
+			}
+				
+		}
+
+		if (this->IPRMain.at(i).Hover(*this->window, this->IPRMain.at(i).DodajPjesmu))
+		{
+			this->IPRMain.at(i).DodajPjesmu.setFillColor(this->AkcenatBoja);
+		}
+		else
+		{
+			this->IPRMain.at(i).DodajPjesmu.setFillColor(sf::Color(10, 10, 10));
+		}
+			
+
+		if (this->IPRMain.at(i).Hover(*this->window, this->IPRMain.at(i).ObrisiPjesmu))
+		{
+			this->IPRMain.at(i).ObrisiPjesmu.setFillColor(this->AkcenatBoja);
+		}
+		else
+		{
+			this->IPRMain.at(i).ObrisiPjesmu.setFillColor(sf::Color(10, 10, 10));
 		}
 	}
 
 	for (int i = 0; i < this->PRMain.size(); i++)
 	{
 		if (this->PRMain.at(i).Hover(*this->window, this->PRMain.at(i).GlavnaPozadina))
+		{
 			this->PRMain.at(i).GlavnaPozadina.setFillColor((sf::Color(10, 10, 10)));
+		}
 		else
 			this->PRMain.at(i).GlavnaPozadina.setFillColor((sf::Color::Black));
 	}
@@ -266,7 +312,7 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 	//if(tempBrzina > 0 && tempBrzina < 1)// 0 -> 0.25 i 1 -> 2 => 2x + 0.25 1.75x + 0.25 
 	//	player.setPitch(1.75 * tempBrzina + 0.25);
 
-	std::cout << "Temp brzina: " << tempBrzina << "\n";
+	//std::cout << "Temp brzina: " << tempBrzina << "\n";
 	player.setProcenatBrzine(tempBrzina);
 	if (tempBrzina > 0 && tempBrzina <= 1.0/8 + (1.0 / 16))
 	{
@@ -327,7 +373,7 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 				//TREBA NAPRAVITI FUNKCIJU
 				this->player.trenutnaPjesma();
 				//std::cout << "Pozvana!\n";
-
+				
 				this->UpdateImePjesme();
 			}
 		}
@@ -336,6 +382,41 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 			this->IPRMain.at(i).PromijeniBojuPozadine(sf::Color(10, 10, 10));
 
 		}
+
+		if (this->IPRMain.at(i).Hover(*this->window, this->IPRMain.at(i).DodajPjesmu))
+		{
+			std::cout << "PRIKAZ PLAYLISTI U KOJE SE MOZE DODAT PJESMA" << "\n";
+			this->IPRMain.at(i).DodajPjesmu.setFillColor(sf::Color(10, 10, 10));
+			this->DodatPjesmaUPlaylistu(i);
+			this->ID_PJESMA_ZA_DODAT = IPRMain.at(i).intID;
+
+		}
+		else
+		{
+			this->IPRMain.at(i).DodajPjesmu.setFillColor(sf::Color(10, 10, 10));
+			
+		}
+
+		if (this->IPRMain.at(i).Hover(*this->window, this->IPRMain.at(i).ObrisiPjesmu))
+		{
+			std::cout << "OBRISI PJESMU" << "\n";
+			this->IPRMain.at(i).ObrisiPjesmu.setFillColor(sf::Color(10, 10, 10));
+			this->PlayListe.at(this->ID_TRENUTNE_PLAYLISTE).IzbaciPjesmu(i);
+
+			std::cout << "this->PlayListe.at(i).IzbaciPjesmu(IPRMain.at(i).intID - 1); " << IPRMain.at(i).intID - 1 << "\n";
+
+			std::cout << this->IPRMain.at(i).intID << "\n";
+			std::cout << this->ID_TRENUTNE_PLAYLISTE << "\n";
+
+			this->IPRMain.clear();
+			this->LoadPjesmeRender(this->PlayListe.at(this->ID_TRENUTNE_PLAYLISTE).getPjesme());
+		}
+		else
+		{
+			this->IPRMain.at(i).ObrisiPjesmu.setFillColor(sf::Color(10, 10, 10));
+
+		}
+			
 	}
 
 	for (int i = 0; i < this->PRMain.size(); i++)
@@ -343,14 +424,39 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 		if (this->PRMain.at(i).Hover(*this->window, this->PRMain.at(i).GlavnaPozadina))
 		{
 			this->PRMain.at(i).GlavnaPozadina.setFillColor(this->AkcenatBoja);
-			if (InfoPjesma::Trenutna_Playlista != i)
+
+			
+
+			if(!this->DodavanjeUPlaylistAktivno)
+				this->ID_TRENUTNE_PLAYLISTE = i;
+
+			std::cout << "trenutna Playlista: " << InfoPjesma::Trenutna_Playlista << "\n";
+			std::cout << "i " << i << "\n";
+
+			//if (InfoPjesma::Trenutna_Playlista != i)
 				this->SwitchPlaylist(i);
 
 				InfoPjesma::Trenutna_Playlista = i;
+
+				if (this->DodavanjeUPlaylistAktivno)
+				{
+					if(i != 0)
+						this->PlayListe.at(i) + this->PlayListe.at(0).getPjesme().at(this->ID_PJESMA_ZA_DODAT - 1);
+					
+					std::cout << "Added! " << this->PlayListe.at(0).getPjesme().at(this->ID_PJESMA_ZA_DODAT - 1)
+						.getImePjesme() << " to " << this->PlayListe.at(i).getIme() << "\n";
+
+					this->IPRMain.clear();
+					this->LoadPjesmeRender(this->PlayListe.at(this->ID_TRENUTNE_PLAYLISTE).getPjesme());
+				}
 		}
 		else
+		{
 			this->PRMain.at(i).GlavnaPozadina.setFillColor((sf::Color::Black));
+		}
+			
 	}
+	
 }
 
 
@@ -363,9 +469,9 @@ void AplikacijaGUI::RenderSveElemente()
 	
 	InfoPjesma::pozadinaPjesma.setSize(sf::Vector2f(InfoPjesma::VelicinaLijevo.x, this->videoMode.height));
 	window->draw(InfoPjesma::pozadinaLista);
-	for (InfoPjesma::InfoPjesmaRender& pjesma : this->IPRMain)
+	for (int i = 0; i < this->IPRMain.size(); i++)
 	{
-		pjesma.Render(*this->window, "");
+		this->IPRMain.at(i).Render(*this->window, "");
 	}
 
 	
@@ -585,13 +691,13 @@ void AplikacijaGUI::UpdateImePjesme()
 			InfoPjesma::PaddingVertical + InfoPjesma::VelicinaLijevo.x
 
 		);
-		InfoPjesma::rateNaslov = -0.001;
+		InfoPjesma::rateNaslov = -0.005;
 
 		InfoPjesma::textPjesnici.setPosition(
 			InfoPjesma::PaddingHorizontal + 1,
 			InfoPjesma::pozicijaPjesma.y + InfoPjesma::PaddingVertical + InfoPjesma::VelicinaLijevo.x + 26 + 20
 		);
-		InfoPjesma::ratePjesnici = -0.001;
+		InfoPjesma::ratePjesnici = -0.005;
 	}
 }
 
@@ -744,6 +850,22 @@ void AplikacijaGUI::SwitchPlaylist(int index)
 	this->LoadPjesmeRender(pjesme);
 }
 
+bool AplikacijaGUI::DodatPjesmaUPlaylistu(int index)
+{
+	if (this->IPRMain.size() < 2)
+		return false;
+
+	this->DodavanjeUPlaylistAktivno = true;
+	for (int i = 1; i < this->PRMain.size(); i++)
+	{
+		this->PRMain.at(i).Dodaj.setFillColor(sf::Color(255, 255, 255, 255));
+	}
+
+
+	std::cout << this->IPRMain.at(index).intID << "\n";
+	return false;
+}
+
 //------------------end of private-------------------------------//
 
 AplikacijaGUI::AplikacijaGUI(sf::Font& font, sf::Font& fontBold, sf::Font& fontBoldest, sf::Font& fontEmoji, sf::Color PrimarnaBoja, sf::Color SekundarnaBoja, sf::Color AkcenatBoja)
@@ -799,6 +921,13 @@ void AplikacijaGUI::UpdatePollEvents() //ova metoda osvjezava eventove, npr. int
 		case sf::Event::KeyPressed:
 
 			//std::cout << InfoPjesma::TextBoxovi.at(0).GetText() << std::endl;
+
+			if (this->event.key.code == sf::Keyboard::Escape)
+			{
+				this->DodavanjeUPlaylistAktivno = false;
+				for (int j = 1; j < this->PRMain.size(); j++)
+					this->PRMain.at(j).Dodaj.setFillColor(sf::Color(255, 255, 255, 0));
+			}
 
 			if (this->event.key.code == sf::Keyboard::Enter) //Kada korisnik pritisne enter
 			{
@@ -917,7 +1046,7 @@ void AplikacijaGUI::RenderGUI() //renderuje objekte, elemente aplikacije
 	//this->IPR.Render(*this->window);
 	//this->IPR2.Render(*this->window);
 
-	
+	//std::cout << this->DodavanjeUPlaylistAktivno << "ID: " << this->ID_PJESMA_ZA_DODAT << "\n";
 
 
 	this->window->display(); //ovo je indikator da je frame zavrsen sa crtanjem
