@@ -21,7 +21,7 @@ const std::vector<Pjesma>& SkupPjesama::dohvatiSvePjesme() const {
 std::vector<Pjesma> SkupPjesama::pretraziPjesme(const std::string& kriterijum) {
     std::vector<Pjesma> rezultati;
     for (const auto& pjesma : Pjesme) {
-        if (pjesma.getIme().find(kriterijum) != std::string::npos ||
+        if (pjesma.getImePjesme().find(kriterijum) != std::string::npos ||
             pjesma.getImeAutora().find(kriterijum) != std::string::npos ||
             pjesma.getAlbum().find(kriterijum) != std::string::npos) {
             rezultati.push_back(pjesma);
@@ -108,6 +108,16 @@ void SkupPjesama::operator-(const Pjesma& pjesma)
 std::vector<Pjesma> &SkupPjesama::getPjesme()
 {
     return this->Pjesme;
+}
+
+std::string SkupPjesama::getIme() const
+{
+    return this->Ime;
+}
+
+std::string SkupPjesama::getImeKreatora() const
+{
+    return this->Kreator;
 }
 
 void SkupPjesama::setPjesme(std::vector<Pjesma>& pjesme)
