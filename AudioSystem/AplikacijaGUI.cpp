@@ -30,9 +30,11 @@ void AplikacijaGUI::MoveUp()
 
 			this->IPRMain.at(i).TrajanjePjesme.move(moveRate);
 			this->IPRMain.at(i).DodajPjesmuUPlaylist.move(moveRate);
+			this->IPRMain.at(i).ObrisiPjesmuIzPlayliste.move(moveRate);
 			this->IPRMain.at(i).Like.move(moveRate);
 
 			this->IPRMain.at(i).DodajPjesmu.move(moveRate);
+			this->IPRMain.at(i).ObrisiPjesmu.move(moveRate);
 		}
 	}
 }
@@ -60,9 +62,11 @@ void AplikacijaGUI::MoveDown()
 			this->IPRMain.at(i).Trajanje_Add_Like_Pozadina.move(moveRate);
 			this->IPRMain.at(i).TrajanjePjesme.move(moveRate);
 			this->IPRMain.at(i).DodajPjesmuUPlaylist.move(moveRate);
+			this->IPRMain.at(i).ObrisiPjesmuIzPlayliste.move(moveRate);
 			this->IPRMain.at(i).Like.move(moveRate);
 
 			this->IPRMain.at(i).DodajPjesmu.move(moveRate);
+			this->IPRMain.at(i).ObrisiPjesmu.move(moveRate);
 		}
 	}
 
@@ -70,6 +74,7 @@ void AplikacijaGUI::MoveDown()
 
 void AplikacijaGUI::InicijalizacijaVarijabli()
 {
+	ID_TRENUTNE_PLAYLISTE = 0;
 	this->like = false;
 	this->window = nullptr; //dobra praksa da se pointer inicijalizira sa nullptr. incicijalizirmao prozor kao pointer jer zelimo da ga alociramo na heap
 	//i fleksibilnija je kontrola
@@ -245,6 +250,15 @@ void AplikacijaGUI::ProvjeriHoverZaSveElemente()
 			this->IPRMain.at(i).DodajPjesmu.setFillColor(sf::Color(10, 10, 10));
 		}
 			
+
+		if (this->IPRMain.at(i).Hover(*this->window, this->IPRMain.at(i).ObrisiPjesmu))
+		{
+			this->IPRMain.at(i).ObrisiPjesmu.setFillColor(this->AkcenatBoja);
+		}
+		else
+		{
+			this->IPRMain.at(i).ObrisiPjesmu.setFillColor(sf::Color(10, 10, 10));
+		}
 	}
 
 	for (int i = 0; i < this->PRMain.size(); i++)
@@ -359,7 +373,7 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 				//TREBA NAPRAVITI FUNKCIJU
 				this->player.trenutnaPjesma();
 				//std::cout << "Pozvana!\n";
-
+				
 				this->UpdateImePjesme();
 			}
 		}
@@ -382,6 +396,26 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 			this->IPRMain.at(i).DodajPjesmu.setFillColor(sf::Color(10, 10, 10));
 			
 		}
+
+		if (this->IPRMain.at(i).Hover(*this->window, this->IPRMain.at(i).ObrisiPjesmu))
+		{
+			std::cout << "OBRISI PJESMU" << "\n";
+			this->IPRMain.at(i).ObrisiPjesmu.setFillColor(sf::Color(10, 10, 10));
+			this->PlayListe.at(this->ID_TRENUTNE_PLAYLISTE).IzbaciPjesmu(i);
+
+			std::cout << "this->PlayListe.at(i).IzbaciPjesmu(IPRMain.at(i).intID - 1); " << IPRMain.at(i).intID - 1 << "\n";
+
+			std::cout << this->IPRMain.at(i).intID << "\n";
+			std::cout << this->ID_TRENUTNE_PLAYLISTE << "\n";
+
+			this->IPRMain.clear();
+			this->LoadPjesmeRender(this->PlayListe.at(this->ID_TRENUTNE_PLAYLISTE).getPjesme());
+		}
+		else
+		{
+			this->IPRMain.at(i).ObrisiPjesmu.setFillColor(sf::Color(10, 10, 10));
+
+		}
 			
 	}
 
@@ -390,20 +424,30 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 		if (this->PRMain.at(i).Hover(*this->window, this->PRMain.at(i).GlavnaPozadina))
 		{
 			this->PRMain.at(i).GlavnaPozadina.setFillColor(this->AkcenatBoja);
-			if (InfoPjesma::Trenutna_Playlista != i)
+
+			
+
+			if(!this->DodavanjeUPlaylistAktivno)
+				this->ID_TRENUTNE_PLAYLISTE = i;
+
+			std::cout << "trenutna Playlista: " << InfoPjesma::Trenutna_Playlista << "\n";
+			std::cout << "i " << i << "\n";
+
+			//if (InfoPjesma::Trenutna_Playlista != i)
 				this->SwitchPlaylist(i);
 
 				InfoPjesma::Trenutna_Playlista = i;
 
 				if (this->DodavanjeUPlaylistAktivno)
 				{
-					this->PlayListe.at(i) + this->PlayListe.at(0).getPjesme().at(this->ID_PJESMA_ZA_DODAT - 1);
+					if(i != 0)
+						this->PlayListe.at(i) + this->PlayListe.at(0).getPjesme().at(this->ID_PJESMA_ZA_DODAT - 1);
 					
 					std::cout << "Added! " << this->PlayListe.at(0).getPjesme().at(this->ID_PJESMA_ZA_DODAT - 1)
 						.getImePjesme() << " to " << this->PlayListe.at(i).getIme() << "\n";
 
 					this->IPRMain.clear();
-					this->LoadPjesmeRender(this->PlayListe.at(i).getPjesme());
+					this->LoadPjesmeRender(this->PlayListe.at(this->ID_TRENUTNE_PLAYLISTE).getPjesme());
 				}
 		}
 		else
@@ -412,6 +456,7 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 		}
 			
 	}
+	
 }
 
 
