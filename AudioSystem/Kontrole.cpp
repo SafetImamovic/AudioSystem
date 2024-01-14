@@ -156,8 +156,8 @@ void Kontrole::InicijalizacijaScroll()
 	this->ScrollBarFollow.setPosition(sf::Vector2f(pocetnaKoordinataX,
 		pocetnaKoordinataY + this->visinaScroll / 2 - scrollBarInnerVisina / 2));
 
-	this->ScrollSimbol.setFont(this->font);
-	this->ScrollSimbol.setString(L"⚫");
+	this->ScrollSimbol.setFont(this->fontBoldest);
+	this->ScrollSimbol.setString(L"I");//⚫
 	this->ScrollSimbol.setCharacterSize(16);
 
 }
@@ -185,20 +185,52 @@ void Kontrole::InicijalizacijaGlasnoca()
 	this->GlasnocaBarFollow.setPosition(sf::Vector2f(this->videoMode.width - this->sirinaGlasnoca - this->sirinaTipke,
 		pocetnaKoordinataY + this->visinaGlasnoca / 2 - glasnocaBarInnerVisina / 2));
 
-	this->GlasnocaSimbol.setFont(this->font);
-	this->GlasnocaSimbol.setString(L"⚫");
+	this->GlasnocaSimbol.setFont(this->fontBoldest);
+	this->GlasnocaSimbol.setString(L"I");
 	this->GlasnocaSimbol.setCharacterSize(16);
 
 	this->GlasnocaProcenatPozadina.setSize(sf::Vector2f(this->sirinaTipke, this->visinaTipke));
 	this->GlasnocaProcenatPozadina.setFillColor(sf::Color(30, 30, 30));
 	this->GlasnocaProcenatPozadina.setPosition(this->videoMode.width - this->sirinaTipke, pocetnaKoordinataY);
 
-	this->GlasnocaProcenat.setFont(this->font);
+	this->GlasnocaProcenat.setFont(this->fontBoldest);
 	this->GlasnocaProcenat.setString("100%");
 	this->GlasnocaProcenat.setCharacterSize(16);
-	this->GlasnocaProcenat.setFillColor(sf::Color::White);
-	this->GlasnocaProcenat.setPosition(this->videoMode.width - this->sirinaTipke + 13, pocetnaKoordinataY + 18);
+	this->GlasnocaProcenat.setFillColor(sf::Color(255,255,255,128));
+	this->GlasnocaProcenat.setPosition(this->videoMode.width - this->sirinaTipke + 16, pocetnaKoordinataY + 18);
 
+}
+
+void Kontrole::InicijalizacijaPlaybackBrzina()
+{
+	int glasnocaBarInnerVisina = 2;
+	int glasnocaBarInnerSirina = this->sirinaGlasnoca;
+
+	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke;
+
+	this->PlaybackBrzinaPozadina.setSize(sf::Vector2f(this->sirinaGlasnoca, this->visinaGlasnoca));
+	this->PlaybackBrzinaPozadina.setFillColor(sf::Color(30, 30, 30));
+	this->PlaybackBrzinaPozadina.setPosition(sf::Vector2f(this->sirinaTipke, pocetnaKoordinataY));
+	
+
+	this->PlaybackBrzinaBar.setSize(sf::Vector2f(glasnocaBarInnerSirina, glasnocaBarInnerVisina));
+	this->PlaybackBrzinaBar.setFillColor(sf::Color::Black);
+	this->PlaybackBrzinaBar.setPosition(sf::Vector2f(this->sirinaTipke,
+		pocetnaKoordinataY + this->visinaGlasnoca / 2 - glasnocaBarInnerVisina / 2));
+
+	this->PlaybackBrzinaSimbol.setFont(this->fontBoldest);
+	this->PlaybackBrzinaSimbol.setString(L"I");
+	this->PlaybackBrzinaSimbol.setCharacterSize(16);
+
+	this->PlaybackBrzinaProcenatPozadina.setSize(sf::Vector2f(this->sirinaTipke, this->visinaTipke));
+	this->PlaybackBrzinaProcenatPozadina.setFillColor(sf::Color(30, 30, 30));
+	this->PlaybackBrzinaProcenatPozadina.setPosition(this->sirinaTipke + this->sirinaGlasnoca, pocetnaKoordinataY);
+
+	this->PlaybackBrzinaProcenat.setFont(this->fontBoldest);
+	this->PlaybackBrzinaProcenat.setString("1x");
+	this->PlaybackBrzinaProcenat.setCharacterSize(16);
+	this->PlaybackBrzinaProcenat.setFillColor(sf::Color(255, 255, 255, 128));
+	this->PlaybackBrzinaProcenat.setPosition(this->sirinaTipke + this->sirinaGlasnoca + 16, pocetnaKoordinataY + 18);
 }
 
 float Kontrole::UpdatePozicijaSimbolaWindow(sf::RenderWindow &window)
@@ -232,6 +264,18 @@ float Kontrole::UpdatePozicijaSimbolaWindowGlasnoca(sf::RenderWindow& window)
 	}
 }
 
+float Kontrole::UpdatePozicijaSimbolaWindowPlaybackBrzina(sf::RenderWindow& window)
+{
+	float pocetnaKoordinataX = this->sirinaTipke;
+	int glasnocaBarInnerVisina = 2;
+	float pocetnaKoordinataYGlasnoca = this->videoMode.height - this->visinaTipke + this->visinaTipke / 4;
+	if (this->Hover(window, this->PlaybackBrzinaPozadina))
+	{
+		//std::cout << sf::Mouse::getPosition(window).x - (pocetnaKoordinataX) / this->sirinaGlasnoca << "\n";
+		return (sf::Mouse::getPosition(window).x - (pocetnaKoordinataX)) / this->sirinaGlasnoca;
+	}
+}
+
 void Kontrole::UpdatePozicijaSimbola(float index)
 //uvijek update-uje poziciju simbola unutar scroll bara po procentu trenutne pjesme, konstantno je pozvana
 {
@@ -242,7 +286,7 @@ void Kontrole::UpdatePozicijaSimbola(float index)
 	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke - this->visinaScroll;
 
 
-	this->ScrollSimbol.setPosition(sf::Vector2f(static_cast<float>(- 6 + index * (this->sirinaScroll) + pocetnaKoordinataX), pocetnaKoordinataY + 15));
+	this->ScrollSimbol.setPosition(sf::Vector2f(static_cast<float>(-1 + index * (this->sirinaScroll) + pocetnaKoordinataX), pocetnaKoordinataY + 15));
 	this->ScrollBarFollow.setSize(sf::Vector2f(index * (this->sirinaScroll), 2));
 }
 
@@ -258,10 +302,24 @@ void Kontrole::UpdatePozicijaSimbolaGlasnoca(float index, sf::RenderWindow &wind
 
 	if (index < 0 || index > 1)
 		return;
-	this->GlasnocaSimbol.setPosition(sf::Vector2f(-6 + index * (this->sirinaGlasnoca) + pocetnaKoordinataX, pocetnaKoordinataY + 5 + this->visinaGlasnoca / 4));
+	this->GlasnocaSimbol.setPosition(sf::Vector2f(index * (this->sirinaGlasnoca) + pocetnaKoordinataX - 1, pocetnaKoordinataY + 5 + this->visinaGlasnoca / 4));
 	this->GlasnocaBarFollow.setSize(sf::Vector2f(index * (this->sirinaGlasnoca), 2));
 	this->GlasnocaProcenat.setString(std::to_string(static_cast<int>(index * 100) ) + "%");
 	//this->GlasnocaProcenat.
+}
+
+void Kontrole::UpdatePozicijaSimbolaPlaybackBrzina(float index, float procenat)
+{
+	float pocetnaKoordinataX = this->sirinaTipke;
+	int glasnocaBarInnerVisina = 2;
+	int glasnocaBarInnerSirina = this->sirinaGlasnoca;
+
+	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke;
+
+	if (index < 0 || index > 1)
+		return;
+	this->PlaybackBrzinaSimbol.setPosition(sf::Vector2f(index * (this->sirinaGlasnoca) + pocetnaKoordinataX - 1, pocetnaKoordinataY + 5 + this->visinaGlasnoca / 4));
+	this->PlaybackBrzinaProcenat.setString(std::to_string(procenat) + "x");
 }
 
 
@@ -277,22 +335,28 @@ void Kontrole::RenderScroll(sf::RenderWindow &window)
 
 void Kontrole::RenderGlasnoca(sf::RenderWindow& window)
 {
-	
 	window.draw(this->GlasnocaPozadina);
 	window.draw(this->GlasnocaBar);
 	window.draw(this->GlasnocaBarFollow);
 	window.draw(this->GlasnocaProcenatPozadina);
 	window.draw(this->GlasnocaProcenat);
 	window.draw(this->GlasnocaSimbol);
-	
 }
 
-void Kontrole::SetKontrole(sf::VideoMode &videoMode, sf::Font &font, sf::Font &fontEmoji, sf::Color PirmarnaBoja, sf::Color SekundrnaBoja, sf::Color AkcenatBoja)
+void Kontrole::RenderPlaybackBrzina(sf::RenderWindow& window)
 {
-	
+	window.draw(this->PlaybackBrzinaPozadina);
+	window.draw(this->PlaybackBrzinaBar);
+	window.draw(this->PlaybackBrzinaProcenatPozadina);
+	window.draw(this->PlaybackBrzinaProcenat);
+	window.draw(this->PlaybackBrzinaSimbol);
+}
 
+void Kontrole::SetKontrole(sf::VideoMode &videoMode, sf::Font &font, sf::Font& fontBoldest, sf::Font &fontEmoji, sf::Color PirmarnaBoja, sf::Color SekundrnaBoja, sf::Color AkcenatBoja)
+{
 	this->videoMode = videoMode;
 	this->font = font;
+	this->fontBoldest = fontBoldest;
 	this->fontEmoji = fontEmoji;
 	this->PrimarnaBoja = PrimarnaBoja;
 	this->SekundarnaBoja = SekundrnaBoja;
@@ -303,6 +367,7 @@ void Kontrole::SetKontrole(sf::VideoMode &videoMode, sf::Font &font, sf::Font &f
 	this->InicijalizacijaTipki(true);
 	this->InicijalizacijaScroll();
 	this->InicijalizacijaGlasnoca();
+	this->InicijalizacijaPlaybackBrzina();
 }
 
 void Kontrole::RenderVrijeme(sf::RenderWindow& window, float sekunde, float trajanje, sf::Color PrimarnaBoja)
@@ -351,6 +416,7 @@ void Kontrole::SetRezolucija(sf::VideoMode& videoMode)
 	this->SetRezolucijaKontrole();
 	this->SetRezolucijaScrollBar();
 	this->SetRezolucijaGlasnoca();
+	this->SetRozolucijaPlaybackBrzina();
 }
 
 void Kontrole::SetRezolucijaKontrole()
@@ -458,6 +524,28 @@ void Kontrole::SetRezolucijaGlasnoca()
 	this->GlasnocaProcenatPozadina.setPosition(this->videoMode.width - this->sirinaTipke, pocetnaKoordinataY);
 
 	this->GlasnocaProcenat.setPosition(this->videoMode.width - this->sirinaTipke + 13, pocetnaKoordinataY + 18);
+}
+
+void Kontrole::SetRozolucijaPlaybackBrzina()
+{
+	int glasnocaBarInnerVisina = 2;
+	int glasnocaBarInnerSirina = this->sirinaGlasnoca;
+
+	//formula koja racuna horizontalni centar prozora, sirina * 4 je 4 jer imaju 4 tipke
+
+	int pocetnaKoordinataY = this->videoMode.height - this->visinaTipke;
+
+	//this->GlasnocaPozadina.setSize(sf::Vector2f(this->sirinaGlasnoca, this->visinaGlasnoca));
+	this->PlaybackBrzinaPozadina.setPosition(sf::Vector2f(this->sirinaTipke, pocetnaKoordinataY));
+
+	//this->GlasnocaBar.setSize(sf::Vector2f(glasnocaBarInnerSirina, glasnocaBarInnerVisina));
+	this->PlaybackBrzinaBar.setPosition(sf::Vector2f(this->sirinaTipke,
+		pocetnaKoordinataY + this->visinaGlasnoca / 2 - glasnocaBarInnerVisina / 2));
+
+	//this->GlasnocaProcenatPozadina.setSize(sf::Vector2f(this->sirinaTipke, this->visinaTipke));
+	this->PlaybackBrzinaProcenatPozadina.setPosition(this->sirinaGlasnoca + this->sirinaTipke, pocetnaKoordinataY);
+
+	this->PlaybackBrzinaProcenat.setPosition(this->sirinaGlasnoca + this->sirinaTipke + 13, pocetnaKoordinataY + 18);
 }
 
 void Kontrole::PromijeniLikeTipku(bool da)
