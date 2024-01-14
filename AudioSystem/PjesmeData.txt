@@ -227,7 +227,7 @@ Knock2
 Pjesme/Jala i Buba - Padam.wav
 Covers/Jala i Buba - Padam.jpg
 Padam
-Jala i Buba
+Jala & Buba
 1
 Zamisli
 
@@ -240,8 +240,8 @@ Fuck this shit i am out
 18
 Pjesme/Henny i Breskvica - Sava i Dunav.wav
 Covers/Henny i Breskvica - Sava i Dunav.jpg
-Sava i Dunav
-Henny i Breskvica
+Sava & Dunav
+Henny & Breskvica
 1
 Zamisli
 
@@ -283,7 +283,7 @@ Fuck this shit i am out
 Pjesme/Skrillex with Bobby Raps - Leave Me Like This.wav
 Covers/Skrillex with Bobby Raps - Leave Me Like This.jpg
 Leave Me Like This
-Skrillex with Bobby Raps
+Skrillex & Bobby Raps
 1
 
 
@@ -297,7 +297,7 @@ OWSLA
 Pjesme/Flowdan, Lil Baby, & Skrillex - Pepper.wav
 Covers/Flowdan, Lil Baby, & Skrillex - Pepper.jpg
 Pepper
-Flowdan, Lil Baby, & Skrillex
+Flowdan, Lil Baby & Skrillex
 1
 
 
@@ -409,7 +409,7 @@ Devito
 Pjesme/Devito i Breskvica - Tu tu tu.wav
 Covers/Devito i Breskvica - Tu tu tu.jpg
 Tu tu tu
-Devito i Breskvica
+Devito & Breskvica
 1
 
 
@@ -437,7 +437,7 @@ Dua Lipa
 Pjesme/Henny i Breskvica - Ko to tamo.wav
 Covers/Henny i Breskvica - Ko to tamo.jpg
 Ko to tamo
-Henny i Breskvica 
+Henny & Breskvica 
 1
 
 
@@ -451,7 +451,7 @@ Henny i Breskvica
 Pjesme/Jala i Buba - Dale.wav
 Covers/Jala i Buba - Dale.jpg
 Dale
-Jala i Buba
+Jala & Buba
 1
 
 
@@ -507,7 +507,7 @@ Seksi
 Pjesme/Skrillex - Fuji Opener (feat. Alvin Risk).wav
 Covers/Skrillex - Fuji Opener (feat. Alvin Risk).jpg
 Fuji Opener
-Skrillex i Alvin Risk
+Skrillex & Alvin Risk
 1
 
 
@@ -535,7 +535,7 @@ Coby x Rouzi
 Pjesme/Skrillex i Damian - Make it bun dem .wav
 Covers/Skrillex i Damian - Make it bun dem.jpg
 Make it bun dem
-Skrillex i Damian
+Skrillex & Damian
 1
 
 
@@ -549,7 +549,7 @@ Skrillex i Damian
 Pjesme/Virtual Riot - Back In Time ft. Angelika.wav
 Covers/Virtual Riot - Back In Time ft. Angelika.jpg
 Back In Time
-Virtual Riot i Angelika
+Virtual Riot & Angelika
 1
 
 
@@ -702,7 +702,7 @@ Disciple Recordings
 51
 Pjesme/ROCK N' ROLL (WILL TAKE YOU TO THE MOUNTAIN).ogg
 Covers/ROCK N' ROLL (WILL TAKE YOU TO THE MOUNTAIN).jpg
-ROCK N' ROLL (WILL TAKE YOU TO THE MOUNTAIN)
+Rock n' Roll (Will Take You To The Mountain)
 Skrillex
 1
 
@@ -711,4 +711,214 @@ Skrillex
 2011
 OWSLA
 4:44
+-
+---------------------------------------------------------------
+52
+Pjesme/Skrillex & Starrah - Good Space [Official Visualizer].wav
+Covers/Skrillex with Bobby Raps - Leave Me Like This.jpg
+Good Space
+Skrillex & Starrah
+1
+
+
+0
+2023
+OWSLA
+2:12
+-
+---------------------------------------------------------------
+53
+Pjesme/Arabian cat - (Official Music VIdeo) ft.Panjabi MC.wav
+Covers/arab-cat.jpg
+Arabian cat ft. Panjabi MC
+Arabian cat & Panjabi MC
+1
+
+
+0
+2021
+Arabian cat's Record Label
+2:12
+-
+---------------------------------------------------------------
+54
+Pjesme/Underscores - Your Favorite Sidekick (Virtual Riot Remix).wav
+Covers/Underscores - Your Favorite Sidekick (Virtual Riot Remix).jpg
+Your Favorite Sidekick (Virtual Riot Remix)
+Underscores & Virtual Riot
+1
+
+
+0
+2023
+
+2:12
+-
+---------------------------------------------------------------
+55
+Pjesme/Quest For Fire/2.wav
+Pjesme/Quest For Fire/QuestForFire.jpg
+RATATA
+Skrillex & Missy Elliott & Mr. Oizo
+1
+
+
+1
+2023
+OWSLA, Atlantic
+2:07
+-
+---------------------------------------------------------------
+56
+Pjesme/Quest For Fire/3.wav
+Pjesme/Quest For Fire/QuestForFire.jpg
+Tears
+Skrillex & Joker & Sleepnet
+1
+
+
+1
+2023
+OWSLA, Atlantic
+3:06
+-
+---------------------------------------------------------------
+57
+Pjesme/Quest For Fire/4.wav
+Pjesme/Quest For Fire/QuestForFire.jpg
+Rumble
+Skrillex & Fred again.. & Flowdan
+1
+
+
+1
+2023
+OWSLA, Atlantic
+2:27
+-
+---------------------------------------------------------------
+58
+Pjesme/Quest For Fire/5.wav
+Pjesme/Quest For Fire/QuestForFire.jpg
+Inhale Exhale
+Skrillex & Aluna & Kito
+1
+
+
+1
+2023
+OWSLA, Atlantic
+3:26
+-
+---------------------------------------------------------------
+59
+Pjesme/Quest For Fire/6.wav
+Pjesme/Quest For Fire/QuestForFire.jpg
+A Street I Know
+Skrillex & Eli Keszler
+1
+
+
+1
+2023
+OWSLA, Atlantic
+3:26
+-
+---------------------------------------------------------------
+60
+Pjesme/Quest For Fire/7.wav
+Pjesme/Quest For Fire/QuestForFire.jpg
+XENA
+Skrillex & Nai Barghouti
+1
+
+
+1
+2023
+OWSLA, Atlantic
+4:12
+-
+---------------------------------------------------------------
+61
+Pjesme/Quest For Fire/8.wav
+Pjesme/Quest For Fire/QuestForFire.jpg
+TOO BIZARRE (juked)
+Skrillex & Swae Lee & Siiickbrain & Posij
+1
+
+
+1
+2023
+OWSLA, Atlantic
+3:29
+-
+---------------------------------------------------------------
+62
+Pjesme/Quest For Fire/10.wav
+Pjesme/Quest For Fire/QuestForFire.jpg
+Hydrate
+Skrillex & Flowdan & BEAM & PEEKABOO
+1
+
+
+1
+2023
+OWSLA, Atlantic
+3:26
+-
+---------------------------------------------------------------
+63
+Pjesme/Quest For Fire/11.wav
+Pjesme/Quest For Fire/QuestForFire.jpg
+Warped Tour '05 with pete WENTZ
+Skrillex
+1
+
+
+1
+2023
+OWSLA, Atlantic
+0:48
+-
+---------------------------------------------------------------
+64
+Pjesme/Quest For Fire/13.wav
+Pjesme/Quest For Fire/QuestForFire.jpg
+Supersonic (my existence)
+Skrillex & Noisia & josh pan & Dylan Brady
+1
+
+
+1
+2023
+OWSLA, Atlantic
+3:08
+-
+---------------------------------------------------------------
+65
+Pjesme/Quest For Fire/14.wav
+Pjesme/Quest For Fire/QuestForFire.jpg
+Hazel Theme
+Skrillex
+1
+
+
+1
+2023
+OWSLA, Atlantic
+1:51
+-
+---------------------------------------------------------------
+66
+Pjesme/Quest For Fire/15.wav
+Pjesme/Quest For Fire/QuestForFire.jpg
+Still Here (with the ones that I came with)
+Skrillex & Porter Robinson & Bibi Bourelly
+1
+
+
+1
+2023
+OWSLA, Atlantic
+5:12
 -
