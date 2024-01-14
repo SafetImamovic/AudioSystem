@@ -41,9 +41,10 @@ private:
 	std::vector<InfoPjesma::InfoPjesmaRender> IPRMain;
 	std::vector<InfoPjesma::InfoPlaylisteRender> PRMain;
 	bool like;
-
+	bool DodavanjeUPlaylistAktivno = false;
 	std::vector<PlayLista> PlayListe;
 
+	int ID_PJESMA_ZA_DODAT;
 	void MoveUp();
 	void MoveDown();
 	//elementi aplikacije
@@ -93,6 +94,7 @@ private:
 	void LoadPlaylisteRender();
 	int BulkSearch();
 	void SwitchPlaylist(int index);
+	bool DodatPjesmaUPlaylistu(int index);
 
 
 public:
