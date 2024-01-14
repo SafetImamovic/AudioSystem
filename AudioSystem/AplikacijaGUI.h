@@ -39,10 +39,12 @@ private:
 	PlayLista* pSvePjesme;
 	std::vector<std::string> NizPjesmi;
 	std::vector<InfoPjesma::InfoPjesmaRender> IPRMain;
+	std::vector<InfoPjesma::InfoPlaylisteRender> PRMain;
 	bool like;
-
+	bool DodavanjeUPlaylistAktivno = false;
 	std::vector<PlayLista> PlayListe;
-
+	int ID_TRENUTNE_PLAYLISTE;
+	int ID_PJESMA_ZA_DODAT;
 	void MoveUp();
 	void MoveDown();
 	//elementi aplikacije
@@ -69,6 +71,7 @@ private:
 	void GetOdgovarajuciTextBoxText();
 	void UpdateScrollBar();
 	void UpdateGlasnocaBar();
+	void UpdatePlaybackBrzina();
 	void PromijeniRezoluciju(int height, int width);
 	void Mute();
 	void InfoPjesmaKonfiguracija();
@@ -85,6 +88,13 @@ private:
 	int KreirajPlayListu(const std::string& ime, const std::string& datumKreiranja,
 		bool ponoviSkupPjesama, bool shuffle, std::string kreator);
 	void LikeTrackHook();
+	bool jeSubstring(const std::string& glavniString, const std::string& trazeniString);
+	bool searchSong(const Pjesma& pjesma);
+	void LoadPjesmeRender(std::vector<Pjesma>& pjesme);
+	void LoadPlaylisteRender();
+	int BulkSearch();
+	void SwitchPlaylist(int index);
+	bool DodatPjesmaUPlaylistu(int index);
 
 
 public:
