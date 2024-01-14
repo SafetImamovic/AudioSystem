@@ -10,6 +10,7 @@ WAVEFORMATEX waveformat;
 AudioPlayer::AudioPlayer()
 {
     // Postavljanje inicijalnih vrijednosti clanova klase
+    this->procenatBrzine = 0.5;
     this->glasnocaJedan = 0xFFFF;
     this->glasnocaDva = 0xFFFF;
     this->glasnoca = MAKELONG(this->glasnocaJedan, this->glasnocaDva);
@@ -252,6 +253,9 @@ void AudioPlayer::pustiPauza() {
 
 // Metoda koja prati trajanje reprodukcije
 void AudioPlayer::Vrijeme() {
+
+    
+
     try {
         sf::Time lastOffset = sf::Time::Zero;
         while (!this->shouldStop && this->isPlaying && !this->isPlaybackComplete) {
@@ -295,9 +299,9 @@ void AudioPlayer::Vrijeme() {
                     //std::cout << "    >> ";
                 
             }
-           
+            //std::cout << "this->tempSekunde >= float(this->trajanjePjesme) " << this->tempSekunde + 5 << ", " << float(this->trajanjePjesme) - 0 << "\n";
             // Provjera završetka reprodukcije
-            if (this->tempSekunde >= this->trajanjePjesme-2) {
+            if (this->tempSekunde >= this->trajanjePjesme - 1){
                 this->isPlaybackComplete = true;
                 this->shouldStop = true;
                 novaPjesma();
@@ -327,6 +331,7 @@ void AudioPlayer::Vrijeme() {
 
 // Metoda za prelazak na sljedecu pjesmu
 void AudioPlayer::novaPjesma() {
+    this->procenatBrzine = 0.5;
     this->shouldStop = true;
     this->tempSekunde = 0;
     if(this->trenutniIndeksPjesme < this->Pjesme.size() - 1)
@@ -380,6 +385,7 @@ void AudioPlayer::novaPjesma() {
 
 // Metoda za prelazak na sljedecu pjesmu
 void AudioPlayer::staraPjesma() {
+    this->procenatBrzine = 0.5;
     this->shouldStop = true;
     this->tempSekunde = 0;
     if(this->trenutniIndeksPjesme > 0)
@@ -432,6 +438,7 @@ void AudioPlayer::staraPjesma() {
 }
 
 void AudioPlayer::trenutnaPjesma() {
+    this->procenatBrzine = 0.5;
     this->shouldStop = true;
     this->tempSekunde = 0;    
 
@@ -446,8 +453,8 @@ void AudioPlayer::trenutnaPjesma() {
             this->stariFilePath = this->soundFilePath;
             this->soundFilePath = this->Pjesme.at(this->trenutniIndeksPjesme).getLokacijaPjesme();
 
-            std::cout << "Stara pjesma:\t\t " << this->stariFilePath << "\n";
-            std::cout << "Trenutna Pjesma:\t " << this->soundFilePath << "\n";
+            //std::cout << "Stara pjesma:\t\t " << this->stariFilePath << "\n";
+            //std::cout << "Trenutna Pjesma:\t " << this->soundFilePath << "\n";
 
             music.openFromFile(soundFilePath);
             music.setPitch(1.0);
@@ -608,16 +615,27 @@ void AudioPlayer::PromijeniBrzinuReprodukcije(double faktor) {
 
 // Metoda koja pocevava brzinu reprodukcije
 void AudioPlayer::Ubrzaj() {
-    double novaBrzina = this->brzina * 1.2;
-    PromijeniBrzinuReprodukcije(novaBrzina);
-    this->brzina = novaBrzina;
+
+    if (music.getPitch() == 1.25)
+        return;
+
+    PromijeniBrzinuReprodukcije(1.25);
+}
+
+void AudioPlayer::Normal()
+{
+    if (music.getPitch() == 1)
+        return;
+
+    PromijeniBrzinuReprodukcije(1);
 }
 
 // Metoda koja smanjuje brzinu reprodukcije
 void AudioPlayer::Uspori() {
-    double novaBrzina = this->brzina * 0.8;
-    PromijeniBrzinuReprodukcije(novaBrzina);
-    this->brzina = novaBrzina;
+    if (music.getPitch() == 0.75)
+        return;
+
+    PromijeniBrzinuReprodukcije(0.75);
 }
 
 void AudioPlayer::SetGlasnoca(float velicina)
@@ -702,6 +720,26 @@ Pjesma& AudioPlayer::getPjesmaObjekat()
 void AudioPlayer::setTrenutniIndexPjesme(size_t index)
 {
     this->trenutniIndeksPjesme = index;
+}
+
+double AudioPlayer::getPitch() const
+{
+    return this->music.getPitch();
+}
+
+void AudioPlayer::setPitch(double pitch)
+{
+    this->music.setPitch(pitch);
+}
+
+float AudioPlayer::getProcenatBrzine()
+{
+    return this->procenatBrzine;
+}
+
+void AudioPlayer::setProcenatBrzine(float index)
+{
+    this->procenatBrzine = index;
 }
 
 size_t AudioPlayer::GetSekunde() const

@@ -32,7 +32,7 @@ public:
     unsigned int getID_Pjesme() const;
     unsigned int getID_WAV() const;
     unsigned int getID_SLIKA() const;
-    std::string getIme() const;
+    std::string getImePjesme() const;
     std::string getImeAutora() const;
     bool getDaLiPripadaAlbumu() const;
     std::string getAlbum() const;
