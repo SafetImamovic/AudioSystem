@@ -2,7 +2,7 @@
 
 # Koristenje iznimke u funkciji "Vrijeme"
 
-<code-block lang="c++">
+```c++
 void AudioPlayer::Vrijeme() {
     try {
         sf::Time lastOffset = sf::Time::Zero;
@@ -73,11 +73,11 @@ void AudioPlayer::Vrijeme() {
         novaPjesma();
     }
 }
-</code-block>
+```
 
 # Iznimka u funckiji "novaPjesma" koja se moze naci i na "staraPjesma"
 
-<code-block lang="c++">
+```c++
 void AudioPlayer::novaPjesma() {
     this->procenatBrzine = 0.5;
     this->shouldStop = true;
@@ -122,4 +122,4 @@ void AudioPlayer::novaPjesma() {
         this->isPlaybackComplete = true;
     }
 }
-</code-block>
+```

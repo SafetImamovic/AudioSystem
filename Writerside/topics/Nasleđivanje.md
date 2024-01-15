@@ -4,7 +4,7 @@
 
 Klasa InfoPjesma:
 
-<code-block lang="c++">
+```c++
 class InfoPjesma : public ElementarneKomponente
 {
 public:
@@ -41,11 +41,12 @@ public:
 		sf::RectangleShape DodajPjesmu;
 		sf::RectangleShape ObrisiPjesmu;
 };
-</code-block>
+```
+
 
 Klasa TextBox:
 
-<code-block lang="c++">
+```c++
 class TextBox : public ElementarneKomponente
 {
 private:
@@ -86,4 +87,4 @@ TextBox() = default;
 	void DrawTo(sf::RenderWindow& window);
 	void OtipkanoNa(sf::Event input);
 };
-</code-block>
+```

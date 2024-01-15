@@ -5,18 +5,16 @@
 
 Operator sabiranja klasa:
 
-<code-block lang="c++">
+```c++
 void SkupPjesama::operator+(const Pjesma& pjesma)
 {
 this->BrojPjesama++;
 this->Pjesme.push_back(pjesma);
 }
-</code-block>
-
+```
 
 Operator oduzimanja klasa:
-
-<code-block lang="c++">
+```c++
 void SkupPjesama::operator-(const Pjesma& pjesma)
 {
     this->BrojPjesama--;
@@ -29,5 +27,7 @@ void SkupPjesama::operator-(const Pjesma& pjesma)
         }
     }
 }
+```
 
-</code-block>
+
+

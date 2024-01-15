@@ -2,8 +2,7 @@
 
 # Primjer koristenja virtualne funckije u klasi "SkupPjesama"
 
-<code-block lang="c++">
-
+```c++
 class SkupPjesama {
 protected:
 std::vector<Pjesma> Pjesme;
@@ -42,5 +41,7 @@ virtual void operator - (const Pjesma& pjesma);
     //
     virtual std::vector<Pjesma> ucitajPjesmeIzDatoteke(const std::string& filename);
 };
+```
 
-</code-block>
+
+
