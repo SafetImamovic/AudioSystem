@@ -30,6 +30,7 @@ AudioPlayer::AudioPlayer()
     this->shouldStop = false;
     this->tempSekunde = 200;
     this->currentTimeInSeconds = 0.0;
+    this->ponavlja = false;
 
   // timeTrackingThread = std::thread(&AudioPlayer::Vrijeme, this);
 
@@ -301,13 +302,19 @@ void AudioPlayer::Vrijeme() {
             }
             //std::cout << "this->tempSekunde >= float(this->trajanjePjesme) " << this->tempSekunde + 5 << ", " << float(this->trajanjePjesme) - 0 << "\n";
             // Provjera završetka reprodukcije
-            if (this->tempSekunde >= this->trajanjePjesme - 1){
+            if (this->tempSekunde >= this->trajanjePjesme - 1 && this->ponavlja == false){
                 this->isPlaybackComplete = true;
                 this->shouldStop = true;
                 novaPjesma();
             }
+            else if (this->tempSekunde >= this->trajanjePjesme - 1 && this->ponavlja == true) {
+                this->isPlaybackComplete = true;
+                this->shouldStop = true;
+                this->trenutniIndeksPjesme--;
+                novaPjesma();
+            }
 
-            // Pokretanje nove pjesme nakon završetka trenutne
+            // Pokretanje nove pjesme nakon završetka trenutn
             //if (this->isPlaybackComplete) {              
              //   novaPjesma();
             //}
@@ -740,6 +747,28 @@ float AudioPlayer::getProcenatBrzine()
 void AudioPlayer::setProcenatBrzine(float index)
 {
     this->procenatBrzine = index;
+}
+
+void AudioPlayer::randomPjesma()
+{
+    srand(time(NULL));
+    int i = rand() % (this->Pjesme.size() - 1) + 1;
+    this->trenutniIndeksPjesme = i;
+    novaPjesma();
+}
+
+void AudioPlayer::setPonavlja()
+{
+    if (this->ponavlja == false)
+        this->ponavlja = true;
+    else
+        this->ponavlja = false;
+          
+}
+
+bool AudioPlayer::getPonavlja()
+{
+    return this->ponavlja;
 }
 
 size_t AudioPlayer::GetSekunde() const
