@@ -1,0 +1,79 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat"><html lang="en-US" data-colors-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex">  <meta name="built-on" content="2024-01-16T00:15:50.9679525"><meta name="build-number" content="${buildNumber}">       <title>Nasljeđivanje | Dokumentacija - Audio System</title><script id="virtual-toc-data" type="application/json">[{"id":"primjer-naslje-ivanja-klasa","level":0,"title":"Primjer nasljeđivanja klasa:","anchor":"#primjer-naslje-ivanja-klasa"}]</script><script id="topic-shortcuts" type="application/json"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.6.6-b205/app.css" rel="stylesheet">   <link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><link rel="manifest" href="https://jetbrains.com/site.webmanifest"><link rel="mask-icon" href="https://jetbrains.com/safari-pinned-tab.svg" color="#000000"><meta name="msapplication-TileColor" content="#000000"/><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"/><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"/><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"/><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"/><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"/>  <meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Nasljeđivanje | Dokumentacija - Audio System"/><meta property="og:description" content=""/><meta property="og:image" content=""/><meta property="og:site_name" content="Dokumentacija - Audio System Help"/><meta property="og:type" content="website"/><meta property="og:locale" content="en_US"/><meta property="og:url" content="nasleđivanje.html"/><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Nasljeđivanje | Dokumentacija - Audio System"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json"> { "@context": "http://schema.org", "@type": "WebPage", "@id": "nasleđivanje.html#webpage", "url": "nasleđivanje.html", "name": "Nasljeđivanje | Dokumentacija - Audio System", "description": "", "image": "", "inLanguage":"en-US" }</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json"> { "@type": "WebSite", "@id": "/#website", "url": "/", "name": "Dokumentacija - Audio System Help" }</script><!-- End Schema.org --></head>      <body data-id="Nasleđivanje" data-main-title="Nasljeđivanje" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}"  data-template="article"  data-breadcrumbs=""  >   <div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Dokumentacija - Audio System  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="Nasleđivanje"   id="Nasleđivanje.md">Nasljeđivanje</h1>  <section class="chapter"><h2 id="primjer-naslje-ivanja-klasa" data-toc="primjer-naslje-ivanja-klasa"   >Primjer nasljeđivanja klasa:</h2><p id="9312de99_399">Klasa InfoPjesma:</p><div class="code-block" data-lang="cpp"         >
+class InfoPjesma : public ElementarneKomponente
+{
+public:
+	struct InfoPjesmaRender : public ElementarneKomponente //ovo je strukt za render pjesme koja ce se nalazit u centru GUI-a, skupina pjesama
+	{
+		static int BrojPjesama;
+		int Visina = 40;
+		int paddingHorizontal = 10;
+		int paddingVertical = 12;
+		sf::Color PrimarnaBoja = sf::Color(10, 10, 10);
+		sf::Font font;
+		sf::Font fontEmoji;
+		std::string lokacijaSlike;
+		std::string lokacijaPjesme;
+
+		int intID;
+		sf::Texture Cover;
+		sf::Sprite CoverRender;
+
+		sf::Text ID;
+		sf::Text Ime;
+		sf::Text ImeAutora;
+		sf::Text TrajanjePjesme;
+		sf::Text DodajPjesmuUPlaylist;
+		sf::Text ObrisiPjesmuIzPlayliste;
+		sf::Text Like;
+
+		Tipka DodajTipka;
+
+		sf::RectangleShape GlavnaPozadina;
+		sf::RectangleShape ID_Cover_Ime_Pozadina;
+		sf::RectangleShape Autor_Pozadina;
+		sf::RectangleShape Trajanje_Add_Like_Pozadina;
+		sf::RectangleShape DodajPjesmu;
+		sf::RectangleShape ObrisiPjesmu;
+};
+</div><p id="9312de99_401">Klasa TextBox:</p><div class="code-block" data-lang="cpp"         >
+class TextBox : public ElementarneKomponente
+{
+private:
+	sf::Text textbox;
+
+	std::ostringstream text;
+	bool jeOznacen = false;
+	bool imaLimit = false;
+	int Limit;
+
+	void InputLogika(int karakterIstipkan);
+	void IzbrisiZadnjiKarakter();
+
+
+public:
+static bool JE_OZNACEN;
+sf::RectangleShape backgroundShape;
+TextBox() = default;
+
+	TextBox(const TextBox&amp; original);//manuelni kopirni konstruktor jer stringstream objekat ima specificnu kopiju
+
+	void SetTextBox(int velicina, sf::Color boja, bool oznacen);
+	void SetFont(sf::Font&amp; font);
+	void SetPosition(sf::Vector2f pozicija);
+	void SetLimit(bool ImaIliNema);
+	void SetLimit(bool ImaIliNema, int Limit);
+	void SetOznacen(bool oznacen);
+	void SetBackground(sf::Color boja, sf::Vector2f velicina);
+	void SetPozadinaPozicija(sf::Vector2f pozicija);
+	void SetSve(std::string ID, int velicinaTeksta, sf::Color bojaTeksta, sf::Color bojaPozadine, bool oznacen, sf::Font&amp; font, sf::Vector2f pozicija, sf::Vector2f padding, sf::Vector2f velicinaPozadine);
+	bool JeOznacen();
+	void Clear();
+	void PromijeniBojuPozadine(sf::Color NovaBoja);
+	void SetPadding(sf::Vector2f padding, sf::Vector2f pozicija);
+	void PostaviVelicinu(sf::Vector2f velicina);
+	std::string GetText();
+
+	void DrawTo(sf::RenderWindow&amp; window);
+	void OtipkanoNa(sf::Event input);
+};
+</div></section><div class="last-modified"> Last modified: 15 January 2024</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom">  <a class="navigation-links__prev" href="virtuelne-funckije.html">Virtuelne funckije</a>   <a class="navigation-links__next" href="preopterećeni-operatori.html">Preopterećeni operatori</a>  </div></article><div id="disqus_thread"></div></div></section></main></div>  <script src="https://resources.jetbrains.com/writerside/apidoc/6.6.6-b205/app.js"></script></body></html>
