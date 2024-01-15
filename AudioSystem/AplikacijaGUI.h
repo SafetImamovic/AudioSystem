@@ -25,6 +25,8 @@ class AplikacijaGUI
 {
 private:
 	sf::RenderWindow* window; //sf::RenderWindow definise prozor za GUI
+	std::unique_ptr<sf::RenderWindow> windowSmart;
+
 	sf::Event event; //event je objekat koji moze da poprimi vrijednost ili vrstu eventa koji se je desio unutar prozora,
     //cak i van prozora ako je tako definisano
 	sf::VideoMode videoMode; //zadaje rezoluciju prozoru
@@ -36,7 +38,7 @@ private:
 	Kontrole kontrole;
 	AudioPlayer player;
 	InfoPjesma infoPjesma;
-	PlayLista* pSvePjesme;
+	SkupPjesama* pSvePjesme; //deklarsina playlista kao njena nadklasa // polimorfizam
 	std::vector<std::string> NizPjesmi;
 	std::vector<InfoPjesma::InfoPjesmaRender> IPRMain;
 	std::vector<InfoPjesma::InfoPlaylisteRender> PRMain;
