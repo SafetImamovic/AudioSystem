@@ -1,18 +1,16 @@
 # Klase
+---
+## Primjeri najvažniji klasa u programu
 
-# Primjeri najvažniji klasa u programu:
 
+Klasa **AudioPlayer**
 
-Klasa **AudioPlayer** :
-
-<code-block lang="c++">
-
-class AudioPlayer
-{
-private:
-PlayLista* playLista;
-std::vector<Pjesma> Pjesme;
-
+```c++
+    class AudioPlayer
+    {
+    private:
+    PlayLista* playLista;
+    std::vector<Pjesma> Pjesme;
     std::string soundFilePath, stariFilePath;
     bool isPlaying;
     bool listaDisplayed;
@@ -41,13 +39,12 @@ std::vector<Pjesma> Pjesme;
     DWORD glasnoca;
     float procenatBrzine;
     bool ponavlja;
-};
-</code-block>
-
+    };
+```
 
 Klasa **AplikacijaGUI**:
 
-<code-block lang="c++">
+```c++
 class AplikacijaGUI
 {
 private:
@@ -74,12 +71,12 @@ private:
 	int ID_TRENUTNE_PLAYLISTE;
 	int ID_PJESMA_ZA_DODAT;
 };
-</code-block>
+```
 
 
 Klasa **Kontrole** koja nasljeđuje klasu **ElementarneKomponente**:
 
-<code-block lang="c++">
+```c++
 class Kontrole : public ElementarneKomponente
 {
 private:
@@ -95,12 +92,15 @@ private:
 	sf::Text textVrijeme, playbackBrzina;
 
 };
-</code-block>
+```
+
+
+
 
 
 Klasa **Pjesma**:
 
-<code-block lang="c++">
+```c++
 class Pjesma {
 private:
     unsigned int ID_Pjesme;
@@ -118,12 +118,13 @@ private:
     std::string RecordLabel;
     std::string TrajanjePjesme;
 };
-</code-block>
+```
+
 
 
 Klasa **TextBox** koja nasljeđuje klasu **ElementarneKomponente**:
 
-<code-block lang="c++">
+```c++
 class TextBox : public ElementarneKomponente
 {
 private:
@@ -138,13 +139,12 @@ private:
 	void IzbrisiZadnjiKarakter();
 
 };
-</code-block>
+```
 
 
 Klasa **Tipka** koja nasljeđuje klasu **ElementarneKomponente**:
 
-<code-block lang="c++">
-
+```c++
 class Tipka : public ElementarneKomponente
 {
 private:
@@ -167,4 +167,4 @@ sf::RectangleShape &getPozadina();
 sf::Text getTextElement();
 
 };
-</code-block>
+```

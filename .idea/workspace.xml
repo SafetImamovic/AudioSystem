@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4437c7ad-19d3-4f76-be46-3f0e1b48cf6e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Writerside/cfg/buildprofiles.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Writerside/topics/Enumeracija.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Writerside/topics/Iznimke.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Writerside/topics/Nasleđivanje.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Writerside/topics/Preopterećeni-operatori.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Writerside/hi.tree" beforeDir="false" afterPath="$PROJECT_DIR$/Writerside/hi.tree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Writerside/topics/Default-topic.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Writerside/topics/Klase.md" beforeDir="false" afterPath="$PROJECT_DIR$/Writerside/topics/Klase.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,12 +68,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "Dokumentacija",
-    "last_opened_file_path": "C:/Users/Korisnik/Desktop/AudioSystem"
-  },
-  "keyToStringList": {
-    "stardust.markdown.MarkdownSplitEditorSuppressor:keyList": [
-      "C:/Users/Korisnik/Desktop/AudioSystem/Writerside/topics/Iznimke.md"
-    ]
+    "last_opened_file_path": "C:/Users/Safet/Documents/GitHub/AudioSystemRepo"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
