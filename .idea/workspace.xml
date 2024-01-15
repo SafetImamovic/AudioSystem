@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4437c7ad-19d3-4f76-be46-3f0e1b48cf6e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Writerside/topics/Klase.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Writerside/cfg/buildprofiles.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Writerside/topics/Enumeracija.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Writerside/topics/Iznimke.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Writerside/topics/Nasleđivanje.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Writerside/topics/Preopterećeni-operatori.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Writerside/hi.tree" beforeDir="false" afterPath="$PROJECT_DIR$/Writerside/hi.tree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Writerside/topics/Default-topic.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Writerside/topics/Klase.md" beforeDir="false" afterPath="$PROJECT_DIR$/Writerside/topics/Klase.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +63,9 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2apPsYIbXmDIQ71edjbbCWOnZ66" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -64,12 +74,12 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+    "git-widget-placeholder": "Dokumentacija",
+    "last_opened_file_path": "C:/Users/Korisnik/Desktop/AudioSystem"
   },
   "keyToStringList": {
     "stardust.markdown.MarkdownSplitEditorSuppressor:keyList": [
-      "C:/Users/Safet/Desktop/New folder/DocumentationTemplate/Writerside/topics/AudioSystem.md",
-      "C:/Users/Safet/Desktop/New folder/DocumentationTemplate/Writerside/topics/Klase.md"
+      "C:/Users/Korisnik/Desktop/AudioSystem/Writerside/topics/Iznimke.md"
     ]
   }
 }]]></component>
