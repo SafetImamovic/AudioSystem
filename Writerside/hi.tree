@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="hi"
+                 name="Dokumentacija - Audio System"
+                 start-page="AudioSystem.md">
+    <toc-element topic="AudioSystem.md">
+    </toc-element>
+    <toc-element topic="SFML.md"/>
+    <toc-element topic="Klase.md"/>
+    <toc-element topic="Iznimke.md"/>
+    <toc-element topic="Virtuelne-funckije.md"/>
+    <toc-element topic="Nasleđivanje.md"/>
+    <toc-element topic="Preopterećeni-operatori.md"/>
+    <toc-element topic="Učitavanje-Podataka-fstream.md"/>
+    <toc-element topic="Enumeracija.md"/>
+
+</instance-profile>
