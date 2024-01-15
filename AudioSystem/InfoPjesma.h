@@ -349,6 +349,7 @@ public:
 	static int NaslovFontSize3;
 
 
+
 	InfoPjesma() = default;
 	static void SetPjesma(std::string naslov, std::string pjesnici, sf::Font& font, sf::Font& fontBold, sf::Font& fontBoldest, sf::Font& fontEmoji);
 	static void RenderPjesma(sf::RenderWindow& window);

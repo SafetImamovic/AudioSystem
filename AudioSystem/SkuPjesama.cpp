@@ -115,6 +115,8 @@ std::string SkupPjesama::getIme() const
     return this->Ime;
 }
 
+
+
 std::string SkupPjesama::getImeKreatora() const
 {
     return this->Kreator;

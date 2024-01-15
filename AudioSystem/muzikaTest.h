@@ -56,6 +56,8 @@ private:
     WORD glasnocaJedan, glasnocaDva;
     DWORD glasnoca;
     float procenatBrzine;
+    bool ponavlja;
+
 public:
 
     AudioPlayer();
@@ -110,21 +112,42 @@ public:
 
     void Uspori();
 
-    //Safet dodao ovo dole
     size_t GetSekunde() const;
+
     float GetTrajanjePjesme() const;
+    
     void SetGlasnoca(float velicina);
+    
     void SetPozicija(int sekunde);
+    
     size_t GetMiliSekunde();
+    
     float GetGlasnoca();
+    
     void Mute();
+    
     void PustiPjesmuPutanja(std::string putanja);
+    
     std::string GetImePjesmePath();
+    
     bool DaLiJeNovaPjesma(std::string TrenutnaPjesma);
+    
     Pjesma& getPjesmaObjekat();
+    
     void setTrenutniIndexPjesme(size_t index);
+    
     double getPitch() const;
+    
     void setPitch(double pitch);
+    
     float getProcenatBrzine();
+    
     void setProcenatBrzine(float index);
+
+    void randomPjesma();
+
+    void setPonavlja();
+
+    bool getPonavlja();
+
 };

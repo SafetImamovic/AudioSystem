@@ -112,7 +112,9 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	this->PlayListe.at(1) + pjesme.at(60);
 	this->PlayListe.at(1) + pjesme.at(61);
 	this->PlayListe.at(1) + pjesme.at(62);
+	this->PlayListe.at(1) + pjesme.at(51);
 	this->PlayListe.at(1) + pjesme.at(63);
+	
 	this->PlayListe.at(1) + pjesme.at(64);
 	this->PlayListe.at(1) + pjesme.at(65);
 
@@ -160,6 +162,8 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 void AplikacijaGUI::InicijalizacijaProzora()
 {
 	this->window = new sf::RenderWindow(this->videoMode, "Audio System", sf::Style::Default);
+	//this->windowSmart = std::make_unique<sf::RenderWindow>(this->videoMode, "Audio System", sf::Style::Default)
+	
 	//rezolucijom zadanom preko VideoMode konstruktora, naziv prozora je zadan
 	//drugim parametrom, treci parametar moze da primi bitwise argumente koji definisu da se prozor moze zatvoriti
 	//i da je prikazan naslov prozora
@@ -302,6 +306,25 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 		this->LikeTrackHook();
 		std::cout << "Like!\n";
 	}
+	else if (Tipka::PRITISNUT == "Shuffle")
+	{
+		//this->kontrole.Tipke.at(0).getPozadina().setFillColor(this->AkcenatBoja);
+		this->player.randomPjesma();
+	}
+		
+	else if (Tipka::PRITISNUT == "Loop")
+	{
+		
+		std::cout << "Kontrole tipka: " << this->kontrole.Tipke.at(4).GetID() << "\n";
+
+		this->player.setPonavlja();
+
+		if(this->player.getPonavlja())
+			this->kontrole.Tipke.at(4).GetText().setString(L"\uE8ED");
+		else
+			this->kontrole.Tipke.at(4).GetText().setString(L"\uE8EE");
+	}
+		
 
 	float tempp = this->kontrole.UpdatePozicijaSimbolaWindowGlasnoca(*this->window);
 

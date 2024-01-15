@@ -25,7 +25,7 @@ public:
 
     // Getteri
     std::vector<Pjesma> &getPjesme();
-    std::string getIme() const;
+    virtual std::string getIme() const;
     std::string getImeKreatora() const;
     std::string getDatumKreiranja() const;
     bool getPonoviSkupPjesama() const;
