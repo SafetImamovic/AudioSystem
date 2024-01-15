@@ -4,21 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4437c7ad-19d3-4f76-be46-3f0e1b48cf6e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Writerside/topics/Enumeracija.md" beforeDir="false" afterPath="$PROJECT_DIR$/Writerside/topics/Enumeracija.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Writerside/topics/Iznimke.md" beforeDir="false" afterPath="$PROJECT_DIR$/Writerside/topics/Iznimke.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Writerside/topics/Klase.md" beforeDir="false" afterPath="$PROJECT_DIR$/Writerside/topics/Klase.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Writerside/topics/Nasleđivanje.md" beforeDir="false" afterPath="$PROJECT_DIR$/Writerside/topics/Nasleđivanje.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Writerside/topics/Preopterećeni-operatori.md" beforeDir="false" afterPath="$PROJECT_DIR$/Writerside/topics/Preopterećeni-operatori.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Writerside/topics/Virtuelne-funckije.md" beforeDir="false" afterPath="$PROJECT_DIR$/Writerside/topics/Virtuelne-funckije.md" afterDir="false" />
-    </list>
+    <list default="true" id="4437c7ad-19d3-4f76-be46-3f0e1b48cf6e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Dokumentacija-Live" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="InstanceColorv3">
@@ -68,14 +65,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Dokumentacija",
-    "last_opened_file_path": "C:/Users/Safet/Documents/GitHub/AudioSystemRepo"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Dokumentacija&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Safet/Documents/GitHub/AudioSystemRepo&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Build Dokumentacija - Audio System (hi)" type="StardustRunConfiguration" factoryName="save-as-zip">
       <option name="folderPath" value="$PROJECT_DIR$" />
