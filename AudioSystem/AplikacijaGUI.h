@@ -97,6 +97,7 @@ private:
 	int BulkSearch();
 	void SwitchPlaylist(int index);
 	bool DodatPjesmaUPlaylistu(int index);
+	void UCITAJ_PLAYLISTE_FILE();
 
 
 public:
