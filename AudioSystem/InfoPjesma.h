@@ -73,8 +73,8 @@ public:
 			this->Ime.setString(pjesma.getImePjesme());
 			this->ImeAutora.setString(pjesma.getImeAutora());
 			this->TrajanjePjesme.setString(pjesma.getTrajanjePjesme());
-			this->DodajPjesmuUPlaylist.setString("+");
-			this->ObrisiPjesmuIzPlayliste.setString("-");
+			this->DodajPjesmuUPlaylist.setString(L"\uE82E");
+			this->ObrisiPjesmuIzPlayliste.setString(L"\uE74D");
 
 			if(!pjesma.getDaLiJeLajkana())
 				this->Like.setString(L"\uE006");
@@ -90,8 +90,8 @@ public:
 			this->Ime.setFont(fontBold);
 			this->ImeAutora.setFont(font);
 			this->TrajanjePjesme.setFont(font);
-			this->DodajPjesmuUPlaylist.setFont(fontBold);
-			this->ObrisiPjesmuIzPlayliste.setFont(fontBold);
+			this->DodajPjesmuUPlaylist.setFont(fontEmoji);
+			this->ObrisiPjesmuIzPlayliste.setFont(fontEmoji);
 			this->Like.setFont(fontEmoji);
 			
 
@@ -103,8 +103,8 @@ public:
 			this->Ime.setCharacterSize(14);
 			this->ImeAutora.setCharacterSize(14);
 			this->TrajanjePjesme.setCharacterSize(14);
-			this->DodajPjesmuUPlaylist.setCharacterSize(28);
-			this->ObrisiPjesmuIzPlayliste.setCharacterSize(28);
+			this->DodajPjesmuUPlaylist.setCharacterSize(20);
+			this->ObrisiPjesmuIzPlayliste.setCharacterSize(20);
 			this->Like.setCharacterSize(14);
 		}
 
@@ -207,12 +207,12 @@ public:
 			this->TrajanjePjesme.setPosition(lijeviOffset + this->paddingHorizontal + sirinaCentar - 160, 200 + paddingVertical + (50 * (index - 1)));
 			this->DodajPjesmuUPlaylist.setPosition(
 				400 + sirinaCentar - 50 + 6 + 10,
-				200 + (50 * (index - 1)) - 5 + 6
+				200 + (50 * (index - 1)) - 5 + 6 + 8
 			);
 
 			this->ObrisiPjesmuIzPlayliste.setPosition(
 				400 + sirinaCentar - 50 - 50 + 6 + 10,
-				200 + (50 * (index - 1)) - 5 + 6
+				200 + (50 * (index - 1)) - 5 + 6 + 8
 			);
 		}
 
