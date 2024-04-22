@@ -1,6 +1,8 @@
 #pragma once
 #pragma comment(lib, "Strmiids.lib")
 #pragma comment(lib, "winmm.lib")
+#include "Pjesma.h"
+#include "PlayList.h"
 #include <iostream>
 #include <Windows.h>
 #include <mmsystem.h>
@@ -23,16 +25,17 @@
 class AudioPlayer
 {
 private:
-
-    std::vector<std::string> songList;
-    std::string soundFilePath;
+    PlayLista* playLista;
+    std::vector<Pjesma> Pjesme;
+    
+    std::string soundFilePath, stariFilePath;
     bool isPlaying;
     bool listaDisplayed;
     bool isPlaybackComplete;
     size_t trenutniIndeksPjesme;
     size_t seconds;
     size_t miliseconds;
-    float trajanjePjesme;
+    int trajanjePjesme;
     double currentTimeInSeconds;
     WAVEFORMATEX waveFormat;
     size_t currentSamplePosition;
@@ -52,13 +55,16 @@ private:
     float TempGlasnoca;
     WORD glasnocaJedan, glasnocaDva;
     DWORD glasnoca;
+    float procenatBrzine;
+    bool ponavlja;
+
 public:
 
     AudioPlayer();
 
     ~AudioPlayer();
 
-    void setNiz(std::vector<std::string> pjesme);
+    void setNiz(PlayLista playLista, float startSystemVolume);
 
     void Pokreni();
 
@@ -90,6 +96,8 @@ public:
 
     void staraPjesma();
 
+    void trenutnaPjesma();
+
     void premotajUnazad();
 
     void premotajUnaprijed();
@@ -100,15 +108,46 @@ public:
 
     void Ubrzaj();
 
+    void Normal();
+
     void Uspori();
 
-    //Safet - dodao dva gettera
     size_t GetSekunde() const;
+
     float GetTrajanjePjesme() const;
+    
     void SetGlasnoca(float velicina);
+    
     void SetPozicija(int sekunde);
+    
     size_t GetMiliSekunde();
+    
     float GetGlasnoca();
+    
     void Mute();
+    
     void PustiPjesmuPutanja(std::string putanja);
+    
+    std::string GetImePjesmePath();
+    
+    bool DaLiJeNovaPjesma(std::string TrenutnaPjesma);
+    
+    Pjesma& getPjesmaObjekat();
+    
+    void setTrenutniIndexPjesme(size_t index);
+    
+    double getPitch() const;
+    
+    void setPitch(double pitch);
+    
+    float getProcenatBrzine();
+    
+    void setProcenatBrzine(float index);
+
+    void randomPjesma();
+
+    void setPonavlja();
+
+    bool getPonavlja();
+
 };
