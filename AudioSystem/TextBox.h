@@ -29,6 +29,7 @@ private:
 
 
 public:
+	static bool JE_OZNACEN;
 	sf::RectangleShape backgroundShape;
 	TextBox() = default;
 
@@ -45,6 +46,9 @@ public:
 	void SetSve(std::string ID, int velicinaTeksta, sf::Color bojaTeksta, sf::Color bojaPozadine, bool oznacen, sf::Font& font, sf::Vector2f pozicija, sf::Vector2f padding, sf::Vector2f velicinaPozadine);
 	bool JeOznacen();
 	void Clear();
+	void PromijeniBojuPozadine(sf::Color NovaBoja);
+	void SetPadding(sf::Vector2f padding, sf::Vector2f pozicija);
+	void PostaviVelicinu(sf::Vector2f velicina);
 	std::string GetText();
 
 	void DrawTo(sf::RenderWindow& window);
