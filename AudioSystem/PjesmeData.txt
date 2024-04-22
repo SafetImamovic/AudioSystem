@@ -1,71 +1,154 @@
+---------------------------------------------------------------
 1
-Zomboy & MUST DIE! - Last One Standing.wav
-Covers/Dead Man Walking.jpg
-Last One Standing
-Zomboy
-true
-Dead Man Walking Pt. 1
+Pjesme/Aleksandra Prijovic - Psiho.wav
+Covers/Aleksandra Prijovic - Psiho.jpg
+Psiho
+Aleksandra Prijovic
+1
 
-false
-2022
-Never Say Die Records
+
+0
+2023
+
+3:17
 -
+---------------------------------------------------------------
 2
-Dua Lipa - Don't Start Now.wav
-Covers/Dua Lipa - Don't Start Now.jpg
-Don't Start Now
-Dua Lipa
-true
-Future Nostalgia
+Pjesme/Coby x Rouzi - Jao Mama.wav
+Covers/Coby x Rouzi - Jao Mama.jpg
+Jao Mama
+Coby x Rouzi
+1
 
-false
-2019
-Warner Records Inc.
+
+0
+2023
+
+2:44
 -
+---------------------------------------------------------------
 3
-Modestep & Virtual Riot & Barely Alive - By My Side.wav
-Covers/Modestep & Virtual Riot & Barely Alive - By My Side.jpg
-By My Side
-Modestep & Virtual Riot & Barely Alive
-false
+Pjesme/Cunami - Capcarap .wav
+Covers/Cunami - Capcarap.jpg
+Capcarap
+Cunami
+1
 
 
-false
-2018
-Disciple Recordings
+0
+2023
+
+3:16
 -
+---------------------------------------------------------------
 4
-Skrillex & Boys Noize - Fine Day Anthem.wav
+Pjesme/Dua Lipa - New Rules.wav
+Covers/Dua Lipa - New Rules.jpg
+New Rules
+Dua Lipa
+1
+
+
+0
+2023
+
+3:29
+-
+---------------------------------------------------------------
+5
+Pjesme/Knock2 - dashstar (VIP).wav
+Covers/Knock2 - dashstar (VIP).jpg
+dashstar (VIP)
+Knock2
+1
+
+
+1
+2023
+
+2:20
+-
+---------------------------------------------------------------
+6
+Pjesme/Maneskin - Beggin.wav
+Covers/Maneskin - Beggin.jpg
+Beggin
+Maneskin
+1
+Zamisli
+
+0
+2023
+Fuck this shit i am out
+3:29
+- 
+---------------------------------------------------------------
+7
+Pjesme/Maneskin - I wanna be your slave.wav
+Covers/Maneskin - Beggin.jpg
+I wanna be your slave
+Maneskin
+1
+Zamisli
+
+0
+2023
+Fuck this shit i am out
+2:53
+-
+---------------------------------------------------------------
+8
+Pjesme/Max Power - 33 Max Verstappen.wav
+Covers/Max Power - 33 Max Verstappen.jpg
+33 Max Verstappen
+Max Power
+1
+
+
+0
+2023
+
+2:52
+-
+---------------------------------------------------------------
+9
+Pjesme/Skrillex & Boys Noize - Fine Day Anthem.wav
 Covers/Skrillex & Boys Noize - Fine Day Anthem.jpg
 Fine Day Anthem
 Skrillex & Boys Noize
-false
+0
 
 
-false
+1
 2023
 OWSLA
+3:13
 -
-5
-Skrillex, Bibi Bourelly, & Sonny Moore - Don't Get Too Close (Virtual Riot Remix).wav
-Covers/Skrillex, Bibi Bourelly, & Sonny Moore - Don't Get Too Close (Virtual Riot Remix).jpg
-Don't Get Too Close (Virtual Riot Remix)
-Skrillex, Bibi Bourelly, & Sonny Moore & Virtual Riot
-false
+---------------------------------------------------------------
+10
+Pjesme/Skrillex with Bobby Raps - Leave Me Like This.wav
+Covers/Skrillex with Bobby Raps - Leave Me Like This.jpg
+Leave Me Like This
+Skrillex & Bobby Raps
+1
 
 
-false
+1
 2023
 OWSLA
+3:08
 -
-6
-Skrillex, Starrah & Four Tet - Butterflies.wav
-Covers/Skrillex, Starrah & Four Tet - Butterflies.jpg
-Butterflies
-Skrillex & Starrah & Four Tet
-true
-Quest For Fire
+---------------------------------------------------------------
+11
+Pjesme/Arabian cat - (Official Music VIdeo) ft.Panjabi MC.wav
+Covers/arab-cat.jpg
+Arabian cat ft. Panjabi MC
+Arabian cat & Panjabi MC
+1
 
-false
-2023
-OWSLA
+
+0
+2021
+Arabian cat's Record Label
+2:12
+-

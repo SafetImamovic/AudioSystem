@@ -40,8 +40,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InfoPjesma.cpp">
-     <Filter>Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Pjesma.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SkuPjesama.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,6 +75,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InfoPjesma.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pjesma.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SkuPjesama.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
