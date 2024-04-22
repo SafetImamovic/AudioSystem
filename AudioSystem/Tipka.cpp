@@ -67,7 +67,7 @@ void Tipka::PromijeniKarakter(std::wstring promjena)
 	//std::cout << (std::string)this->text.getString();
 }
 
-sf::RectangleShape Tipka::getPozadina()
+sf::RectangleShape& Tipka::getPozadina()
 {
 	return this->tipka;
 }

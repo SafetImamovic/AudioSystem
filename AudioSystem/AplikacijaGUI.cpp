@@ -91,8 +91,9 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	this->pSvePjesme->setPjesme(pjesme);
 	
 	this->KreirajPlayListu("Sve Pjesme", "09.01.2024", false, false, "Me");
-	this->KreirajPlayListu("Quest For Fire", "09.01.2024", true, false, "Me");
-	this->KreirajPlayListu("Save Yourself", "09.01.2024", true, false, "Me");
+	this->KreirajPlayListu("Playlist Primjer 1", "09.01.2024", true, false, "Safet");
+	this->KreirajPlayListu("Playlist Primjer 2", "09.01.2024", true, false, "Nedim");
+	this->KreirajPlayListu("Playlist Primjer 3", "09.01.2024", true, false, "Hamza");
 
 
 
@@ -100,38 +101,35 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	//-------------------------------------------------------------------------------------------
 	//-------------------------------------------------------------------------------------------
 	//-------------------------------------------------------------------------------------------
-	this->PlayListe.at(1) + pjesme.at(20);
-	this->PlayListe.at(1) + pjesme.at(54);
-	this->PlayListe.at(1) + pjesme.at(55);
-	this->PlayListe.at(1) + pjesme.at(56);
-	this->PlayListe.at(1) + pjesme.at(14);
-	this->PlayListe.at(1) + pjesme.at(57);
-	
-	this->PlayListe.at(1) + pjesme.at(58);
-	this->PlayListe.at(1) + pjesme.at(59);
-	this->PlayListe.at(1) + pjesme.at(60);
-	this->PlayListe.at(1) + pjesme.at(61);
-	this->PlayListe.at(1) + pjesme.at(62);
-	this->PlayListe.at(1) + pjesme.at(63);
-	this->PlayListe.at(1) + pjesme.at(64);
-	this->PlayListe.at(1) + pjesme.at(65);
+	this->PlayListe.at(1) + pjesme.at(9);
+	this->PlayListe.at(1) + pjesme.at(8);
+	this->PlayListe.at(1) + pjesme.at(10);
 
 	//-------------------------------------------------------------------------------------------
 	//-------------------------------------------------------------------------------------------
 	//-------------------------------------------------------------------------------------------
 
 	this->PlayListe.at(2) + pjesme.at(0);
-	this->PlayListe.at(2) + pjesme.at(1);
 	this->PlayListe.at(2) + pjesme.at(2);
-	this->PlayListe.at(2) + pjesme.at(3);
-	this->PlayListe.at(2) + pjesme.at(4);
-	this->PlayListe.at(2) + pjesme.at(5);
-	this->PlayListe.at(2) + pjesme.at(6);
-	this->PlayListe.at(2) + pjesme.at(7);
 
 	//-------------------------------------------------------------------------------------------
 	//-------------------------------------------------------------------------------------------
 	//-------------------------------------------------------------------------------------------
+
+	this->PlayListe.at(3) + pjesme.at(1);
+	this->PlayListe.at(3) + pjesme.at(8);
+	this->PlayListe.at(3) + pjesme.at(7);
+	this->PlayListe.at(3) + pjesme.at(5);
+
+	//-------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------
+
+	std::cout << "Size: " << this->PlayListe.size();
+
+	//this->UCITAJ_PLAYLISTE_FILE();
+
+	std::cout << "Size: " << this->PlayListe.size();
 
 	std::cout << "this->PlayListe.at(0).getPjesme().size(): " << this->PlayListe.at(0).getPjesme().size() << "\n";
 	
@@ -153,13 +151,15 @@ void AplikacijaGUI::InicijalizacijaVarijabli()
 	//-----------------------------------------------------------------------------------------------
 
 	this->InfoPjesmaKonfiguracija();
-
+	
 	
 }
 
 void AplikacijaGUI::InicijalizacijaProzora()
 {
 	this->window = new sf::RenderWindow(this->videoMode, "Audio System", sf::Style::Default);
+	//this->windowSmart = std::make_unique<sf::RenderWindow>(this->videoMode, "Audio System", sf::Style::Default)
+	
 	//rezolucijom zadanom preko VideoMode konstruktora, naziv prozora je zadan
 	//drugim parametrom, treci parametar moze da primi bitwise argumente koji definisu da se prozor moze zatvoriti
 	//i da je prikazan naslov prozora
@@ -302,6 +302,25 @@ void AplikacijaGUI::ProvjeriClickZaSveElemente()
 		this->LikeTrackHook();
 		std::cout << "Like!\n";
 	}
+	else if (Tipka::PRITISNUT == "Shuffle")
+	{
+		//this->kontrole.Tipke.at(0).getPozadina().setFillColor(this->AkcenatBoja);
+		this->player.randomPjesma();
+	}
+		
+	else if (Tipka::PRITISNUT == "Loop")
+	{
+		
+		std::cout << "Kontrole tipka: " << this->kontrole.Tipke.at(4).GetID() << "\n";
+
+		this->player.setPonavlja();
+
+		if(this->player.getPonavlja())
+			this->kontrole.Tipke.at(4).GetText().setString(L"\uE8ED");
+		else
+			this->kontrole.Tipke.at(4).GetText().setString(L"\uE8EE");
+	}
+		
 
 	float tempp = this->kontrole.UpdatePozicijaSimbolaWindowGlasnoca(*this->window);
 
@@ -865,6 +884,55 @@ bool AplikacijaGUI::DodatPjesmaUPlaylistu(int index)
 	std::cout << this->IPRMain.at(index).intID << "\n";
 	return false;
 }
+
+void AplikacijaGUI::UCITAJ_PLAYLISTE_FILE() {
+	std::string filename = "PlaylisteData.txt";
+	std::ifstream file(filename);
+
+	int i = 0, index;
+
+	if (!file.is_open()) {
+		std::cerr << "Nemoguæe otvoriti datoteku: " << filename << std::endl;
+	}
+
+	std::string line;
+	std::string temp = "";
+
+	int idPjesme, tempID;
+	std::string ime, imeAutora, temp2;
+
+	while (std::getline(file, line)) {
+		std::istringstream iss(line);
+
+		std::getline(file, line); temp = line; idPjesme = std::atoi(temp.c_str()); temp = "";
+		std::cout << idPjesme << ", ";
+		std::getline(file, line); temp = line;  ime = temp; temp = "";
+		std::cout << ime << ", ";
+		std::getline(file, line); temp = line; imeAutora = temp; temp = "";
+		std::cout << imeAutora << ", ";
+
+		std::cout << "\n";
+
+		index = this->KreirajPlayListu(ime, "nice", false, false, imeAutora);
+		
+		/*
+		while (std::getline(file, line, ';'))
+		{
+			std::getline(file, line, ';'); temp = line;
+			tempID = atoi(temp.c_str());
+			this->PlayListe.at(index) + this->pSvePjesme->getPjesme().at(tempID);
+		}
+		*/
+		i++;
+
+		std::cout << "\n\n" << "Iterator: " << i << "\n\n";
+
+		std::getline(file, line); temp = line; temp = "";
+	}
+
+	file.close();
+}
+
 
 //------------------end of private-------------------------------//
 
