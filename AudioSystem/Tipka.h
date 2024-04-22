@@ -23,5 +23,7 @@ public:
 	std::wstring GetTextUTF16();
 	sf::Text& GetText();
 	void PromijeniKarakter(std::wstring promjena);
+	sf::RectangleShape &getPozadina();
+	sf::Text getTextElement();
 
 };
