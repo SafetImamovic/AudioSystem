@@ -20,37 +20,30 @@ protected:
     int BrojPjesama;
 
 public:
-    void operator + (const Pjesma& pjesma);
-    void operator - (const Pjesma& pjesma);
+    virtual void operator + (const Pjesma& pjesma);
+    virtual void operator - (const Pjesma& pjesma);
 
     // Getteri
-    std::vector<Pjesma> &getPjesme();
-    std::string getIme() const;
-    std::string getImeKreatora() const;
-    std::string getDatumKreiranja() const;
-    bool getPonoviSkupPjesama() const;
-    bool getShuffle() const;
+    virtual std::vector<Pjesma> &getPjesme();
+    virtual std::string getIme() const;
+    virtual std::string getImeKreatora() const;
 
     // Setteri
-    void setPjesme(std::vector<Pjesma>& pjesme);
-    void setIme(const std::string& ime);
-    void setDatumKreiranja(const std::string& datumKreiranja);
-    void setPonoviSkupPjesama(bool ponoviSkupPjesama);
-    void setShuffle(bool shuffle);
+    virtual void setPjesme(std::vector<Pjesma>& pjesme);
 
     SkupPjesama(std::string ime, std::string datumKreiranja, bool ponovi, bool shuffle, std::string kreator);
 
     // Primjer dodavanja pjesme
-    void dodajPjesmu(const Pjesma& pjesma);
+    virtual void dodajPjesmu(const Pjesma& pjesma);
 
-    void IzbaciPjesmu(int index);
+    virtual void IzbaciPjesmu(int index);
 
     // Primjer dohvaæanja svih pjesama
-    const std::vector<Pjesma>& dohvatiSvePjesme() const;
+    virtual const std::vector<Pjesma>& dohvatiSvePjesme() const;
 
     // Funkcija za pretraživanje pjesama
-    std::vector<Pjesma> pretraziPjesme(const std::string& kriterijum);
+    virtual std::vector<Pjesma> pretraziPjesme(const std::string& kriterijum);
 
     //
-    std::vector<Pjesma> ucitajPjesmeIzDatoteke(const std::string& filename);
+    virtual std::vector<Pjesma> ucitajPjesmeIzDatoteke(const std::string& filename);
 };
