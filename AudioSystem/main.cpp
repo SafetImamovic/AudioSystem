@@ -4,14 +4,17 @@
 
 int main()
 {
-    sf::Color PrimarnaBoja = sf::Color(30, 30, 30);
+    sf::Color PrimarnaBoja = sf::Color(30,30,30);
     sf::Color SekundarnaBoja = sf::Color(60, 60, 60);
     sf::Color AkcenatBoja = sf::Color::Red;
 
-    sf::Font font;
-    font.loadFromFile("seguisym.ttf");
+    sf::Font font, fontBold, fontBoldest, fontEmoji;
+    font.loadFromFile("Fonts/Montserrat/static/Montserrat-Regular.ttf");
+    fontBold.loadFromFile("Fonts/Montserrat/static/Montserrat-SemiBold.ttf");
+    fontBoldest.loadFromFile("Fonts/Montserrat/static/Montserrat-Bold.ttf");
+    fontEmoji.loadFromFile("Fonts/Segoe MDL2 Assets.ttf");
 
-    AplikacijaGUI AudioSystemGUI(font, PrimarnaBoja, SekundarnaBoja, AkcenatBoja);
+    AplikacijaGUI AudioSystemGUI(font, fontBold, fontBoldest, fontEmoji, PrimarnaBoja, SekundarnaBoja, AkcenatBoja);
 
     while (AudioSystemGUI.getWindowIsOpen()) //petlja u kojoj se odvijaju akcije aplikacije dok je prozor otvoren
     {
@@ -21,7 +24,7 @@ int main()
         //render
         AudioSystemGUI.RenderGUI();
     }
-
+     
 
     //AudioPlayer player;
     //player.Pokreni();
