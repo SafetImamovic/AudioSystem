@@ -48,6 +48,7 @@ public:
 	void Clear();
 	void PromijeniBojuPozadine(sf::Color NovaBoja);
 	void SetPadding(sf::Vector2f padding, sf::Vector2f pozicija);
+	void PostaviVelicinu(sf::Vector2f velicina);
 	std::string GetText();
 
 	void DrawTo(sf::RenderWindow& window);
