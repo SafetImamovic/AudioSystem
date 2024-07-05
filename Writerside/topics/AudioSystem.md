@@ -28,99 +28,22 @@ zadovoljiti potrebe ljubitelja muzike i entuzijasta tehnologije.
 
 <code-block lang="plantuml">
    @startmindmap
-   * AudioSystem
-     ** Covers
-     ** DLL
-     ** External
-     *** include
-     **** SFML
-     ***** Audio
-     ***** Graphics
-     ***** Network
-     ***** System
-     ***** Window
-     *** lib
-     *** Eman
-     ** Fonts
-     ** Pjesme
-     ** PjesmeData.txt
+   * AudioSystem (root)
+   ** AudioSystem
+     *** Covers
+     *** DLL
+     *** External
+     **** include
+     ***** SFML
+     ****** Audio
+     ****** Graphics
+     ****** Network
+     ****** System
+     ****** Window
+     **** lib
+     *** Fonts
+     *** Pjesme
+     *** PjesmeData.txt
   @endmindmap
 </code-block>
 
-<code-block lang="plantuml">
-   <![CDATA[
-   @startuml
-   
-   left to right direction
-   
-   class User {
-   id : INTEGER
-   int nice;
-   ..
-   other_id : INTEGER
-   }
-   
-   class Pjesma {
-      unsigned int ID_Pjesme;
-      ..
-      unsigned int ID_WAV;
-      ..
-      unsigned int ID_SLIKA;
-   ..
-      std::string lokacijaPjesme;
-   ..
-      std::string lokacijaSlike;
-   ..
-      std::string Ime;
-   ..
-      std::string ImeAutora;
-   ..
-      bool DaLiPripadaAlbumu;
-   ..
-      std::string Album;
-   ..
-      unsigned int ID_Album;
-   ..
-      std::string DatumObjave;
-   ..
-      std::string RecordLabel;
-   ..
-      std::string TrajanjePjesme;
-   }
-   
-   
-   
-   class Pjesma2 {
-   unsigned int ID_Pjesme;
-   ..
-   unsigned int ID_WAV;
-   ..
-   unsigned int ID_SLIKA;
-   ..
-   std::string lokacijaPjesme;
-   ..
-   std::string lokacijaSlike;
-   ..
-   std::string Ime;
-   ..
-   std::string ImeAutora;
-   ..
-   bool DaLiPripadaAlbumu;
-   ..
-   std::string Album;
-   ..
-   unsigned int ID_Album;
-   ..
-   std::string DatumObjave;
-   ..
-   std::string RecordLabel;
-   ..
-   std::string TrajanjePjesme;
-   }
-   @enduml
-   ]]>
-</code-block>
-
-<seealso>
-<!--Give some related links to how-to articles-->
-</seealso>
