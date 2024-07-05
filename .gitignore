@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+AudioSystem/Pjesme/*
+AudioSystem/Covers/*
+.idea
+
 # User-specific files
 *.rsuser
 *.suo
